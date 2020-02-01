@@ -1,0 +1,22 @@
+/*------------------------------*/
+/* SECTION                      */
+/* ---------------------------- */
+
+.section{
+    position: relative;
+    top: 3.625rem;
+    padding: 15px 30px;
+    border-top: 1px solid #c4c4c4;
+}
+
+.section__title {
+    color:#ff748b;;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+
+/*--- Home ---*/
+.section--home {
+    top:0;
+}
