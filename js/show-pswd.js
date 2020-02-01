@@ -11,4 +11,4 @@ function showPswd() {
     }
 }
 
-eye.onclick = showPswd;
+eye.addEventListener('click', showPswd);

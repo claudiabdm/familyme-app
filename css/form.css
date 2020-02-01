@@ -33,6 +33,10 @@
     background-color: #fffdf5;
 }
 
+.form__control--invalid {
+    border-color: #ff748b;
+}
+
 .form__icon {
     display: flex;
     justify-content: flex-end;
