@@ -1,0 +1,67 @@
+/*------------------------------*/
+/* FORM                         */
+/* ---------------------------- */
+
+.form {
+    margin: 0 auto;
+}
+
+.form__group {
+    margin-bottom: 10px;
+}
+
+.form__label {
+    display: inline-block;
+    color: #94e9f2;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.form__control {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    border: 1px solid #c4c4c4;
+    border-radius: 4px;
+    padding: 5px 7px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+}
+
+.form__control:focus {
+    outline: none;
+    background-color: #fffdf5;
+}
+
+.form__icon {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.form__link {
+    display: block;
+    margin-top: 10px;
+    font-size: 1rem;
+    font-style: italic;
+    text-align: end;
+}
+
+.form__actions {
+    margin-top: 45px;
+}
+
+/*--- Login ---*/
+.form--login .form__control {
+    height: 3.125rem;
+    padding: 16px 10px;
+}
+
+.form--login .form__group {
+    margin-bottom: 42px;
+}
+
+/*--- Signup ---*/
+.form--signup .form__control {
+    height: 2.188rem;
+}

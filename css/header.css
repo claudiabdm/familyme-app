@@ -1,0 +1,59 @@
+/*------------------------------*/
+/* HEADER                       */
+/* ---------------------------- */
+
+.header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    border-bottom: 1px solid #c4c4c4;
+    width: 100%;
+    background-color: #fff;
+    color: #ff748b;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 1.875rem;
+    z-index: 10;
+}
+
+.header__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 315px;
+    height: 3.625rem;
+    margin: 0 auto;
+}
+
+.header__title {
+    font-size: 2.5rem;
+}
+
+.header__link {
+    margin-left: auto;
+}
+
+/*--- Login ---*/
+.header--login {
+    position: relative;
+    border: 0;
+    margin: 20px auto;
+}
+
+.header__title--login {
+    margin: auto;
+}
+
+/*--- Home ---*/
+
+.header--home {
+    position: static;
+    border: 0;
+}
+
+.header__container--home {
+    display: flex;
+    justify-content: flex-end;
+    max-width: 375px;
+}

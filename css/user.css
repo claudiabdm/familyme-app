@@ -1,0 +1,33 @@
+/*------------------------------*/
+/* USER                         */
+/* ---------------------------- */
+.user {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+.user__img {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.user__img--large{
+    width: 9.188rem;
+    height: 9.188rem;
+}
+
+.user__name {
+    margin-left: 10px;
+}
+
+.user--col {
+    flex-direction: column;
+    justify-content: space-between;
+    height: 12.125rem;
+}
+
+.user__role {
+    color: #c4c4c4;
+    font-size: 1rem;
+}

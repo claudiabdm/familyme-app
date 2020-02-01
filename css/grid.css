@@ -1,0 +1,42 @@
+/*------------------------------*/
+/* GRID                         */
+/* ---------------------------- */
+
+.container {
+    position: absolute;
+    max-width: 375px;
+    top: 3.625rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 10px auto;
+    padding: 20px 30px 40px;
+}
+
+.container__p {
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1rem;
+}
+
+.container__p--large {
+    font-size: 1.75rem;
+    line-height: 2.188rem;
+    margin-bottom: 60px;
+}
+
+/*--- Login ---*/
+.container--login {
+    position: static;
+}
+
+/*--- Home ---*/
+.container--home {
+    position: static;
+    padding-bottom: 20px;
+}
+.container--members{
+    position: relative;
+    top: 0;
+    margin: 0 auto;
+}

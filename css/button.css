@@ -1,0 +1,30 @@
+/*------------------------------*/
+/* BUTTON                       */
+/* ---------------------------- */
+
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 2.813rem;
+    width: 100%;
+    border: 0;
+    border-radius: 10px;
+    margin: 0 auto 42px;
+    color: #fff;
+    background-color: #c4c4c4;
+    font-size: 1.75rem;
+    font-weight: 700;
+    text-align: center;
+    line-height: 0;
+    cursor: pointer;
+}
+
+.btn--success {
+    background-color: #94e9f2;
+}
+
+.btn--sm {
+    height: 1.875rem;
+    font-size: 1.25rem;
+}

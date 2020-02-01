@@ -1,0 +1,24 @@
+/*------------------------------*/
+/* ICONS                        */
+/* ---------------------------- */
+
+.icon {
+	width: 2.5rem;
+	height: 2.5rem;
+}
+
+.icon--pswd {
+	position: absolute;
+	margin-right: 5px;
+	margin-left: -5px;
+	cursor: pointer;
+}
+
+.icon--sm {
+	width: 1.875rem;
+	height: 1.875rem;
+}
+
+.icon--off{
+	color: #c4c4c4;
+}

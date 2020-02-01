@@ -1,0 +1,16 @@
+/*------------------------------*/
+/* MEMBERS                      */
+/* ---------------------------- */
+
+.members{
+    border-top: 1px solid #c4c4c4;
+    
+
+}
+
+.members__title {
+    margin-bottom: 15px;
+    color: #ff748b;
+    font-size: 1.5rem;
+    font-weight: 700;
+}

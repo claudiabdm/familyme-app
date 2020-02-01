@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Log in</title>
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header header--login">
+        <div class="header__container">
+            <h1 class="header__title header__title--login">NameApp</h1>
+        </div>
+    </header>
+    <!-- //HEADER -->
+
+    <!-- MAIN -->
+    <main>
+        <div class="container container--login">
+
+            <!-- FORM -->
+            <form action="..." class="form form--login">
+                <div class="form__group">
+                    <label for="email" class="form__label">Email</label>
+                    <input type="email" id="email" name="email " class="form__control">
+                </div>
+
+                <div class="form__group">
+                    <label for="password" class="form__label">Password</label>
+                    <div class="form__icon">
+                        <input type="password" id="password" name="password" class="form__control form__control-pswd">
+                        <i class="icon icon-color-red_eye_close icon--pswd icon--sm" id="eye"></i>
+                    </div>
+                    <a href="#" class="form__link">Forgot password?</a>
+                </div>
+
+                <div class="form__actions">
+                    <button type="submit" class="btn" aria-disabled="true">Log in</button>
+                </div>
+
+            </form>
+            <!-- //FORM -->
+
+            <p class="container__p">Don't have an account?<br><a href="signup.html" class="container__link">Sign up</a>
+            </p>
+        </div>
+    </main>
+    <!-- //MAIN -->
+
+    <script src="../js/show-pswd.js"></script>
+</body>
+
+</html>

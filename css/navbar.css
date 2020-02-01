@@ -1,0 +1,21 @@
+/*------------------------------*/
+/* NAVBAR                       */
+/* ---------------------------- */
+
+.navbar {
+    position: fixed;
+    bottom: 0;
+    height: 3.75rem;
+    width: 100%;
+    margin: 0 auto;
+    border-top: 1px solid #c4c4c4;
+    background-color: #fff;
+    z-index: 10;
+}
+
+.navbar__icons{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+}
