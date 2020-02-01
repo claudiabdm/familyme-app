@@ -1,6 +1,10 @@
 /*------------------------------*/
 /* SETTINGS                     */
 /* ---------------------------- */
+.settings {
+    max-width: 375px;
+    margin: 0 auto;
+}
 
 .settings__title {
     color: #94e9f2;
