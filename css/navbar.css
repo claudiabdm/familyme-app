@@ -19,3 +19,21 @@
     align-items: center;
     height: 100%;
 }
+
+.navbar--top {
+    position: relative;
+    display: flex;
+    top:0;
+}
+
+.navbar__container {
+    display: flex;
+    padding: 10px;
+    overflow: auto;
+}
+
+.navbar__container--actions {
+    align-items: center;
+    width: 8.75rem;
+    border-left: 1px solid #c4c4c4;
+}

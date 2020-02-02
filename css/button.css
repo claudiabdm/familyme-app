@@ -20,14 +20,28 @@
     cursor: pointer;
 }
 
+/*--- Colors ---*/
+
 .btn--success {
     background-color: #94e9f2;
 }
+
+
+/*--- Sizes ---*/
 
 .btn--sm {
     height: 1.875rem;
     font-size: 1.25rem;
 }
+
+.btn--xs {
+    height: 1.563rem;
+    width: 5.313rem;
+    margin: 0 auto;
+    font-size: 0.875rem;
+}
+
+/*--- Switch button ---*/
 
 .btn--check {
     display: none;

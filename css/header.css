@@ -21,7 +21,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 315px;
+    width: 315px;
     height: 3.625rem;
     margin: 0 auto;
 }
@@ -48,12 +48,10 @@
 /*--- Home ---*/
 
 .header--home {
-    position: static;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 0;
 }
 
-.header__container--home {
-    display: flex;
-    justify-content: flex-end;
-    max-width: 375px;
-}

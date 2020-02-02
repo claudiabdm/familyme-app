@@ -2,14 +2,14 @@
 /* USER                         */
 /* ---------------------------- */
 .user {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    margin-bottom: 10px;
     font-size: 1rem;
 }
 .user__img {
     width: 2.5rem;
     height: 2.5rem;
+    margin-right: 10px;
 }
 
 .user__img--large{
@@ -22,6 +22,7 @@
 }
 
 .user--col {
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 12.125rem;
@@ -30,4 +31,11 @@
 .user__role {
     color: #c4c4c4;
     font-size: 1rem;
+}
+
+/*--- Home ---*/
+
+.user--home {
+    display: flex;
+    margin-bottom: 10px;
 }
