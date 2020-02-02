@@ -28,3 +28,38 @@
     height: 1.875rem;
     font-size: 1.25rem;
 }
+
+.btn--check {
+    display: none;
+}
+
+.btn--switch {
+
+    position: relative;
+    display: inline-flex;
+    width: 40px;
+    height: 20px;
+    margin: 0;
+    background-color: #c4c4c4;
+    border-radius: 20px;
+}
+
+.btn--switch::before {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: white;
+    top: 1px;
+    left: 1px;
+    transition: all 0.3s;
+}
+
+.btn--check:checked+.btn--switch::before {
+    left: 20px;
+}
+
+.btn--check:checked+.btn--switch {
+    background-color: #79f285;
+}

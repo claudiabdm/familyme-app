@@ -19,10 +19,20 @@
 	height: 1.875rem;
 }
 
+.icon--xs {
+	width: 0.75rem;
+	height: 1.25rem;
+}
+
 .icon--off{
 	color: #c4c4c4;
 }
 
 .icon-color-settings {
 	margin-right: 15px;
+}
+
+.icon-off, .icon-on {
+	height: 2rem;
+	width: 3.75rem;
 }

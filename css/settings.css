@@ -1,13 +1,22 @@
 /*------------------------------*/
 /* SETTINGS                     */
 /* ---------------------------- */
-.settings {
-    max-width: 375px;
-    margin: 0 auto;
-}
-
 .settings__title {
+    margin-bottom: 15px;
     color: #94e9f2;
     font-size: 1.5rem;
     font-weight: 700;
+}
+
+.settings__txt {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    color: #000;
+    font-weight: 400;
+}
+
+.settings__txt--warning {
+    color: #ff748b;
 }

@@ -28,13 +28,23 @@
                 <article class="settings">
                     <h2 class="settings__title">User settings</h2>
                     <ul class="settings__list">
-                        <li>Change password</li>
-                        <li>Edit user name</li>
-                        <li>Change email</li>
-                        <li>Notifications</li>
-                        <li>Location</li>
-                        <li class="settings__txt settings__txt--warning">Log out</li>
-                        <li class="settings__txt settings__txt--warning">Delete account</li>
+                        <li><a href="#" class="settings__txt">Change password<i class="icon icon-next icon--xs"></i></a></li>
+                        <li><a href="#" class="settings__txt">Edit user name<i class="icon icon-next icon--xs"></i></a></li>
+                        <li><a href="#" class="settings__txt">Change email<i class="icon icon-next icon--xs"></i></a></li>
+                        <li>
+                            <div class="settings__txt">Location
+                                <input type="checkbox" class="btn btn--check" id="toggle-locat" role="switch" aria-checked="true">
+                                <label for="toggle-locat" class="btn btn--switch"></label>
+                            </div>
+                        <li>
+                        <li>
+                            <div class="settings__txt">Notifications
+                                <input type="checkbox" class="btn btn--check" id="toggle-notif" role="switch" aria-checked="true">
+                                <label for="toggle-notif" class="btn btn--switch"></label>
+                            </div>
+                        <li>
+                        <li><a href="#" class="settings__txt settings__txt--warning">Log out</a></li>
+                        <li><a href="#" class="settings__txt settings__txt--warning">Delete account</a></li>
                     </ul>
                 </article>
             </div>
@@ -45,8 +55,8 @@
                 <article class="settings">
                     <h2 class="settings__title">Family settings</h2>
                     <ul>
-                        <li>Change admin</li>
-                        <li>Change family name</li>
+                        <li class="settings__txt">Change admin <i class="icon icon-next icon--xs"></i></li>
+                        <li class="settings__txt">Change family name <i class="icon icon-next icon--xs"></i></li>
                         <li class="settings__txt settings__txt--warning">Delete family group</li>
                     </ul>
                 </article>
