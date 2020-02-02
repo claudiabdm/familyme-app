@@ -15,16 +15,16 @@
 .user__img--large{
     width: 9.188rem;
     height: 9.188rem;
+    margin: 0;
 }
 
-.user__name {
-    margin-left: 10px;
-}
+
 
 .user--col {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     height: 12.125rem;
 }
 
@@ -38,4 +38,8 @@
 .user--home {
     display: flex;
     margin-bottom: 10px;
+}
+
+.user__name--large {
+    font-size: 1.25rem;
 }
