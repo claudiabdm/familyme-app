@@ -20,6 +20,19 @@
     cursor: pointer;
 }
 
+/*--- Close button ---*/
+.btn--close {
+    margin: 0;
+    border: 0;
+    background: none;
+    color: #c4c4c4;
+    transition: color 0.2s ease-out;
+}
+
+.btn--close:hover {
+    color: #525252;
+}
+
 /*--- Colors ---*/
 
 .btn--success {

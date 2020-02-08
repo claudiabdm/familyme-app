@@ -7,6 +7,15 @@
     font-size: 1rem;
 }
 
+.user__btn {
+    display: block;
+    width: max-content;
+    height: max-content;
+    margin: 0;
+    padding: 0;
+    background: none;
+}
+
 .user__img {
     width: 2.5rem;
     height: 2.5rem;

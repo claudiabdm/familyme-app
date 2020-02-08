@@ -5,6 +5,14 @@
 .icon {
 	width: 2.5rem;
 	height: 2.5rem;
+	filter: grayscale();
+}
+
+.icon--selected,
+.icon:hover,
+.icon-red_eye,
+.icon-red_eye_close {
+	filter: none;
 }
 
 .icon--pswd {
@@ -22,14 +30,4 @@
 .icon--xs {
 	width: 0.75rem;
 	height: 1.25rem;
-}
-
-.icon--off{
-	color: #c4c4c4;
-}
-
-
-.icon-off, .icon-on {
-	height: 2rem;
-	width: 3.75rem;
 }

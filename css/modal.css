@@ -1,0 +1,46 @@
+/*------------------------------*/
+/* MODAL                        */
+/* ---------------------------- */
+
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background-color: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+    z-index: -1;
+}
+
+.modal--show {
+    opacity: 1;
+    z-index: 1000;
+}
+
+.modal__container {
+    width: 100%;
+    background-color: #fff;
+    transform: translate3d(0, 100%, 0);
+    transition: transform 0.3s ease-out;
+    z-index: 1000;
+}
+
+.modal__container--show {
+    transform: translate3d(0, 0, 0);
+    z-index: 1000;
+}
+
+.modal__title {
+    position: static;
+}
+
+.modal__close {
+    width: 26px;
+    height: 26px;
+}
+

@@ -7,7 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home</title>
     <link rel="stylesheet" href="../css/style.css">
-
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -15,8 +18,11 @@
     <!-- HEADER -->
     <header class="header header--home">
         <div class="header__container header__container--home">
-            <a href="settings.html" class="header__link icon icon-color-settings"></a>
+            <a href="settings.html" class="header__link icon icon-settings"></a>
         </div>
+        <!-- <svg class="icon">
+            <use xlink:href="../icons/sprite.svg#icon-calendar"></use>
+        </svg> -->
     </header>
     <!-- //HEADER -->
 
@@ -27,8 +33,10 @@
 
             <!-- USER -->
             <article class="user user--col">
-                <img class="user__img user__img--large" src="../img/profile-photo-round.svg"
-                    alt="Claudia Benito profile photo">
+                <button type="button" class="btn user__btn" id="imgBtn">
+                    <img class="user__img user__img--large" src="../img/profile-photo-round.svg"
+                        alt="Claudia Benito profile photo">
+                </button>
                 <h2 class="user__name user__name--large">Claudia Benito</h2>
                 <span class="user__role">admin</span>
             </article>
@@ -62,30 +70,64 @@
                 </article>
 
                 <div class="container--padding">
-                    <button type="button" class="btn btn--sm btn--success">New member</button>
+                    <button type="button" class="btn btn--sm btn--success" id="addMemBtn">New member</button>
                 </div>
-                
+
             </section>
             <!-- //MEMBERS -->
 
         </div>
 
+        <!-- MODAL NEW MEMBER -->
+        <div class="modal">
+            
+            <div class="modal__container">
+
+                <h1 class="header modal__title">
+                    <div class="header__container">
+                        <h1 class="header__title">New member</h1>
+                        <button type="button" class="btn btn--close modal__close">&times;</button>
+                        <!-- <a href="signup.html" class="header__link icon icon-close icon--sm"></a> -->
+                    </div>
+                </h1>
+
+                <div class="modal__body">
+
+                    <form action="..." class="form">
+                        <div class="form__group">
+                            <label for="email" class="form__label" aria-required="true">Email</label>
+                            <input type="email" id="email" class="form__control" placeholder="john_smith@gmail.com">
+                        </div>
+                        <!-- FORM ACTIONS -->
+                        <div class="form__actions">
+                            <button type="submit" class="btn btn--signup" aria-disabled="true">Send email</button>
+                        </div>
+                        <!-- //FORM ACTIONS -->
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- //MODAL NEW MEMBER -->
+
         <!-- NAVBAR -->
         <nav class="navbar">
             <div class="navbar__icons">
-                <a href="home.html" class="navbar__link icon icon-color-home icon--nav" aria-current="true"></a>
-                <a href="calendar.html" class="navbar__link icon icon-grey-calendar icon--nav" aria-current="false"></a>
-                <a href="notifications.html" class="navbar__link icon icon-grey-bell icon--nav"
-                    aria-current="false"></a>
-                <a href="locator.html" class="navbar__link icon icon-grey-location icon--nav" aria-current="false"></a>
-                <a href="list.html" class="navbar__link icon icon-grey-check_list icon--nav" aria-current="false"></a>
+                <a href="home.html" class="navbar__link icon icon-home icon--selected icon--nav"
+                    aria-current="true"></a>
+                <a href="calendar.html" class="navbar__link icon icon-calendar icon--nav" aria-current="false"></a>
+                <a href="notifications.html" class="navbar__link icon icon-bell icon--nav" aria-current="false"></a>
+                <a href="locator.html" class="navbar__link icon icon-location icon--nav" aria-current="false"></a>
+                <a href="list.html" class="navbar__link icon icon-check_list icon--nav" aria-current="false"></a>
             </div>
         </nav>
         <!-- //NAVBAR -->
 
     </main>
     <!-- //MAIN -->
-
+    <script src="../js/toggleModal.js"></script>
 </body>
 
 </html>
