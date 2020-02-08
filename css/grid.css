@@ -4,25 +4,28 @@
 
 .container {
     position: absolute;
-    max-width: 375px;
+    min-width: 20rem;
     top: 3.625rem;
     left: 0;
     right: 0;
     bottom: 0;
     margin: 0 auto;
-    padding: 20px 30px 40px;
 }
 
 .container__p {
     text-align: center;
     font-size: 1rem;
-    line-height: 1rem;
+    line-height: 1.2;
 }
 
 .container__p--large {
-    font-size: 1.75rem;
-    line-height: 2.188rem;
-    margin-bottom: 60px;
+    font-size: 1.5rem;
+    margin: 60px 0;
+}
+
+/*--- Containers with padding ---*/
+.container--padding {
+    padding: 20px 30px;
 }
 
 /*--- Login ---*/
@@ -31,8 +34,7 @@
 }
 
 /*--- Home ---*/
-.container--relative{
+.container--relative {
     position: relative;
     top: 0;
-    padding-bottom: 10px;
 }

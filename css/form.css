@@ -2,8 +2,8 @@
 /* FORM                         */
 /* ---------------------------- */
 
-.form {
-    margin: 0 auto;
+.form  {
+    padding: 20px 30px 40px;
 }
 
 .form__group {

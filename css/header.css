@@ -7,8 +7,9 @@
     top: 0;
     right: 0;
     left: 0;
-    border-bottom: 1px solid #c4c4c4;
     width: 100%;
+    padding: 0 30px;
+    border-bottom: 1px solid #c4c4c4;
     background-color: #fff;
     color: #ff748b;
     font-family: 'Roboto', sans-serif;
@@ -21,7 +22,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 315px;
+    min-width: 320px;
     height: 3.625rem;
     margin: 0 auto;
 }

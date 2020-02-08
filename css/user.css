@@ -6,19 +6,18 @@
     align-items: center;
     font-size: 1rem;
 }
+
 .user__img {
     width: 2.5rem;
     height: 2.5rem;
     margin-right: 10px;
 }
 
-.user__img--large{
+.user__img--large {
     width: 9.188rem;
     height: 9.188rem;
     margin: 0;
 }
-
-
 
 .user--col {
     display: flex;
@@ -26,6 +25,7 @@
     justify-content: space-between;
     align-items: center;
     height: 12.125rem;
+    margin-bottom: 20px;
 }
 
 .user__role {
@@ -37,7 +37,12 @@
 
 .user--home {
     display: flex;
-    margin-bottom: 10px;
+    padding: 10px 30px;
+    border-top: 1px solid #c4c4c4;
+}
+
+.user--home:last-of-type {
+    border-bottom: 1px solid #c4c4c4;
 }
 
 .user__name--large {

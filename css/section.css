@@ -5,13 +5,18 @@
 .section{
     position: relative;
     top: 3.625rem;
+    bottom: 0;
+    margin: 0 auto;
+}
+
+.section {
     border-top: 1px solid #c4c4c4;
 }
 
 .section__title {
-    margin: 0 auto;
-    padding-top: 15px;
-    max-width: 315px;
+    margin: 20px auto;
+    padding: 0px 30px;
+    min-width: 320px;
     color:#ff748b;
     font-size: 1.5rem;
     font-weight: 700;
