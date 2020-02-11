@@ -6,8 +6,11 @@
 	width: 2.5rem;
 	height: 2.5rem;
 	filter: grayscale();
+	transition: filter 0.1s linear;
 }
-
+.icon-trash1 {
+	fill: grey;
+}
 .icon--selected,
 .icon:hover,
 .icon-red_eye,

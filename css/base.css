@@ -23,7 +23,6 @@ input::placeholder {
     font-weight: 400;
 }
 
-
-
-
-
+.zindex {
+    z-index: -100;
+}
