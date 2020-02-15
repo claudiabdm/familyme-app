@@ -1,6 +1,6 @@
-/*------------------------------*/
-/* HEADER                       */
-/* ---------------------------- */
+//------------------------------//
+// HEADER                       //
+// ---------------------------- //
 
 .header {
     position: fixed;
@@ -9,9 +9,9 @@
     left: 0;
     width: 100%;
     padding: 0 30px;
-    border-bottom: 1px solid #c4c4c4;
+    border-bottom: $border;
     background-color: #fff;
-    color: #ff748b;
+    color: $secondary;
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
     font-size: 1.875rem;
@@ -22,7 +22,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-width: 320px;
+    width: 100%;
     height: 3.625rem;
     margin: 0 auto;
 }
@@ -35,7 +35,7 @@
     margin-left: auto;
 }
 
-/*--- Login ---*/
+//--- Login ---//
 .header--login {
     position: relative;
     border: 0;
@@ -46,7 +46,7 @@
     margin: auto;
 }
 
-/*--- Home ---*/
+//--- Home ---//
 
 .header--home {
     position: relative;
@@ -56,3 +56,14 @@
     border: 0;
 }
 
+.header__container--home {
+    justify-content: flex-end;
+}
+
+
+//-- Calendar --//
+
+.header--calendar {
+    padding: 0;
+    margin: 0;
+}

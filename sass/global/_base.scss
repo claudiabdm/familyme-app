@@ -1,0 +1,29 @@
+/*------------------------------*/
+/* BASE                         */
+/* ---------------------------- */
+
+body {
+    background-color: $body-bg;
+    color: $body-color;
+    font-family: $font-family-primary;
+    font-weight: $font-weight-light;
+    font-size: 1.25rem;
+}
+
+a {
+    text-decoration: $link-decoration;
+    color: $secondary;
+    font-weight: $font-weight-bold;
+    cursor: pointer;
+}
+
+input::placeholder {
+    color: $grey-100;
+    font-family: $font-family-primary;
+    font-size: 1rem;
+    font-weight: $font-weight-light;
+}
+
+// .zindex {
+//     z-index: -100;
+// }

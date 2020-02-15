@@ -1,6 +1,6 @@
-/*------------------------------*/
-/* GRID                         */
-/* ---------------------------- */
+//------------------------------//
+// GRID                         //
+// ---------------------------- //
 
 .container {
     position: absolute;
@@ -23,17 +23,17 @@
     margin: 60px 0;
 }
 
-/*--- Containers with padding ---*/
+//--- Containers with padding ---//
 .container--padding {
     padding: 20px 30px;
 }
 
-/*--- Login ---*/
+//--- Login ---//
 .container--login {
     position: static;
 }
 
-/*--- Home ---*/
+//--- Home ---//
 .container--relative {
     position: relative;
     top: 0;

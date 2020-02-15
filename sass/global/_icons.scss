@@ -5,12 +5,10 @@
 .icon {
 	width: 2.5rem;
 	height: 2.5rem;
-	filter: grayscale();
+	filter: grayscale(100%);
 	transition: filter 0.1s linear;
 }
-.icon-trash1 {
-	fill: grey;
-}
+
 .icon--selected,
 .icon:hover,
 .icon-red_eye,
@@ -18,13 +16,8 @@
 	filter: none;
 }
 
-.icon--pswd {
-	position: absolute;
-	margin-right: 5px;
-	margin-left: -5px;
-	cursor: pointer;
-}
 
+//-- Sizes --//
 .icon--sm {
 	width: 1.875rem;
 	height: 1.875rem;
@@ -33,4 +26,18 @@
 .icon--xs {
 	width: 0.75rem;
 	height: 1.25rem;
+}
+
+//-- Icons --//
+
+
+.icon--pswd {
+	position: absolute;
+	margin-right: 5px;
+	margin-left: -5px;
+	cursor: pointer;
+}
+
+.icon-settings {
+	right: 0;
 }

@@ -1,0 +1,50 @@
+// ------------------------------------------
+// VARIABLES
+// ------------------------------------------
+
+
+
+
+// Color palette
+// ------------------------------------------
+
+// Colors
+$primary:  #94e9f2;
+$secondary:#ff748b;
+$success:  #79f285;
+
+// Grey
+$grey-100:  #c4c4c4;
+
+
+
+
+// Scaffolding
+// ------------------------------------------
+
+$body-color:   #000;
+$body-bg:      #fff;
+
+$link-color:          $secondary;
+$link-decoration:     none;
+$link-hover:          none; 
+
+$paragraph-bottom:    1rem;
+
+$border: 1px solid $grey-100;
+
+// Font
+// ------------------------------------------
+
+//podemos tener dos fuentes, una para el encabezado y otra para el texto corrido.
+$font-primary:   "Roboto";
+$font-secondary: "Quattrocento";
+$font-family-primary:        $font-primary, Arial, sans-serif;
+$font-family-secondary:      $font-primary, serif;
+
+$font-size-base:  16px;
+
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;

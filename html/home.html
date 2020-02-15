@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 </head>
@@ -16,7 +16,7 @@
     <!-- HEADER -->
     <header class="header header--home">
         <div class="header__container header__container--home">
-            <a href="settings.html" class="header__link icon icon-settings"></a>
+            <button type="button" class="btn btn--icon icon icon-settings" id="settingsBtn"></button>
         </div>
     </header>
     <!-- //HEADER -->
@@ -24,12 +24,13 @@
     <!-- MAIN -->
     <main>
 
+        <!-- USER AND FAMILY INFO -->
         <div class="container">
 
             <!-- USER -->
             <article class="user user--col">
                 <button type="button" class="btn user__btn" id="imgBtn">
-                    <img class="user__img user__img--large" src="../img/profile-photo-round.svg"
+                    <img class="user__img user__img--large" src="../assets/img/profile-photo-round.svg"
                         alt="Claudia Benito profile photo">
                 </button>
                 <h2 class="user__name user__name--large">Claudia Benito</h2>
@@ -42,39 +43,56 @@
 
                 <h1 class="section__title section__title--home">Familia Benito de Moya</h1>
                 <article class="user user--home">
-                    <img class="user__img user__img" src="../img/profile-photo-round.svg"
+                    <img class="user__img user__img" src="../assets/img/profile-photo-round.svg"
                         alt="Ricardo Benito profile photo">
                     <h2 class="user__name">Ricardo Benito</h2>
                 </article>
 
                 <article class="user user--home">
-                    <img class="user__img user__img" src="../img/profile-photo-round.svg"
+                    <img class="user__img user__img" src="../assets/img/profile-photo-round.svg"
                         alt="Celia Benito profile photo">
                     <h2 class="user__name">Celia Benito</h2>
                 </article>
 
                 <article class="user user--home">
-                    <img class="user__img user__img" src="../img/profile-photo-round.svg"
+                    <img class="user__img user__img" src="../assets/img/profile-photo-round.svg"
                         alt="Sonsoles Benito profile photo">
                     <h2 class="user__name">Sonsoles Benito</h2>
                 </article>
 
                 <article class="user user--home">
-                    <img class="user__img user__img" src="../img/profile-photo-round.svg" alt="Mamá profile photo">
+                    <img class="user__img user__img" src="../assets/img/profile-photo-round.svg"
+                        alt="Mamá profile photo">
                     <h2 class="user__name">Mamá</h2>
                 </article>
 
+                <!-- NEW MEMBERS BUTTON -->
                 <div class="container--padding">
-                    <button type="button" class="btn btn--sm btn--success" id="addMemBtn">New member</button>
+                    <button type="button" class="btn btn--sm btn--success" id="newMemberBtn">New member</button>
                 </div>
+                <!-- //NEW MEMBERS BUTTON -->
 
             </section>
             <!-- //MEMBERS -->
 
         </div>
+        <!-- //USER AND FAMILY INFO -->
+
+        <!-- NAVBAR -->
+        <nav class="navbar">
+            <div class="navbar__icons">
+                <a href="home.html" class="navbar__link icon icon-home icon--selected icon--nav"
+                    aria-current="true"></a>
+                <a href="calendar.html" class="navbar__link icon icon-calendar icon--nav" aria-current="false"></a>
+                <a href="notifications.html" class="navbar__link icon icon-bell icon--nav" aria-current="false"></a>
+                <a href="locator.html" class="navbar__link icon icon-location icon--nav" aria-current="false"></a>
+                <a href="list.html" class="navbar__link icon icon-check_list icon--nav" aria-current="false"></a>
+            </div>
+        </nav>
+        <!-- //NAVBAR -->
 
         <!-- MODAL NEW MEMBER -->
-        <div class="modal">
+        <div class="modal" id="newMemberModal">
 
             <div class="modal__container">
 
@@ -107,23 +125,75 @@
         </div>
         <!-- //MODAL NEW MEMBER -->
 
-        <!-- NAVBAR -->
-        <nav class="navbar">
-            <div class="navbar__icons">
-                <a href="home.html" class="navbar__link icon icon-home icon--selected icon--nav"
-                    aria-current="true"></a>
-                <a href="calendar.html" class="navbar__link icon icon-calendar icon--nav" aria-current="false"></a>
-                <a href="notifications.html" class="navbar__link icon icon-bell icon--nav" aria-current="false"></a>
-                <a href="locator.html" class="navbar__link icon icon-location icon--nav" aria-current="false"></a>
-                <a href="list.html" class="navbar__link icon icon-check_list icon--nav" aria-current="false"></a>
+        <!-- MODAL SETTINGS -->
+        <div class="modal modal--settings" id="settingsModal">
+            <div class="modal__container modal__container--settings">
+
+                <h1 class="header modal__title">
+                    <div class="header__container">
+                        <h1 class="header__title">Settings</h1>
+                        <button type="button" class="btn btn--close modal__close">&times;</button>
+                        <!-- <a href="signup.html" class="header__link icon icon-close icon--sm"></a> -->
+                    </div>
+                </h1>
+
+                <div class="modal__body">
+
+                    <article class="settings">
+                        <h2 class="settings__title">User settings</h2>
+                        <ul class="settings__list">
+                            <li><a href="#" class="settings__txt">Change password<i
+                                        class="icon icon-next icon--xs"></i></a></li>
+                            <li><a href="#" class="settings__txt">Edit user name<i
+                                        class="icon icon-next icon--xs"></i></a></li>
+                            <li><a href="#" class="settings__txt">Change email<i
+                                        class="icon icon-next icon--xs"></i></a></li>
+                            <li>
+                                <div class="settings__txt">Location
+                                    <div class="switch">
+                                        <input type="checkbox" class="switch__check" id="location" role="switch"
+                                            aria-checked="true">
+                                        <label for="location" class="switch__slider"></label>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="settings__txt">Notifications
+                                    <div class="switch">
+                                        <input type="checkbox" class="switch__check" id="notifications" role="switch"
+                                            aria-checked="true">
+                                        <label for="notifications" class="switch__slider"></label>
+                                    </div>
+                                </div>
+                            </li>
+                            <li><a href="login.html" class="settings__txt settings__txt--warning">Log out</a>
+                            </li>
+                            <li><a href="#" class="settings__txt settings__txt--warning">Delete account</a></li>
+                        </ul>
+                    </article>
+
+                    <article class="settings">
+                        <h2 class="settings__title">Family settings</h2>
+                        <ul>
+                            <li class="settings__txt">Change admin <i class="icon icon-next icon--xs"></i></li>
+                            <li class="settings__txt">Change family name <i class="icon icon-next icon--xs"></i>
+                            </li>
+                            <li class="settings__txt settings__txt--warning">Delete family group</li>
+                        </ul>
+                    </article>
+
+
+                </div>
+
             </div>
-        </nav>
-        <!-- //NAVBAR -->
+        </div>
+        <!-- //MODAL SETTINGS -->
 
     </main>
     <!-- //MAIN -->
+
     <script src="../js/toggleModal.js"></script>
-    
+
 </body>
 
 </html>

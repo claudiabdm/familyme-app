@@ -13,20 +13,32 @@
     align-items: flex-end;
     background-color: rgba(0, 0, 0, 0.8);
     opacity: 0;
-    transition: opacity 0.2s ease-out;
-    z-index: -1;
+    transition: opacity 0.2s ease-out, visibility 0.2s;
+    z-index: 1000;
+    visibility: hidden;
+
+    &--settings {
+        transition: none;
+    }
 }
 
 .modal--show {
     opacity: 1;
-    z-index: 1000;
+    visibility: visible;
 }
 
 .modal__container {
     width: 100%;
     background-color: #fff;
     transform: translate3d(0, 100%, 0);
-    transition: transform 0.3s ease-out;
+    transition: transform 0.25s ease-out;
+
+    &--settings {
+        position: absolute;
+        top: 0;
+        height: 100vh;
+        transform: none;
+    }
 }
 
 .modal--show .modal__container {
@@ -41,4 +53,3 @@
     width: 26px;
     height: 26px;
 }
-

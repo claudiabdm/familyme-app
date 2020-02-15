@@ -10,7 +10,7 @@
     height: 3.75rem;
     width: 100%;
     margin: 0 auto;
-    border-top: 1px solid #c4c4c4;
+    border-top: $border;
     background-color: #fff;
     z-index: 10;
 }
@@ -26,10 +26,12 @@
     position: relative;
     display: flex;
     top:0;
+    border: 0;
 }
 
 .navbar__container {
     display: flex;
+    width: 100%;
     padding: 10px;
     overflow: auto;
 }
@@ -37,5 +39,5 @@
 .navbar__container--actions {
     align-items: center;
     width: 8.75rem;
-    border-left: 1px solid #c4c4c4;
+    border-left: $border;
 }

@@ -1,0 +1,43 @@
+//------------------------------//
+// SWITCH                       //
+// ---------------------------- //
+
+.switch {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+
+  &__check {
+    display: none;
+  }
+  
+  &__slider {
+    position: relative;
+    display: inline-flex;
+    width: 3.125rem;
+    height: 1.625rem;
+    margin: 0;
+    background-color: #c4c4c4;
+    border-radius: 20px;
+  }
+  
+  &__slider::before {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background-color: white;
+    transition: all 0.3s;
+  }
+  
+  &__check:checked+&__slider::before {
+    left: 25px;
+  }
+  
+  &__check:checked+&__slider {
+    background-color: $success;
+  }
+}

@@ -38,7 +38,7 @@
 }
 
 .user__role {
-    color: #c4c4c4;
+    color: $grey-100;
     font-size: 1rem;
 }
 
@@ -47,11 +47,11 @@
 .user--home {
     display: flex;
     padding: 10px 30px;
-    border-top: 1px solid #c4c4c4;
+    border-top: $border;
 }
 
 .user--home:last-of-type {
-    border-bottom: 1px solid #c4c4c4;
+    border-bottom: $border;
 }
 
 .user__name--large {
