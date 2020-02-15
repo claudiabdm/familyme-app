@@ -265,6 +265,7 @@ input::placeholder {
 
 .btn--close {
   margin: 0;
+  padding: 0;
   border: 0;
   background: none;
   color: #c4c4c4;
@@ -461,8 +462,8 @@ input::placeholder {
   position: static; }
 
 .modal__close {
-  width: 26px;
-  height: 26px; }
+  width: auto;
+  height: auto; }
 
 .switch {
   display: flex;
