@@ -14,6 +14,16 @@ $('#settingsBtn').click(function(e){
 	showModal(modalElem);
 })
 
+$('#createBtn').click(function(e){
+	const modalElem = $('#createModal');
+	showModal(modalElem);
+})
+
+$('#joinBtn').click(function(e){
+	const modalElem = $('#joinModal');
+	showModal(modalElem);
+})
+
 $('.modal__close').click(() => {
 	$('.modal').removeClass('modal--show');
 })

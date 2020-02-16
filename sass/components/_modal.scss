@@ -17,39 +17,36 @@
     z-index: 1000;
     visibility: hidden;
 
-    &--settings {
-        transition: none;
+    &--show {
+        opacity: 1;
+        visibility: visible;
+
+        & .modal__container {
+            transform: translate3d(0, 0, 0);
+        }
     }
-}
 
-.modal--show {
-    opacity: 1;
-    visibility: visible;
-}
-
-.modal__container {
-    width: 100%;
-    background-color: #fff;
-    transform: translate3d(0, 100%, 0);
-    transition: transform 0.25s ease-out;
-
-    &--settings {
-        position: absolute;
-        top: 0;
-        height: 100vh;
-        transform: none;
+    &__container {
+        width: 100%;
+        background-color: #fff;
+        overflow: auto;
+        transform: translate3d(0, 100%, 0);
+        transition: transform 0.25s ease-out;
+        
+        &--full {
+            position: absolute;
+            top: 0;
+            height: 100vh;
+            transform: translate3d(100%, 0, 0);
+        }
     }
-}
 
-.modal--show .modal__container {
-    transform: translate3d(0, 0, 0);
-}
+    &__title {
+        position: static;
+    }
 
-.modal__title {
-    position: static;
-}
-
-.modal__close {
-    width: auto;
-    height: auto;
+    &__close {
+        width: auto;
+        height: 26px;
+    }
 }

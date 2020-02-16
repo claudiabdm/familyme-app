@@ -24,18 +24,151 @@
     <main>
         <div class="container container--padding">
             <p class="container__p container__p--large">
-                Do you want to create a new Family Group or join to one?
+                Do you want to <strong>create</strong> a new Family Group or <strong>join</strong> to one?
             </p>
 
             <!-- ACTIONS -->
-            <a href="signup-create.html" class="btn btn--success">Create</a>
-            <a href="signup-join.html" class="btn btn--success">Join</a>
+            <button type="button" class="btn btn--success" id="createBtn">Create</button>
+            <button type="button" class="btn btn--success" id="joinBtn">Join</button>
             <!-- //ACTIONS -->
         </div>
+
+        <!-- MODAL SIGNUP CREATE -->
+        <div class="modal modal--full" id="createModal">
+            <div class="modal__container modal__container--full">
+
+                <h1 class="header modal__title">
+                    <div class="header__container">
+                        <h1 class="header__title">Sign up - Create</h1>
+                        <button type="button" class="btn btn--close modal__close">&times;</button>
+                        <!-- <a href="signup.html" class="header__link icon icon-close icon--sm"></a> -->
+                    </div>
+                </h1>
+
+                <div class="modal__body">
+
+                    <!-- FORM -->
+                    <form action="..." class="form form--signup">
+
+                        <div class="form__group">
+                            <label for="email" class="form__label" aria-required="true">Email</label>
+                            <input type="email" id="email" class="form__control" placeholder="john_smith@gmail.com">
+                        </div>
+
+                        <div class="form__group">
+                            <label for="name" class="form__label">First name</label>
+                            <input type="name" id="name" class="form__control" placeholder="John">
+                        </div>
+
+                        <div class="form__group">
+                            <label for="famname" class="form__label">Family Name</label>
+                            <input type="text" id="famname" class="form__control" placeholder="Smith">
+                        </div>
+
+                        <div class="form__group">
+                            <label for="password" class="form__label">Password</label>
+                            <div class="form__icon">
+                                <input type="password" id="password" name="password" class="form__control">
+                                <i class="icon icon-red_eye_close icon--pswd icon--sm" id="eye"></i>
+                            </div>
+                        </div>
+
+                        <div class="form__group">
+                            <label for="pswd-confirm" class="form__label">Confirm password</label>
+                            <div class="form__icon">
+                                <input type="password" id="pswd-confirm" name="password" class="form__control">
+                                <i class="icon icon-red_eye_close icon--pswd icon--sm" id="eyeConf"></i>
+                            </div>
+                        </div>
+
+                        <!-- FORM ACTIONS -->
+                        <div class="form__actions">
+                            <button type="submit" class="btn btn--signup" aria-disabled="true">Sign up</button>
+                        </div>
+                        <!-- //FORM ACTIONS -->
+
+                    </form>
+                    <!-- //FORM -->
+
+
+                </div>
+
+            </div>
+        </div>
+        <!-- //MODAL SIGNUP CREATE -->
+
+
+        <!-- MODAL SIGNUP JOIN -->
+        <div class="modal modal--full" id="joinModal">
+            <div class="modal__container modal__container--full">
+
+                <h1 class="header modal__title">
+                    <div class="header__container">
+                        <h1 class="header__title">Sign up - Join</h1>
+                        <button type="button" class="btn btn--close modal__close">&times;</button>
+                        <!-- <a href="signup.html" class="header__link icon icon-close icon--sm"></a> -->
+                    </div>
+                </h1>
+
+                <div class="modal__body">
+
+                    <!-- FORM -->
+                    <form action="..." class="form form--signup">
+
+                        <div class="form__group">
+                            <label for="email" class="form__label">Email</label>
+                            <input type="email" id="email" class="form__control" placeholder="john_smith@gmail.com">
+                        </div>
+        
+                        <div class="form__group">
+                            <label for="name" class="form__label">First name</label>
+                            <input type="name" id="name" class="form__control" placeholder="John">
+                        </div>
+        
+                        <div class="form__group">
+                            <label for="famname" class="form__label">Family Code</label>
+                            <input type="text" id="famname" class="form__control" placeholder="xxx123">
+                        </div>
+        
+                        <div class="form__group">
+                            <label for="password" class="form__label">Password</label>
+                            <div class="form__icon">
+                                <input type="password" id="password" class="form__control">
+                                <i class="icon icon-red_eye_close icon--pswd icon--sm" id="eye"></i>
+                            </div>
+                        </div>
+        
+                        <div class="form__group">
+                            <label for="pswd-confirm" class="form__label">Confirm password</label>
+                            <div class="form__icon">
+                                <input type="password" id="pswd-confirm" class="form__control">
+                                <i class="icon icon-red_eye_close icon--pswd icon--sm" id="eyeConf"></i>
+                            </div>
+                        </div>
+        
+                        <!-- FORM ACTIONS -->
+                        <div class="form__actions">
+                            <button type="submit" class="btn" aria-disabled="true">Sign up</button>
+                        </div>
+                        <!-- //FORM ACTIONS -->
+        
+                    </form>
+                    <!-- //FORM -->
+
+
+                </div>
+
+            </div>
+        </div>
+        <!-- //MODAL SIGNUP JOIN -->
 
     </main>
     <!-- //MAIN -->
 
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="../js/toggleModal.js"></script>
+    
 </body>
 
 </html>
