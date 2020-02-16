@@ -3,7 +3,7 @@
 /* ---------------------------- */
 
 .form  {
-    padding: 20px 30px 40px;
+    padding: 20px $padding-sides 40px;
 }
 
 .form__group {
@@ -13,7 +13,7 @@
 .form__label {
     display: inline-block;
     color: $primary;
-    font-weight: 700;
+    font-weight: $font-weight-bold;
     margin-bottom: 5px;
 }
 
@@ -24,13 +24,13 @@
     border: $border;
     border-radius: 4px;
     padding: 5px 7px;
-    font-family: 'Roboto', sans-serif;
+    font-family: $font-family-primary;
     font-size: 1rem;
 }
 
 .form__control:focus {
     outline: none;
-    background-color: #fffdf5;
+    background-color: $tertiary;
 }
 
 .form__control--invalid {

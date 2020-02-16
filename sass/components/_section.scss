@@ -8,16 +8,15 @@
     bottom: 0;
     margin: 0 auto;
     padding-bottom: 20px;
-    border-top: 1px solid #c4c4c4;
+    border-top: $border;
 }
 
 .section__title {
     margin: 20px auto;
-    padding: 0px 30px;
-    min-width: 320px;
-    color:#ff748b;
+    padding: 0 $padding-sides;
+    color: $secondary;
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: $font-weight-bold;
 }
 
 

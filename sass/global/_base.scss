@@ -7,7 +7,8 @@ body {
     color: $body-color;
     font-family: $font-family-primary;
     font-weight: $font-weight-light;
-    font-size: 1.25rem;
+    font-size: $font-size-base;
+    line-height: 1;
 }
 
 a {
@@ -24,3 +25,6 @@ input::placeholder {
     font-weight: $font-weight-light;
 }
 
+strong {
+    font-weight: $font-weight-bold;
+}

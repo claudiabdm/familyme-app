@@ -34,13 +34,14 @@
     padding: 0;
     border: 0;
     background: none;
-    color: #c4c4c4;
+    color: $grey-100;
     transition: color 0.2s ease-out;
+    &:hover {
+        color: $grey-200;
+    }
 }
 
-.btn--close:hover {
-    color: #525252;
-}
+
 
 //--- Colors ---//
 

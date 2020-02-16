@@ -1,3 +1,5 @@
+// Show or hide password text
+
 const pswd = document.getElementById('password');
 const eye = document.getElementById('eye');
 

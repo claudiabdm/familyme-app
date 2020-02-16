@@ -1,21 +1,18 @@
-const pswd = document.getElementById('password');
-const confirm = document.getElementById('pswd-confirm');
-const eye = document.getElementById('eye');
-const eyeConf = document.getElementById('eyeConf');
+const pswd = document.querySelectorAll('input[type = "password"]');
+const eye = document.querySelectorAll('.icon--pswd')
 
-function showPswd() {
-    if (pswd.type === 'password') {
-        pswd.type = 'text';
-        confirm.type = 'text';
-        eye.classList = "icon icon-red_eye icon--pswd icon--sm";
-        eyeConf.classList = "icon icon-red_eye icon--pswd icon--sm";
+function showPswd(e) {
+    selectedEye = e.currentTarget;
+    elemInput = e.currentTarget.parentNode.children[0];
+
+    if (elemInput.type === 'password') {
+        elemInput.type = 'text';
+        selectedEye.classList = "icon icon-red_eye icon--pswd icon--sm";
+       
     } else {
-        pswd.type = 'password';
-        confirm.type = 'password';
-        eye.classList = "icon icon-red_eye_close icon--pswd icon--sm";
-        eyeConf.classList = "icon icon-red_eye_close icon--pswd icon--sm";
+        elemInput.type = 'password';
+        selectedEye.classList = "icon icon-red_eye_close icon--pswd icon--sm";
     }
 }
 
-eye.onclick = showPswd;
-eyeConf.onclick = showPswd;
+eye.forEach(elem => elem.onclick = showPswd);
