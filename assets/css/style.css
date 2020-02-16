@@ -165,7 +165,8 @@ strong {
 .header--login {
   position: relative;
   border: 0;
-  margin: 20px auto; }
+  margin: 20px auto;
+  box-shadow: none; }
 
 .header__title--login {
   margin: auto; }
