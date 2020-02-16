@@ -1,9 +1,11 @@
 function showModal(modalElem) {
+		// $('.container').toggleClass('container--hidden');
 		$(modalElem).toggleClass('modal--show');
 		$('.modal__fade').toggleClass('modal__fade--show');
 		$('.modal__container').toggleClass('modal__container--show');
 }
 
+//--- BUTTONS LISTENERS ---//
 $('#newMemberBtn').click(function(e){
 	const modalElem = $('#newMemberModal');
 	showModal(modalElem);
@@ -24,6 +26,12 @@ $('#joinBtn').click(function(e){
 	showModal(modalElem);
 })
 
+$('#newEventBtn').click(function(e){
+	const modalElem = $('#newEventModal');
+	showModal(modalElem);
+})
+
 $('.modal__close').click(() => {
 	$('.modal').removeClass('modal--show');
+	// $('.container').removeClass('container--hidden');
 })
