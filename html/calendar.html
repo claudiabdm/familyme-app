@@ -2,207 +2,201 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Calendar</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Calendar</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
 
 </head>
 
 <body>
 
-    <!-- HEADER -->
-    <header class="header header--calendar">
+  <!-- HEADER -->
+  <header class="header header--calendar">
 
-        <nav class="navbar navbar--top">
+    <nav class="navbar navbar--top">
 
-            <!-- USERS -->
-            <div class="navbar__container">
+      <!-- USERS -->
+      <div class="navbar__container">
 
-                <article class="user">
-                    <img class="user__img user__img" src="../assets/img/profile-photo-round.svg"
-                        alt="Claudia Benito profile photo">
-                </article>
+        <article class="user">
+          <img class="user__img user__img" src="../assets/img/profile-photo-round.svg"
+            alt="Claudia Benito profile photo">
+        </article>
 
-                <article class="user">
-                    <img class="user__img user__img" src="../assets/img/profile-photo-round.svg"
-                        alt="Claudia Benito profile photo">
-                </article>
+        <article class="user">
+          <img class="user__img user__img" src="../assets/img/profile-photo-round.svg"
+            alt="Claudia Benito profile photo">
+        </article>
 
-                <article class="user">
-                    <img class="user__img user__img" src="../assets/img/profile-photo-round.svg"
-                        alt="Ricardo Benito profile photo">
-                </article>
+        <article class="user">
+          <img class="user__img user__img" src="../assets/img/profile-photo-round.svg"
+            alt="Ricardo Benito profile photo">
+        </article>
 
-                <article class="user">
-                    <img class="user__img user__img" src="../assets/img/profile-photo-round.svg"
-                        alt="Celia Benito profile photo">
-                </article>
+        <article class="user">
+          <img class="user__img user__img" src="../assets/img/profile-photo-round.svg" alt="Celia Benito profile photo">
+        </article>
 
-                <article class="user">
-                    <img class="user__img user__img" src="../assets/img/profile-photo-round.svg"
-                        alt="Sonsoles Benito profile photo">
-                </article>
+        <article class="user">
+          <img class="user__img user__img" src="../assets/img/profile-photo-round.svg"
+            alt="Sonsoles Benito profile photo">
+        </article>
 
-                <article class="user">
-                    <img class="user__img user__img" src="../assets/img/profile-photo-round.svg"
-                        alt="Mamá profile photo">
-                </article>
+        <article class="user">
+          <img class="user__img user__img" src="../assets/img/profile-photo-round.svg" alt="Mamá profile photo">
+        </article>
 
-                <article class="user">
-                    <img class="user__img user__img" src="../assets/img/profile-photo-round.svg"
-                        alt="Mamá profile photo">
-                </article>
+        <article class="user">
+          <img class="user__img user__img" src="../assets/img/profile-photo-round.svg" alt="Mamá profile photo">
+        </article>
+
+      </div>
+      <!-- //USERS -->
+
+      <!-- NEW EVENT -->
+      <div class="navbar__container navbar__container--actions">
+        <button type="button" class="btn btn--success btn--xs" id="newEventBtn">New event</button>
+      </div>
+      <!-- //NEW EVENT -->
+      </div>
+
+  </header>
+  <!-- //HEADER -->
+
+  <!-- MAIN -->
+  <main>
+    <!-- CALENDAR -->
+    <div class="container">
+
+
+
+    </div>
+    <!-- //CALENDAR -->
+
+    <!-- MODAL NEW EVENT -->
+    <div class="modal" id="newEventModal">
+
+      <div class="modal__container modal__container--full">
+
+        <h1 class="header modal__title">
+          <div class="header__container">
+            <h1 class="header__title">New event</h1>
+            <button type="button" class="btn btn--close modal__close">&times;</button>
+            <!-- <a href="signup.html" class="header__link icon icon-close icon--sm"></a> -->
+          </div>
+        </h1>
+
+        <div class="modal__body modal__body--full">
+
+          <!-- FORM -->
+          <form action="..." class="form">
+
+            <!-- Event name and location -->
+            <div class="form__section">
+              <div class="form__group">
+                <label for="eventName" class="form__label" aria-required="true">Event name</label>
+                <input type="text" id="eventName" class="form__control" placeholder="Clase de tenis">
+              </div>
+
+              <div class="form__group">
+                <label for="location" class="form__label">Location</label>
+                <input type="text" id="location" class="form__control" placeholder="C/Abc, 28220, Madrid">
+              </div>
+            </div>
+            <!-- //Event name and location -->
+
+            <!-- Event dates -->
+            <div class="form__section">
+              <div class="form__group form__group--grid">
+                <label for="startDate" class="form__label">Start date</label>
+                <input type="text" id="startDate" class="form__control" placeholder="DD/MM/YYYY">
+                <label for="startTime" class="form__label form__label--hidden" aria-hidden="true">Start Time</label>
+                <input type="text" id="startTime" class="form__control" placeholder="00:00">
+              </div>
+
+              <div class="form__group form__group--grid">
+                <label for="endDate" class="form__label">End date</label>
+                <input type="text" id="endDate" class="form__control" placeholder="DD/MM/YYYY">
+                <label for="endTime" class="form__label form__label--hidden" aria-hidden="true">End time</label>
+                <input type="text" id="endTime" class="form__control" placeholder="00:00">
+              </div>
 
             </div>
-            <!-- //USERS -->
+            <!-- //Event dates -->
 
-            <!-- NEW EVENT -->
-            <div class="navbar__container navbar__container--actions">
-                <button type="button" class="btn btn--success btn--xs" id="newEventBtn">New event</button>
+            <!-- Event add invitee -->
+            <div class="form__section form__section--add">
+
+              <!-- USERS -->
+              <div class="navbar__container">
+
+                <article class="user">
+                  <img class="user__img user__img" src="../assets/img/profile-photo-round.svg"
+                    alt="Claudia Benito profile photo">
+                </article>
+
+                <article class="user">
+                  <img class="user__img user__img" src="../assets/img/profile-photo-round.svg"
+                    alt="Claudia Benito profile photo">
+                </article>
+
+              </div>
+              <!-- //USERS -->
+
+              <!-- Add invitee -->
+              <div class="navbar__container navbar__container--actions">
+                <button type="button" class="btn btn--success btn--xs" id="addInviteeBtn">Add
+                  invitee</button>
+              </div>
+              <!-- //Add invitee -->
+
             </div>
-            <!-- //NEW EVENT -->
+            <!-- //Event add invitee -->
+
+            <div class="form__section">
+              <div class="form__group">
+                <label for="notes" class="form__label">Notes</label>
+                <textarea id="notes" class="form__control" rows="4" cols="50"
+                  placeholder="Write additional information here..."></textarea>
+              </div>
             </div>
 
-    </header>
-    <!-- //HEADER -->
+            <!-- FORM ACTIONS -->
+            <div class="form__actions">
+              <button type="submit" class="btn btn--signup" aria-disabled="true">Add event</button>
+            </div>
+            <!-- //FORM ACTIONS -->
 
-    <!-- MAIN -->
-    <main>
-        <!-- CALENDAR -->
-        <div class="container">
-
+          </form>
+          <!-- //FORM -->
 
 
         </div>
-        <!-- //CALENDAR -->
 
-        <!-- MODAL NEW EVENT -->
-        <div class="modal" id="newEventModal">
+      </div>
+    </div>
+    <!-- //MODAL NEW EVENT -->
 
-            <div class="modal__container modal__container--full">
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="navbar__icons">
+        <a href="home.html" class="navbar__link icon icon-home icon--nav" aria-current="true"></a>
+        <a href="calendar.html" class="navbar__link icon icon-calendar icon--selected icon--nav"
+          aria-current="false"></a>
+        <a href="notifications.html" class="navbar__link icon icon-bell icon--nav" aria-current="false"></a>
+        <a href="locator.html" class="navbar__link icon icon-location icon--nav" aria-current="false"></a>
+        <a href="list.html" class="navbar__link icon icon-check_list icon--nav" aria-current="false"></a>
+      </div>
+    </nav>
+    <!-- //NAVBAR -->
 
-                <h1 class="header modal__title">
-                    <div class="header__container">
-                        <h1 class="header__title">New event</h1>
-                        <button type="button" class="btn btn--close modal__close">&times;</button>
-                        <!-- <a href="signup.html" class="header__link icon icon-close icon--sm"></a> -->
-                    </div>
-                </h1>
-
-                <div class="modal__body modal__body--full">
-
-                    <!-- FORM -->
-                    <form action="..." class="form">
-
-                        <!-- Event name and location -->
-                        <div class="form__section">
-                            <div class="form__group">
-                                <label for="eventName" class="form__label" aria-required="true">Event name</label>
-                                <input type="text" id="eventName" class="form__control" placeholder="Clase de tenis">
-                            </div>
-
-                            <div class="form__group">
-                                <label for="location" class="form__label">Location</label>
-                                <input type="text" id="location" class="form__control"
-                                    placeholder="C/Abc, 28220, Madrid">
-                            </div>
-                        </div>
-                        <!-- //Event name and location -->
-
-                        <!-- Event dates -->
-                        <div class="form__section">
-                            <div class="form__group form__group--grid">
-                                <label for="startDate" class="form__label">Start date</label>
-                                <div class="form__inputs">
-                                    <input type="text" id="startDate" class="form__control" placeholder="DD/MM/YYYY">
-                                    <input type="text" id="startTime" class="form__control" placeholder="00:00">
-                                </div>
-                            </div>
-
-                            <div class="form__group form__group--grid">
-                                <label for="endDate" class="form__label">End date</label>
-                                <div class="form__inputs">
-                                    <input type="text" id="endDate" class="form__control" placeholder="DD/MM/YYYY">
-                                    <input type="text" id="endTime" class="form__control" placeholder="00:00">
-                                </div>
-                            </div>
-
-                        </div>
-                        <!-- //Event dates -->
-
-                        <!-- Event add invitee -->
-                        <div class="form__section form__section--add">
-
-                            <!-- USERS -->
-                            <div class="navbar__container">
-
-                                <article class="user">
-                                    <img class="user__img user__img" src="../assets/img/profile-photo-round.svg"
-                                        alt="Claudia Benito profile photo">
-                                </article>
-
-                                <article class="user">
-                                    <img class="user__img user__img" src="../assets/img/profile-photo-round.svg"
-                                        alt="Claudia Benito profile photo">
-                                </article>
-
-                            </div>
-                            <!-- //USERS -->
-
-                            <!-- Add invitee -->
-                            <div class="navbar__container navbar__container--actions">
-                                <button type="button" class="btn btn--success btn--xs" id="addInviteeBtn">Add
-                                    invitee</button>
-                            </div>
-                            <!-- //Add invitee -->
-
-                        </div>
-                        <!-- //Event add invitee -->
-
-                        <div class="form__section">
-                            <div class="form__group">
-                                <label for="notes" class="form__label">Notes</label>
-                                <textarea id="notes" class="form__control" rows="4"
-                                    cols="50" placeholder="Write additional information here..."></textarea>
-                            </div>
-                        </div>
-
-                        <!-- FORM ACTIONS -->
-                        <div class="form__actions">
-                            <button type="submit" class="btn btn--signup" aria-disabled="true">Add event</button>
-                        </div>
-                        <!-- //FORM ACTIONS -->
-
-                    </form>
-                    <!-- //FORM -->
-
-
-                </div>
-
-            </div>
-        </div>
-        <!-- //MODAL NEW EVENT -->
-
-        <!-- NAVBAR -->
-        <nav class="navbar">
-            <div class="navbar__icons">
-                <a href="home.html" class="navbar__link icon icon-home icon--nav" aria-current="true"></a>
-                <a href="calendar.html" class="navbar__link icon icon-calendar icon--selected icon--nav"
-                    aria-current="false"></a>
-                <a href="notifications.html" class="navbar__link icon icon-bell icon--nav" aria-current="false"></a>
-                <a href="locator.html" class="navbar__link icon icon-location icon--nav" aria-current="false"></a>
-                <a href="list.html" class="navbar__link icon icon-check_list icon--nav" aria-current="false"></a>
-            </div>
-        </nav>
-        <!-- //NAVBAR -->
-
-    </main>
-    <!-- //MAIN -->
-    <script src="https://code.jquery.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    <script src="../js/toggleModal.js"></script>
+  </main>
+  <!-- //MAIN -->
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <script src="../js/toggleModal.js"></script>
 
 </body>
 

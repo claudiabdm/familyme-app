@@ -24,9 +24,8 @@
 
         &--grid {
             display: grid;
-            grid-template-columns: 0.5fr 1fr;
+            grid-template-columns: 4.75rem 2fr 1fr;
             grid-template-rows: repeat(1, 1fr);
-            grid-auto-columns: max-content;
             column-gap: 10px;
         }
     }
@@ -37,11 +36,10 @@
         color: $primary;
         font-weight: $font-weight-bold;
         margin-bottom: 5px;
-    }
 
-    &__inputs {
-        display: flex;
-        width: 50%;
+        &--hidden {
+          display: none;
+        }
     }
 
     &__control {

@@ -6,27 +6,27 @@ function showModal(modalElem) {
 }
 
 //--- BUTTONS LISTENERS ---//
-$('#newMemberBtn').click(function(e){
+$('#newMemberBtn').click(function(){
 	const modalElem = $('#newMemberModal');
 	showModal(modalElem);
 })
 
-$('#settingsBtn').click(function(e){
+$('#settingsBtn').click(function(){
 	const modalElem = $('#settingsModal');
 	showModal(modalElem);
 })
 
-$('#createBtn').click(function(e){
+$('#createBtn').click(function(){
 	const modalElem = $('#createModal');
 	showModal(modalElem);
 })
 
-$('#joinBtn').click(function(e){
+$('#joinBtn').click(function(){
 	const modalElem = $('#joinModal');
 	showModal(modalElem);
 })
 
-$('#newEventBtn').click(function(e){
+$('#newEventBtn').click(function(){
 	const modalElem = $('#newEventModal');
 	showModal(modalElem);
 })

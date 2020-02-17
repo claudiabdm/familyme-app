@@ -9,14 +9,13 @@ var sourcemaps = require('gulp-sourcemaps');
 // para mantener una compatibilidad futura en caso de que
 // cambie el valor predeterminado.
 sass.compiler = require('node-sass');
- 
 
 // Compilar los ficheros SCSS y enviar el CSS resutlante
 // en la carpeta /assets/css
 gulp.task('sass', function () {
   return gulp.src('./sass/**/*.scss')
   .pipe(sourcemaps.init())
-    .pipe(sass().on('error', sass.logError))
+    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(sourcemaps.write('../../sass/sourcemap/'))
     .pipe(gulp.dest('./assets/css'));
 });
@@ -25,4 +24,3 @@ gulp.task('sass', function () {
 gulp.task('default', function () {
   gulp.watch('./sass/**/*.scss', gulp.series('sass'));
 });
-
