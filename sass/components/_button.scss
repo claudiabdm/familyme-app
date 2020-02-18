@@ -3,65 +3,65 @@
 // ---------------------------- //
 
 .btn {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    height: 2.813rem;
-    width: 100%;
-    border: 0;
-    border-radius: 10px;
-    margin: 0 auto 20px;
-    color: #fff;
-    background-color: #c4c4c4;
-    font-size: 1.75rem;
-    font-weight: 700;
-    text-align: center;
-    line-height: 0;
-    cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.813rem;
+  width: 100%;
+  border: 0;
+  border-radius: 10px;
+  margin: 0 auto 20px;
+  color: #fff;
+  background-color: #c4c4c4;
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+  line-height: 0;
+  cursor: pointer;
 
 }
 
 //--- Buttons that are icons ---//
 .btn--icon {
-    width: 2.813rem;
-    margin: 0;
-    padding: 0;
-    background-color: rgba(0, 0, 0, 0);
+  width: 2.813rem;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 //--- Close button ---//
 .btn--close {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    background: none;
-    color: $grey-100;
-    transition: color 0.2s ease-out;
-    &:hover {
-        color: $grey-200;
-    }
+  margin: 0;
+  padding: 10px 0px 10px 10px;
+  background: none;
+  color: $grey-100;
+  transition: color 0.2s ease-out;
+
+  &:hover {
+    color: $grey-200;
+  }
 }
 
 //--- Colors ---//
 
-.btn--success {
-    background-color: $primary;
+.btn--primary {
+  background-color: $primary;
 }
 
-.btn--danger {
+.btn--secondary {
   background-color: $secondary;
 }
 
 //--- Sizes ---//
 
 .btn--sm {
-    height: 1.875rem;
-    font-size: 1.25rem;
+  height: 1.875rem;
+  font-size: 1.25rem;
 }
 
 .btn--xs {
-    height: 1.563rem;
-    min-width: 4.375rem;
-    margin: 0 auto;
-    font-size: 0.675rem;
+  height: 1.563rem;
+  min-width: 4.375rem;
+  margin: 0 auto;
+  font-size: 0.675rem;
 }
