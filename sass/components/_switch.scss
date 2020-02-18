@@ -1,20 +1,28 @@
 //------------------------------//
 // SWITCH                       //
 // ---------------------------- //
+:root {
+	--switch-size: 1.625rem;
+	--switch-label-size: 1.2rem;
+	--slider-size: var(--switch-size);
+}
 
 .switch {
   display: flex;
   align-items: center;
   width: 100%;
 
+  &--sm {
+    --switch-size: 1.25rem;
+    --switch-label-size: 0.75rem;
+  }
+
   &__label {
     display: flex;
-    align-items: center;
-    width: 100%;
     color: #000;
-    font-size: 1rem;
+    font-size: var(--switch-label-size);
     font-weight: $font-weight-light;
-    margin-right: auto;
+    margin-right: 5px;
   }
 
   &__check {
@@ -24,27 +32,29 @@
   &__slider {
     position: relative;
     display: inline-flex;
-    width: 3.125rem;
-    height: 1.625rem;
-    margin: 0;
-    background-color: #c4c4c4;
+    align-items: center;
+    width: calc(var(--switch-size) * 2);
+    height: var(--switch-size);
     border-radius: 20px;
+    margin: 10;
+    background-color: $grey-100;
+    transition:  background-color 0.3s;
   }
   
   &__slider::before {
     content: '';
-    position: absolute;
-    top: 1px;
-    left: 1px;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: var(--switch-size);
+    height: var(--switch-size);
     border-radius: 50%;
+    border: $border;
     background-color: white;
-    transition: all 0.3s;
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.3s, border 0.3s;
   }
   
   &__check:checked+&__slider::before {
-    left: 25px;
+    transform: translate3d(100%, 0, 0);
+    border: 1px solid $success;
   }
   
   &__check:checked+&__slider {
