@@ -36,7 +36,7 @@
         color: $primary;
         font-weight: $font-weight-bold;
         margin-bottom: 5px;
-
+        width: inherit;
         &--hidden {
           display: none;
         }
@@ -59,6 +59,11 @@
 
         &--invalid {
             border-color: $secondary;
+        }
+
+        &--check {
+          width: 1rem;
+          height: 1rem;
         }
 
     }

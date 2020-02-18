@@ -3,42 +3,46 @@
 // ---------------------------- //
 
 .container {
-    position: absolute;
-    min-width: 20rem;
-    top: 3.625rem;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: 0 auto;
+  position: relative;
+  min-width: 20rem;
+  top: 3.625rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
 
-    &--hidden {
-        overflow: hidden;
-    }
+  &--hidden {
+    overflow: hidden;
+  }
+
+  //--- Containers that need padding like buttons ---//
+  &--padding {
+    top: 0;
+    margin: 0;
+    padding: 20px $padding-sides;
+  }
 }
 
 .container__p {
-    text-align: center;
-    font-size: 1rem;
-    line-height: 1.2;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.2;
 }
 
 .container__p--large {
-    font-size: 1.5rem;
-    margin: 60px 0;
+  font-size: 1.5rem;
+  margin: 60px 0;
 }
 
-//--- Containers with padding ---//
-.container--padding {
-    padding: 20px 30px;
-}
 
 //--- Login ---//
 .container--login {
-    position: static;
+  position: static;
 }
 
 //--- Home ---//
 .container--relative {
-    position: relative;
-    top: 0;
+  position: relative;
+  top: 0;
+  padding-bottom: 42px;
 }

@@ -3,6 +3,8 @@
 /* ---------------------------- */
 .settings {
 
+    min-width: 20rem;
+
     &+& {
         border-top: 4px solid $grey-100;
     }

@@ -5,6 +5,11 @@
     display: inline-flex;
     align-items: center;
     font-size: 1rem;
+
+    &--check {
+      width: 100%;
+      justify-content: space-between;
+    }
 }
 
 .user__btn {
