@@ -67,6 +67,7 @@
 
   <!-- MAIN -->
   <main>
+    
     <!-- CALENDAR -->
     <div class="container">
 
@@ -112,14 +113,14 @@
               <div class="form__group form__group--grid">
                 <label for="startDate" class="form__label">Start date</label>
                 <input type="text" id="startDate" class="form__control" placeholder="DD/MM/YYYY">
-                <label for="startTime" class="form__label form__label--hidden" aria-hidden="true">Start Time</label>
+                <label for="startTime" class="" aria-hidden="true" hidden>Start Time</label>
                 <input type="text" id="startTime" class="form__control" placeholder="00:00">
               </div>
 
               <div class="form__group form__group--grid">
                 <label for="endDate" class="form__label">End date</label>
                 <input type="text" id="endDate" class="form__control" placeholder="DD/MM/YYYY">
-                <label for="endTime" class="form__label form__label--hidden" aria-hidden="true">End time</label>
+                <label for="endTime" class="" aria-hidden="true" hidden>End time</label>
                 <input type="text" id="endTime" class="form__control" placeholder="00:00">
               </div>
 
@@ -224,7 +225,7 @@
 
             <!-- FORM ACTIONS -->
             <div class="form__actions">
-              <button type="submit" class="btn btn--signup" aria-disabled="true">Add invitee</button>
+              <button type="submit" class="btn btn--signup btn--primary" aria-disabled="true">Add invitee</button>
             </div>
             <!-- //FORM ACTIONS -->
 
@@ -252,6 +253,7 @@
 
   </main>
   <!-- //MAIN -->
+
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
   <script src="../js/toggleModal.js"></script>

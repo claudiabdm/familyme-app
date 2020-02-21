@@ -20,8 +20,8 @@
   &--show {
     opacity: 1;
     visibility: visible;
-
-    & .modal__container {
+  
+    .modal__container {
       transform: translate3d(0, 0, 0);
     }
   }
@@ -30,7 +30,7 @@
     display: flex;
     align-items: space-around;
     justify-content: center;
-    min-height: 10rem;
+    min-height: 15rem;
     width: 100%;
     background-color: #fff;
     transform: translate3d(0, 100%, 0);

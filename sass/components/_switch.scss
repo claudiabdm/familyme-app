@@ -10,7 +10,6 @@
 .switch {
   display: flex;
   align-items: center;
-  width: 100%;
 
   &--sm {
     --switch-size: 1.25rem;
@@ -36,7 +35,6 @@
     width: calc(var(--switch-size) * 2);
     height: var(--switch-size);
     border-radius: 20px;
-    margin: 10;
     background-color: $grey-100;
     transition:  background-color 0.3s;
   }
