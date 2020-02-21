@@ -11,12 +11,14 @@ function initMap() {
       lng: 150.644,
     },
     zoom: 10,
+    disableDefaultUI: true,
   });
+
   infoWindow = new google.maps.InfoWindow;
 
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
-    navigator.geolocation.watchPosition((position) => {
+    navigator.geolocation.getCurrentPosition((position) => {
       const pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,

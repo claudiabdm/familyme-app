@@ -42,6 +42,11 @@ $('#addInviteeBtn').click(() => {
   showModal(modalElem);
 });
 
+$('#filterBtn').click(() => {
+  const modalElem = $('#filterModal');
+  showModal(modalElem);
+});
+
 $('.modal__close').click((e) => {
   const btn = $(e.currentTarget);
   const modal = btn.parent().parent().parent().parent();

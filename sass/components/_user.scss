@@ -5,16 +5,14 @@
     display: inline-flex;
     align-items: center;
     font-size: 1rem;
-
-    &--check {
-      width: 100%;
-      justify-content: space-between;
-    }
 }
 
 .user__name {
-  width: inherit;
-  margin: 0;
+  width: 100%;
+  margin: 0 auto;
+  font-size: $font-size-base;
+  font-weight: $font-weight-light;
+  color: #000;
 }
 
 .user__btn {
@@ -65,5 +63,6 @@
 }
 
 .user__name--large {
+    width: inherit;
     font-size: 1.25rem;
 }

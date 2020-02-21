@@ -5,6 +5,11 @@
 .form {
     min-width: 20rem;
 
+    &--checklist {
+      display: flex;
+      flex-direction: column;
+    }
+
     &__section {
         border-bottom: $border;
 
@@ -20,6 +25,12 @@
 
         & + &, &:last-child {
             margin-bottom: 15px;
+        }
+
+        &--checklist {
+          display: flex;
+          justify-content: space-between;
+
         }
 
         &--grid {
@@ -38,6 +49,10 @@
         margin-bottom: 5px;
         width: inherit;
 
+        &--checklist {
+          font-weight: $font-weight-light;
+          color: #000;
+        }
         // &--hidden {
         //   display: none;
         // }

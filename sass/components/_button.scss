@@ -19,6 +19,30 @@
   line-height: 0;
   cursor: pointer;
 
+  //--- Colors ---//
+
+  &--primary {
+    background-color: $primary;
+  }
+
+  &--secondary {
+    background-color: $secondary;
+  }
+
+  //--- Sizes ---//
+
+  &--sm {
+    height: 1.875rem;
+    font-size: 1.25rem;
+  }
+
+  &--xs {
+    height: 1.563rem;
+    min-width: 4.375rem;
+    margin: 0 auto;
+    font-size: 0.675rem;
+  }
+
 }
 
 //--- Buttons that are icons ---//
@@ -42,26 +66,16 @@
   }
 }
 
-//--- Colors ---//
-
-.btn--primary {
-  background-color: $primary;
-}
-
-.btn--secondary {
-  background-color: $secondary;
-}
-
-//--- Sizes ---//
-
-.btn--sm {
-  height: 1.875rem;
-  font-size: 1.25rem;
-}
-
-.btn--xs {
-  height: 1.563rem;
-  min-width: 4.375rem;
-  margin: 0 auto;
-  font-size: 0.675rem;
+//--- Filter button ---//
+.btn--filter {
+  position: absolute;
+  bottom:($navbar-height + rem(30px));
+  right: 20px;
+  border-radius: 100%;
+  width: rem(60px);
+  height: rem(60px);
+  font-size: $font-size-base;
+  font-weight: $font-weight-light;
+  box-shadow: $box-shadow;
+  z-index: 1000;
 }

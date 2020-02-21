@@ -55,12 +55,13 @@
       </div>
       <!-- //USERS -->
 
-      <!-- NEW EVENT -->
+      <!-- NEW PLACE -->
       <div class="navbar__container navbar__container--actions">
         <button type="button" class="btn btn--primary btn--xs" id="newPlaceBtn">New place</button>
       </div>
-      <!-- //NEW EVENT -->
+      <!-- //NEW PLACE -->
       </div>
+
 
   </header>
   <!-- //HEADER -->
@@ -68,9 +69,56 @@
   <!-- MAIN -->
   <main>
 
-    <!-- Map -->
-    <div id="googleMap" class="container container--map" aria-label="google map"></div>
-    <!-- //Map -->
+      <!-- Map -->
+      <div id="googleMap" class="container container--map" aria-label="google map"></div>
+      <button type="button" class="btn btn--filter" id="filterBtn">Filter</button>
+      <!-- //Map -->
+
+
+    <!-- MODAL FILTER -->
+    <div class="modal" id="filterModal">
+
+      <div class="modal__container">
+
+        <h1 class="header modal__title">
+          <div class="header__container">
+            <h1 class="header__title">Filter</h1>
+            <button type="button" class="btn btn--close modal__close" id="secondModalBtn">&times;</button>
+            <!-- <a href="signup.html" class="header__link icon icon-close icon--sm"></a> -->
+          </div>
+        </h1>
+
+        <div class="modal__body">
+
+          <form action="..." class="form form--checklist">
+
+            <div class="form__group form__group--checklist">
+              <label for="user1" class="form__label form__label--checklist" aria-required="true">Restaurant</label>
+              <input type="checkbox" id="user1" class="form__control form__control--check">
+            </div>
+
+
+
+            <div class="form__group form__group--checklist">
+              <label for="user2" class="form__label form__label--checklist" aria-required="true">Cafe</label>
+              <input type="checkbox" id="user2" class="form__control form__control--check">
+            </div>
+
+            <!-- FORM ACTIONS -->
+            <div class="form__actions">
+              <button type="submit" class="btn btn--signup btn--primary" aria-disabled="true">Add filter</button>
+            </div>
+            <!-- //FORM ACTIONS -->
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+    <!-- //MODAL FILTER -->
+
 
     <!-- NAVBAR -->
     <nav class="navbar">
@@ -91,7 +139,8 @@
     crossorigin="anonymous"></script>
   <script src="../js/toggleModal.js"></script>
   <script src="../js/map.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAsSSWQD5dcDfeb4LSi6s-lr_FVaj3q61U&callback=initMap"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAsSSWQD5dcDfeb4LSi6s-lr_FVaj3q61U&callback=initMap"></script>
 
 </body>
 
