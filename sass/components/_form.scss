@@ -33,7 +33,7 @@
 
         &--grid {
             display: grid;
-            grid-template-columns: 5rem 2fr 1fr;
+            grid-template-columns: 7rem 2fr 1fr;
             grid-template-rows: repeat(1, 1fr);
             column-gap: 10px;
         }
