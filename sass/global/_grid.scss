@@ -48,3 +48,12 @@
   top: 0;
   padding-bottom: 42px;
 }
+
+// --- Map ---//
+.container--map {
+  position: absolute;
+  top: $header-height;
+  right: 0;
+  bottom: $navbar-height;
+  left: 0;
+}
