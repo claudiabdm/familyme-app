@@ -71,7 +71,9 @@
 
       <!-- Map -->
       <div id="googleMap" class="container container--map" aria-label="google map"></div>
-      <button type="button" class="btn btn--filter" id="filterBtn">Filter</button>
+      <button type="button" class="btn btn--float" id="filterBtn">
+        <i class="icon icon-funnel icon--sm"></i>
+      </button>
       <!-- //Map -->
 
 
@@ -92,16 +94,20 @@
 
           <form action="..." class="form form--checklist">
 
-            <div class="form__group form__group--checklist">
-              <label for="user1" class="form__label form__label--checklist" aria-required="true">Restaurant</label>
-              <input type="checkbox" id="user1" class="form__control form__control--check">
+            <div class="form__group">
+              <label for="restaurant" class="form__label" aria-required="true">Restaurant</label>
+              <div class="checkbox">
+                <input type="checkbox" name="restaurant" id="restaurant" class="checkbox__box">
+                <span class="checkbox__checkmark"></span>
+              </div> 
             </div>
-
-
-
-            <div class="form__group form__group--checklist">
-              <label for="user2" class="form__label form__label--checklist" aria-required="true">Cafe</label>
-              <input type="checkbox" id="user2" class="form__control form__control--check">
+            
+            <div class="form__group">
+              <label for="cafe" class="form__label" aria-required="true">Cafe</label>
+              <div class="checkbox">
+                <input type="checkbox" name="cafe" id="cafe" class="checkbox__box">
+                <span class="checkbox__checkmark"></span>
+              </div> 
             </div>
 
             <!-- FORM ACTIONS -->

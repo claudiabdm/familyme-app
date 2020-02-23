@@ -3,50 +3,61 @@
 // ---------------------------- //
 
 .container {
-  position: relative;
+  position: fixed;
   min-width: 20rem;
-  top: 3.625rem;
+  top: $header-height;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: $navbar-height;
   margin: 0 auto;
+  overflow: auto;
 
-  &--hidden {
-    overflow: hidden;
+  // PARAGRAPH
+  // ----------------------------- 
+  &__p {
+    padding: 0 $padding-sides;
+    font-size: $font-size-base;
+    text-align: center;
+    line-height: 1.2;
+
+    &--large {
+      font-size: 1.5rem;
+      margin: 50px 0;
+    }
   }
 
-  //--- Containers that need padding like buttons ---//
-  &--padding {
-    top: 0;
-    margin: 0;
-    padding: 20px $padding-sides;
+  // CONTAINER TITLE
+  // ----------------------------- 
+  &__title {
+    margin: 20px auto;
+    padding: 0 $padding-sides;
+    color: $secondary;
+    font-size: 1.5rem;
+    font-weight: $font-weight-bold;
   }
+
 }
 
-//--- Para sign up ---//
-
-.container__p {
-  text-align: center;
-  font-size: 1rem;
-  line-height: 1.2;
+// --- Hidden container --- //
+.container--hidden {
+  overflow: hidden;
 }
 
-.container__p--large {
-  font-size: 1.5rem;
-  margin: 60px 0;
+// --- CONTAINER BUTTON --- //
+.container--btn {
+  position: static;
+  padding: 20px $padding-sides;
 }
-
 
 //--- Login ---//
 .container--login {
   position: static;
+  margin-bottom: 20px;
 }
 
-//--- Home ---//
-.container--relative {
-  position: relative;
+// --- Home --- //
+.container--home {
   top: 0;
-  padding-bottom: 42px;
 }
 
 // --- Map ---//

@@ -11,22 +11,21 @@
 
 <body>
 
-  <!-- HEADER -->
-  <header class="header header--home">
-    <div class="header__container header__container--home">
-      <button type="button" class="btn btn--icon icon icon-settings" id="settingsBtn"></button>
-    </div>
-  </header>
-  <!-- //HEADER -->
 
-  <!-- MAIN -->
-  <main>
+  <!-- USER AND FAMILY INFO -->
+  <div class="container container--home">
+    <!-- HEADER -->
+    <header class="header header--home">
+      <div class="header__container">
+        <button type="button" class="btn btn--icon icon  icon--right icon-settings" id="settingsBtn"></button>
+      </div>
+    </header>
+    <!-- //HEADER -->
 
-    <!-- USER AND FAMILY INFO -->
-    <div class="container container--relative">
-
-      <!-- USER -->
-      <article class="user user--col">
+    <!-- MAIN -->
+    <main>
+      <!-- MAIN USER -->
+      <article class="user user--home user--col">
         <button type="button" class="btn user__btn" id="imgBtn">
           <img class="user__img user__img--large" src="../assets/img/profile-photo-round.svg"
             alt="Claudia Benito profile photo">
@@ -34,193 +33,188 @@
         <h2 class="user__name user__name--large">Claudia Benito</h2>
         <span class="user__role">admin</span>
       </article>
-      <!-- //USER -->
+      <!-- //MAIN USER -->
 
       <!-- MEMBERS -->
-      <section class="section section--home">
 
-        <h1 class="section__title section__title--home">Familia Benito de Moya</h1>
-        <article class="user user--home">
-          <img class="user__img user__img" src="../assets/img/profile-photo-round.svg"
-            alt="Ricardo Benito profile photo">
-          <h2 class="user__name">Ricardo Benito</h2>
+      <h1 class="container__title">Familia Benito de Moya</h1>
+      <article class="user user--home">
+        <img class="user__img" src="../assets/img/profile-photo-round.svg" alt="Ricardo Benito profile photo">
+        <h2 class="user__name">Ricardo Benito</h2>
+      </article>
+      <article class="user user--home">
+        <img class="user__img" src="../assets/img/profile-photo-round.svg" alt="Celia Benito profile photo">
+        <h2 class="user__name">Celia Benito</h2>
+      </article>
+      <article class="user user--home">
+        <img class="user__img" src="../assets/img/profile-photo-round.svg"
+          alt="Sonsoles Benito profile photo">
+        <h2 class="user__name">Sonsoles Benito</h2>
+      </article>
+      <article class="user user--home">
+        <img class="user__img" src="../assets/img/profile-photo-round.svg" alt="Mamá profile photo">
+        <h2 class="user__name">Mamá</h2>
+      </article>
+
+      <!-- NEW MEMBERS BUTTON -->
+      <div class="container container--btn">
+        <button type="button" class="btn btn--sm btn--primary" id="newMemberBtn">New member</button>
+      </div>
+      <!-- //NEW MEMBERS BUTTON -->
+
+
+      <!-- //MEMBERS -->
+
+  </div>
+  <!-- //USER AND FAMILY INFO -->
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar__icons">
+      <a href="home.html" class="navbar__link icon icon-home icon--selected icon--nav" aria-current="true"></a>
+      <a href="calendar.html" class="navbar__link icon icon-calendar icon--nav" aria-current="false"></a>
+      <a href="notifications.html" class="navbar__link icon icon-bell icon--nav" aria-current="false"></a>
+      <a href="locator.html" class="navbar__link icon icon-location icon--nav" aria-current="false"></a>
+      <a href="list.html" class="navbar__link icon icon-check_list icon--nav" aria-current="false"></a>
+    </div>
+  </nav>
+  <!-- //NAVBAR -->
+
+  <!-- MODAL NEW MEMBER -->
+  <div class="modal" id="newMemberModal">
+
+    <div class="modal__container">
+
+      <h1 class="header modal__title">
+        <div class="header__container">
+          <h1 class="header__title">New member</h1>
+          <button type="button" class="btn btn--close modal__close">&times;</button>
+          <!-- <a href="signup.html" class="header__link icon icon-close icon--sm"></a> -->
+        </div>
+      </h1>
+
+      <div class="modal__body">
+
+        <form action="..." class="form">
+          <div class="form__group">
+            <label for="email" class="form__label" aria-required="true">Email</label>
+            <input type="email" id="email" class="form__control" placeholder="john_smith@gmail.com">
+          </div>
+          <!-- FORM ACTIONS -->
+          <div class="form__actions">
+            <button type="submit" class="btn btn--signup" aria-disabled="true">Send email</button>
+          </div>
+          <!-- //FORM ACTIONS -->
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+  <!-- //MODAL NEW MEMBER -->
+
+  <!-- MODAL SETTINGS -->
+  <div class="modal" id="settingsModal">
+    <div class="modal__container modal__container--full">
+
+      <h1 class="header modal__title">
+        <div class="header__container">
+          <h1 class="header__title">Settings</h1>
+          <button type="button" class="btn btn--close modal__close">&times;</button>
+          <!-- <a href="signup.html" class="header__link icon icon-close icon--sm"></a> -->
+        </div>
+      </h1>
+
+      <div class="modal__body modal__body--full">
+
+        <article class="settings">
+          <h2 class="settings__title">User settings</h2>
+          <ul class="settings__list">
+            <li>
+              <a href="#" class="settings__txt">Change password<i class="icon icon-next icon--xs"></i></a>
+            </li>
+            <li>
+              <a href="#" class="settings__txt">Edit user name<i class="icon icon-next icon--xs"></i></a>
+            </li>
+            <li>
+              <a href="#" class="settings__txt">Change email<i class="icon icon-next icon--xs"></i></a>
+            </li>
+            <!-- SWITCHES -->
+            <li>
+              <label class="switch settings__txt" for="location">
+                <span class="switch__label">Location</span>
+                <input type="checkbox" class="switch__check" id="location" role="switch" aria-checked="true">
+                <span class="switch__slider"></span>
+              </label>
+            </li>
+
+            <li>
+              <label class="switch settings__txt" for="notifications">
+                <span class="switch__label">Notifications</span>
+                <input type="checkbox" class="switch__check" id="notifications" role="switch" aria-checked="true">
+                <span class="switch__slider"></span>
+              </label>
+            </li>
+            <!-- //SWITCHES -->
+            <li>
+              <a href="login.html" class="settings__txt settings__txt--warning">Log out</a>
+            </li>
+            <li>
+              <a href="#" class="settings__txt settings__txt--warning">Delete account</a>
+            </li>
+          </ul>
         </article>
 
-        <article class="user user--home">
-          <img class="user__img user__img" src="../assets/img/profile-photo-round.svg" alt="Celia Benito profile photo">
-          <h2 class="user__name">Celia Benito</h2>
+        <article class="settings">
+          <h2 class="settings__title">Family settings</h2>
+          <ul>
+            <li class="settings__txt">Change admin <i class="icon icon-next icon--xs"></i></li>
+            <li class="settings__txt">Change family name <i class="icon icon-next icon--xs"></i>
+            </li>
+            <li class="settings__txt settings__txt--warning">Delete family group</li>
+          </ul>
         </article>
 
-        <article class="user user--home">
-          <img class="user__img user__img" src="../assets/img/profile-photo-round.svg"
-            alt="Sonsoles Benito profile photo">
-          <h2 class="user__name">Sonsoles Benito</h2>
-        </article>
 
-        <article class="user user--home">
-          <img class="user__img user__img" src="../assets/img/profile-photo-round.svg" alt="Mamá profile photo">
-          <h2 class="user__name">Mamá</h2>
-        </article>
+      </div>
+
+    </div>
+  </div>
+  <!-- //MODAL SETTINGS -->
+
+
+  <!-- MODAL Edit Profile Photo -->
+  <div class="modal" id="editPhotoModal">
+
+    <div class="modal__container">
+
+      <h1 class="header modal__title">
+        <div class="header__container">
+          <h1 class="header__title">Edit profile photo</h1>
+          <button type="button" class="btn btn--close modal__close">&times;</button>
+          <!-- <a href="signup.html" class="header__link icon icon-close icon--sm"></a> -->
+        </div>
+      </h1>
+
+      <div class="modal__body">
 
         <!-- NEW MEMBERS BUTTON -->
-        <div class="container container--padding">
-          <button type="button" class="btn btn--sm btn--primary" id="newMemberBtn">New member</button>
+        <div class="container container--btn">
+          <button type="button" class="btn btn--sm btn--primary btn--mg-bottom-sm" id="newMemberBtn">Take
+            photo</button>
+          <button type="button" class="btn btn--sm btn--primary btn--mg-bottom-sm" id="newMemberBtn">Photo
+            library</button>
+          <button type="button" class="btn btn--sm btn--secondary btn--mg-bottom-sm" id="newMemberBtn">Remove</button>
         </div>
         <!-- //NEW MEMBERS BUTTON -->
 
-      </section>
-      <!-- //MEMBERS -->
-
-    </div>
-    <!-- //USER AND FAMILY INFO -->
-
-    <!-- NAVBAR -->
-    <nav class="navbar">
-      <div class="navbar__icons">
-        <a href="home.html" class="navbar__link icon icon-home icon--selected icon--nav" aria-current="true"></a>
-        <a href="calendar.html" class="navbar__link icon icon-calendar icon--nav" aria-current="false"></a>
-        <a href="notifications.html" class="navbar__link icon icon-bell icon--nav" aria-current="false"></a>
-        <a href="locator.html" class="navbar__link icon icon-location icon--nav" aria-current="false"></a>
-        <a href="list.html" class="navbar__link icon icon-check_list icon--nav" aria-current="false"></a>
-      </div>
-    </nav>
-    <!-- //NAVBAR -->
-
-    <!-- MODAL NEW MEMBER -->
-    <div class="modal" id="newMemberModal">
-
-      <div class="modal__container">
-
-        <h1 class="header modal__title">
-          <div class="header__container">
-            <h1 class="header__title">New member</h1>
-            <button type="button" class="btn btn--close modal__close">&times;</button>
-            <!-- <a href="signup.html" class="header__link icon icon-close icon--sm"></a> -->
-          </div>
-        </h1>
-
-        <div class="modal__body">
-
-          <form action="..." class="form">
-            <div class="form__group">
-              <label for="email" class="form__label" aria-required="true">Email</label>
-              <input type="email" id="email" class="form__control" placeholder="john_smith@gmail.com">
-            </div>
-            <!-- FORM ACTIONS -->
-            <div class="form__actions">
-              <button type="submit" class="btn btn--signup" aria-disabled="true">Send email</button>
-            </div>
-            <!-- //FORM ACTIONS -->
-          </form>
-
-        </div>
-
       </div>
 
     </div>
-    <!-- //MODAL NEW MEMBER -->
 
-    <!-- MODAL SETTINGS -->
-    <div class="modal" id="settingsModal">
-      <div class="modal__container modal__container--full">
-
-        <h1 class="header modal__title">
-          <div class="header__container">
-            <h1 class="header__title">Settings</h1>
-            <button type="button" class="btn btn--close modal__close">&times;</button>
-            <!-- <a href="signup.html" class="header__link icon icon-close icon--sm"></a> -->
-          </div>
-        </h1>
-
-        <div class="modal__body modal__body--full">
-
-          <article class="settings">
-            <h2 class="settings__title">User settings</h2>
-            <ul class="settings__list">
-              <li>
-                <a href="#" class="settings__txt">Change password<i class="icon icon-next icon--xs"></i></a>
-              </li>
-              <li>
-                <a href="#" class="settings__txt">Edit user name<i class="icon icon-next icon--xs"></i></a>
-              </li>
-              <li>
-                <a href="#" class="settings__txt">Change email<i class="icon icon-next icon--xs"></i></a>
-              </li>
-              <li>
-
-                <label class="switch settings__txt" for="location">
-                  <span class="switch__label">Location</span>
-                  <input type="checkbox" class="switch__check" id="location" role="switch" aria-checked="true">
-                  <span class="switch__slider"></span>
-                </label>
-              </li>
-              <li>
-
-                <label class="switch settings__txt" for="notifications">
-                    <span class="switch__label">Notifications</span>
-                    <input type="checkbox" class="switch__check" id="notifications" role="switch" aria-checked="true">
-                    <span class="switch__slider"></span>
-                </label>
-
-              </li>
-              <li>
-                <a href="login.html" class="settings__txt settings__txt--warning">Log out</a>
-              </li>
-              <li>
-                <a href="#" class="settings__txt settings__txt--warning">Delete account</a>
-              </li>
-            </ul>
-          </article>
-
-          <article class="settings">
-            <h2 class="settings__title">Family settings</h2>
-            <ul>
-              <li class="settings__txt">Change admin <i class="icon icon-next icon--xs"></i></li>
-              <li class="settings__txt">Change family name <i class="icon icon-next icon--xs"></i>
-              </li>
-              <li class="settings__txt settings__txt--warning">Delete family group</li>
-            </ul>
-          </article>
-
-
-        </div>
-
-      </div>
-    </div>
-    <!-- //MODAL SETTINGS -->
-
-
-    <!-- MODAL Edit Profile Photo -->
-    <div class="modal" id="editPhotoModal">
-
-      <div class="modal__container">
-
-        <h1 class="header modal__title">
-          <div class="header__container">
-            <h1 class="header__title">Edit profile photo</h1>
-            <button type="button" class="btn btn--close modal__close">&times;</button>
-            <!-- <a href="signup.html" class="header__link icon icon-close icon--sm"></a> -->
-          </div>
-        </h1>
-
-        <div class="modal__body">
-
-          <!-- NEW MEMBERS BUTTON -->
-          <div class="container container--padding">
-            <button type="button" class="btn btn--sm btn--primary btn--mg-bottom-sm" id="newMemberBtn">Take
-              photo</button>
-            <button type="button" class="btn btn--sm btn--primary btn--mg-bottom-sm" id="newMemberBtn">Photo
-              library</button>
-            <button type="button" class="btn btn--sm btn--secondary btn--mg-bottom-sm" id="newMemberBtn">Remove</button>
-          </div>
-          <!-- //NEW MEMBERS BUTTON -->
-
-        </div>
-
-      </div>
-
-    </div>
-    <!-- // MODAL Edit Profile Photo -->
+  </div>
+  <!-- // MODAL Edit Profile Photo -->
 
   </main>
   <!-- //MAIN -->

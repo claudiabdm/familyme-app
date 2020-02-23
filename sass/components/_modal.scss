@@ -17,54 +17,60 @@
   z-index: 1000;
   visibility: hidden;
 
-  &--show {
-    opacity: 1;
-    visibility: visible;
-  
-    .modal__container {
-      transform: translate3d(0, 0, 0);
-    }
-  }
-
+  // MODAL CONTAINER
+  // ----------------------------- 
   &__container {
     display: flex;
-    align-items: space-around;
     justify-content: center;
-    min-height: 15rem;
     width: 100%;
     background-color: #fff;
     transform: translate3d(0, 100%, 0);
     transition: transform 0.35s ease-out;
 
+    // Modal container full
+    // ------------------------
     &--full {
-      position: relative;
       height: 100%;
       transform: translate3d(100%, 0, 0);
     }
+
+    // Modal show container
+    // ------------------------
+    .modal--show & {
+      transform: translate3d(0, 0, 0);
+    }
   }
 
+  // MODAL TITLE
+  // ----------------------------- 
   &__title {
     position: fixed;
     top: 0;
     box-shadow: none;
   }
 
+  // MODAL BODY
+  // ----------------------------- 
   &__body {
     position: relative;
-    top: 3.625rem;
+    top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     width: 100%;
-    padding-bottom: 40px;
-
-    &--full {
-      position: absolute;
-      overflow-y: auto;
-    }
+    padding-top: $header-height;
+    overflow-y: auto;
   }
 
+  // MODAL CLOSE BUTTON
+  // ----------------------------- 
   &__close {
     width: auto;
   }
+}
+
+//--- Modal Show ---//
+.modal--show {
+  opacity: 1;
+  visibility: visible;
 }

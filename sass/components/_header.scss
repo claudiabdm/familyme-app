@@ -3,68 +3,72 @@
 // ---------------------------- //
 
 .header {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    min-width: 20rem;
-    padding: 0 $padding-sides;
-    border-bottom: $border;
-    color: $secondary;
-    background-color: #fff;
-    font-weight: $font-weight-bold;
-    font-size: 1.875rem;
-    z-index: 10;
-    box-shadow: $box-shadow;
-}
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  min-width: 20rem;
+  padding: 0 $padding-sides;
+  border-bottom: $border;
+  color: $secondary;
+  background-color: #fff;
+  font-weight: $font-weight-bold;
+  font-size: ($font-size-base * 2);
+  z-index: 10;
+  box-shadow: $box-shadow;
 
-.header__container {
+  // HEADER CONTAINER
+  // ----------------------------- 
+  &__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     height: $header-height;
     margin: 0 auto;
-}
 
-.header__title {
+    // Header login container
+    // -------------------------
+    .header--home & {
+      justify-content: flex-end;
+    }
+  }
+
+  // HEADER TITTLE
+  // ----------------------------- 
+  &__title {
     font-size: 1.75rem;
+
+    // Header login title
+    // ------------------------
+    .header--login & {
+      margin: auto;
+    }
+
+  }
+
 }
 
-.header__link {
-    margin-left: auto;
-}
-
-//--- Login ---//
+//--- Header Login ---//
 .header--login {
-    position: relative;
-    border: 0;
-    margin: 20px auto;
-    box-shadow: none;
-}
-
-.header__title--login {
-    margin: auto;
+  position: relative;
+  border: 0;
+  margin: 20px auto;
+  box-shadow: none;
 }
 
 //--- Home ---//
-
 .header--home {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 0;
-    box-shadow: none;
-}
-
-.header__container--home {
-    justify-content: flex-end;
+  position: static;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  box-shadow: none;
 }
 
 //-- Calendar --//
-
 .header--calendar {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }

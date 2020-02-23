@@ -1,68 +1,84 @@
-/*------------------------------*/
-/* USER                         */
-/* ---------------------------- */
+// ---------------------------- //
+// USER                         //
+// ---------------------------- //
+
 .user {
-    display: inline-flex;
-    align-items: center;
-    font-size: 1rem;
-}
 
-.user__name {
-  width: 100%;
-  margin: 0 auto;
+  display: inline-flex;
+  align-items: center;
   font-size: $font-size-base;
-  font-weight: $font-weight-light;
-  color: #000;
-}
 
-.user__btn {
+  // USER NAME
+  // ----------------------------- 
+  &__name {
+    width: 100%;
+    margin: 0 auto;
+    font-weight: $font-weight-light;
+    color: #000;
+
+    &--large {
+      width: inherit;
+      font-size: 1.2rem;
+    }
+
+  }
+
+  &__role {
+    color: $grey-100;
+    font-size: $font-size-base;
+  }
+
+  // USER BTN
+  // ----------------------------- 
+  &__btn {
     display: block;
     width: max-content;
     height: max-content;
     margin: 0;
     padding: 0;
     background: none;
-}
+  }
 
-.user__img {
+  // USER IMG
+  // ----------------------------- 
+  &__img {
     width: 2.5rem;
     height: 2.5rem;
     margin-right: 10px;
+
+    &--large {
+      width: 8rem;
+      height: 8rem;
+      margin: 0;
+    }
+  }
+
 }
 
-.user__img--large {
-    width: 9.188rem;
-    height: 9.188rem;
-    margin: 0;
-}
+// --- Layout in column --- //
 
 .user--col {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    height: 12.125rem;
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 12.125rem;
+  padding-bottom: 20px;
 }
 
-.user__role {
-    color: $grey-100;
-    font-size: 1rem;
-}
-
-/*--- Home ---*/
-
+// --- Home --- //
 .user--home {
-    display: flex;
-    padding: 10px 30px;
+  display: flex;
+  padding: 10px $padding-sides;
+  border-bottom: $border;
+
+  &~& {
     border-top: $border;
-}
+    border-bottom: none;
+  }
 
-.user--home:last-of-type {
+  &:last-of-type {
     border-bottom: $border;
-}
+  }
 
-.user__name--large {
-    width: inherit;
-    font-size: 1.25rem;
 }

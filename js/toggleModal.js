@@ -1,11 +1,15 @@
 function showModal(modalElem) {
-  // $('.container').toggleClass('container--hidden');
+  $('body').css('overflow', 'hidden');
   $(modalElem).toggleClass('modal--show');
-  $('.modal__fade').toggleClass('modal__fade--show');
-  $('.modal__container').toggleClass('modal__container--show');
 }
 
 // --- BUTTONS LISTENERS --- //
+
+
+$('#signUpBtn').click(() => {
+  const modalElem = $('#signUpModal');
+  showModal(modalElem);
+});
 
 $('#newMemberBtn').click(() => {
   const modalElem = $('#newMemberModal');
@@ -51,5 +55,5 @@ $('.modal__close').click((e) => {
   const btn = $(e.currentTarget);
   const modal = btn.parent().parent().parent().parent();
   modal.removeClass('modal--show');
-  // $('.container').removeClass('container--hidden');
+  $('body').css('overflow', 'auto');
 });

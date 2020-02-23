@@ -1,31 +1,37 @@
 
-.icon-add {
-	background-image: url('png/add.png');
+.icon-family {
+	background-image: url('png/family.png');
 	background-repeat: no-repeat;
 }
 
-.icon-close-small {
-	background-image: url('png/close-small.png');
+
+.icon-red_eye {
+	background-image: url('png/red_eye.png');
 	background-repeat: no-repeat;
 }
 
-.icon-close {
-	background-image: url('png/close.png');
+.icon-bell {
+	background-image: url('png/bell.png');
 	background-repeat: no-repeat;
 }
 
-.icon-next {
-	background-image: url('png/next.png');
+.icon-calendar {
+	background-image: url('png/calendar.png');
 	background-repeat: no-repeat;
 }
 
-.icon-off {
-	background-image: url('png/off.png');
+.icon-chat_1 {
+	background-image: url('png/chat_1.png');
 	background-repeat: no-repeat;
 }
 
-.icon-on {
-	background-image: url('png/on.png');
+.icon-check_1 {
+	background-image: url('png/check_1.png');
+	background-repeat: no-repeat;
+}
+
+.icon-check_list {
+	background-image: url('png/check_list.png');
 	background-repeat: no-repeat;
 }
 
@@ -34,217 +40,97 @@
 	background-repeat: no-repeat;
 }
 
-.icon-grey-bell {
-	background-image: url('png/grey-bell.png');
+.icon-copy {
+	background-image: url('png/copy.png');
 	background-repeat: no-repeat;
 }
 
-.icon-grey-chat_1 {
-	background-image: url('png/grey-chat_1.png');
+.icon-cross {
+	background-image: url('png/cross.png');
 	background-repeat: no-repeat;
 }
 
-.icon-grey-check_1 {
-	background-image: url('png/grey-check_1.png');
+.icon-delete {
+	background-image: url('png/delete.png');
 	background-repeat: no-repeat;
 }
 
-.icon-grey-check_list {
-	background-image: url('png/grey-check_list.png');
+.icon-funnel {
+	background-image: url('png/funnel.png');
 	background-repeat: no-repeat;
 }
 
-.icon-grey-family {
-	background-image: url('png/grey-family.png');
+.icon-home {
+	background-image: url('png/home.png');
 	background-repeat: no-repeat;
 }
 
-.icon-grey-home {
-	background-image: url('png/grey-home.png');
+.icon-info {
+	background-image: url('png/info.png');
 	background-repeat: no-repeat;
 }
 
-.icon-grey-list {
-	background-image: url('png/grey-list.png');
+.icon-list {
+	background-image: url('png/list.png');
 	background-repeat: no-repeat;
 }
 
-.icon-grey-location {
-	background-image: url('png/grey-location.png');
+.icon-location {
+	background-image: url('png/location.png');
 	background-repeat: no-repeat;
 }
 
-.icon-grey-map location {
-	background-image: url('png/grey-map location.png');
+.icon-maplocation {
+	background-image: url('png/maplocation.png');
 	background-repeat: no-repeat;
 }
 
-.icon-grey-maps {
-	background-image: url('png/grey-maps.png');
+.icon-maps {
+	background-image: url('png/maps.png');
 	background-repeat: no-repeat;
 }
 
-.icon-grey-plus {
-	background-image: url('png/grey-plus.png');
+.icon-plus {
+	background-image: url('png/plus.png');
 	background-repeat: no-repeat;
 }
 
-.icon-grey-power_on_off {
-	background-image: url('png/grey-power_on_off.png');
+.icon-power_on_off {
+	background-image: url('png/power_on_off.png');
 	background-repeat: no-repeat;
 }
 
-.icon-grey-settings_1 {
-	background-image: url('png/grey-settings_1.png');
+.icon-red_eye_close {
+	background-image: url('png/red_eye_close_1.png');
 	background-repeat: no-repeat;
 }
 
-.icon-grey-settings {
-	background-image: url('png/grey-settings.png');
+.icon-settings_1 {
+	background-image: url('png/settings_1.png');
 	background-repeat: no-repeat;
 }
 
-.icon-grey-shopping_car {
-	background-image: url('png/grey-shopping_car.png');
+.icon-settings {
+	background-image: url('png/settings.png');
 	background-repeat: no-repeat;
 }
 
-.icon-grey-shopping {
-	background-image: url('png/grey-shopping.png');
+.icon-shopping_car {
+	background-image: url('png/shopping_car.png');
 	background-repeat: no-repeat;
 }
 
-.icon-grey-speech_bubble {
-	background-image: url('png/grey-speech_bubble.png');
+.icon-shopping {
+	background-image: url('png/shopping.png');
 	background-repeat: no-repeat;
 }
 
-.icon-grey-trash {
-	background-image: url('png/grey-trash.png');
+.icon-speech_bubble {
+	background-image: url('png/speech_bubble.png');
 	background-repeat: no-repeat;
 }
 
-.icon-color-cross {
-	background-image: url('png/color-cross.png');
-	background-repeat: no-repeat;
-}
-
-.icon-color-bell {
-	background-image: url('png/color-bell.png');
-	background-repeat: no-repeat;
-}
-
-.icon-color-calendar {
-	background-image: url('png/color-calendar.png');
-	background-repeat: no-repeat;
-}
-
-.icon-color-chat_1 {
-	background-image: url('png/color-chat_1.png');
-	background-repeat: no-repeat;
-}
-
-.icon-color-check_1 {
-	background-image: url('png/color-check_1.png');
-	background-repeat: no-repeat;
-}
-
-.icon-color-check_list {
-	background-image: url('png/color-check_list.png');
-	background-repeat: no-repeat;
-}
-
-.icon-color-control {
-	background-image: url('png/color-control.png');
-	background-repeat: no-repeat;
-}
-
-.icon-color-copy {
-	background-image: url('png/color-copy.png');
-	background-repeat: no-repeat;
-}
-
-.icon-color-family {
-	background-image: url('png/color-family.png');
-	background-repeat: no-repeat;
-}
-
-.icon-color-home {
-	background-image: url('png/color-home.png');
-	background-repeat: no-repeat;
-}
-
-.icon-color-list {
-	background-image: url('png/color-list.png');
-	background-repeat: no-repeat;
-}
-
-.icon-color-location {
-	background-image: url('png/color-location.png');
-	background-repeat: no-repeat;
-}
-
-.icon-color-map location {
-	background-image: url('png/color-map location.png');
-	background-repeat: no-repeat;
-}
-
-.icon-color-maps {
-	background-image: url('png/color-maps.png');
-	background-repeat: no-repeat;
-}
-
-.icon-color-power_on_off {
-	background-image: url('png/color-power_on_off.png');
-	background-repeat: no-repeat;
-}
-
-.icon-color-red_eye {
-	background-image: url('png/color-red_eye.png');
-	background-repeat: no-repeat;
-}
-
-.icon-color-settings_1 {
-	background-image: url('png/color-settings_1.png');
-	background-repeat: no-repeat;
-}
-
-.icon-color-settings {
-	background-image: url('png/color-settings.png');
-	background-repeat: no-repeat;
-}
-
-.icon-color-shopping_car {
-	background-image: url('png/color-shopping_car.png');
-	background-repeat: no-repeat;
-}
-
-.icon-color-shopping {
-	background-image: url('png/color-shopping.png');
-	background-repeat: no-repeat;
-}
-
-.icon-color-speech_bubble {
-	background-image: url('png/color-speech_bubble.png');
-	background-repeat: no-repeat;
-}
-
-.icon-color-trash {
-	background-image: url('png/color-trash.png');
-	background-repeat: no-repeat;
-}
-
-.icon-grey-calendar {
-	background-image: url('png/grey-calendar.png');
-	background-repeat: no-repeat;
-}
-
-.icon-grey-control {
-	background-image: url('png/grey-control.png');
-	background-repeat: no-repeat;
-}
-
-.icon-color-red_eye_close {
-	background-image: url('png/color-red_eye_close.png');
+.icon-trash {
+	background-image: url('png/trash.png');
 	background-repeat: no-repeat;
 }

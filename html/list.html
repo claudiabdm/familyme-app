@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Locator</title>
+  <title>Shopping List</title>
   <link rel="stylesheet" href="../assets/css/style.css">
 
 </head>
@@ -73,6 +73,37 @@
   <!-- MAIN -->
   <main>
 
+    <div class="container">
+      <ul class="list" id="shoppingList">
+
+        <li class="list__item">
+          <label for="galletas" class="list__label">
+            <span class="list__product">Galletas</span>
+            <span class="list__addedby">Added by Claudia Benito</span>
+          </label>
+          <div class="list__checkbox checkbox checkbox--lg">
+            <input type="checkbox" name="galletas" id="galletas" class="checkbox__box">
+            <span class="checkbox__checkmark"></span>
+          </div>
+        </li>
+
+        <li class="list__item">
+          <label for="leche" class="list__label">
+            <span class="list__product">Leche</span>
+            <span class="list__addedby">Added by Claudia Benito</span>
+          </label>
+          <div class="list__checkbox checkbox checkbox--lg">
+            <input type="checkbox" name="leche" id="leche" class="checkbox__box">
+            <span class="checkbox__checkmark"></span>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+
+    <button type="button" class="btn btn--float" id="addItemBtn">
+      <i class="icon icon-plus icon--sm"></i>
+    </button>
     <!-- NAVBAR -->
     <nav class="navbar">
       <div class="navbar__icons">
@@ -90,6 +121,7 @@
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
   <script src="../js/toggleModal.js"></script>
+  <script src="../js/addItem.js"></script>
 
 </body>
 

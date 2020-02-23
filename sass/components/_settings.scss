@@ -1,39 +1,45 @@
-/*------------------------------*/
-/* SETTINGS                     */
-/* ---------------------------- */
+// ---------------------------- //
+// SETTINGS                     //
+// ---------------------------- //
 .settings {
 
-    min-width: 20rem;
+  min-width: 20rem;
 
-    &+& {
-        border-top: 4px solid $grey-100;
+  &+& {
+    border-top: 4px solid $grey-100;
+  }
+
+  // SETTINGS TITLE
+  // ----------------------------- 
+  &__title {
+    width: 100%;
+    border-bottom: $border;
+    color: $primary;
+    font-size: 1.5rem;
+    font-weight: $font-weight-bold;
+    padding: 10px $padding-sides;
+  }
+
+  // SETTINGS TEXT
+  // ----------------------------- 
+  &__txt {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px $padding-sides;
+    border-bottom: $border;
+    color: #000;
+    font-weight: $font-weight-light;
+
+    &:hover {
+      background-color: rgba($color: $tertiary, $alpha: 1);
     }
 
-
-    &__title {
-        width: 100%;
-        border-bottom: $border;
-        color: $primary;
-        font-size: 1.5rem;
-        font-weight: $font-weight-bold;
-        padding: 10px $padding-sides;
+    // Settings text warnig
+    // ------------------------
+    &--warning {
+      color: $secondary;
     }
+  }
 
-    &__txt {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px $padding-sides;
-        border-bottom: $border;
-        color: #000;
-        font-weight: $font-weight-light;
-
-        &:hover {
-            background-color: rgba($color: $tertiary, $alpha: 1);
-        }
-    }
-
-    &__txt--warning {
-        color: $secondary;
-    }
 }

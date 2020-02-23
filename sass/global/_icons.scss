@@ -1,6 +1,7 @@
 /*------------------------------*/
 /* ICONS                        */
 /* ---------------------------- */
+@import "../icons/icons.data.svg.css";
 
 .icon {
 	width: 2.5rem;
@@ -16,8 +17,14 @@
 	filter: none;
 }
 
+// --- Position --- //
+.icon--right{
+  margin-left: auto;
+  margin-right: 0;
+}
 
-//-- Sizes --//
+
+// -- Sizes --- //
 .icon--sm {
 	width: 1.875rem;
 	height: 1.875rem;
@@ -28,15 +35,11 @@
 	height: 1.25rem;
 }
 
-//-- Icons --//
+// --- Icons --- //
 
 .icon--pswd {
 	position: absolute;
 	margin-right: 5px;
 	margin-left: -5px;
 	cursor: pointer;
-}
-
-.icon-settings {
-	right: 0;
 }

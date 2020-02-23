@@ -1,58 +1,71 @@
 //------------------------------//
 // BUTTON                       //
 // ---------------------------- //
+:root {
+  --button-height: 2.813rem;
+  --button-font-size: 1.75rem;
+}
 
 .btn {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  height: 2.813rem;
+  height: var(--button-height);
   width: 100%;
   border: 0;
   border-radius: 10px;
-  margin: 0 auto 20px;
   color: #fff;
-  background-color: #c4c4c4;
-  font-size: 1.75rem;
-  font-weight: 700;
+  background-color: $grey-100;
+  font-size: var(--button-font-size);
+  font-weight: $font-weight-bold;
   text-align: center;
   line-height: 0;
   cursor: pointer;
 
-  //--- Colors ---//
-
-  &--primary {
-    background-color: $primary;
+  & + & {
+    margin-top: 30px;
   }
 
-  &--secondary {
-    background-color: $secondary;
-  }
+}
 
-  //--- Sizes ---//
+//--- Colors ---//
 
-  &--sm {
-    height: 1.875rem;
-    font-size: 1.25rem;
-  }
+.btn--primary {
+  background-color: $primary;
+}
 
-  &--xs {
-    height: 1.563rem;
-    min-width: 4.375rem;
-    margin: 0 auto;
-    font-size: 0.675rem;
-  }
+.btn--secondary {
+  background-color: $secondary;
+}
 
+//--- Sizes ---//
+
+.btn--sm {
+  --button-height: 1.875rem;
+  --button-font-size: 1.25rem;
+}
+
+.btn--xs {
+  --button-height: 1.563rem;
+  --button-font-size: 0.675rem;
 }
 
 //--- Buttons that are icons ---//
 .btn--icon {
   width: 2.813rem;
-  margin: 0;
   padding: 0;
   background-color: rgba(0, 0, 0, 0);
 }
 
+// --- Link button ---//
+.btn--link {
+ background: none;
+ height: 100%;
+ padding: 10px;
+ color: $secondary;
+ font-size: $font-size-base;
+ font-weight: $font-weight-bold;
+}
 //--- Close button ---//
 .btn--close {
   margin: 0;
@@ -66,14 +79,18 @@
   }
 }
 
-//--- Filter button ---//
-.btn--filter {
-  position: absolute;
-  bottom:($navbar-height + rem(30px));
-  right: 20px;
+//--- Float button ---//
+.btn--float {
+  position: fixed;
+  bottom: ($navbar-height + rem(20px));
+  right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 100%;
-  width: rem(60px);
-  height: rem(60px);
+  width: rem(50px);
+  height: rem(50px);
+  background-color: #fff;
   font-size: $font-size-base;
   font-weight: $font-weight-light;
   box-shadow: $box-shadow;

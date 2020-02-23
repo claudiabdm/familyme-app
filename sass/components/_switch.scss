@@ -1,21 +1,18 @@
-//------------------------------//
+// ---------------------------- //
 // SWITCH                       //
 // ---------------------------- //
 :root {
-	--switch-size: 1.5rem;
-	--switch-label-size: 1rem;
-	--slider-size: var(--switch-size);
+  --switch-size: 1.5rem;
+  --switch-label-size: $font-size-base;
+  --slider-size: var(--switch-size);
 }
 
 .switch {
   display: flex;
   align-items: center;
 
-  &--sm {
-    --switch-size: 1.25rem;
-    --switch-label-size: 0.75rem;
-  }
-
+  // SWITCH LABEL
+  // ----------------------------- 
   &__label {
     display: flex;
     color: #000;
@@ -24,10 +21,14 @@
     margin-right: 5px;
   }
 
+  // CHECK
+  // ----------------------------- 
   &__check {
     display: none;
   }
-  
+
+  // SLIDER
+  // ----------------------------- 
   &__slider {
     position: relative;
     display: inline-flex;
@@ -36,26 +37,36 @@
     height: var(--switch-size);
     border-radius: 20px;
     background-color: $grey-100;
-    transition:  background-color 0.3s;
+    transition: background-color 0.3s;
+
+    &::before {
+      content: '';
+      width: var(--switch-size);
+      height: var(--switch-size);
+      border-radius: 50%;
+      border: $border;
+      background-color: white;
+      transform: translate3d(0, 0, 0);
+      transition: transform 0.3s, border 0.3s;
+    }
   }
-  
-  &__slider::before {
-    content: '';
-    width: var(--switch-size);
-    height: var(--switch-size);
-    border-radius: 50%;
-    border: $border;
-    background-color: white;
-    transform: translate3d(0, 0, 0);
-    transition: transform 0.3s, border 0.3s;
-  }
-  
+
+  // STATES AND TRANSITIONS
+  // ----------------------------- 
+
   &__check:checked+&__slider::before {
     transform: translate3d(100%, 0, 0);
     border: 1px solid $success;
   }
-  
+
   &__check:checked+&__slider {
     background-color: $success;
   }
+
+}
+
+//--- Sizes ---//
+.switch--sm {
+  --switch-size: 1.25rem;
+  --switch-label-size: 0.75rem;
 }

@@ -3,43 +3,45 @@
 /* ---------------------------- */
 
 .navbar {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 3.75rem;
-    width: 100%;
-    margin: 0 auto;
-    border-top: $border;
-    background-color: #fff;
-    z-index: 10;
-}
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: $navbar-height;
+  width: 100%;
+  margin: 0 auto;
+  border-top: $border;
+  background-color: #fff;
+  z-index: 10;
 
-.navbar__icons{
+  &__icons {
     display: flex;
     justify-content: space-around;
     align-items: center;
     height: 100%;
-}
+  }
 
-.navbar--top {
-    position: relative;
-    display: flex;
-    top:0;
-    border: 0;
-}
-
-.navbar__container {
+  &__container {
     display: flex;
     width: 100%;
     padding: 10px;
     overflow: auto;
+
+    &--actions {
+      align-items: center;
+      width: 10rem;
+      border-left: $border;
+      box-shadow: -1px 0 0px 0 rgba(0, 0, 0, 0.075);
+      z-index: 10;
+    }
+
+  }
 }
 
-.navbar__container--actions {
-    align-items: center;
-    width: 10rem;
-    border-left: $border;
-    box-shadow: -1px 0px 0px 0px rgba(0, 0, 0, 0.096);
-    z-index: 10;
+// --- User navbar top --- //
+.navbar--top {
+  position: relative;
+  display: flex;
+  top: 0;
+  border: 0;
 }

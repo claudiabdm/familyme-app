@@ -3,28 +3,29 @@
 /* ---------------------------- */
 
 body {
-    background-color: $body-bg;
-    color: $body-color;
-    font-family: $font-family-primary;
-    font-weight: $font-weight-light;
-    font-size: $font-size-base;
-    line-height: 1;
+  background-color: $body-bg;
+  color: $body-color;
+  font-family: $font-family-primary;
+  font-weight: $font-weight-light;
+  font-size: $font-size-body;
+  line-height: 1;
 }
 
 a {
-    text-decoration: $link-decoration;
-    color: $secondary;
-    font-weight: $font-weight-bold;
-    cursor: pointer;
+  text-decoration: $link-decoration;
+  color: $secondary;
+  font-weight: $font-weight-bold;
+  cursor: pointer;
+}
+
+
+strong {
+  font-weight: $font-weight-bold;
 }
 
 input::placeholder {
-    color: $grey-100;
-    font-family: $font-family-primary;
-    font-size: 0.75rem;
-    font-weight: $font-weight-light;
-}
-
-strong {
-    font-weight: $font-weight-bold;
+  color: $grey-100;
+  font-family: $font-family-primary;
+  font-size: 1rem;
+  font-weight: $font-weight-light;
 }
