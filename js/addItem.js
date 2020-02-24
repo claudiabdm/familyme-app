@@ -80,7 +80,7 @@ function createListItem(ulElem) {
   const input = document.createElement('input');
   input.className = 'list__input list__label';
   input.setAttribute('type', 'text');
-  input.focus();
+  setTimeout(() => {input.focus()}, 100);
 
   // Plus Btn
   const plusBtn = document.createElement('button');
