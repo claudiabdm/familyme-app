@@ -18,11 +18,11 @@
   },
   "homepage": "https://github.com/claudiabdm/personal-project#readme",
   "devDependencies": {
-    "browser-sync": "^2.26.7",
     "gulp": "^4.0.2",
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.4",
     "jquery": "^3.4.1",
+    "jsdom": "^16.2.0",
     "node-sass": "^4.11.0"
   },
   "dependencies": {}
