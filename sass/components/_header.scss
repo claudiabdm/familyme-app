@@ -3,10 +3,8 @@
 // ---------------------------- //
 
 .header {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
+  @include fixed(0, 0, auto, 0);
+
   min-width: 20rem;
   padding: 0 $padding-sides;
   border-bottom: $border;
@@ -14,17 +12,14 @@
   background-color: #fff;
   font-weight: $font-weight-bold;
   font-size: ($font-size-base * 2);
-  z-index: 10;
   box-shadow: $box-shadow;
+  z-index: 10;
 
   // HEADER CONTAINER
   // ----------------------------- 
   &__container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: $header-height;
+    @include flex(center, space-between);
+    @include size(100%, $header-height);
     margin: 0 auto;
 
     // Header login container
@@ -59,10 +54,9 @@
 
 //--- Home ---//
 .header--home {
+  @include flex(center, flex-end);
+  
   position: static;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border: 0;
   box-shadow: none;
 }

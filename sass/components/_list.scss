@@ -3,11 +3,7 @@
 // ---------------------------- //
 
 .list {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  @include absolute(0, 0, 0, 0);
   min-width: 20rem;
   background-color: $tertiary;
   padding: 20px $padding-sides;
@@ -16,8 +12,7 @@
   // ITEM
   //----------------------------- 
   &__item {
-    display: flex;
-    align-items: center;
+    @include flex(center, flex-start);
     padding: 10px 0;
     height: rem(60px);
     border-bottom: 1px solid rgba($color: $secondary, $alpha: 0.5);
@@ -32,10 +27,9 @@
   // LABEL
   //----------------------------- 
   &__label {
-    display: flex;
+    @include flex (flex-start, space-between);
+    @include size();
     flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
     font-size: rem(24px);
   }
 
@@ -50,19 +44,19 @@
   // INPUT TEXT
   //----------------------------- 
   &__input {
-    height: 100%;
+    @include size();
     border: none;
     border-bottom: $border;
     background: none;
+    font-family: $font-family-primary;
+    font-size: rem(24px);
     font-weight: $font-weight-light;
   }
 
   // ADD ITEM ICON
   //----------------------------- 
   &__add {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex();
     border: 0;
     background: none;
     color: $primary;
