@@ -57,18 +57,14 @@
   @include flex(space-between, center);
   flex-direction: column;
   padding-bottom: 20px;
+  border-bottom: $border;
 }
 
-// --- Home --- //
-.user--home {
+// --- Layout in row --- //
+.user--row {
   display: flex;
   padding: 10px $padding-sides;
-  border-bottom: $border;
-
-  &~& {
-    border-top: $border;
-    border-bottom: none;
-  }
+  border-top: $border;
 
   &:last-of-type {
     border-bottom: $border;
