@@ -4,8 +4,9 @@
 
 .header {
   @include fixed(0, 0, auto, 0);
-
+  
   min-width: 20rem;
+  margin: 0 auto;
   border-bottom: $border;
   color: $secondary;
   background-color: #fff;
@@ -19,48 +20,37 @@
   &__container {
     @include flex(center, space-between);
     @include size(100%, $header-height);
-    margin: 0 auto;
-
-    // Header login container
-    // -------------------------
-    .header--home & {
-      justify-content: flex-end;
-    }
   }
 
   // HEADER TITTLE
   // ----------------------------- 
   &__title {
     font-size: 1.75rem;
-
-    // Header login title
-    // ------------------------
-    .header--login & {
-      margin: auto;
-    }
-
   }
 
 }
 
-//--- Header Login ---//
-.header--login {
-  position: relative;
-  border: 0;
-  margin: 20px auto;
-  box-shadow: none;
-}
-
-//--- Home ---//
-.header--home {
+// --- Header transparent --- //
+.header--transparent {
   @include flex(center, flex-end);
-  
-  position: static;
+
   border: 0;
+  background: none;
   box-shadow: none;
 }
 
-//-- Calendar --//
-.header--calendar {
+// --- Header static --- //
+.header--static {
+  position: static;
+}
 
+// --- Header center --- //
+.header--center {
+  justify-content: center;
+}
+
+// --- Header main --- //
+.header--main {
+  margin: 30px 0;
+  font-size: rem(36px);
 }
