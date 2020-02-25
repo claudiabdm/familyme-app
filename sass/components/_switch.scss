@@ -8,13 +8,11 @@
 }
 
 .switch {
-  display: flex;
-  align-items: center;
+  @include flex(center, flex-start);
 
   // SWITCH LABEL
   // ----------------------------- 
   &__label {
-    display: flex;
     color: #000;
     font-size: var(--switch-label-size);
     font-weight: $font-weight-light;
@@ -30,19 +28,18 @@
   // SLIDER
   // ----------------------------- 
   &__slider {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    width: calc(var(--switch-size) * 2);
-    height: var(--switch-size);
+    @include relative();
+    @include flex(center, flex-start);
+    @include size(calc(var(--switch-size) * 2), var(--switch-size));
+
     border-radius: 20px;
     background-color: $grey-100;
     transition: background-color 0.3s;
 
     &::before {
       content: '';
-      width: var(--switch-size);
-      height: var(--switch-size);
+      @include size(var(--switch-size));
+      
       border-radius: 50%;
       border: $border;
       background-color: white;

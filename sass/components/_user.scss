@@ -3,9 +3,7 @@
 // ---------------------------- //
 
 .user {
-
-  display: inline-flex;
-  align-items: center;
+  @include flex(center, flex-start);
   font-size: $font-size-base;
 
   // USER NAME
@@ -19,6 +17,7 @@
     &--large {
       width: inherit;
       font-size: 1.2rem;
+      margin: 10px 0;
     }
 
   }
@@ -31,9 +30,8 @@
   // USER BTN
   // ----------------------------- 
   &__btn {
+    @include size(max-content);
     display: block;
-    width: max-content;
-    height: max-content;
     margin: 0;
     padding: 0;
     background: none;
@@ -42,13 +40,11 @@
   // USER IMG
   // ----------------------------- 
   &__img {
-    width: 2.5rem;
-    height: 2.5rem;
+    @include size(2.5rem);
     margin-right: 10px;
 
     &--large {
-      width: 8rem;
-      height: 8rem;
+      @include size(8rem);
       margin: 0;
     }
   }
@@ -58,11 +54,8 @@
 // --- Layout in column --- //
 
 .user--col {
-  display: flex;
+  @include flex(space-between, center);
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  height: 12.125rem;
   padding-bottom: 20px;
 }
 
