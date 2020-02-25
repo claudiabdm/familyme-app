@@ -3,12 +3,8 @@
 // ---------------------------- //
 
 .container {
-  position: fixed;
+  @include fixed($header-height, 0, $navbar-height, 0);
   min-width: 20rem;
-  top: $header-height;
-  left: 0;
-  right: 0;
-  bottom: $navbar-height;
   margin: 0 auto;
   overflow: auto;
 
@@ -49,22 +45,17 @@
   padding: 20px $padding-sides;
 }
 
-//--- Login ---//
-.container--login {
-  position: static;
-  margin-bottom: 20px;
+// --- Container top 0 --- //
+.container--top {
+  top: 0;
 }
 
-// --- Home --- //
-.container--home {
-  top: 0;
+// --- Container relative --- //
+.container--relative {
+  position: relative;
 }
 
 // --- Map ---//
 .container--map {
-  position: absolute;
-  top: $header-height;
-  right: 0;
-  bottom: $navbar-height;
-  left: 0;
+  @include absolute($header-height, 0, $navbar-height, 0);
 }

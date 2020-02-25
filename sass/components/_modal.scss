@@ -48,7 +48,7 @@
   // ----------------------------- 
   &__body {
     @include relative(0, 0, 0, 0);
-    @include size($height: auto);
+    @include size();
     padding-top: $header-height;
     overflow-y: auto;
   }
