@@ -36,10 +36,11 @@
     }
   }
 
-  // MODAL TITLE
+  // MODAL HEADER
   // ----------------------------- 
-  &__title {
+  &__header {
     @include fixed(0, 0, auto, 0);
+    padding: 0 $padding-sides;
     box-shadow: none;
   }
 
