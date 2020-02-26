@@ -3,7 +3,7 @@
 // ---------------------------- //
 
 .video {
-  // For smartphone video is hidden because of API already enables connection to Camera
+  // For smartphone and tablet video is hidden because API already enables connection to Camera
   display: none;
 
   & * {
