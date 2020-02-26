@@ -42,7 +42,6 @@ $box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.075);
 // Font
 // ------------------------------------------
 
-//podemos tener dos fuentes, una para el encabezado y otra para el texto corrido.
 $font-primary:   "Roboto";
 $font-secondary: "Quattrocento";
 $font-family-primary:        $font-primary, Arial, sans-serif;
@@ -55,3 +54,9 @@ $font-weight-light: 300;
 $font-weight-normal: 400;
 $font-weight-medium: 500;
 $font-weight-bold: 700;
+
+
+// Breakpoints
+// ------------------------------------------
+$md: 768px;
+$lg: 1024px;
