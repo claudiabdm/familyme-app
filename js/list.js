@@ -1,21 +1,25 @@
-// ADD EVENT LISTENER TO CHECKBOX TO LINE THROUGH LABEL
+
+// DOM ELEM VARIABLES
+// -------------------------------------------------------------------
+const list = document.getElementById('shoppingList');
+const addBtn = document.getElementById('addItemBtn');
+
+
+// LINE THROUGH LABEL WHEN ITEM HAS BEEN CHECKED HANDLER FUNCTION
 // -------------------------------------------------------------------
 
 function itemChecked(e) {
-  const id = e.currentTarget.getAttribute('id');
-  const listProduct = document.querySelector(`[for="${id}"]`).firstElementChild;
+  const itemId = e.target.getAttribute('id');
+  const listProduct = document.querySelector(`[for="${itemId}"]`).firstElementChild;
+  
   if (listProduct.className === 'list__product list__done') {
-    listProduct.className = 'list__product';
+    listProduct.classList.remove('list__done');
   } else if (listProduct.className === 'list__product') {
-    listProduct.className = 'list__product list__done';
+    listProduct.classList.add('list__done');
   }
 }
 
-const checkboxContainer = document.querySelectorAll('input');
-checkboxContainer.forEach((elem) => elem.addEventListener('click', itemChecked));
 
-const listElem = document.getElementById('shoppingList');
-const addBtn = document.getElementById('addItemBtn');
 
 
 // ADD ITEM TO LIST (to be broken into smaller functions)
@@ -53,21 +57,16 @@ function addItem(ulElem, liElem, inputElem, plusBtn, userName) {
   // Append to checkbox
   checkbox.appendChild(box);
   checkbox.appendChild(checkmark);
-  box.addEventListener('click', itemChecked);
+
+  // Remove btn
+  const removeBtn = createRemoveBtn();
 
   // Append to list
-  liElem.appendChild(label);
   liElem.appendChild(checkbox);
+  liElem.appendChild(label);
+  liElem.appendChild(removeBtn);
   ulElem.appendChild(liElem);
 }
-
-
-function addItemOnEnter(ulElem, liElem, input, plusBtn, userName, event) {
-  if (event.keyCode === 13) {
-    addItem(ulElem, liElem, input, plusBtn, userName);
-  }
-}
-
 
 // CREATE INPUT ITEM TO BE ADDED (to be broken into smaller functions)
 // -------------------------------------------------------------------
@@ -94,4 +93,44 @@ function createListItem(ulElem) {
   ulElem.appendChild(liElem);
 }
 
-addBtn.addEventListener('click', createListItem.bind(this, listElem));
+
+// CREATE REMOVE ITEM BTN
+// -------------------------------------------------------------------
+function createRemoveBtn () {
+  const removeBtn = document.createElement('button');
+  const text = document.createTextNode('×')
+  removeBtn.className = 'list__remove btn btn--close';
+  removeBtn.appendChild(text);
+  return removeBtn;
+}
+
+// REMOVE ITEM HANDLER FUNCTION
+// -------------------------------------------------------------------
+function removeItem(target) {
+  const liElem = target.parentNode;
+  const list = liElem.parentNode;
+  list.removeChild(liElem);
+}
+
+
+// ADD EVENTS TO BUTTONS
+// -------------------------------------------------------------------
+
+// Even delegation
+// -------------------------
+list.onclick = function(e) {
+  const target = e.target;
+  if (target.className === 'list__remove btn btn--close'){
+    return removeItem(target);
+  } else if (target.className === 'checkbox__box'){
+    return itemChecked(e);
+  }
+};
+
+addBtn.addEventListener('click', createListItem.bind(this, list));
+
+function addItemOnEnter(ulElem, liElem, input, plusBtn, userName, event) {
+  if (event.keyCode === 13) {
+    addItem(list, liElem, input, plusBtn, userName);
+  }
+}

@@ -11,6 +11,7 @@
   @include size($height: var(--button-height));
   border: 0;
   border-radius: 10px;
+  padding: 5px;
   background-color: $grey-100;
   color: #fff;
   font-size: var(--button-font-size);
@@ -37,13 +38,19 @@
 
 //--- Sizes ---//
 
-.btn--sm {
+.btn--m {
   --button-height: 1.875rem;
   --button-font-size: 1.25rem;
 }
 
-.btn--xs {
+.btn--sm {
   --button-height: 1.563rem;
+  --button-font-size: 0.675rem;
+}
+
+.btn--xs {
+  width: fit-content;
+  height: 1rem;
   --button-font-size: 0.675rem;
 }
 
@@ -65,6 +72,7 @@
 }
 //--- Close button ---//
 .btn--close {
+  width: max-content;
   margin: 0;
   padding: 10px 0 10px 10px;
   background: none;

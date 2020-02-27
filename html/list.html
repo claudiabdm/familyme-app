@@ -77,25 +77,27 @@
       <ul class="list" id="shoppingList">
 
         <li class="list__item">
-          <label for="galletas" class="list__label">
-            <span class="list__product">Galletas</span>
-            <span class="list__addedby">Added by Claudia Benito</span>
-          </label>
           <div class="list__checkbox checkbox checkbox--lg">
             <input type="checkbox" name="galletas" id="galletas" class="checkbox__box">
             <span class="checkbox__checkmark"></span>
           </div>
+          <label for="galletas" class="list__label">
+            <span class="list__product">Galletas</span>
+            <span class="list__addedby">Added by Claudia Benito</span>
+          </label>
+          <button type="button" class="list__remove btn btn--close">&times;</button>
         </li>
 
         <li class="list__item">
-          <label for="leche" class="list__label">
-            <span class="list__product">Leche</span>
-            <span class="list__addedby">Added by Claudia Benito</span>
-          </label>
           <div class="list__checkbox checkbox checkbox--lg">
             <input type="checkbox" name="leche" id="leche" class="checkbox__box">
             <span class="checkbox__checkmark"></span>
           </div>
+          <label for="leche" class="list__label">
+            <span class="list__product">Leche</span>
+            <span class="list__addedby">Added by Claudia Benito</span>
+          </label>
+          <button type="button" class="list__remove btn btn--close">&times;</button>
         </li>
 
       </ul>
@@ -120,7 +122,7 @@
   <!-- //MAIN -->
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
   <script src="../js/toggleModal.js"></script>
-  <script src="../js/addItem.js"></script>
+  <script src="../js/list.js"></script>
 
 </body>
 
