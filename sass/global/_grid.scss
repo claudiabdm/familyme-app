@@ -25,11 +25,11 @@
   // CONTAINER TITLE
   // ----------------------------- 
   &__title {
-    margin: 20px auto;
-    padding: 0 $padding-sides;
+    padding: 20px $padding-sides;
     color: $secondary;
     font-size: 1.5rem;
     font-weight: $font-weight-bold;
+    border-bottom: $border;
   }
 
 }

@@ -64,10 +64,5 @@
 .user--row {
   display: flex;
   padding: 10px $padding-sides;
-  border-top: $border;
-
-  &:last-of-type {
-    border-bottom: $border;
-  }
-
+  border-bottom: $border;
 }
