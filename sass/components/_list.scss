@@ -6,7 +6,7 @@
   @include absolute(0, 0, 0, 0);
   min-width: 20rem;
   background-color: $tertiary;
-  padding: 20px $padding-sides;
+  padding: 0;
   overflow: auto;
 
   // ITEM
@@ -15,12 +15,22 @@
     @include flex(center, flex-start);
     @include size($height:rem(60px));
 
-    padding: 10px 0;
+    padding: 10px $padding-sides;
     border-bottom: 1px solid rgba($color: $secondary, $alpha: 0.5);
     cursor: pointer;
 
+    &:first-child {
+      border-top: 1px solid rgba($color: $secondary, $alpha: 0.5);
+    }
+
     & span {
       cursor: pointer;
+    }
+
+    @media screen and (min-width:1024px) {
+      &:hover {
+        background-color: darken($tertiary, 2.5%);
+      }
     }
 
   }
@@ -76,6 +86,12 @@
   //----------------------------- 
   &__remove {
     color: $grey-100;
+
+    @media screen and (min-width:1024px) {
+      &:hover {
+        color: rgba($color: $secondary, $alpha: 0.5);
+      }
+    }
   }
 
   // Checked status

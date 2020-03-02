@@ -1,7 +1,7 @@
-/*------------------------------*/
-/* ICONS                        */
-/* ---------------------------- */
-@import "../icons/icons.data.svg.css";
+//------------------------------//
+// ICONS                        //
+// ---------------------------- //
+@import "../../assets/icons/icons.data.svg";
 
 .icon {
 	width: 2.5rem;
@@ -16,13 +16,6 @@
 .icon-red_eye_close {
 	filter: none;
 }
-
-// --- Position --- //
-.icon--right{
-  margin-left: auto;
-  margin-right: 0;
-}
-
 
 // -- Sizes --- //
 .icon--sm {
@@ -42,4 +35,9 @@
 	margin-right: 5px;
 	margin-left: -5px;
 	cursor: pointer;
+}
+
+.icon-settings{
+  margin: 10px 20px;
+  margin-left: auto;
 }

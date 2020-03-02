@@ -8,19 +8,18 @@ const addBtn = document.getElementById('addItemBtn');
 // LINE THROUGH LABEL WHEN ITEM HAS BEEN CHECKED HANDLER FUNCTION
 // -------------------------------------------------------------------
 
-function itemChecked(e) {
-  const itemId = e.target.getAttribute('id');
+function itemChecked(input) {
+  const itemId = input.getAttribute('id');
   const listProduct = document.querySelector(`[for="${itemId}"]`).firstElementChild;
   
   if (listProduct.className === 'list__product list__done') {
     listProduct.classList.remove('list__done');
+    input.checked = false;
   } else if (listProduct.className === 'list__product') {
     listProduct.classList.add('list__done');
+    input.checked = true;
   }
 }
-
-
-
 
 // ADD ITEM TO LIST (to be broken into smaller functions)
 // --------------------------------------------------------------
@@ -119,17 +118,22 @@ function removeItem(target) {
 // Even delegation
 // -------------------------
 list.onclick = function(e) {
-  const target = e.target;
-  if (target.className === 'list__remove btn btn--close'){
-    return removeItem(target);
-  } else if (target.className === 'checkbox__box'){
-    return itemChecked(e);
+  const { target } = e;
+
+  switch (target.className) {
+    case 'list__remove btn btn--close':
+      return removeItem(target);
+    case 'checkbox__box':
+      console.log(e.target)
+      return itemChecked(e.target);
+    case 'list__item':
+      return itemChecked(e.target.children[0].children[0])
   }
 };
 
 addBtn.addEventListener('click', createListItem.bind(this, list));
 
-function addItemOnEnter(ulElem, liElem, input, plusBtn, userName, event) {
+function addItemOnEnter(list, liElem, input, plusBtn, userName, event) {
   if (event.keyCode === 13) {
     addItem(list, liElem, input, plusBtn, userName);
   }

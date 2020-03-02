@@ -57,3 +57,12 @@ $('.modal__close').click((e) => {
   modal.removeClass('modal--show');
   $('body').css('overflow', 'auto');
 });
+
+
+// Remove modal when clicking outside
+window.onclick = function(event) {
+  const modal = event.target.className.match(/modal--show/);
+  if (modal) {
+    event.target.classList.remove('modal--show');
+  }
+}

@@ -18,13 +18,13 @@ var video = document.getElementById('video');
 var snapBtn = document.getElementById('snap');
 
 // Trigger photo take
-snapBtn.addEventListener('click', function() {
-  if(snapBtn.textContent === 'Take photo') {
+snapBtn.addEventListener('click', function(e) {
+  if(snapBtn.innerText === 'Take photo') {
     canvas.className = 'video__canvas video__canvas--show';
     video.className = 'video__camera video__camera--hide';
     context.drawImage(video, 0, 0, 426, 320);
     snapBtn.textContent = 'Retake photo';
-  } else if (snapBtn.textContent === 'Retake photo') {
+  } else if (snapBtn.innerText === 'Retake photo') {
     canvas.className = 'video__canvas video__canvas';
     video.className = 'video__camera video__camera';
     snapBtn.textContent = 'Take photo';
