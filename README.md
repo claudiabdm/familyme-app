@@ -8,7 +8,7 @@ My personal project at Boream full-stack bootcamp.
 You will need Node.js installed in your environement. 
 
 ### Installation
-Clone this repository in your enviroment and install npm modules.
+Clone this repository in your enviroment and install npm modules:
 
 ```
 git clone https://github.com/claudiabdm/personal-project.git
@@ -17,7 +17,7 @@ npm install
 ```
 
 ## Run
-You will need to start gulp by using the following command. 
+You will need to start gulp by using the following command:
 ```
 npm start
 ```
