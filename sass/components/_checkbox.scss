@@ -12,6 +12,7 @@
   border: $border;
   border-radius: 5px;
   background-color: #fff;
+  width: max-content;
 
   &__box {
     @include size();
