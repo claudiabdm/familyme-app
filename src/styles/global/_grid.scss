@@ -1,0 +1,61 @@
+//------------------------------//
+// GRID                         //
+// ---------------------------- //
+
+.container {
+  @include fixed($header-height, 0, $navbar-height, 0);
+  min-width: 20rem;
+  margin: 0 auto;
+  overflow: auto;
+
+  // PARAGRAPH
+  // ----------------------------- 
+  &__p {
+    padding: 0 $padding-sides;
+    font-size: $font-size-base;
+    text-align: center;
+    line-height: 1.2;
+
+    &--large {
+      font-size: 1.5rem;
+      margin: 50px 0;
+    }
+  }
+
+  // CONTAINER TITLE
+  // ----------------------------- 
+  &__title {
+    padding: 20px $padding-sides;
+    color: $secondary;
+    font-size: 1.5rem;
+    font-weight: $font-weight-bold;
+    border-bottom: $border;
+  }
+
+}
+
+// --- Hidden container --- //
+.container--hidden {
+  overflow: hidden;
+}
+
+// --- CONTAINER BUTTON --- //
+.container--btn {
+  position: static;
+  padding: 20px $padding-sides;
+}
+
+// --- Container top 0 --- //
+.container--top {
+  top: 0;
+}
+
+// --- Container relative --- //
+.container--relative {
+  position: relative;
+}
+
+// --- Map ---//
+.container--map {
+  @include absolute($header-height, 0, $navbar-height, 0);
+}

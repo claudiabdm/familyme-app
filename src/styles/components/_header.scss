@@ -1,0 +1,52 @@
+//------------------------------//
+// HEADER                       //
+// ---------------------------- //
+
+.header {
+  @include fixed(0, 0, auto, 0);
+  
+  min-width: 20rem;
+  margin: 0 auto;
+  border-bottom: $border;
+  color: $secondary;
+  background-color: #fff;
+  font-weight: $font-weight-bold;
+  font-size: ($font-size-base * 2);
+  box-shadow: $box-shadow;
+  z-index: 10;
+
+  // HEADER CONTAINER
+  // ----------------------------- 
+  &__container {
+    @include flex(center, space-between);
+    @include size(100%, $header-height);
+  }
+
+  // HEADER TITTLE
+  // ----------------------------- 
+  &__title {
+    font-size: 1.75rem;
+  }
+
+}
+
+// --- Header transparent --- //
+.header--transparent {
+  @include flex(center, flex-end);
+
+  border: 0;
+  background: none;
+  box-shadow: none;
+}
+
+// --- Header static --- //
+.header--static {
+  position: static;
+}
+
+// --- Header main --- //
+.header--main {
+  justify-content: center;
+  margin: 30px 0;
+  font-size: rem(36px);
+}

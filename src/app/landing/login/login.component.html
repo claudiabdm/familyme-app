@@ -1,0 +1,44 @@
+ <!-- HEADER -->
+ <header class="header header--transparent header--static header--main">
+  <h1 class="header__title">NameApp</h1>
+</header>
+<!-- //HEADER -->
+
+<!-- MAIN -->
+<main>
+
+  <!-- LOGIN -->
+  <div class="container container--top container--relative">
+
+    <!-- FORM -->
+    <form [formGroup]="formGroup" class="form form--login">
+      <div class="form__group">
+        <label for="emailLogin" class="form__label">Email</label>
+        <input type="email" id="emailLogin" name="email " class="form__control">
+      </div>
+
+      <div class="form__group">
+        <label for="password" class="form__label">Password</label>
+        <div class="form__icon">
+          <input type="password" id="password" name="password" class="form__control form__control-pswd">
+          <i class="icon icon-red_eye_close icon--pswd icon--sm" data-toggle="eye"></i>
+        </div>
+        <a href="#" class="form__link">Forgot password?</a>
+      </div>
+
+      <div class="form__actions">
+        <button type="submit" class="btn" aria-disabled="true">Log in</button>
+      </div>
+
+    </form>
+    <!-- //FORM -->
+
+    <p class="container__p">Don't have an account?<br>
+      <a [routerLink]="'../signup'" class="btn btn--link" id="signUpBtn">Sign up</a>
+    </p>
+
+  </div>
+  <!-- LOGIN -->
+
+</main>
+<!-- //MAIN -->

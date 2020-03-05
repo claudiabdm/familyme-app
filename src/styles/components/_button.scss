@@ -1,0 +1,99 @@
+//------------------------------//
+// BUTTON                       //
+// ---------------------------- //
+:root {
+  --button-height: 3rem;
+  --button-font-size: 1.75rem;
+}
+
+.btn {
+  @include flex();
+  @include size($height: var(--button-height));
+  border: 0;
+  border-radius: 10px;
+  padding: 5px;
+  background-color: $grey-100;
+  color: #fff;
+  font-size: var(--button-font-size);
+  font-weight: $font-weight-bold;
+  text-align: center;
+  line-height: 0;
+  cursor: pointer;
+
+  & + & {
+    margin-top: 30px;
+  }
+
+}
+
+//--- Colors ---//
+
+.btn--primary {
+  background-color: $primary;
+}
+
+.btn--secondary {
+  background-color: $secondary;
+}
+
+//--- Sizes ---//
+
+.btn--m {
+  --button-height: 1.875rem;
+  --button-font-size: 1.25rem;
+}
+
+.btn--sm {
+  --button-height: 1.563rem;
+  --button-font-size: 0.675rem;
+}
+
+.btn--xs {
+  width: fit-content;
+  height: 1rem;
+  --button-font-size: 0.675rem;
+}
+
+//--- Buttons that are icons ---//
+.btn--icon {
+  width: 2.813rem;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+// --- Link button ---//
+.btn--link {
+ background: none;
+ height: 100%;
+ padding: 10px;
+ color: $secondary;
+ font-size: $font-size-base;
+ font-weight: $font-weight-bold;
+}
+//--- Close button ---//
+.btn--close {
+  width: max-content;
+  margin: 0;
+  padding: 10px 0 10px 10px;
+  background: none;
+  color: $grey-100;
+  transition: color 0.2s ease-out;
+
+  &:hover {
+    color: $grey-200;
+  }
+}
+
+//--- Float button ---//
+.btn--float {
+  @include fixed($right: rem(20px), $bottom:($navbar-height + rem(20px)));
+  @include flex();
+  @include size(rem(50px));
+
+  border-radius: 100%;
+  background-color: #fff;
+  font-size: $font-size-base;
+  font-weight: $font-weight-light;
+  box-shadow: $box-shadow;
+  z-index: 1000;
+}

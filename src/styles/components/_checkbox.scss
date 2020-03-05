@@ -1,0 +1,44 @@
+//------------------------------//
+// CHECKBOX                     //
+// ---------------------------- //
+
+:root {
+  --checkbox-size: 1rem;
+  --checkmark-size: 1.25rem;
+}
+
+.checkbox {
+  position: relative;
+  border: $border;
+  border-radius: 5px;
+  background-color: #fff;
+  width: max-content;
+
+  &__box {
+    @include size();
+
+    position: absolute;
+    opacity: 0;
+    z-index: 100;
+    cursor: pointer;
+  }
+
+  &__checkmark {
+    @include flex();
+    @include size(var(--checkbox-size));
+    position: relative;
+    cursor: pointer;
+  }
+
+  &__box:checked~&__checkmark::after {
+    content: '\2713';
+    color: $success;
+    font-size: var(--checkmark-size);
+    transform: rotate(2deg);
+  }
+}
+
+.checkbox--lg {
+  --checkbox-size: 1.25rem;
+  --checkmark-size: 1.5rem;
+}

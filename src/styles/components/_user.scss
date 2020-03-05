@@ -1,0 +1,68 @@
+// ---------------------------- //
+// USER                         //
+// ---------------------------- //
+
+.user {
+  @include flex(center, flex-start);
+  font-size: $font-size-base;
+
+  // USER NAME
+  // ----------------------------- 
+  &__name {
+    width: 100%;
+    margin: 0 auto;
+    font-weight: $font-weight-light;
+    color: #000;
+
+    &--large {
+      width: inherit;
+      font-size: 1.2rem;
+      margin: 10px 0;
+    }
+
+  }
+
+  &__role {
+    color: $grey-100;
+    font-size: $font-size-base;
+  }
+
+  // USER BTN
+  // ----------------------------- 
+  &__btn {
+    @include size(max-content);
+    display: block;
+    margin: 0;
+    padding: 0;
+    background: none;
+  }
+
+  // USER IMG
+  // ----------------------------- 
+  &__img {
+    @include size(2.5rem);
+    margin-right: 10px;
+
+    &--large {
+      @include size(8rem);
+      margin: 0;
+    }
+  }
+
+}
+
+// --- Layout in column --- //
+
+.user--col {
+  @include flex(space-between, center);
+  flex-direction: column;
+  padding-bottom: 20px;
+  border-bottom: $border;
+}
+
+// --- Layout in row --- //
+.user--row {
+  display: flex;
+  padding: 10px $padding-sides;
+  border-bottom: $border;
+}

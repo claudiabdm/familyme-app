@@ -1,0 +1,137 @@
+//------------------------------//
+// FORM                         //
+// ---------------------------- //
+
+.form {
+  
+  min-width: 20rem;
+
+  // SECTION
+  //----------------------------- 
+  &__section {
+    border-bottom: $border;
+
+    &--add {
+      display: flex;
+      padding: 0 20px;
+      z-index: 0;
+    }
+  }
+
+  // GROUP
+  //----------------------------- 
+  &__group {
+    padding: 15px $padding-sides;
+
+    &+& {
+      padding-top: 0;
+    }
+
+    &--grid {
+      display: grid;
+      grid-template-columns: 5rem 2fr 1fr;
+      grid-template-rows: repeat(1, 1fr);
+      column-gap: 10px;
+    }
+
+    // Form login group
+    // ---------------------
+    .form--login & {
+      margin-bottom: 30px;
+    }
+
+    // Form checklist group
+    // ---------------------
+    .form--checklist & {
+      @include flex(center, space-between);
+    }
+
+  }
+
+  // LABEL
+  // ----------------------------- 
+  &__label {
+    @include flex(center, flex-start);
+
+    width: inherit;
+    color: $primary;
+    font-weight: $font-weight-bold;
+    margin-bottom: 5px;
+
+    // Form checklist label
+    // ---------------------
+    .form--checklist & {
+      @include size();
+      color: #000;
+      font-weight: $font-weight-light;
+      margin: 0;
+      cursor: pointer;
+    }
+
+  }
+
+  // CONTROL
+  // ----------------------------- 
+  &__control {
+    @include flex(center, flex-start);
+    @include size();
+
+    border: $border;
+    border-radius: 4px;
+    padding: 5px 7px;
+    font-family: $font-family-primary;
+    font-size: 1rem;
+
+    &:focus {
+      outline: none;
+      background-color: $tertiary;
+    }
+
+    &--invalid {
+      border-color: $secondary;
+    }
+
+    // Form login control
+    // ---------------------
+    .form--login & {
+      @include size($height: 3.125rem);
+      padding: 16px 10px;
+    }
+
+    // Form singup control
+    // ---------------------
+    .form--singup & {
+      @include size($height: 2.188rem);
+    }
+
+  }
+
+  // ICON
+  // ----------------------------- 
+  &__icon {
+    @include flex(center, flex-end);
+  }
+
+  // LINKS
+  // ----------------------------- 
+  &__link {
+    display: block;
+    margin-top: 10px;
+    font-size: 1rem;
+    font-style: italic;
+    text-align: end;
+  }
+
+  // ACTIONS
+  // ----------------------------- 
+  &__actions {
+    padding: 20px $padding-sides;
+  }
+
+}
+
+//--- Form layout for checklist ---// 
+.form--checklist {
+  display: flex;
+  flex-direction: column;
+}

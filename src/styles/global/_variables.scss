@@ -1,0 +1,73 @@
+// ------------------------------------------
+// VARIABLES
+// ------------------------------------------
+:root {
+  // Button
+  --button-height: 3rem;
+  --button-font-size: 1.75rem;
+
+  // Switch
+  --switch-size: 1.5rem;
+  --switch-label-size: $font-size-base;
+  --slider-size: var(--switch-size);
+
+  // Checkbox
+  --checkbox-size: 1rem;
+  --checkmark-size: 1.25rem;
+}
+
+// Color palette
+// -----------------------------------------
+
+// Colors
+$primary:  #94e9f2;
+$secondary:#ff748b;
+$tertiary: #fffdf5;
+$success:  #79f285;
+
+// Grey
+$grey-100:  #c4c4c4;
+$grey-200:  #525252;
+
+
+
+
+// Scaffolding
+// ------------------------------------------
+$header-height: 3.625rem;
+$navbar-height: 3.75rem;
+
+$body-color:   #000;
+$body-bg:      #fff;
+
+$link-color:          $secondary;
+$link-decoration:     none;
+$link-hover:          none;
+
+$padding-sides: 30px;
+
+$border: 1px solid $grey-100;
+
+$box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.075);
+
+// Font
+// ------------------------------------------
+
+$font-primary:   "Roboto";
+$font-secondary: "Quattrocento";
+$font-family-primary:        $font-primary, Arial, sans-serif;
+$font-family-secondary:      $font-primary, serif;
+
+$font-size-body: 16px;
+$font-size-base: rem($font-size-body);
+
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+
+// Breakpoints
+// ------------------------------------------
+$md: 768px;
+$lg: 1024px;

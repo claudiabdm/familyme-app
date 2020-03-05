@@ -1,0 +1,19 @@
+// ---------------------------- //
+// NOTIFICATIONS                //
+// ---------------------------- //
+
+.notification {
+
+  &__item {
+    padding: 20px;
+    border-color: rgba($color: $secondary, $alpha: 0.5);
+  }
+
+  &__time {
+    display: block;
+    margin-top: 2px;
+    color: $grey-100;
+    font-size: rem(14px);
+  }
+
+}
