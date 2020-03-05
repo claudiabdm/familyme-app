@@ -1,20 +1,9 @@
 // ------------------------------------------
 // VARIABLES
 // ------------------------------------------
-:root {
-  // Button
-  --button-height: 3rem;
-  --button-font-size: 1.75rem;
 
-  // Switch
-  --switch-size: 1.5rem;
-  --switch-label-size: $font-size-base;
-  --slider-size: var(--switch-size);
 
-  // Checkbox
-  --checkbox-size: 1rem;
-  --checkmark-size: 1.25rem;
-}
+
 
 // Color palette
 // -----------------------------------------
@@ -42,7 +31,7 @@ $body-bg:      #fff;
 
 $link-color:          $secondary;
 $link-decoration:     none;
-$link-hover:          none;
+$link-hover:          none; 
 
 $padding-sides: 30px;
 
