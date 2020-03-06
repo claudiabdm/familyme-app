@@ -8,7 +8,7 @@
 <main>
 
   <!-- LOGIN -->
-  <div class="container container--top container--relative">
+  <div class="container container--static">
 
     <!-- FORM -->
     <form [formGroup]="loginForm" (ngSubmit) = "onSubmit()" class="form form--login">
@@ -27,7 +27,7 @@
       </div>
 
       <div class="form__actions">
-        <button type="submit" class="btn" [disabled]="!loginForm.valid">Log in</button>
+        <button type="submit" class="btn" [disabled]="!loginForm.valid" [routerLink] = "'../../pages/home'">Log in</button>
       </div>
 
     </form>
@@ -42,5 +42,3 @@
 
 </main>
 <!-- //MAIN -->
-
-<app-navbar></app-navbar>
