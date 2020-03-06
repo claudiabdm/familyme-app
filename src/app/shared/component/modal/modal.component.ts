@@ -18,13 +18,8 @@ export class ModalComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  open(){
-    this.modal.nativeElement.classList.add('modal--show');
-  }
-
-
   onClose(){
-    this.modal.nativeElement.classList.add('modal--show');
+    this.close.emit(this.modal);
   }
 
 }
