@@ -4,10 +4,12 @@ import { HomeComponent } from './home/home.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { PagesComponent } from './pages.component';
 
 
 const pagesRoutes: Routes = [
   { path: '',
+    component: PagesComponent,
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },

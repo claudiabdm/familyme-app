@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { UsersService } from './users.service';
 import { User } from '../models/user';
@@ -10,6 +11,8 @@ import { User } from '../models/user';
 export class AuthService {
 
   user: User;
+  invalidUser: boolean = false;
+  invalidPassword: boolean = false;
 
   constructor(
     private usersService: UsersService,
@@ -20,15 +23,17 @@ export class AuthService {
     this.usersService.searchUser(currUser)
       .subscribe(user => {
         if (user) {
+          this.invalidUser = false;
           if (currUser.password === user.password) {
+            this.invalidPassword = false;
             this.user = user;
             this.router.navigate(['pages/home']);
           } else {
-            console.log('Email or password incorrect');
+            this.invalidPassword = true;
           }
+        } else {
+          this.invalidUser = true;
         }
-        console.log('user not found')
-        return false;
       }
       );
   }

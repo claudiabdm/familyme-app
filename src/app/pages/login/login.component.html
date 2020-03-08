@@ -13,28 +13,45 @@
     <!-- FORM -->
     <form [formGroup]="loginForm" (ngSubmit) = "onSubmit(loginForm)" class="form form--login">
       <div class="form__group">
-        <label for="emailLogin" class="form__label">Email</label>
-        <input type="email" id="emailLogin" name="email " class="form__control" formControlName="email" required>
+        <label for="email" class="form__label">Email</label>
+        <input type="email" id="email" name="email " class="form__control" required  autocomplete="on"
+          formControlName="email"
+          [class.form__control--invalid]="loginForm.controls.email.dirty && loginForm.controls.email.invalid">
+
+        <div *ngIf="authService.invalidUser" class="form__msg-validation">
+          We don't recognize that email.
+        </div>
+
       </div>
 
       <div class="form__group">
         <label for="current-password" class="form__label">Password</label>
         <div class="form__icon">
-          <input type="password" id="current-password" name="current-password" class="form__control form__control-pswd" formControlName="password" required autocomplete="on">
-          <i class="icon icon-red_eye_close icon--pswd icon--sm" data-toggle="eye"></i>
+          <input id="current-password" name="current-password" class="form__control form__control-pswd" required autocomplete="on"
+            [type]="type"
+            formControlName="password"
+            [class.form__control--invalid]="loginForm.controls.password.dirty && loginForm.controls.password.invalid">
+            <i class="icon icon--pswd icon--sm" data-toggle="eye"
+              [class.icon-red_eye]="isVisible"
+              [class.icon-red_eye_close]="!isVisible" (click)=showPswd()></i>
         </div>
-        <a href="#" class="form__link">Forgot password?</a>
+
+        <div *ngIf="authService.invalidPassword" class="form__msg-validation">
+            Incorrect Password.
+        </div>
+
       </div>
 
       <div class="form__actions">
         <button type="submit" class="btn" [disabled]="!loginForm.valid">Log in</button>
       </div>
 
+      <a href="#" class="form__link">Forgot password?</a>
+
     </form>
     <!-- //FORM -->
 
-    <p class="container__p">Don't have an account?<br>
-      <a [routerLink]="'./signup'" class="btn btn--link" id="signUpBtn">Sign up</a>
+    <p class="container__p">Don't have an account? <a [routerLink]="'../signup'" class="form__link" id="signUpBtn">Sign up</a>
     </p>
 
   </div>

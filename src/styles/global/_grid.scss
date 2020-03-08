@@ -9,11 +9,11 @@
   overflow: auto;
 
   // PARAGRAPH
-  // ----------------------------- 
+  // -----------------------------
   &__p {
+    @include flex();
     padding: 0 $padding-sides;
     font-size: $font-size-base;
-    text-align: center;
     line-height: 1.2;
 
     &--large {
@@ -23,7 +23,7 @@
   }
 
   // CONTAINER TITLE
-  // ----------------------------- 
+  // -----------------------------
   &__title {
     padding: 20px $padding-sides;
     color: $secondary;

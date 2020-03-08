@@ -3,11 +3,11 @@
 // ---------------------------- //
 
 .form {
-  
+
   min-width: 20rem;
 
   // SECTION
-  //----------------------------- 
+  //-----------------------------
   &__section {
     border-bottom: $border;
 
@@ -19,8 +19,9 @@
   }
 
   // GROUP
-  //----------------------------- 
+  //-----------------------------
   &__group {
+    position: relative;
     padding: 15px $padding-sides;
 
     &+& {
@@ -49,7 +50,7 @@
   }
 
   // LABEL
-  // ----------------------------- 
+  // -----------------------------
   &__label {
     @include flex(center, flex-start);
 
@@ -71,7 +72,7 @@
   }
 
   // CONTROL
-  // ----------------------------- 
+  // -----------------------------
   &__control {
     @include flex(center, flex-start);
     @include size();
@@ -91,6 +92,10 @@
       border-color: $secondary;
     }
 
+    &--valid {
+      border-color: $success;
+    }
+
     // Form login control
     // ---------------------
     .form--login & {
@@ -107,30 +112,39 @@
   }
 
   // ICON
-  // ----------------------------- 
+  // -----------------------------
   &__icon {
     @include flex(center, flex-end);
   }
 
   // LINKS
-  // ----------------------------- 
+  // -----------------------------
   &__link {
     display: block;
-    margin-top: 10px;
+    margin: 10px;
     font-size: 1rem;
     font-style: italic;
-    text-align: end;
+    text-align: center;
   }
 
   // ACTIONS
-  // ----------------------------- 
+  // -----------------------------
   &__actions {
     padding: 20px $padding-sides;
   }
 
+  // MESSAGE VALIDATIONS
+  // -----------------------------
+  &__msg-validation {
+    position: absolute;
+    margin-top: 10px;
+    color: $secondary;
+    font-weight: $font-weight-bold;
+  }
+
 }
 
-//--- Form layout for checklist ---// 
+//--- Form layout for checklist ---//
 .form--checklist {
   display: flex;
   flex-direction: column;

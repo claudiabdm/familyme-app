@@ -1,6 +1,4 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { EventEmitter } from 'protractor';
-
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',

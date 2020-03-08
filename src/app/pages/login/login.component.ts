@@ -1,29 +1,38 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
 
-  // @Output() login = new EventEmitter();
-
+  isVisible: boolean = false;
+  type: string = 'password';
   loginForm: FormGroup = this.formBuilder.group({
     email: ['', Validators.required],
-    password: ['', Validators.required]
+    password: ['', [Validators.required, Validators.minLength(6)]]
   });
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
+  constructor(private formBuilder: FormBuilder, public authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
-  onSubmit(form) {
+  onSubmit(form: FormGroup) {
     this.authService.logIn(form.value);
   }
 
+  showPswd() {
+    if (this.isVisible) {
+      this.isVisible = false;
+      this.type = 'password';
+    } else {
+      this.isVisible = true;
+      this.type = 'text';
+    }
+  }
 }
