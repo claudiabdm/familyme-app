@@ -19,7 +19,12 @@ export class UsersService {
     return this.http.get<User[]>(this.url);
   }
 
-  /** GET hero by id. Will 404 if id not found */
+  getUsersByGroup(group): Observable<User[]> {
+    console.log()
+    return this.http.get<User[]>(`${this.url}/?search=${group.replace(' ', '&')}`);
+  }
+
+
   getUser(id: number): Observable<User> {
     const url = `${this.url}/${id}`;
     return this.http.get<User>(url);

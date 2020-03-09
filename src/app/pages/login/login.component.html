@@ -12,6 +12,7 @@
 
     <!-- FORM -->
     <form [formGroup]="loginForm" (ngSubmit) = "onSubmit(loginForm)" class="form form--login">
+
       <div class="form__group">
         <label for="email" class="form__label">Email</label>
         <input type="email" id="email" name="email " class="form__control" required  autocomplete="on"
@@ -21,7 +22,6 @@
         <div *ngIf="authService.invalidUser" class="form__msg-validation">
           We don't recognize that email.
         </div>
-
       </div>
 
       <div class="form__group">

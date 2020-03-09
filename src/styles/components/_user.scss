@@ -7,7 +7,7 @@
   font-size: $font-size-base;
 
   // USER NAME
-  // ----------------------------- 
+  // -----------------------------
   &__name {
     width: 100%;
     margin: 0 auto;
@@ -28,7 +28,7 @@
   }
 
   // USER BTN
-  // ----------------------------- 
+  // -----------------------------
   &__btn {
     @include size(max-content);
     display: block;
@@ -38,10 +38,11 @@
   }
 
   // USER IMG
-  // ----------------------------- 
+  // -----------------------------
   &__img {
-    @include size(2.5rem);
+    @include size(2.5rem, 2.5rem);
     margin-right: 10px;
+    border-radius: 50%;
 
     &--large {
       @include size(8rem);

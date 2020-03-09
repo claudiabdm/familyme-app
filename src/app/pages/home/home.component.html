@@ -5,32 +5,21 @@
     <!-- MAIN USER -->
     <article class="user user--col">
       <button type="button" class="btn user__btn" id="imgBtn">
-        <img class="user__img user__img--large" src="../assets/img/profile-photo-round.svg"
+        <img class="user__img user__img--large" [src]="user.avatar"
           alt="Claudia Benito profile photo">
       </button>
-      <h2 class="user__name user__name--large">Claudia Benito</h2>
-      <span class="user__role">admin</span>
+      <h2 class="user__name user__name--large">{{ user.name }}</h2>
+      <span class="user__role" *ngIf="user.role === 'admin'">admin</span>
     </article>
     <!-- //MAIN USER -->
 
     <!-- MEMBERS -->
 
-    <h1 class="container__title">Familia Benito de Moya</h1>
-    <article class="user user--row">
-      <img class="user__img" src="../assets/img/profile-photo-round.svg" alt="Ricardo Benito profile photo">
-      <h2 class="user__name">Ricardo Benito</h2>
-    </article>
-    <article class="user user--row">
-      <img class="user__img" src="../assets/img/profile-photo-round.svg" alt="Celia Benito profile photo">
-      <h2 class="user__name">Celia Benito</h2>
-    </article>
-    <article class="user user--row">
-      <img class="user__img" src="../assets/img/profile-photo-round.svg" alt="Sonsoles Benito profile photo">
-      <h2 class="user__name">Sonsoles Benito</h2>
-    </article>
-    <article class="user user--row">
-      <img class="user__img" src="../assets/img/profile-photo-round.svg" alt="Mamá profile photo">
-      <h2 class="user__name">Mamá</h2>
+    <h1 class="container__title">Family {{ user.group }}</h1>
+
+    <article class="user user--row" *ngFor="let user of usersGroup;">
+      <img class="user__img" [src]="user.avatar" alt="{{ user.name }} profile photo">
+      <h2 class="user__name">{{ user.name }}</h2>
     </article>
 
     <!-- NEW MEMBERS BUTTON -->
