@@ -1,0 +1,57 @@
+<form [formGroup]="signupForm" class="form form--signup">
+
+  <div class="form__group">
+    <label for="email" class="form__label" aria-required="true" required  autocomplete="on">Email</label>
+    <input type="email" id="email" class="form__control" placeholder="john_smith@gmail.com">
+  </div>
+
+  <div class="form__group">
+    <label for="name" class="form__label">First name</label>
+    <input type="name" id="name" class="form__control" placeholder="John">
+  </div>
+
+  <div class="form__group">
+    <label for="famfield" class="form__label">Family {{ famField.label }}</label>
+    <input type="text" id="famfield" class="form__control" [placeholder]="famField.placeholder">
+  </div>
+
+  <div class="form__group">
+    <label for="new-password" class="form__label">Password</label>
+    <div class="form__icon">
+      <input id="new-password" name="new-password" class="form__control form__control-pswd" required autocomplete="on"
+        [type]="type"
+        formControlName="password"
+        [class.form__control--invalid]="signupForm.controls.password.dirty && signupForm.controls.password.invalid">
+        <i class="icon icon--pswd icon--sm" data-toggle="eye"
+          [class.icon-red_eye]="isVisible"
+          [class.icon-red_eye_close]="!isVisible" (click)=showPswd()></i>
+    </div>
+    <div *ngIf="authService.invalidPassword" class="form__msg-validation">
+        Incorrect Password.
+    </div>
+  </div>
+
+  <div class="form__group">
+    <label for="confirm-password" class="form__label">Password</label>
+    <div class="form__icon">
+      <input id="confirm-password" name="confirm-password" class="form__control form__control-pswd" required autocomplete="on"
+        [type]="type"
+        formControlName="password"
+        [class.form__control--invalid]="signupForm.controls.password.dirty && signupForm.controls.password.invalid">
+        <i class="icon icon--pswd icon--sm" data-toggle="eye"
+          [class.icon-red_eye]="isVisible"
+          [class.icon-red_eye_close]="!isVisible" (click)=showPswd()></i>
+    </div>
+    <div *ngIf="authService.invalidPassword" class="form__msg-validation">
+        Incorrect Password.
+    </div>
+  </div>
+
+  <!-- FORM ACTIONS -->
+  <div class="form__actions">
+    <button type="submit" class="btn btn--signup" aria-disabled="true" [disabled]="!signupForm.valid">Sign up</button>
+  </div>
+  <!-- //FORM ACTIONS -->
+
+</form>
+<!-- //FORM -->

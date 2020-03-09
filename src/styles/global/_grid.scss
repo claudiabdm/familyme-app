@@ -11,10 +11,11 @@
   // PARAGRAPH
   // -----------------------------
   &__p {
-    @include flex();
+
     padding: 0 $padding-sides;
     font-size: $font-size-base;
     line-height: 1.2;
+    text-align: center;
 
     &--large {
       font-size: 1.5rem;

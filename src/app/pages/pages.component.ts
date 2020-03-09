@@ -21,7 +21,7 @@ export class PagesComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck() {
-    this.navbarHidden = this.router.url.includes('login') || this.router.url.includes('login');
+    this.navbarHidden = this.router.url.includes('login') || this.router.url.includes('signup');
   }
 
 }

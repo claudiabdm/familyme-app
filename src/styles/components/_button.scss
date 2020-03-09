@@ -4,6 +4,8 @@
 :root {
   --button-height: 3rem;
   --button-font-size: 1.75rem;
+  --button-bgcolor: #{$primary};
+  --button-hover: #{darken($primary, 10%)};
 }
 
 .btn {
@@ -12,7 +14,7 @@
   border: 0;
   border-radius: 10px;
   padding: 5px;
-  background-color: $primary;
+  background-color: var(--button-bgcolor);
   color: #fff;
   font-size: var(--button-font-size);
   font-weight: $font-weight-bold;
@@ -21,7 +23,7 @@
   cursor: pointer;
   transition: background-color 0.1s linear;
 
-  & + & {
+  &+& {
     margin-top: 30px;
   }
 
@@ -29,16 +31,17 @@
     background-color: $grey-100;
   }
 
+  &:hover:not(:disabled) {
+    background-color: var(--button-hover);
+  }
+
 }
 
 //--- Colors ---//
 
-.btn--primary {
-  background-color: $primary;
-}
-
 .btn--secondary {
-  background-color: $secondary;
+  --button-bgcolor: #{$secondary};
+  --button-hover: #{darken($secondary, 5%)};
 }
 
 //--- Sizes ---//
@@ -64,17 +67,19 @@
   width: 2.813rem;
   padding: 0;
   background-color: rgba(0, 0, 0, 0);
+  --button-hover: rgba(0, 0, 0, 0);
 }
 
 // --- Link button ---//
 .btn--link {
- background: none;
- height: 100%;
- padding: 10px;
- color: $secondary;
- font-size: $font-size-base;
- font-weight: $font-weight-bold;
+  background: none;
+  height: 100%;
+  padding: 10px;
+  color: $secondary;
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
 }
+
 //--- Close button ---//
 .btn--close {
   width: max-content;
@@ -85,8 +90,15 @@
   transition: color 0.2s ease-out;
 
   &:hover {
-    color: $grey-200;
+    color:  #{darken($grey-100, 30%)};
+    --button-hover: rgba(0, 0, 0, 0);
   }
+}
+
+//--- Back button ---//
+.btn--back {
+  @extend .btn--close;
+  padding: 10px 10px 10px 0;
 }
 
 //--- Float button ---//

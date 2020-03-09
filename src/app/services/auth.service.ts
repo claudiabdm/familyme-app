@@ -52,5 +52,8 @@ export class AuthService {
       );
   }
 
+  signUp(currUser: User) {
+
+  }
 
 }

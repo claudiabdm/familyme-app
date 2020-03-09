@@ -1,0 +1,21 @@
+@import '../../../styles/global/variables';
+
+.header--signup {
+  padding: 0 $padding-sides;
+
+  & .header__title {
+    margin-left: 20px;
+  }
+
+  & .header__container {
+    justify-content: flex-start;
+  }
+}
+
+.container__p {
+  text-align: center;
+}
+
+.bold {
+  margin: 10px;
+}

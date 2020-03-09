@@ -1,128 +1,30 @@
-<div class="modal modal--show">
-  <div class="modal__container modal__container--full">
-    <header class="header modal__header">
-      <div class="header__container">
-        <h1 class="header__title">Sign up</h1>
-        <button type="button" class="btn btn--close modal__close">&times;</button>
-      </div>
-    </header>
+<div class="container container--static">
 
-    <div class="modal__body">
-
-      <div class="container container--padding">
-        <p class="container__p container__p--large">
-          Do you want to <strong>create</strong> a new Family Group or <strong>join</strong> to one?
-        </p>
-
-        <!-- ACTIONS -->
-        <div class="container container--btn">
-          <button type="button" class="btn btn--primary" id="createBtn">Create</button>
-          <button type="button" class="btn btn--primary" id="joinBtn">Join</button>
-        </div>
-        <!-- //ACTIONS -->
-      </div>
-
-      <!-- MODAL CREATE -->
-      <app-modal
-        [title]="'Sign up - Create'"
-        [modalId]="'createModal'"
-        (close)="cerrar($event)">
-         <!-- FORM -->
-         <form action="..." class="form form--signup">
-
-          <div class="form__group">
-            <label for="emailSingUp" class="form__label" aria-required="true">Email</label>
-            <input type="email" id="emailSingUp" class="form__control" placeholder="john_smith@gmail.com">
-          </div>
-
-          <div class="form__group">
-            <label for="name" class="form__label">First name</label>
-            <input type="name" id="name" class="form__control" placeholder="John">
-          </div>
-
-          <div class="form__group">
-            <label for="famname" class="form__label">Family Name</label>
-            <input type="text" id="famname" class="form__control" placeholder="Smith">
-          </div>
-
-          <div class="form__group">
-            <label for="passwordCreate" class="form__label">Password</label>
-            <div class="form__icon">
-              <input type="password" id="passwordCreate" class="form__control">
-              <i class="icon icon-red_eye_close icon--pswd icon--sm" data-toggle="eye"></i>
-            </div>
-          </div>
-
-          <div class="form__group">
-            <label for="passwordCreateConfirm" class="form__label">Confirm password</label>
-            <div class="form__icon">
-              <input type="password" id="passwordCreateConfirm" class="form__control">
-              <i class="icon icon-red_eye_close icon--pswd icon--sm" data-toggle="eye"></i>
-            </div>
-          </div>
-
-          <!-- FORM ACTIONS -->
-          <div class="form__actions">
-            <button type="submit" class="btn btn--signup" aria-disabled="true">Sign up</button>
-          </div>
-          <!-- //FORM ACTIONS -->
-
-        </form>
-        <!-- //FORM -->
-      </app-modal>
-      <!-- // MODAL CREATE -->
-
-      <!-- MODAL JOIN -->
-      <app-modal
-        [title]="'Sign up - Join'"
-        [modalId]="'joinModal'"
-        (close)="cerrar($event)">
-         <!-- FORM -->
-         <form action="..." class="form form--signup">
-
-          <div class="form__group">
-            <label for="emailSingUp" class="form__label" aria-required="true">Email</label>
-            <input type="email" id="emailSingUp" class="form__control" placeholder="john_smith@gmail.com">
-          </div>
-
-          <div class="form__group">
-            <label for="name" class="form__label">First name</label>
-            <input type="name" id="name" class="form__control" placeholder="John">
-          </div>
-
-          <div class="form__group">
-            <label for="famname" class="form__label">Family Name</label>
-            <input type="text" id="famname" class="form__control" placeholder="Smith">
-          </div>
-
-          <div class="form__group">
-            <label for="passwordCreate" class="form__label">Password</label>
-            <div class="form__icon">
-              <input type="password" id="passwordCreate" class="form__control">
-              <i class="icon icon-red_eye_close icon--pswd icon--sm" data-toggle="eye"></i>
-            </div>
-          </div>
-
-          <div class="form__group">
-            <label for="passwordCreateConfirm" class="form__label">Confirm password</label>
-            <div class="form__icon">
-              <input type="password" id="passwordCreateConfirm" class="form__control">
-              <i class="icon icon-red_eye_close icon--pswd icon--sm" data-toggle="eye"></i>
-            </div>
-          </div>
-
-          <!-- FORM ACTIONS -->
-          <div class="form__actions">
-            <button type="submit" class="btn btn--signup" aria-disabled="true">Sign up</button>
-          </div>
-          <!-- //FORM ACTIONS -->
-
-        </form>
-        <!-- //FORM -->
-      </app-modal>
-      <!-- // MODAL CREATE -->
-
+  <header class="header header--static header--signup">
+    <div class="header__container">
+      <button type="button" class="btn btn--back" (click)="goBack()">ᐸ</button>
+      <h1 class="header__title">Sign up</h1>
     </div>
+  </header>
+
+  <p class="container__p container__p--large">
+    Do you want to <strong> create </strong> a new Family Group or <strong> join </strong> to one?
+  </p>
+
+  <!-- ACTIONS -->
+  <div class="container container--btn">
+    <button type="button" class="btn btn--primary" id="createBtn" (click)="openCreateModal()">Create</button>
+    <button type="button" class="btn btn--primary" id="joinBtn" (click)="openJoinModal()">Join</button>
   </div>
+  <!-- //ACTIONS -->
+
 </div>
 
+
+<!-- MODAL -->
+<app-modal [title]="targetModal.title" [modalId]="targetModal.id" (close)="close($event)" [modalVisible]="modalVisible">
+
+  <app-signup-form [famField]="targetModal"></app-signup-form>
+
+</app-modal>
+<!-- // MODAL -->
