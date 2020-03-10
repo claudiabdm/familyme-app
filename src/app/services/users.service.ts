@@ -20,17 +20,20 @@ export class UsersService {
   }
 
   getUsersByGroup(group): Observable<User[]> {
-    console.log()
     return this.http.get<User[]>(`${this.url}/?search=${group.replace(' ', '&')}`);
   }
 
-
-  getUser(id: number): Observable<User> {
+  getUserById(id: number): Observable<User> {
     const url = `${this.url}/${id}`;
     return this.http.get<User>(url);
   }
 
-  searchUser(user: User){
+  createUser(user: User): Observable<User> {
+    const adminUser = Object.assign(user, { role: 'admin' });
+    return this.http.post<User>(this.url, adminUser);
+  }
+
+  searchUser(user: User) {
     const url = `${this.url}/?search=${user.email}`;
     return this.http.get<User>(url).pipe(
       map(users => users[0]),

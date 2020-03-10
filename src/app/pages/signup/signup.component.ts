@@ -9,12 +9,15 @@ import { ModalComponent } from 'src/app/shared/component/modal/modal.component';
 export class SignupComponent implements OnInit {
 
   public modalVisible: boolean = false;
-  targetModal:  {
-    title: string,
-    id: string,
-    label: string,
-    placeholder: string,
+
+  targetModal =  {
+    title: 'Sign in',
+    id: 'string',
+    label: 'string',
+    placeholder: 'string',
   };
+
+
   constructor(private router: Router) { }
 
   ngOnInit(): void {
@@ -32,7 +35,6 @@ export class SignupComponent implements OnInit {
       label: 'Name',
       placeholder: 'Smith Sánchez',
     }
-    console.log(this.modalVisible)
     this.modalVisible = true;
   }
 

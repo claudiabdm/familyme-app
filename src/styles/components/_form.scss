@@ -136,9 +136,12 @@
   // -----------------------------
   &__msg-validation {
     position: absolute;
-    margin-top: 10px;
+    margin-top: 5px;
+    padding-right: $padding-sides;
     color: $secondary;
+    font-size: rem(12px);
     font-weight: $font-weight-bold;
+    line-height: 1.2;
   }
 
 }

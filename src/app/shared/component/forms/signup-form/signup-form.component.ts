@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators, AbstractControl} from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { CustomValidatorsService } from 'src/app/services/custom-validators.service';
 
 
 @Component({
@@ -10,30 +11,44 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SignupFormComponent implements OnInit {
 
-  @Input() famField = {
-    label: '',
-    placeholder: '',
+  @Input() group = {
+    title: 'Sign in',
+    id: 'string',
+    label: 'string',
+    placeholder: 'string',
   };
 
+  signupForm: FormGroup;
   isVisible: boolean = false;
   type: string = 'password';
 
-  signupForm: FormGroup = this.formBuilder.group({
-    email: ['', Validators.required],
-    name: ['', Validators.required],
-    famField: ['', Validators.required],
-    password: ['', [Validators.required, Validators.minLength(6)]],
-    passwordConfirm: ['', [Validators.required, Validators.minLength(6), this.validatePswdConfirm]],
-  });
 
-  constructor(private formBuilder: FormBuilder, public authService: AuthService) { }
+  constructor(
+    public authService: AuthService,
+    private formBuilder: FormBuilder,
+    private customValidators: CustomValidatorsService) { }
 
   ngOnInit(): void {
-
+    this.signupForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      name: ['', Validators.required],
+      group: ['', Validators.required],
+      password: ['', [Validators.required, this.customValidators.patternValidator()]],
+      passwordConfirm: ['', [Validators.required]],
+    },
+    {
+      validator: this.customValidators.matchPassword('password', 'passwordConfirm'),
+    }
+    );
+    this.signupForm.reset()
   }
 
   onSubmit(form: FormGroup) {
-    this.authService.signUp(form.value);
+    if (this.group.id === 'createModal') {
+      this.authService.signUpCreate(form.value);
+    } else {
+      this.authService.signUpJoin(form.value);
+    }
   }
 
   showPswd() {
@@ -44,10 +59,6 @@ export class SignupFormComponent implements OnInit {
       this.isVisible = true;
       this.type = 'text';
     }
-  }
-
-  private validatePswdConfirm() {
-
   }
 
 }
