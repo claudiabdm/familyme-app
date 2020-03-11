@@ -1,0 +1,39 @@
+<app-header [onlyImage]="true" [switchVisible]="true"></app-header>
+
+<!-- MAIN -->
+<main>
+
+  <div class="container">
+    <ul class="list" id="shoppingList">
+
+      <li class="list__item">
+        <div class="list__checkbox checkbox checkbox--lg">
+          <input type="checkbox" name="galletas" id="galletas" class="checkbox__box">
+          <span class="checkbox__checkmark"></span>
+        </div>
+        <label for="galletas" class="list__label">
+          <span class="list__product">Galletas</span>
+          <span class="list__addedby">Added by Claudia Benito</span>
+        </label>
+        <button type="button" class="list__remove btn btn--close">&times;</button>
+      </li>
+
+      <li class="list__item">
+        <div class="list__checkbox checkbox checkbox--lg">
+          <input type="checkbox" name="leche" id="leche" class="checkbox__box">
+          <span class="checkbox__checkmark"></span>
+        </div>
+        <label for="leche" class="list__label">
+          <span class="list__product">Leche</span>
+          <span class="list__addedby">Added by Claudia Benito</span>
+        </label>
+        <button type="button" class="list__remove btn btn--close">&times;</button>
+      </li>
+
+    </ul>
+  </div>
+
+  <button type="button" class="btn btn--float" id="addItemBtn">
+    <i class="btn btn--icon icon icon-plus icon--sm"></i>
+  </button>
+</main>
