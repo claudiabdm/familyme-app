@@ -6,10 +6,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalComponent } from './component/modal/modal.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { SignupFormComponent } from './component/forms/signup-form/signup-form.component';
+import { LoginFormComponent } from './component/forms/login-form/login-form.component';
+import { SettingsComponent } from './component/settings/settings.component';
+import { HeaderComponent } from './component/header/header.component';
+import { UserListComponent } from './component/user-list/user-list.component';
 
 
 @NgModule({
-  declarations: [ModalComponent, NavbarComponent, SignupFormComponent,],
+  declarations: [ModalComponent, NavbarComponent, SignupFormComponent, LoginFormComponent, SettingsComponent, HeaderComponent, UserListComponent,],
   imports: [
     CommonModule,
     RouterModule,
@@ -20,6 +24,10 @@ import { SignupFormComponent } from './component/forms/signup-form/signup-form.c
     ModalComponent,
     NavbarComponent,
     SignupFormComponent,
+    LoginFormComponent,
+    SettingsComponent,
+    HeaderComponent,
+    UserListComponent
   ]
 })
 export class SharedModule { }

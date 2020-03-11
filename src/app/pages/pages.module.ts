@@ -10,11 +10,12 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { PagesRoutingModule } from './pages-routing.module';
+import { ListComponent } from './list/list.component';
 
 
 
 @NgModule({
-  declarations: [HomeComponent, CalendarComponent, LoginComponent, SignupComponent, PagesComponent,],
+  declarations: [HomeComponent, CalendarComponent, LoginComponent, SignupComponent, PagesComponent, ListComponent,],
   imports: [
     CommonModule,
     SharedModule,
@@ -29,7 +30,7 @@ import { PagesRoutingModule } from './pages-routing.module';
     PagesRoutingModule,
     SignupComponent,
     LoginComponent,
-
+    ListComponent
   ]
 })
 export class PagesModule { }

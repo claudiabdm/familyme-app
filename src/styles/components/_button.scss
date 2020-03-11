@@ -108,7 +108,8 @@
   @include size(rem(50px));
 
   border-radius: 100%;
-  background-color: #fff;
+  background-color: rgba(0, 0, 0, 0);
+  --button-hover: rgba(0, 0, 0, 0);
   font-size: $font-size-base;
   font-weight: $font-weight-light;
   box-shadow: $box-shadow;
