@@ -1,6 +1,6 @@
 <!-- USER AND FAMILY INFO -->
 <div class="container container--top">
-  <button type="button" class="btn btn--icon icon icon-settings" id="settingsBtn" aria-label="Settings" aria-labelledby="settingsModal"></button>
+  <button type="button" class="btn btn--icon icon icon-settings" id="settingsBtn" aria-label="Settings" aria-labelledby="settingsModal" (click)="openSettingsModal()"></button>
 
     <!-- MAIN USER -->
     <article class="user user--col">
@@ -17,10 +17,7 @@
 
     <h1 class="container__title">Family {{ user.group }}</h1>
 
-    <article class="user user--row" *ngFor="let user of usersGroup;">
-      <img class="user__img" [src]="user.avatar" alt="{{ user.name }} profile photo">
-      <h2 class="user__name">{{ user.name }}</h2>
-    </article>
+    <app-user-list [onlyImage]="false"></app-user-list>
 
     <!-- NEW MEMBERS BUTTON -->
     <div class="container container--btn">
@@ -34,3 +31,11 @@
 </div>
 <!-- //USER AND FAMILY INFO -->
 
+
+<!-- MODAL -->
+<app-modal [title]="targetModal.title" [modalId]="targetModal.id" (close)="close($event)" [modalVisible]="modalVisible">
+
+  <app-settings></app-settings>
+
+</app-modal>
+<!-- // MODAL -->
