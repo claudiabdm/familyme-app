@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Button } from 'src/app/models/button';
 
 @Component({
   selector: 'app-calendar',
@@ -6,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit {
+
+  public button: Button = {
+    id: "newEventButton",
+    name: "New event"
+  }
 
   constructor() { }
 

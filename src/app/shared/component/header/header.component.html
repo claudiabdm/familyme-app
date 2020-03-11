@@ -1,0 +1,29 @@
+<header class="header">
+
+  <nav class="navbar navbar--top">
+
+    <!-- USERS -->
+
+    <app-user-list [onlyImage]="onlyImage" class="navbar__container"></app-user-list>
+
+    <!-- //USERS -->
+
+    <!-- SWITCH -->
+    <div class="navbar__actions" *ngIf="switchVisible">
+      <label class="switch switch--sm" for="shopping">
+        <span class="switch__label switch__label--sm">Shopping</span>
+        <input type="checkbox" class="switch__check" id="shopping" role="switch" aria-checked="true">
+        <span class="switch__slider"></span>
+      </label>
+    </div>
+    <!-- //SWITCH -->
+
+    <!-- BUTTON -->
+    <div class="navbar__actions" *ngIf="!switchVisible">
+      <button type="button" class="btn btn--primary btn--sm" id="button.id">{{ button.name }}</button>
+    </div>
+    <!-- //BUTTON -->
+
+  </nav>
+
+</header>
