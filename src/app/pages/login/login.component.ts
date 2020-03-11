@@ -10,29 +10,11 @@ import { AuthService } from 'src/app/services/auth.service';
 
 export class LoginComponent implements OnInit {
 
-  isVisible: boolean = false;
-  type: string = 'password';
-  loginForm: FormGroup = this.formBuilder.group({
-    email: ['', Validators.required],
-    password: ['', [Validators.required, Validators.minLength(6)]]
-  });
-
-  constructor(private formBuilder: FormBuilder, public authService: AuthService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  onSubmit(form: FormGroup) {
-    this.authService.logIn(form.value);
-  }
 
-  showPswd() {
-    if (this.isVisible) {
-      this.isVisible = false;
-      this.type = 'password';
-    } else {
-      this.isVisible = true;
-      this.type = 'text';
-    }
-  }
+
 }
