@@ -14,7 +14,7 @@ export class SettingsComponent implements OnInit {
   }
 
   logOut(){
-
+    this.authService.logOut();
   }
 
   deleteAccount(){

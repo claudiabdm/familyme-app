@@ -12,7 +12,6 @@ export class HeaderComponent implements OnInit {
 
   @Input() button: Button;
   @Input() switchVisible: boolean = false;
-  @Input() onlyImage: boolean = false;
 
   constructor() { }
 

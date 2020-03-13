@@ -1,2 +1,3 @@
+<app-header [button]="button" [switchVisible]="switchVisible" *ngIf="headerVisible"></app-header>
 <router-outlet></router-outlet>
-<app-navbar *ngIf="!navbarHidden"></app-navbar>
+<app-navbar *ngIf="navbarVisible"></app-navbar>

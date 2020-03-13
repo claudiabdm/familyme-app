@@ -73,5 +73,8 @@ export class AuthService {
 
   signUpJoin(currUser: User) { }
 
-  logOut(): void {};
+  logOut(): void {
+    this.storage.remove('user');
+    this.storage.remove('usersGroup');
+  };
 }

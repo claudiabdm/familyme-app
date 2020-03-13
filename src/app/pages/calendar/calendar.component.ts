@@ -8,11 +8,6 @@ import { Button } from 'src/app/models/button';
 })
 export class CalendarComponent implements OnInit {
 
-  public button: Button = {
-    id: "newEventButton",
-    name: "New event"
-  }
-
   constructor() { }
 
   ngOnInit(): void {
