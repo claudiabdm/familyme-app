@@ -39,6 +39,10 @@ export class AuthService {
     }
   }
 
+  public updateLocalStorage(item, value) {
+    this.storage.set(item, value);
+  }
+
   logIn(currUser: FormGroup["value"]): void {
     this.usersService.searchUserByEmail(currUser)
       .subscribe(user => {
@@ -124,5 +128,6 @@ export class AuthService {
 
   logOut(): void {
     this.storage.remove('user');
+    this.storage.remove('userGroup');
   };
 }

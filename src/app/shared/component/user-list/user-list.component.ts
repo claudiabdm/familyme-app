@@ -9,16 +9,18 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class UserListComponent implements OnInit {
 
-  @Input() userList: User[];
   @Input() onlyImage: boolean;
+
+  private _userList: User[];
 
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this._userList = this.authService.userGroup.members;
   }
 
-  // get userGroup(): User[]{
-  //   // return this.authService.user.group.members;
-  // }
+  get userList(): User[]{
+    return this._userList;
+  }
 
 }

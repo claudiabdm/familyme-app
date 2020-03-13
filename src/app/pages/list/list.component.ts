@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, ElementRef, TemplateRef, ViewChild } from '@angular/core';
 import { ShoppingListService } from 'src/app/services/shopping-list.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subscription, Subject } from 'rxjs';
@@ -10,52 +10,47 @@ import { Product } from 'src/app/models/product';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit, OnDestroy {
+export class ListComponent implements OnInit {
 
-  addItemVisible: boolean = false;
+  productList : Product[];
+  addItemElemVisible: boolean = false;
 
-  private ngUnsubscribe$ = new Subject<void>();
-
-  constructor(private shoppingList: ShoppingListService, private authService: AuthService) { }
-
-  get productList() {
-    return this.shoppingList.productList;
-  }
+  constructor(
+    private authService: AuthService,
+    private shoppingListService: ShoppingListService) { }
 
   ngOnInit(): void {
-    this.shoppingList.getProducts()
-    .pipe(takeUntil(this.ngUnsubscribe$))
-    .subscribe(res => {
-      this.shoppingList.productList = res;
-      this.shoppingList.setLocalStorage();
-    });
+    this.productList = this.shoppingListService.getProductList();
   }
 
-
-  addItem(): void {
-    this.addItemVisible = true;
+  addItemElem(): void {
+    this.addItemElemVisible = true;
+    this.scrollToBottom(document.getElementById('shoppingList'));
   }
 
-  saveItem(product: string): void {
-    this.addItemVisible = false;
-    const newProduct: Product = {
-      id: this.shoppingList.productList.length+1,
-      createdAt: new Date(),
-      name: product,
-      addedBy: this.authService.user
-    };
-    this.shoppingList.productList.push(newProduct);
-    this.authService.setLocalStorage();
-    this.shoppingList.createProduct(newProduct).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
+  addItem(product: string): void {
+    if (product) {
+      const productId = this.productList.length > 0 ? this.productList[this.productList.length - 1].id + 1 : 1;
+      const newProduct: Product = {
+        id: productId,
+        createdAt: new Date(),
+        name: product,
+        addedBy: this.authService.user.name,
+      };
+      this.productList.push(newProduct);
+      this.scrollToBottom(document.getElementById('shoppingList'));
+      this.shoppingListService.updateProductList(this.productList);
+    }
+    this.addItemElemVisible = false;
   }
 
   deleteItem(product: Product): void {
-    this.shoppingList.deleteProduct(product).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
+    this.productList = this.productList.filter((data) => data.id !== product.id);
+    this.shoppingListService.updateProductList(this.productList);
   }
 
-  ngOnDestroy(): void {
-    this.ngUnsubscribe$.next()
-    this.ngUnsubscribe$.complete();
+  scrollToBottom(container){
+    container.scrollTop = container.scrollHeight;
   }
 
 }

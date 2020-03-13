@@ -4,5 +4,5 @@ export class Product {
   id: number;
   createdAt: Date;
   name: string;
-  addedBy: User;
+  addedBy: User["name"];
 }

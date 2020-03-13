@@ -103,7 +103,7 @@
 
 //--- Float button ---//
 .btn--float {
-  @include fixed($right: rem(20px), $bottom:($navbar-height + rem(20px)));
+  @include fixed($right: rem(20px), $bottom:($navbar-height + rem(5px)));
   @include flex();
   @include size(rem(50px));
 

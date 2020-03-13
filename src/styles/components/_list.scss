@@ -6,11 +6,11 @@
   @include absolute(0, 0, 0, 0);
   min-width: 20rem;
   background-color: $tertiary;
-  padding: 0;
+  padding-bottom: rem(60px);
   overflow: auto;
 
   // ITEM
-  //----------------------------- 
+  //-----------------------------
   &__item {
     @include flex(center, flex-start);
     @include size($height:rem(60px));
@@ -36,18 +36,18 @@
   }
 
   // LABEL
-  //----------------------------- 
+  //-----------------------------
   &__label {
     @include flex (flex-start, space-between);
     @include size();
-    
+
     flex-direction: column;
     margin-left: 10px;
     font-size: rem(24px);
   }
 
   // ADDED BY USERNAME
-  //----------------------------- 
+  //-----------------------------
   &__addedby {
     color: $grey-100;
     font-size: rem(14px);
@@ -55,7 +55,7 @@
   }
 
   // INPUT TEXT
-  //----------------------------- 
+  //-----------------------------
   &__input {
     @include size();
     border: none;
@@ -67,13 +67,13 @@
   }
 
   // ADD ITEM BTN
-  //----------------------------- 
+  //-----------------------------
   &__add {
     @include flex();
     border: 0;
     background: none;
     color: $primary;
-    font-size: rem(36px);
+    font-size: rem(40px);
     margin-left: 10px;
 
     &::after {
@@ -83,7 +83,7 @@
   }
 
   // REMOVE ITEM BTN
-  //----------------------------- 
+  //-----------------------------
   &__remove {
     color: $grey-100;
 

@@ -10,10 +10,11 @@ import { LoginFormComponent } from './component/forms/login-form/login-form.comp
 import { SettingsComponent } from './component/settings/settings.component';
 import { HeaderComponent } from './component/header/header.component';
 import { UserListComponent } from './component/user-list/user-list.component';
+import { ScrollBottomDirective } from './directive/scroll-bottom.directive';
 
 
 @NgModule({
-  declarations: [ModalComponent, NavbarComponent, SignupFormComponent, LoginFormComponent, SettingsComponent, HeaderComponent, UserListComponent,],
+  declarations: [ModalComponent, NavbarComponent, SignupFormComponent, LoginFormComponent, SettingsComponent, HeaderComponent, UserListComponent, ScrollBottomDirective,],
   imports: [
     CommonModule,
     RouterModule,

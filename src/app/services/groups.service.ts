@@ -17,12 +17,20 @@ export class GroupsService {
 
   constructor(private http:HttpClient) { }
 
-  createGroup(group: Group): Observable<Group> {
+  createGroup(group: string): Observable<Group> {
     const newGroup = {
       name: group,
       createdAt: new Date(),
     }
     return this.http.post<Group>(this.url, newGroup);
+  }
+
+  updateGroup(group: Group): Observable<Group> {
+    return this.http.post<Group>(this.url, group);
+  }
+
+  deleteGroup(id: Group["id"]): Observable<Group> {
+    return this.http.delete<Group>(`${this.url}/${id}`);
   }
 
   searchGroupByToken(group: string): Observable<Group> {
@@ -32,6 +40,6 @@ export class GroupsService {
   addUserToGroup(user: User, group: Group): Observable<Group> {
     user.groupToken = group.token;
     group.members.push(user);
-    return this.http.put<Group>(`${this.url}/${group.id}`, group, this.httpOptions);
+    return this.http.put<Group>(`${this.url}/${group.apiId}`, group, this.httpOptions);
   }
 }
