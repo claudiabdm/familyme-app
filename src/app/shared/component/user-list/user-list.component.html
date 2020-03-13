@@ -1,4 +1,4 @@
-<article class="user" *ngFor="let user of usersGroup;" [class.user--row]="!onlyImage">
+<article class="user" *ngFor="let user of userList;" [class.user--row]="!onlyImage">
   <img class="user__img" [src]="user.avatar" alt="{{ user.name }} profile photo">
   <h2 class="user__name" *ngIf="!onlyImage">{{ user.name }}</h2>
 </article>

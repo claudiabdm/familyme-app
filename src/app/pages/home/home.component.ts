@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user';
+import { Group } from 'src/app/models/group';
 
 @Component({
   selector: 'app-home',
@@ -11,16 +12,13 @@ import { User } from 'src/app/models/user';
 })
 export class HomeComponent implements OnInit {
 
-  private _user: User = this.authService.user;
-  private _usersGroup: User[] = this.authService.usersGroup;
-
   public modalVisible: boolean = false;
   targetModal =  {
     title: 'Settings',
     id: 'string',
   };
 
-  constructor(private authService: AuthService, private usersService: UsersService) {
+  constructor(private authService: AuthService) {
 
   }
 
@@ -28,13 +26,14 @@ export class HomeComponent implements OnInit {
 
   }
 
-  get user() {
-    return this._user;
+  get user(): User {
+    return this.authService.user;
   }
 
-  get usersGroup() {
-    return this._usersGroup;
+  get userGroup(): Group {
+    return this.authService.userGroup;
   }
+
 
   openSettingsModal(){
     this.modalVisible = true;

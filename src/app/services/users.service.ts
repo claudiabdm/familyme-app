@@ -4,6 +4,8 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { User } from '../models/user';
+import { environment } from 'src/environments/environment';
+import { Group } from '../models/group';
 
 
 @Injectable({
@@ -11,7 +13,7 @@ import { User } from '../models/user';
 })
 export class UsersService {
 
-  private url = 'https://5e63c7d2782c970014a89dce.mockapi.io/users';
+  private url = `${environment.apiUrl}users`;
 
   constructor(private http: HttpClient) { }
 
@@ -19,22 +21,22 @@ export class UsersService {
     return this.http.get<User[]>(this.url);
   }
 
-  getUsersByGroup(group): Observable<User[]> {
-    return this.http.get<User[]>(`${this.url}/?search=${group.replace(' ', '&')}`);
+  getUsersByGroupId(group): Observable<User[]> {
+    return this.http.get<User[]>(`${this.url}/${group.id}`);
   }
 
-  getUserById(id: number): Observable<User> {
-    const url = `${this.url}/${id}`;
-    return this.http.get<User>(url);
+  // getUserById(id: number): Observable<User> {
+  //   const url = `${this.url}/${id}`;
+  //   return this.http.get<User>(url);
+  // }
+
+  createUser(user: User, group: string, role: string): Observable<User> {
+    const newUser = Object.assign(user, { role: role, groupToken: group });
+    return this.http.post<User>(this.url, newUser);
   }
 
-  createUser(user: User): Observable<User> {
-    const adminUser = Object.assign(user, { role: 'admin' });
-    return this.http.post<User>(this.url, adminUser);
-  }
-
-  searchUser(user: User) {
-    const url = `${this.url}/?search=${user.email}`;
+  searchUserByEmail(user: User): Observable<User> {
+    const url = `${this.url}?search=${user.email}`;
     return this.http.get<User>(url).pipe(
       map(users => users[0]),
     );

@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class UserListComponent implements OnInit {
 
+  @Input() userList: User[];
   @Input() onlyImage: boolean;
 
   constructor(private authService: AuthService) { }
@@ -16,8 +17,8 @@ export class UserListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get usersGroup(): User[]{
-    return this.authService.usersGroup;
-  }
+  // get userGroup(): User[]{
+  //   // return this.authService.user.group.members;
+  // }
 
 }

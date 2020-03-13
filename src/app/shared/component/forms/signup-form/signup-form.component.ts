@@ -11,7 +11,7 @@ import { CustomValidatorsService } from 'src/app/services/custom-validators.serv
 })
 export class SignupFormComponent implements OnInit {
 
-  @Input() group = {
+  @Input() singUpType = {
     title: 'Sign in',
     id: 'string',
     label: 'string',
@@ -43,15 +43,19 @@ export class SignupFormComponent implements OnInit {
     this.signupForm.reset()
   }
 
-  onSubmit(form: FormGroup) {
-    if (this.group.id === 'createModal') {
-      this.authService.signUpCreate(form.value);
-    } else {
-      this.authService.signUpJoin(form.value);
+  onSubmit(form: FormGroup): void {
+    if (form.valid) {
+      delete form.value.passwordConfirm;
+      if (this.singUpType.id === 'createModal') {
+        this.authService.signUpCreate(form.value);
+      } else {
+        this.authService.signUpJoin(form.value);
+      }
     }
+    this.signupForm.reset()
   }
 
-  showPswd() {
+  showPswd(): void {
     if (this.isVisible) {
       this.isVisible = false;
       this.type = 'password';

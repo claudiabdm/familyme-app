@@ -132,9 +132,10 @@
     padding: 20px $padding-sides;
   }
 
-  // MESSAGE VALIDATIONS
+
+  // MESSAGE GROUP
   // -----------------------------
-  &__msg-validation {
+  &__msg-group {
     position: absolute;
     margin-top: 5px;
     padding-right: $padding-sides;
@@ -142,6 +143,16 @@
     font-size: rem(12px);
     font-weight: $font-weight-bold;
     line-height: 1.2;
+  }
+
+  // MESSAGE VALIDATIONS
+  // -----------------------------
+  &__msg-validation {}
+
+  // MESSAGE SUBMISION WRONG
+  // -----------------------------
+  &__msg-submit {
+
   }
 
 }

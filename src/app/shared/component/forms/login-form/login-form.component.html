@@ -6,7 +6,7 @@
       formControlName="email"
       [class.form__control--invalid]="loginForm.controls.email.dirty && loginForm.controls.email.invalid">
 
-    <div *ngIf="authService.invalidUser" class="form__msg-validation">
+    <div *ngIf="authService.invalidUser" class="form__msg-group">
       We don't recognize that email.
     </div>
   </div>
@@ -23,7 +23,7 @@
           [class.icon-red_eye_close]="!isVisible" (click)=showPswd()></i>
     </div>
 
-    <div *ngIf="authService.invalidPassword" class="form__msg-validation">
+    <div *ngIf="authService.invalidPassword" class="form__msg-group">
         Incorrect Password.
     </div>
 

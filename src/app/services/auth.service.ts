@@ -5,6 +5,10 @@ import { Observable } from 'rxjs';
 
 import { UsersService } from './users.service';
 import { User } from '../models/user';
+import { GroupsService } from './groups.service';
+import { Group } from '../models/group';
+import { FormGroup } from '@angular/forms';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,37 +16,47 @@ import { User } from '../models/user';
 export class AuthService {
 
   public user: User;
-  public usersGroup: User[];
+  public userGroup: Group;
   public invalidUser: boolean = false;
+  public invalidGroup: boolean = false;
   public invalidPassword: boolean = false;
 
   constructor(
     @Inject(LOCAL_STORAGE) private storage: StorageService,
     private usersService: UsersService,
+    private groupsService: GroupsService,
     public router: Router) { }
 
   public setLocalStorage(): void {
     if (!this.storage.get('user')) {
       this.storage.set('user', this.user);
-      this.storage.set('usersGroup', this.usersGroup);
+      this.storage.set('userGroup', this.userGroup);
     } else {
       this.user = this.storage.get('user');
-      this.usersGroup = this.storage.get('usersGroup');
+      this.storage.set('user', this.user);
+      this.userGroup = this.storage.get('userGroup');
+      this.storage.set('userGroup', this.userGroup);
     }
   }
 
-  logIn(currUser: User): void {
-    this.usersService.searchUser(currUser)
+  logIn(currUser: FormGroup["value"]): void {
+    this.usersService.searchUserByEmail(currUser)
       .subscribe(user => {
         if (user) {
           this.invalidUser = false;
           if (currUser.password === user.password) {
             this.invalidPassword = false;
-            this.user = user;
-            this.usersService.getUsersByGroup(user.group).subscribe(res => {
-              this.usersGroup = res;
-              this.setLocalStorage();
-              this.router.navigate(['pages/home']);
+            this.groupsService.searchGroupByToken(user.groupToken).pipe(map(group => group[0]))
+            .subscribe(group => {
+              if (group) {
+                this.invalidGroup = false;
+                this.user = user;
+                this.userGroup = group;
+                this.setLocalStorage();
+                this.router.navigate(['pages/home']);
+              } else {
+                this.invalidGroup = true;
+              }
             });
           } else {
             this.invalidPassword = true;
@@ -54,27 +68,61 @@ export class AuthService {
       );
   }
 
-  signUpCreate(currUser: User): void {
-    this.usersService.searchUser(currUser)
+  signUpCreate(currUser: FormGroup["value"]): void {
+    this.usersService.searchUserByEmail(currUser)
       .subscribe(user => {
         if (!user) {
           this.invalidUser = false;
-          this.usersService.createUser(currUser).subscribe(res => {
-            this.user = res;
-            this.usersGroup = [this.user];
-            this.setLocalStorage();
-            this.router.navigate(['pages/home']);
-          })
+          this.groupsService.createGroup(currUser.group)
+            .subscribe(group => {
+              delete currUser.group;
+              this.usersService.createUser(currUser as User, group.token, 'admin').subscribe(user => {
+                this.groupsService.addUserToGroup(user, group).subscribe(group => {
+                  this.invalidGroup = false;
+                  this.user = user;
+                  this.userGroup = group;
+                  this.setLocalStorage();
+                  this.router.navigate(['pages/home']);
+                }
+                )
+              })
+            })
         } else {
           this.invalidUser = true;
         }
       })
   }
 
-  signUpJoin(currUser: User) { }
+  signUpJoin(currUser: FormGroup["value"]): void {
+    this.usersService.searchUserByEmail(currUser)
+      .subscribe(user => {
+        if (!user) {
+          this.invalidUser = false;
+          this.groupsService.searchGroupByToken(currUser.group).pipe(map(group => group[0]))
+          .subscribe(group => {
+            if (group) {
+              delete currUser.group;
+              this.usersService.createUser(currUser as User, group.token, '').subscribe(user => {
+                this.groupsService.addUserToGroup(user, group).subscribe(group => {
+                  this.invalidGroup = false;
+                  this.user = user;
+                  this.userGroup = group;
+                  this.setLocalStorage();
+                  this.router.navigate(['pages/home']);
+                })
+              })
+            } else {
+              this.invalidGroup = true;
+            }
+          })
+        } else {
+          this.invalidUser = true;
+        }
+
+      })
+  }
 
   logOut(): void {
     this.storage.remove('user');
-    this.storage.remove('usersGroup');
   };
 }
