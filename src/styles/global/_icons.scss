@@ -12,12 +12,20 @@
 
 .icon--selected,
 .icon:hover,
+.icon-close,
 .icon-red_eye,
 .icon-red_eye_close {
-	filter: none;
+  filter: none;
+  transition: none;
 }
 
 // -- Sizes --- //
+
+.icon--ms {
+	width: 3rem;
+  height: 3rem;
+}
+
 .icon--sm {
 	width: 1.875rem;
 	height: 1.875rem;

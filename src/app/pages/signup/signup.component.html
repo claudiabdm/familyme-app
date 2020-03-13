@@ -2,7 +2,11 @@
 
   <header class="header header--static header--signup">
     <div class="header__container">
-      <button type="button" class="btn btn--back" (click)="goBack()">ᐸ</button>
+      <button type="button" class="btn btn--back" (click)="goBack()">
+        <svg class="icon icon-close icon--ms">
+          <use xlink:href="../../assets/icons/sprite.svg#back"/>
+        </svg>
+      </button>
       <h1 class="header__title">Sign up</h1>
     </div>
   </header>

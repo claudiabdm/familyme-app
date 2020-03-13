@@ -4,7 +4,11 @@
     <header class="header modal__header">
       <div class="header__container">
         <h1 class="header__title">{{title}}</h1>
-        <button type="button" class="btn btn--close modal__close" (click)="onClose()">&times;</button>
+        <button type="button" class="btn btn--close modal__close" (click)="onClose()">
+          <svg class="icon icon--sm icon-close">
+            <use xlink:href="../../assets/icons/sprite.svg#close"/>
+          </svg>
+        </button>
       </div>
     </header>
 

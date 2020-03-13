@@ -3,13 +3,13 @@
   <!-- Email -->
   <div class="form__group">
     <label for="email" class="form__label">Email</label>
-    <input type="email" id="email" class="form__control" placeholder="john_smith@gmail.com" aria-required="true"
+    <input type="email" id="email" class="form__control" placeholder="john_smith@gmail.com" aria-required="true" #emailInput
       autocomplete="off" required formControlName="email"
       [class.form__control--invalid]="signupForm.controls.email.dirty && signupForm.controls.email.invalid">
     <div class="form__msg-validation" *ngIf="signupForm.controls.email.dirty && signupForm.controls.email.invalid">
       Incorrect email
     </div>
-    <div class="form__msg-validation" *ngIf="authService.invalidUser">
+    <div class="form__msg-validation" *ngIf="authService.invalidUser || emailInput.value === ''">
       Email already in use
     </div>
 
