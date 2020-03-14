@@ -44,6 +44,7 @@ export class AuthService {
   }
 
   logIn(currUser: FormGroup["value"]): void {
+    this.storage.clear();
     this.usersService.searchUserByEmail(currUser)
       .subscribe(user => {
         if (user) {
@@ -127,7 +128,6 @@ export class AuthService {
   }
 
   logOut(): void {
-    this.storage.remove('user');
-    this.storage.remove('userGroup');
+    this.storage.clear();
   };
 }

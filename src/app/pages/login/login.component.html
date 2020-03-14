@@ -1,26 +1,21 @@
- <!-- HEADER -->
- <header class="header header--transparent header--static header--main">
+<!-- HEADER -->
+<header class="header header--transparent header--static header--main">
   <h1 class="header__title">NameApp</h1>
 </header>
 <!-- //HEADER -->
 
-<!-- MAIN -->
-<main>
+<!-- LOGIN -->
+<div class="container container--static">
 
-  <!-- LOGIN -->
-  <div class="container container--static">
+  <!-- FORM -->
+  <app-login-form></app-login-form>
+  <!-- //FORM -->
 
-    <!-- FORM -->
-     <app-login-form></app-login-form>
-    <!-- //FORM -->
+  <a href="#" class="form__link">Forgot password?</a>
 
-    <a href="#" class="form__link">Forgot password?</a>
+  <p class="container__p">Don't have an account? <a [routerLink]="'../signup'" class="form__link" id="signUpBtn">Sign
+      up</a>
+  </p>
 
-    <p class="container__p">Don't have an account? <a [routerLink]="'../signup'" class="form__link" id="signUpBtn">Sign up</a>
-    </p>
-
-  </div>
-  <!-- LOGIN -->
-
-</main>
-<!-- //MAIN -->
+</div>
+<!-- LOGIN -->
