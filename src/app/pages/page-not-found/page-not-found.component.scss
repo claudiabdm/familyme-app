@@ -1,0 +1,37 @@
+@import "../../../styles/mixins/mixins";
+@import "../../../styles/global/variables";
+
+main {
+  @include absolute(0,0,0,0);
+  @include flex(center, flex-start);
+  flex-direction: column;
+  color: #fff;
+  background:$primary;
+}
+.header {
+  z-index: 1000;
+}
+.not-found {
+  @include size(max-content);
+  @include flex(center, space-around);
+  flex-direction: column;
+  padding: 10px;
+
+
+  &__error {
+    font-size: rem(100px);
+  }
+
+  &__message {
+    font-size: rem(36px);
+    margin-bottom: 20px;
+  }
+
+  &__redirect {
+    color: #fff;
+
+    &:hover {
+      color: $secondary;
+    }
+  }
+}

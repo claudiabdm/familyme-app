@@ -4,7 +4,7 @@
 
 .header {
   @include fixed(0, 0, auto, 0);
-  
+
   min-width: 20rem;
   margin: 0 auto;
   border-bottom: $border;
@@ -16,16 +16,24 @@
   z-index: 10;
 
   // HEADER CONTAINER
-  // ----------------------------- 
+  // -----------------------------
   &__container {
     @include flex(center, space-between);
     @include size(100%, $header-height);
   }
 
   // HEADER TITTLE
-  // ----------------------------- 
+  // -----------------------------
   &__title {
     font-size: 1.75rem;
+  }
+
+  // HEADER UDBTITTLE
+  // -----------------------------
+  &__subtitle {
+    margin-top: 40px;
+    color: #000;
+    font-size: 1.5rem;
   }
 
 }
@@ -41,6 +49,7 @@
 
 // --- Header static --- //
 .header--static {
+  flex-direction: column;
   position: static;
 }
 
