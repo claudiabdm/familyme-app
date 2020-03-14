@@ -1,0 +1,142 @@
+@import '../../../styles/mixins/mixins';
+@import '../../../styles/global/variables';
+//------------------------------//
+// LIST                         //
+// ---------------------------- //
+
+.list {
+  @include absolute(0, 0, 0, 0);
+  min-width: 20rem;
+  background-color: $tertiary;
+  padding-bottom: rem(60px);
+  overflow: auto;
+
+  // ITEM
+  //-----------------------------
+  &__item {
+    @include flex(center, flex-start);
+    @include size($height:rem(60px));
+
+    padding: 0 $padding-sides;
+    border-bottom: 1px solid rgba($color: $secondary, $alpha: 0.5);
+
+    &:first-child {
+      border-top: 1px solid rgba($color: $secondary, $alpha: 0.5);
+    }
+
+    & span {
+      cursor: pointer;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    @media screen and (min-width:1024px) {
+      &:hover {
+        background-color: darken($tertiary, 2.5%);
+      }
+    }
+
+  }
+
+  // LABEL
+  //-----------------------------
+  &__label {
+    @include flex (flex-start, space-between);
+    @include size();
+
+    padding: 10px 0;
+    flex-direction: column;
+    margin-left: 10px;
+    font-size: rem(24px);
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  // ADDED BY USERNAME
+  //-----------------------------
+  &__addedby {
+    color: $grey-100;
+    font-size: rem(14px);
+    text-decoration: none;
+  }
+
+  // INPUT TEXT
+  //-----------------------------
+  &__input {
+    @include size($height: rem(30px));
+    border: none;
+    border-bottom: $border;
+    margin: 0;
+    margin-left: 0px;
+    padding: 0;
+    background: none;
+    font-family: $font-family-primary;
+    font-size: rem(24px);
+    font-weight: $font-weight-light;
+  }
+
+  // ADD ITEM BTN
+  //-----------------------------
+  &__add {
+    @include flex();
+    border: 0;
+    background: none;
+    color: $primary;
+    font-size: rem(48px);
+    margin-left: 20px;
+
+    &::after {
+      content: "+";
+    }
+
+  }
+
+  // REMOVE ITEM BTN
+  //-----------------------------
+  &__remove {
+    color: $grey-100;
+
+    @media screen and (min-width:1024px) {
+      &:hover {
+        color: rgba($color: $secondary, $alpha: 0.5);
+      }
+    }
+  }
+
+  // Checked status
+  // ---------------------
+
+  &__product {
+    transition: all 0.15s linear;
+  }
+
+  @keyframes strike{
+    0%   { width : 0; }
+    100% { width: 100%; }
+  }
+  &__done {
+    position: relative;
+    color: $grey-100;
+  }
+
+  &__done::after {
+    content: ' ';
+    position: absolute;
+    top: rem(12px);
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: $grey-100;
+    animation-name: strike;
+    animation-duration: 0.15s;
+    animation-timing-function: linear;
+    transform-origin: right;
+    animation-fill-mode: forwards;
+  }
+
+
+}

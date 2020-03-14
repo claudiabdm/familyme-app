@@ -1,33 +1,30 @@
-<!-- MAIN -->
-<main>
+<div class="container">
+  <ul class="list" id="shoppingList">
+    <li class="list__item" *ngFor="let product of productList">
+      <div class="list__checkbox checkbox checkbox--lg">
+        <input type="checkbox" [name]="product.name" [id]="product.id" class="checkbox__box" [checked]="product.done"
+          #checkboxCheck (click)="doneItem(product, checkboxCheck.checked)">
+        <span class="checkbox__checkmark"></span>
+      </div>
+      <label [for]="product.id" class="list__label">
+        <span class="list__product" [class.list__done]="product.done">{{ product.name }}</span>
+        <span class="list__addedby">Added by {{ product.addedBy }}</span>
+      </label>
+      <button type="button" class="btn btn--close list__remove" (click)="deleteItem(product)">
+        <svg class="icon icon--sm icon-close">
+          <use xlink:href="../../assets/icons/sprite.svg#close" />
+        </svg>
+      </button>
+    </li>
 
-  <div class="container">
-    <ul class="list" id="shoppingList">
-      <li class="list__item" *ngFor="let product of productList">
-        <div class="list__checkbox checkbox checkbox--lg">
-          <input type="checkbox" [name]="product.name" [id]="product.id" class="checkbox__box">
-          <span class="checkbox__checkmark"></span>
-        </div>
-        <label [for]="product.id" class="list__label">
-          <span class="list__product">{{ product.name }}</span>
-          <span class="list__addedby">Added by {{ product.addedBy }}</span>
-        </label>
-        <button type="button" class="btn btn--close list__remove" (click)="deleteItem(product)">
-          <svg class="icon icon--sm icon-close">
-            <use xlink:href="../../assets/icons/sprite.svg#close"/>
-          </svg>
-        </button>
-      </li>
+    <li class="list__item" *ngIf="addItemElemVisible">
+      <input class="list__label list__input" type="text" #newProduct>
+      <button class="list__add" (click)="addItem(newProduct.value)"></button>
+    </li>
 
-      <li class="list__item" *ngIf="addItemElemVisible">
-        <input class="list__input list__label" type="text" #newProduct>
-        <button class="list__add" (click)="addItem(newProduct.value)"></button>
-      </li>
+  </ul>
+</div>
 
-    </ul>
-  </div>
-
-  <button type="button" class="btn btn--float" id="addItemELemBtn" (click) ="addItemElem()" *ngIf="!addItemElemVisible">
-    <i class="btn btn--icon icon icon-plus icon--xs"></i>
-  </button>
-</main>
+<button type="button" class="btn btn--float" id="addItemELemBtn" (click)="addItemElem()" *ngIf="!addItemElemVisible">
+  <i class="btn btn--icon icon icon-plus icon--xs"></i>
+</button>

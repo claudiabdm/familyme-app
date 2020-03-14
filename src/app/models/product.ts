@@ -5,4 +5,5 @@ export class Product {
   createdAt: Date;
   name: string;
   addedBy: User["name"];
+  done: boolean;
 }
