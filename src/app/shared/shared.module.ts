@@ -11,10 +11,11 @@ import { SettingsComponent } from './component/settings/settings.component';
 import { HeaderComponent } from './component/header/header.component';
 import { UserListComponent } from './component/user-list/user-list.component';
 import { ScrollBottomDirective } from './directive/scroll-bottom.directive';
+import { ProfileImgComponent } from './component/profile-img/profile-img.component';
 
 
 @NgModule({
-  declarations: [ModalComponent, NavbarComponent, SignupFormComponent, LoginFormComponent, SettingsComponent, HeaderComponent, UserListComponent, ScrollBottomDirective,],
+  declarations: [ModalComponent, NavbarComponent, SignupFormComponent, LoginFormComponent, SettingsComponent, HeaderComponent, UserListComponent, ScrollBottomDirective, ProfileImgComponent,],
   imports: [
     CommonModule,
     RouterModule,
@@ -28,7 +29,8 @@ import { ScrollBottomDirective } from './directive/scroll-bottom.directive';
     LoginFormComponent,
     SettingsComponent,
     HeaderComponent,
-    UserListComponent
+    UserListComponent,
+    ProfileImgComponent
   ]
 })
 export class SharedModule { }

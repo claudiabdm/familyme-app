@@ -1,10 +1,10 @@
 <!-- USER AND FAMILY INFO -->
 <div class="container container--top">
-  <button type="button" class="btn btn--icon icon icon-settings" id="settingsBtn" aria-label="Settings" aria-labelledby="settingsModal" (click)="openSettingsModal()"></button>
+  <button type="button" class="btn btn--icon icon icon-settings" id="settingsBtn" aria-label="Settings" aria-labelledby="settingsModal" (click)="toggleModal(settingsModal)"></button>
 
     <!-- MAIN USER -->
     <article class="user user--col">
-      <button type="button" class="btn user__btn" id="imgBtn">
+      <button type="button" class="btn user__btn" id="imgBtn" (click)="toggleModal(editPhotoModal)">
         <img class="user__img user__img--large" [src]="user.avatar"
           alt="Claudia Benito profile photo">
       </button>
@@ -32,10 +32,15 @@
 <!-- //USER AND FAMILY INFO -->
 
 
-<!-- MODAL -->
-<app-modal [title]="targetModal.title" [modalId]="targetModal.id" (close)="close($event)" [modalVisible]="modalVisible">
-
-  <app-settings></app-settings>
-
+<!-- MODAL SETTINGS -->
+<app-modal [title]="'Settings'" [modalId]="'settingsModal'" (close)="toggleModal(settingsModal)" [modalVisible]="false" #settingsModal>
+  <app-settings *ngIf="settingsModal.modalVisible"></app-settings>
 </app-modal>
-<!-- // MODAL -->
+<!-- // MODAL SETTINGS -->
+
+<!-- MODAL EDIT PHOTOS -->
+<app-modal [title]="'Edit profile photo'" [modalId]="'editPhotoModal'" (close)="toggleModal(editPhotoModal)" [modalVisible]="false" [isFull]="false" #editPhotoModal>
+  <app-profile-img *ngIf="editPhotoModal.modalVisible"></app-profile-img>
+</app-modal>
+<!-- // MODAL EDIT PHOTOS -->
+

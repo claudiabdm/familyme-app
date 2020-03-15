@@ -1,6 +1,5 @@
 <div #modal class="modal" [id]="modalId">
-  <div class="modal__container modal__container--full">
-
+  <div class="modal__container" [class.modal__container--full]="isFull">
     <header class="header modal__header">
       <div class="header__container">
         <h1 class="header__title">{{title}}</h1>

@@ -17,8 +17,8 @@
 
   <!-- ACTIONS -->
   <div class="container container--btn">
-    <button type="button" class="btn btn--primary" id="createBtn" (click)="openCreateModal()">Create</button>
-    <button type="button" class="btn btn--primary" id="joinBtn" (click)="openJoinModal()">Join</button>
+    <button type="button" class="btn btn--primary" id="createBtn" (click)="selectedModalInfo(targetModal, 'createModal')">Create</button>
+    <button type="button" class="btn btn--primary" id="joinBtn" (click)="selectedModalInfo(targetModal, 'joinModal')">Join</button>
   </div>
   <!-- //ACTIONS -->
 
@@ -26,9 +26,9 @@
 
 
 <!-- MODAL -->
-<app-modal [title]="targetModal.title" [modalId]="targetModal.id" (close)="close($event)" [modalVisible]="modalVisible">
+<app-modal [title]="targetModalInfo.title" [modalId]="targetModalInfo.id" (close)="toggleModal(targetModal)" [modalVisible]="false" [isFull]="true" #targetModal>
 
-  <app-signup-form [singUpType]="targetModal"></app-signup-form>
+  <app-signup-form [singUpType]="targetModalInfo" *ngIf="targetModal.modalVisible"></app-signup-form>
 
 </app-modal>
 <!-- // MODAL -->

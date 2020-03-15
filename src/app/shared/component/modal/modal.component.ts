@@ -7,7 +7,9 @@ import { Component, OnInit, Input, ElementRef, Output, EventEmitter } from '@ang
 })
 export class ModalComponent implements OnInit {
 
-  @Input() public modalVisible: boolean;
+  @Input() public modalVisible: boolean = false;
+
+  @Input() public isFull: boolean = true;
 
   @Input() public title: string;
 
@@ -19,14 +21,6 @@ export class ModalComponent implements OnInit {
 
   ngOnInit(): void {
 
-  }
-
-  ngOnChanges(): void {
-    if (this.modalVisible) {
-      this.modal.nativeElement.children[0].classList.add('modal--show');
-    } else {
-      this.modal.nativeElement.children[0].classList.remove('modal--show');
-    }
   }
 
   onClose() {
