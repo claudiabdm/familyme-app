@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { ModalService } from 'src/app/services/modal.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-profile-img',
@@ -9,23 +10,25 @@ import { ModalService } from 'src/app/services/modal.service';
 })
 export class ProfileImgComponent implements OnInit {
 
-  @Input() user: User;
+
   @Input() imageUrl: string | ArrayBuffer;
 
   @Output() save = new EventEmitter();
   @Output() delete = new EventEmitter();
 
-  isDisabled: boolean = true;
+  public user: User;
+  public isDisabled: boolean = true;
+
   fileName: string = "No file selected";
   file: File;
 
-  constructor(private modalService: ModalService) { }
+  constructor(private authService: AuthService, private modalService: ModalService) { }
 
   ngOnInit(): void {
+    this.user = this.authService.user;
   }
 
-
-  toggleModal(targetModal) {
+  toggleModal(targetModal): void {
     if (!targetModal.modalVisible) {
       this.modalService.openModal(targetModal);
     } else {
@@ -33,7 +36,7 @@ export class ProfileImgComponent implements OnInit {
     }
   }
 
-  onChangePhoto(file) {
+  onChangePhoto(file: File): void {
     this.fileName = file.name;
     this.file = file;
 
@@ -46,7 +49,7 @@ export class ProfileImgComponent implements OnInit {
     };
   }
 
-  onSave(file) {
+  onSave(file: string | ArrayBuffer) {
     this.user.avatar = file;
     this.save.emit(this.user.avatar);
   }

@@ -25,12 +25,12 @@ export class ShoppingListService {
     private groupsService: GroupsService,
   ) { }
 
-  updateProductList(productList: Product[]): Observable<void> {
+  updateProductList(productList: Product[]): Observable<Group> {
     this.authService.userGroup.shoppingList = productList;
     return this.groupsService.updateGroup(this.authService.userGroup).pipe(map(group => {
       this.authService.userGroup = group;
       this.authService.updateLocalStorage('userGroup', group);
-      this.groupsService.deleteGroup(group.apiId - 1).subscribe(); // dejar aquí de momento
+      return group;
     }));
   }
 

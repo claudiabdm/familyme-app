@@ -5,6 +5,8 @@ import { Subscription, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Product } from 'src/app/models/product';
 import { TemplateBinding } from '@angular/compiler';
+import { Group } from 'src/app/models/group';
+import { GroupsService } from 'src/app/services/groups.service';
 
 @Component({
   selector: 'app-list',
@@ -15,15 +17,16 @@ export class ListComponent implements OnInit {
 
   private ngUnsubscribe$ = new Subject<void>();
 
-  productList : Product[];
-  addItemElemVisible: boolean = false;
+  public productList: Product[];
+  public addItemElemVisible: boolean = false;
 
   constructor(
     private authService: AuthService,
+    private groupsService: GroupsService,
     private shoppingListService: ShoppingListService) { }
 
   ngOnInit(): void {
-    this.shoppingListService.refreshProductList().pipe(takeUntil(this.ngUnsubscribe$)).subscribe( shoppingList => {
+    this.shoppingListService.refreshProductList().pipe(takeUntil(this.ngUnsubscribe$)).subscribe(shoppingList => {
       this.productList = shoppingList;
       this.authService.userGroup.shoppingList = shoppingList;
       this.authService.updateLocalStorage('userGroup', this.authService.userGroup);
@@ -48,7 +51,7 @@ export class ListComponent implements OnInit {
       };
       this.productList.push(newProduct);
       this.scrollToBottom(document.getElementById('shoppingList'));
-      this.shoppingListService.updateProductList(this.productList).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
+      this.updateList();
     }
     this.addItemElemVisible = false;
   }
@@ -57,18 +60,22 @@ export class ListComponent implements OnInit {
     const idx = this.productList.findIndex((data) => data.id === product.id);
     product.done = check;
     this.productList.splice(idx, 1, product);
-    this.shoppingListService.updateProductList(this.productList).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
+    this.updateList();
   }
 
   deleteItem(product: Product): void {
     this.productList = this.productList.filter((data) => data.id !== product.id);
-    this.shoppingListService.updateProductList(this.productList).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
+    this.updateList();
   }
 
-  scrollToBottom(container){
+  private updateList(): void {
+    this.shoppingListService.updateProductList(this.productList).pipe(takeUntil(this.ngUnsubscribe$)).subscribe(group =>{
+      this.groupsService.deleteGroup(group.apiId - 1).pipe(takeUntil(this.ngUnsubscribe$)).subscribe()}); // dejar aquí de momento);
+  }
+
+  private scrollToBottom(container) {
     container.scrollTop = container.scrollHeight;
   }
-
 
   ngOnDestroy(): void {
     this.ngUnsubscribe$.next()

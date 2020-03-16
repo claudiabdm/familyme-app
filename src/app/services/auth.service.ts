@@ -55,8 +55,8 @@ export class AuthService {
             .subscribe(group => {
               if (group) {
                 this.invalidGroup = false;
-                this.user = user;
                 this.userGroup = group;
+                this.user = this.userGroup.members.find(data => data.id === user.id);
                 this.setLocalStorage();
                 this.router.navigate(['pages/home']);
               } else {
@@ -84,8 +84,8 @@ export class AuthService {
               this.usersService.createUser(currUser as User, group.token, 'admin').subscribe(user => {
                 this.groupsService.addUserToGroup(user, group).subscribe(group => {
                   this.invalidGroup = false;
-                  this.user = user;
                   this.userGroup = group;
+                  this.user = this.userGroup.members.find(data => data.id === user.id);
                   this.setLocalStorage();
                   this.router.navigate(['pages/home']);
                 }
@@ -110,8 +110,8 @@ export class AuthService {
                 this.usersService.createUser(currUser as User, group.token, '').subscribe(user => {
                   this.groupsService.addUserToGroup(user, group).subscribe(group => {
                     this.invalidGroup = false;
-                    this.user = user;
                     this.userGroup = group;
+                    this.user = this.userGroup.members.find(data => data.id === user.id);;
                     this.setLocalStorage();
                     this.router.navigate(['pages/home']);
                   })

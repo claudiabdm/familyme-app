@@ -39,7 +39,7 @@
 
 <!-- MODAL EDIT PHOTOS -->
 <app-modal [title]="'Edit profile photo'" [modalId]="'editPhotoModal'" (close)="toggleModal(editPhotoModal)" [modalVisible]="false" [isFull]="false" #editPhotoModal>
-  <app-profile-img *ngIf="editPhotoModal.modalVisible" [(user)]="user" [(imageUrl)]="user.avatar" (save)="uploadPhoto($event, editPhotoModal)" (delete)="uploadPhoto($event, editPhotoModal)"></app-profile-img>
+  <app-profile-img *ngIf="editPhotoModal.modalVisible" [imageUrl]="user.avatar" (save)="uploadPhoto($event, editPhotoModal)" (delete)="uploadPhoto($event, editPhotoModal)"></app-profile-img>
 </app-modal>
 <!-- // MODAL EDIT PHOTOS -->
 

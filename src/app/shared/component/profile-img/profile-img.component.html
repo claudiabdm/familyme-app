@@ -1,19 +1,21 @@
-<!-- PREVIEW -->
-<article class="user user--col">
-  <img class="user__img user__img--large" [src]="imageUrl" alt="{{user.name}} profile photo">
-</article>
-<!-- //PREVIEW -->
+<div class="edit-photo">
+  <!-- PREVIEW -->
+  <article class="user user--col">
+    <img class="user__img user__img--large" [src]="imageUrl" alt="{{user.name}} profile photo">
+  </article>
+  <!-- //PREVIEW -->
 
-<!-- BUTTONS -->
-<div class="container container--btn">
-  <label class="btn btn--m btn--primary">
-    Change photo
-    <input type="file" id="changePhoto" hidden accept="image/*" (change)=onChangePhoto(imgInput.files[0]) #imgInput>
-  </label>
+  <!-- BUTTONS -->
+  <div class="container container--btn">
+    <label class="btn btn--m btn--primary">
+      Change photo
+      <input type="file" id="changePhoto" hidden accept="image/*" (change)=onChangePhoto(imgInput.files[0]) #imgInput>
+    </label>
 
-  <button type="button" class="btn btn--m btn--success" (click)="onSave(imageUrl)" [disabled]="isDisabled">Save</button>
+    <button type="button" class="btn btn--m btn--success" (click)="onSave(imageUrl)" [disabled]="isDisabled">Save</button>
 
-  <button type="button" class="btn btn--m btn--secondary" (click)="onDelete()">Remove</button>
+    <button type="button" class="btn btn--m btn--secondary" (click)="onDelete()">Remove</button>
 
+  </div>
+  <!-- //BUTTONS -->
 </div>
-<!-- //BUTTONS -->

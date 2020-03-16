@@ -11,22 +11,12 @@ export class UserListComponent implements OnInit {
 
   @Input() onlyImage: boolean;
 
-  private _userList: User[];
-  private _user: User;
+  public userList: User[];
 
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this._userList = this.authService.userGroup.members;
-    this._user = this.authService.user;
-  }
-
-  getUser(): User {
-    return this._user;
-  }
-
-  get userList(): User[]{
-    return this._userList;
+    this.userList = this.authService.userGroup.members;
   }
 
 }
