@@ -104,22 +104,22 @@ export class AuthService {
         if (!user) {
           this.invalidUser = false;
           this.groupsService.searchGroupByToken(currUser.group).pipe(map(group => group[0]))
-          .subscribe(group => {
-            if (group) {
-              delete currUser.group;
-              this.usersService.createUser(currUser as User, group.token, '').subscribe(user => {
-                this.groupsService.addUserToGroup(user, group).subscribe(group => {
-                  this.invalidGroup = false;
-                  this.user = user;
-                  this.userGroup = group;
-                  this.setLocalStorage();
-                  this.router.navigate(['pages/home']);
+            .subscribe(group => {
+              if (group) {
+                delete currUser.group;
+                this.usersService.createUser(currUser as User, group.token, '').subscribe(user => {
+                  this.groupsService.addUserToGroup(user, group).subscribe(group => {
+                    this.invalidGroup = false;
+                    this.user = user;
+                    this.userGroup = group;
+                    this.setLocalStorage();
+                    this.router.navigate(['pages/home']);
+                  })
                 })
-              })
-            } else {
-              this.invalidGroup = true;
-            }
-          })
+              } else {
+                this.invalidGroup = true;
+              }
+            })
         } else {
           this.invalidUser = true;
         }

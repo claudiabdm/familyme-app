@@ -9,6 +9,7 @@ import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { User } from '../models/user';
 import { GroupsService } from './groups.service';
 import { Group } from '../models/group';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,17 +25,17 @@ export class ShoppingListService {
     private groupsService: GroupsService,
   ) { }
 
-  getProductList() {
-    return this.authService.userGroup.shoppingList;
-  }
-
-  updateProductList(productList: Product[]): void {
+  updateProductList(productList: Product[]): Observable<void> {
     this.authService.userGroup.shoppingList = productList;
-    this.groupsService.updateGroup(this.authService.userGroup).subscribe(group => {
+    return this.groupsService.updateGroup(this.authService.userGroup).pipe(map(group => {
       this.authService.userGroup = group;
       this.authService.updateLocalStorage('userGroup', group);
-      this.groupsService.deleteGroup(group.apiId - 1).subscribe();
-    })
+      this.groupsService.deleteGroup(group.apiId - 1).subscribe(); // dejar aquí de momento
+    }));
+  }
+
+  refreshProductList(): Observable<Product[]> {
+    return this.groupsService.searchGroupByToken(this.authService.userGroup.token).pipe(map(group => group[0].shoppingList));
   }
 }
 

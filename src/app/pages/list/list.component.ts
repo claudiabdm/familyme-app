@@ -13,6 +13,8 @@ import { TemplateBinding } from '@angular/compiler';
 })
 export class ListComponent implements OnInit {
 
+  private ngUnsubscribe$ = new Subject<void>();
+
   productList : Product[];
   addItemElemVisible: boolean = false;
 
@@ -21,10 +23,13 @@ export class ListComponent implements OnInit {
     private shoppingListService: ShoppingListService) { }
 
   ngOnInit(): void {
-    this.productList = this.shoppingListService.getProductList();
+    this.shoppingListService.refreshProductList().pipe(takeUntil(this.ngUnsubscribe$)).subscribe( shoppingList => {
+      this.productList = shoppingList;
+      this.authService.userGroup.shoppingList = shoppingList;
+      this.authService.updateLocalStorage('userGroup', this.authService.userGroup);
+    }
+    );
   }
-
-
 
   addItemElem(): void {
     this.addItemElemVisible = true;
@@ -43,25 +48,30 @@ export class ListComponent implements OnInit {
       };
       this.productList.push(newProduct);
       this.scrollToBottom(document.getElementById('shoppingList'));
-      this.shoppingListService.updateProductList(this.productList);
+      this.shoppingListService.updateProductList(this.productList).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
     }
     this.addItemElemVisible = false;
   }
 
-  doneItem(product: Product, check: Product["done"]): void {
+  doneItem(product: Product, check: boolean): void {
     const idx = this.productList.findIndex((data) => data.id === product.id);
     product.done = check;
     this.productList.splice(idx, 1, product);
-    this.shoppingListService.updateProductList(this.productList);
+    this.shoppingListService.updateProductList(this.productList).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
   }
 
   deleteItem(product: Product): void {
     this.productList = this.productList.filter((data) => data.id !== product.id);
-    this.shoppingListService.updateProductList(this.productList);
+    this.shoppingListService.updateProductList(this.productList).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
   }
 
   scrollToBottom(container){
     container.scrollTop = container.scrollHeight;
   }
 
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe$.next()
+    this.ngUnsubscribe$.complete();
+  }
 }
