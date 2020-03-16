@@ -25,6 +25,10 @@ export class UsersService {
     return this.http.get<User[]>(`${this.url}/${group.id}`);
   }
 
+  updateUser(user: User): Observable<User> {
+    return this.http.post<User>(this.url, user);
+  }
+
   // getUserById(id: number): Observable<User> {
   //   const url = `${this.url}/${id}`;
   //   return this.http.get<User>(url);

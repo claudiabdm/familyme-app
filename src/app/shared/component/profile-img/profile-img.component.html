@@ -1,25 +1,19 @@
+<!-- PREVIEW -->
+<article class="user user--col">
+  <img class="user__img user__img--large" [src]="imageUrl" alt="{{user.name}} profile photo">
+</article>
+<!-- //PREVIEW -->
 
-<div class="video">
-  <video id="video" class="video__camera" autoplay></video>
-  <canvas id="canvas" class="video__canvas" height="320px" width="426px"></canvas>
-  <button type="button" class="btn btn--m btn--primary video__btn" id="snap">Take
-    photo</button>
-</div>
-<!-- //Video -->
-
-<!-- NEW MEMBERS BUTTON -->
+<!-- BUTTONS -->
 <div class="container container--btn">
-  <!-- <label for="takePhoto" class="btn btn--m btn--primary">
-            Take photo
-            <input type="file" name="video" accept="video/*" capture="capture">
-          </label> -->
-
-  <label for="changePhoto" class="btn btn--m btn--primary">
+  <label class="btn btn--m btn--primary">
     Change photo
-    <input type="file" id="changePhoto" hidden>
+    <input type="file" id="changePhoto" hidden accept="image/*" (change)=onChangePhoto(imgInput.files[0]) #imgInput>
   </label>
 
-  <button type="button" class="btn btn--m btn--secondary" id="newMemberBtn">Remove</button>
-</div>
-<!-- //NEW MEMBERS BUTTON -->
+  <button type="button" class="btn btn--m btn--success" (click)="onSave(imageUrl)" [disabled]="isDisabled">Save</button>
 
+  <button type="button" class="btn btn--m btn--secondary" (click)="onDelete()">Remove</button>
+
+</div>
+<!-- //BUTTONS -->

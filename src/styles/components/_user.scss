@@ -31,33 +31,73 @@
   // -----------------------------
   &__btn {
     @include size(max-content);
+    position: relative;
     display: block;
     margin: 0;
     padding: 0;
     background: none;
+    border: none;
+
+    &:hover::before {
+      content: "Edit profile photo";
+      @include absolute(0, 0, 0, 0);
+      @include flex(center, center);
+      @include size(10rem);
+      border-radius: 50%;
+      color: #fff;
+      background-color: rgba(#000, 50%);
+      font-size: $font-size-base;
+      font-weight: $font-weight-light;
+      line-height: 0;
+      z-index: 100;
+    }
   }
 
   // USER IMG
   // -----------------------------
-  &__img {
-    @include size(2.5rem, 2.5rem);
-    margin-right: 10px;
-    border-radius: 50%;
 
-    &--large {
-      @include size(8rem);
-      margin: 0;
-    }
+  &__img-holder {
+    @include size(2.5rem, 2.5rem);
+    position: relative;
+    overflow: hidden;
   }
 
+  &__img-test {
+    @include size(2.5rem, 2.5rem);
+    display: block;
+    @include absolute(0, 0, 0, 0);
+  }
+
+  &__img {
+    @include size(2.5rem, 2.5rem);
+    display: block;
+    margin-right: 10px;
+    border-radius: 50%;
+    object-position: center;
+    object-fit: cover;
+
+    // when there is no photo
+    background-image: url('../assets/img/profile-photo-round.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    &--large {
+      @include size(10rem, 10rem);
+      display: block;
+      margin: 0;
+    }
+
+  }
 }
+
 
 // --- Layout in column --- //
 
 .user--col {
   @include flex(space-between, center);
   flex-direction: column;
-  padding-bottom: 20px;
+  padding: 20px;
   border-bottom: $border;
 }
 

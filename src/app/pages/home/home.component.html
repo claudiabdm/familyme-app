@@ -4,9 +4,8 @@
 
     <!-- MAIN USER -->
     <article class="user user--col">
-      <button type="button" class="btn user__btn" id="imgBtn" (click)="toggleModal(editPhotoModal)">
-        <img class="user__img user__img--large" [src]="user.avatar"
-          alt="Claudia Benito profile photo">
+      <button type="button" class="user__btn" id="imgBtn" (click)="toggleModal(editPhotoModal)">
+        <img class="user__img user__img--large" [src]="user.avatar" alt="{{ user.name }} profile photo">
       </button>
       <h2 class="user__name user__name--large">{{ user.name }}</h2>
       <span class="user__role" *ngIf="user.role === 'admin'">admin</span>
@@ -40,7 +39,7 @@
 
 <!-- MODAL EDIT PHOTOS -->
 <app-modal [title]="'Edit profile photo'" [modalId]="'editPhotoModal'" (close)="toggleModal(editPhotoModal)" [modalVisible]="false" [isFull]="false" #editPhotoModal>
-  <app-profile-img *ngIf="editPhotoModal.modalVisible"></app-profile-img>
+  <app-profile-img *ngIf="editPhotoModal.modalVisible" [(user)]="user" [(imageUrl)]="user.avatar" (save)="uploadPhoto($event, editPhotoModal)" (delete)="uploadPhoto($event, editPhotoModal)"></app-profile-img>
 </app-modal>
 <!-- // MODAL EDIT PHOTOS -->
 

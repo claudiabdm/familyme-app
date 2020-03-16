@@ -44,6 +44,10 @@
   --button-hover: #{darken($secondary, 5%)};
 }
 
+.btn--success {
+  --button-bgcolor: #{$success};
+  --button-hover: #{darken($success, 5%)};
+}
 //--- Sizes ---//
 
 .btn--m {
