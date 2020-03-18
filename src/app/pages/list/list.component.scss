@@ -4,21 +4,39 @@
 // LIST                         //
 // ---------------------------- //
 
-.list {
-  @include absolute(0, 0, 0, 0);
-  min-width: 20rem;
+.container--list {
   background-color: $tertiary;
-  padding-bottom: rem(60px);
+}
+.list {
+  min-width: 20rem;
+  margin-bottom: rem(120px);
   overflow: auto;
+
+  // HEADER
+  //-----------------------------
+  &__header {
+    @include flex(center, flex-end);
+    padding: 15px ($padding-sides - 10px) 0;
+    // border-bottom: 1px solid rgba($color: $secondary, $alpha: 0.5);
+    // background-color: rgba($color: $secondary, $alpha: 0.5);
+    color: #fff;
+    font-size: rem(28px);
+    // box-shadow: $box-shadow-sharpen;
+  }
 
   // ITEM
   //-----------------------------
   &__item {
     @include flex(center, flex-start);
-    @include size($height:rem(60px));
+    @include size(auto, rem(60px));
+    transition: background-color 0.2s linear;
 
-    padding: 0 $padding-sides;
-    border-bottom: 1px solid rgba($color: $secondary, $alpha: 0.5);
+    margin: 10px;
+    padding: 0 ($padding-sides - 20px);
+    background-color: #fff;
+    border: 1px solid rgba($color: $secondary, $alpha: 0.75);
+    border-radius: 3px;
+    box-shadow: $box-shadow-sharpen;
 
     &:first-child {
       border-top: 1px solid rgba($color: $secondary, $alpha: 0.5);
@@ -30,12 +48,7 @@
 
     &:hover {
       cursor: pointer;
-    }
-
-    @media screen and (min-width:1024px) {
-      &:hover {
-        background-color: darken($tertiary, 2.5%);
-      }
+      background-color: darken($tertiary, 2.5%);
     }
 
   }
@@ -79,32 +92,26 @@
     font-weight: $font-weight-light;
   }
 
-  // ADD ITEM BTN
+  // LIST ITEM BTN
   //-----------------------------
-  &__add {
-    @include flex();
-    border: 0;
-    background: none;
-    color: $primary;
-    font-size: rem(48px);
-    margin-left: 20px;
-
-    &::after {
-      content: "+";
-    }
-
-  }
-
-  // REMOVE ITEM BTN
-  //-----------------------------
-  &__remove {
+  &__btn {
     color: $grey-100;
+    transition: color 0.1s linear;
+    margin: 0 10px;
 
-    @media screen and (min-width:1024px) {
-      &:hover {
-        color: rgba($color: $secondary, $alpha: 0.5);
-      }
+    &--sort {
+      color: #fff;
     }
+
+    &--add {
+      color: $primary;
+      transform: rotate(45deg);
+    }
+
+    &:hover {
+      color: $secondary
+    }
+
   }
 
   // Checked status
@@ -114,10 +121,16 @@
     transition: all 0.15s linear;
   }
 
-  @keyframes strike{
-    0%   { width : 0; }
-    100% { width: 100%; }
+  @keyframes strike {
+    0% {
+      width: 0;
+    }
+
+    100% {
+      width: 100%;
+    }
   }
+
   &__done {
     position: relative;
     color: $grey-100;
@@ -139,4 +152,9 @@
   }
 
 
+}
+
+.icon--sort-down {
+  transform-origin: center;
+  transform: scale(1, -1);
 }

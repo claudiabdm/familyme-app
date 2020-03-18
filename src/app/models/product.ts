@@ -6,4 +6,5 @@ export class Product {
   name: string;
   addedBy: User["name"];
   done: boolean;
+  deleted: boolean;
 }

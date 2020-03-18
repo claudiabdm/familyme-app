@@ -2,9 +2,6 @@
 // VARIABLES
 // ------------------------------------------
 
-
-
-
 // Color palette
 // -----------------------------------------
 
@@ -31,13 +28,15 @@ $body-bg:      #fff;
 
 $link-color:          $secondary;
 $link-decoration:     none;
-$link-hover:          none; 
+$link-hover:          none;
 
 $padding-sides: 30px;
 
 $border: 1px solid $grey-100;
 
 $box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.075);
+
+$box-shadow-sharpen: 0 3px 1px 1px rgba(0, 0, 0, 0.05);
 
 // Font
 // ------------------------------------------

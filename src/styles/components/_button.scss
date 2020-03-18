@@ -35,6 +35,11 @@
     background-color: var(--button-hover);
   }
 
+  &:focus {
+    outline:none;
+    box-shadow: $box-shadow-sharpen;
+  }
+
 }
 
 //--- Colors ---//
@@ -48,6 +53,7 @@
   --button-bgcolor: #{$success};
   --button-hover: #{darken($success, 5%)};
 }
+
 //--- Sizes ---//
 
 .btn--m {
@@ -94,7 +100,7 @@
   transition: color 0.2s ease-out;
 
   &:hover {
-    color:  #{darken($grey-100, 30%)};
+    color: #{darken($grey-100, 30%)};
     --button-hover: rgba(0, 0, 0, 0);
   }
 }
@@ -116,6 +122,6 @@
   --button-hover: #fff;
   font-size: $font-size-base;
   font-weight: $font-weight-light;
-  box-shadow: $box-shadow;
+  box-shadow: $box-shadow-sharpen;
   z-index: 1000;
 }
