@@ -6,6 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { User } from '../models/user';
 import { environment } from 'src/environments/environment';
 import { Group } from '../models/group';
+import { DataService } from './data.service';
 
 
 @Injectable({
@@ -15,28 +16,25 @@ export class UsersService {
 
   private url = `${environment.apiUrl}users`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private dataService: DataService) { }
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.url);
-  }
-
-  getUsersByGroupId(group): Observable<User[]> {
-    return this.http.get<User[]>(`${this.url}/${group.id}`);
+  createUser(user: User, group: Group, role: string): Observable<User> {
+    const newUser = Object.assign(user, { role: role, groupToken: group.token, groupId: group.id });
+    return this.http.post<User>(this.url, newUser);
   }
 
   updateUser(user: User): Observable<User> {
-    return this.http.post<User>(this.url, user);
+    return this.http.put<User>(`${this.url}/${user.id}`, user).pipe(map(user => {
+      this.dataService.updateUserData(user);
+      return user;
+    }))
   }
 
-  // getUserById(id: number): Observable<User> {
-  //   const url = `${this.url}/${id}`;
-  //   return this.http.get<User>(url);
-  // }
-
-  createUser(user: User, group: string, role: string): Observable<User> {
-    const newUser = Object.assign(user, { role: role, groupToken: group });
-    return this.http.post<User>(this.url, newUser);
+  getUsersByGroupToken(groupToken: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.url}?search=${groupToken}`).pipe(map(users => {
+      this.dataService.updateUserList(users);
+      return users;
+    }))
   }
 
   searchUserByEmail(user: User): Observable<User> {

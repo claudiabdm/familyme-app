@@ -8,15 +8,14 @@ import { User } from '../models/user';
 import { GroupsService } from './groups.service';
 import { Group } from '../models/group';
 import { FormGroup } from '@angular/forms';
-import { map } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
+import { DataService } from './data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  public user: User;
-  public userGroup: Group;
   public invalidUser: boolean = false;
   public invalidGroup: boolean = false;
   public invalidPassword: boolean = false;
@@ -25,23 +24,8 @@ export class AuthService {
     @Inject(LOCAL_STORAGE) private storage: StorageService,
     private usersService: UsersService,
     private groupsService: GroupsService,
+    private dataService: DataService,
     public router: Router) { }
-
-  public setLocalStorage(): void {
-    if (!this.storage.get('user')) {
-      this.storage.set('user', this.user);
-      this.storage.set('userGroup', this.userGroup);
-    } else {
-      this.user = this.storage.get('user');
-      this.storage.set('user', this.user);
-      this.userGroup = this.storage.get('userGroup');
-      this.storage.set('userGroup', this.userGroup);
-    }
-  }
-
-  public updateLocalStorage(item, value) {
-    this.storage.set(item, value);
-  }
 
   logIn(currUser: FormGroup["value"]): void {
     this.storage.clear();
@@ -51,14 +35,14 @@ export class AuthService {
           this.invalidUser = false;
           if (currUser.password === user.password) {
             this.invalidPassword = false;
-            this.groupsService.searchGroupByToken(user.groupToken).pipe(map(group => group[0]))
+            this.groupsService.searchGroupByToken(user.groupToken)
             .subscribe(group => {
               if (group) {
                 this.invalidGroup = false;
-                this.userGroup = group;
-                this.user = this.userGroup.members.find(data => data.id === user.id);
-                this.setLocalStorage();
-                this.router.navigate(['pages/home']);
+                this.usersService.getUsersByGroupToken(user.groupToken).subscribe(users => {
+                  this.dataService.setData(user, group, users);
+                  this.router.navigate(['pages/home']);
+                })
               } else {
                 this.invalidGroup = true;
               }
@@ -74,20 +58,21 @@ export class AuthService {
   }
 
   signUpCreate(currUser: FormGroup["value"]): void {
+    this.storage.clear();
     this.usersService.searchUserByEmail(currUser)
       .subscribe(user => {
         if (!user) {
           this.invalidUser = false;
           this.groupsService.createGroup(currUser.group)
-            .subscribe(group => {
+            .subscribe(newGroup => {
               delete currUser.group;
-              this.usersService.createUser(currUser as User, group.token, 'admin').subscribe(user => {
-                this.groupsService.addUserToGroup(user, group).subscribe(group => {
+              this.usersService.createUser(currUser as User, newGroup, 'admin').subscribe(user => {
+                this.groupsService.addUserToGroup(user, newGroup).subscribe(group => {
                   this.invalidGroup = false;
-                  this.userGroup = group;
-                  this.user = this.userGroup.members.find(data => data.id === user.id);
-                  this.setLocalStorage();
-                  this.router.navigate(['pages/home']);
+                  this.usersService.getUsersByGroupToken(user.groupToken).subscribe(users => {
+                    this.dataService.setData(user, group, users);
+                    this.router.navigate(['pages/home']);
+                  })
                 }
                 )
               })
@@ -99,6 +84,7 @@ export class AuthService {
   }
 
   signUpJoin(currUser: FormGroup["value"]): void {
+    this.storage.clear();
     this.usersService.searchUserByEmail(currUser)
       .subscribe(user => {
         if (!user) {
@@ -107,13 +93,13 @@ export class AuthService {
             .subscribe(group => {
               if (group) {
                 delete currUser.group;
-                this.usersService.createUser(currUser as User, group.token, '').subscribe(user => {
+                this.usersService.createUser(currUser as User, group, '').subscribe(user => {
                   this.groupsService.addUserToGroup(user, group).subscribe(group => {
                     this.invalidGroup = false;
-                    this.userGroup = group;
-                    this.user = this.userGroup.members.find(data => data.id === user.id);;
-                    this.setLocalStorage();
-                    this.router.navigate(['pages/home']);
+                    this.usersService.getUsersByGroupToken(user.groupToken).subscribe(users => {
+                      this.dataService.setData(user, group, users);
+                      this.router.navigate(['pages/home']);
+                    })
                   })
                 })
               } else {

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from 'src/app/models/user';
-import { AuthService } from 'src/app/services/auth.service';
+import { UsersService } from 'src/app/services/users.service';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-user-list',
@@ -11,12 +11,15 @@ export class UserListComponent implements OnInit {
 
   @Input() onlyImage: boolean;
 
-  public userList: User[];
-
-  constructor(private authService: AuthService) { }
+  constructor(private dataService: DataService, private usersService: UsersService) { }
 
   ngOnInit(): void {
-    this.userList = this.authService.userGroup.members;
+    this.usersService.getUsersByGroupToken(this.dataService.user.groupToken).subscribe();
   }
+
+  get userList() {
+    return this.dataService.userList;
+  }
+
 
 }

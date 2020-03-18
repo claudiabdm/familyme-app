@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { ModalService } from 'src/app/services/modal.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-profile-img',
@@ -12,20 +13,19 @@ export class ProfileImgComponent implements OnInit {
 
 
   @Input() imageUrl: string | ArrayBuffer;
-
+  @Input() user: User;
   @Output() save = new EventEmitter();
   @Output() delete = new EventEmitter();
 
-  public user: User;
   public isDisabled: boolean = true;
 
   fileName: string = "No file selected";
   file: File;
 
-  constructor(private authService: AuthService, private modalService: ModalService) { }
+  constructor(private dataService: DataService, private modalService: ModalService) { }
 
   ngOnInit(): void {
-    this.user = this.authService.user;
+
   }
 
   toggleModal(targetModal): void {

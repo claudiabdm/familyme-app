@@ -38,11 +38,12 @@
     background: none;
     border: none;
 
-    &:hover::before {
+    &::before {
       content: "Edit profile photo";
       @include absolute(0, 0, 0, 0);
       @include flex(center, center);
       @include size(10rem);
+      opacity: 0;
       border-radius: 50%;
       color: #fff;
       background-color: rgba(#000, 50%);
@@ -50,6 +51,11 @@
       font-weight: $font-weight-light;
       line-height: 0;
       z-index: 100;
+      transition: all 0.1s linear;
+    }
+
+    &:hover::before {
+      opacity: 1;
     }
   }
 
@@ -76,7 +82,7 @@
     object-position: center;
     object-fit: cover;
 
-    // when there is no photo
+    // when there is no photo or when user remove photo
     background-image: url('../assets/img/profile-photo-round.svg');
     background-size: cover;
     background-repeat: no-repeat;

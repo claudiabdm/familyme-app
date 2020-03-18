@@ -33,13 +33,13 @@
 
 <!-- MODAL SETTINGS -->
 <app-modal [title]="'Settings'" [modalId]="'settingsModal'" (close)="toggleModal(settingsModal)" [modalVisible]="false" #settingsModal>
-  <app-settings *ngIf="settingsModal.modalVisible"></app-settings>
+  <app-settings *ngIf="settingsModal.modalVisible" [user]="user"></app-settings>
 </app-modal>
 <!-- // MODAL SETTINGS -->
 
 <!-- MODAL EDIT PHOTOS -->
 <app-modal [title]="'Edit profile photo'" [modalId]="'editPhotoModal'" (close)="toggleModal(editPhotoModal)" [modalVisible]="false" [isFull]="false" #editPhotoModal>
-  <app-profile-img *ngIf="editPhotoModal.modalVisible" [imageUrl]="user.avatar" (save)="uploadPhoto($event, editPhotoModal)" (delete)="uploadPhoto($event, editPhotoModal)"></app-profile-img>
+  <app-profile-img *ngIf="editPhotoModal.modalVisible" [imageUrl]="user.avatar" [user]="user" (save)="uploadPhoto($event, editPhotoModal)" (delete)="uploadPhoto($event, editPhotoModal)"></app-profile-img>
 </app-modal>
 <!-- // MODAL EDIT PHOTOS -->
 

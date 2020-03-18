@@ -1,20 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UsersService } from './services/users.service';
 import { User } from './models/user';
+import { DataService } from './services/data.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'personal-project-routing';
+  constructor(private dataService: DataService) {
 
-  users: User[];
-
-  user: User;
-  constructor(private usersService: UsersService) {
-
+  }
+  ngOnInit(): void {
+    this.dataService.setLocalStorage();
   }
 }
 
