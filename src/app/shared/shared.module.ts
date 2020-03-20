@@ -14,6 +14,7 @@ import { UserListComponent } from './component/user-list/user-list.component';
 import { ScrollBottomDirective } from './directive/scroll-bottom.directive';
 import { ProfileImgComponent } from './component/profile-img/profile-img.component';
 import { MapComponent } from './component/map/map.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { MapComponent } from './component/map/map.component';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
   ],
   exports: [
     ModalComponent,

@@ -23,7 +23,7 @@ import { LocatorComponent } from './locator/locator.component';
     SharedModule,
     PagesRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     PagesComponent,

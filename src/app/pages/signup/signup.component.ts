@@ -23,12 +23,12 @@ export class SignupComponent implements OnInit {
   }
 
 
-  goBack(){
+  goBack(): void{
     this.router.navigate(['pages/login'])
   }
 
 
-  toggleModal(targetModal) {
+  toggleModal(targetModal):void {
     if (!targetModal.modalVisible) {
       this.modalService.openModal(targetModal);
     } else {
@@ -36,7 +36,7 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  selectedModalInfo(targetModal, targetModalName) {
+  selectedModalInfo(targetModal, targetModalName): void {
     if (targetModalName === 'createModal') {
       this.targetModalInfo = {
         title: 'Sign up - Create',

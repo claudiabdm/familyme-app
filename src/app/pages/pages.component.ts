@@ -1,9 +1,8 @@
-import { Component, OnInit, OnChanges, DoCheck, SimpleChange, Input } from '@angular/core';
-import { ActivatedRoute, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs';
 import { Button } from '../models/button';
 import { filter, takeUntil } from 'rxjs/operators';
-import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-pages',
