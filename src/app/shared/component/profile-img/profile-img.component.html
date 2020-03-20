@@ -1,7 +1,9 @@
 <div class="edit-photo">
   <!-- PREVIEW -->
   <article class="user user--col">
-    <img class="user__img user__img--large" [src]="imageUrl" alt="{{user.name}} profile photo">
+    <div class="user__img-wrapper user__img-wrapper--large">
+      <img class="user__img user__img--large" [src]="imageUrl" alt="{{user.name}} profile photo">
+    </div>
   </article>
   <!-- //PREVIEW -->
 

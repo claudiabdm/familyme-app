@@ -42,7 +42,7 @@
       content: "Edit profile photo";
       @include absolute(0, 0, 0, 0);
       @include flex(center, center);
-      @include size(10rem);
+      @include size(11rem);
       opacity: 0;
       border-radius: 50%;
       color: #fff;
@@ -62,25 +62,31 @@
   // USER IMG
   // -----------------------------
 
-  &__img-holder {
-    @include size(2.5rem, 2.5rem);
-    position: relative;
-    overflow: hidden;
-  }
+  &__img-wrapper {
+    @include flex(center, center);
 
-  &__img-test {
-    @include size(2.5rem, 2.5rem);
-    display: block;
-    @include absolute(0, 0, 0, 0);
+    margin-right: 10px;
+    border-radius: 100%;
+    border: 2px solid #fff;
+    background: #fff;
+    background: linear-gradient(0, $primary 0%, $secondary 100%);
+    padding: 1px;
+
+    &--large {
+      @include size(11rem, 11rem);
+      margin: 0;
+    }
   }
 
   &__img {
-    @include size(2.5rem, 2.5rem);
-    display: block;
-    margin-right: 10px;
-    border-radius: 50%;
+    @include size(rem(40px), rem(40px));
+    margin: 0;
+    border-radius: 100%;
+    border: 2px solid #fff;
+    border-radius: 100%;
     object-position: center;
     object-fit: cover;
+    z-index: 20;
 
     // when there is no photo or when user remove photo
     background-image: url('../assets/img/profile-photo-round.svg');
@@ -91,11 +97,13 @@
     &--large {
       @include size(10rem, 10rem);
       display: block;
-      margin: 0;
+      border-width: 5px;
     }
 
   }
+
 }
+
 
 
 // --- Layout in column --- //

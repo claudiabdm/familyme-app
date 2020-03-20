@@ -1,45 +1,50 @@
 <!-- USER AND FAMILY INFO -->
 <div class="container container--top">
-  <button type="button" class="btn btn--icon icon icon-settings" id="settingsBtn" aria-label="Settings" aria-labelledby="settingsModal" (click)="toggleModal(settingsModal)"></button>
+  <button type="button" class="btn btn--icon icon icon-settings" id="settingsBtn" aria-label="Settings"
+    aria-labelledby="settingsModal" (click)="toggleModal(settingsModal)"></button>
 
-    <!-- MAIN USER -->
-    <article class="user user--col">
-      <button type="button" class="user__btn" id="imgBtn" (click)="toggleModal(editPhotoModal)">
+  <!-- MAIN USER -->
+  <article class="user user--col">
+    <button type="button" class="user__btn" id="imgBtn" (click)="toggleModal(editPhotoModal)">
+      <div class="user__img-wrapper user__img-wrapper--large">
         <img class="user__img user__img--large" [src]="user.avatar" alt="{{ user.name }} profile photo">
-      </button>
-      <h2 class="user__name user__name--large">{{ user.name }}</h2>
-      <span class="user__role" *ngIf="user.role === 'admin'">admin</span>
-    </article>
-    <!-- //MAIN USER -->
+      </div>
+    </button>
+    <h2 class="user__name user__name--large">{{ user.name }}</h2>
+    <span class="user__role" *ngIf="user.role === 'admin'">admin</span>
+  </article>
+  <!-- //MAIN USER -->
 
-    <!-- MEMBERS -->
+  <!-- MEMBERS -->
 
-    <h1 class="container__title">Family {{ userGroup.name }}</h1>
+  <h1 class="container__title">Family {{ userGroup.name }}</h1>
 
-    <app-user-list [onlyImage]="false"></app-user-list>
+  <app-user-list [onlyImage]="false"></app-user-list>
 
-    <!-- NEW MEMBERS BUTTON -->
-    <div class="container container--btn">
-      <button type="button" class="btn btn--m btn--primary" id="newMemberBtn">New member</button>
-    </div>
-    <!-- //NEW MEMBERS BUTTON -->
+  <!-- NEW MEMBERS BUTTON -->
+  <div class="container container--btn">
+    <button type="button" class="btn btn--m btn--primary" id="newMemberBtn">New member</button>
+  </div>
+  <!-- //NEW MEMBERS BUTTON -->
 
 
-    <!-- //MEMBERS -->
+  <!-- //MEMBERS -->
 
 </div>
 <!-- //USER AND FAMILY INFO -->
 
 
 <!-- MODAL SETTINGS -->
-<app-modal [title]="'Settings'" [modalId]="'settingsModal'" (close)="toggleModal(settingsModal)" [modalVisible]="false" #settingsModal>
+<app-modal [title]="'Settings'" [modalId]="'settingsModal'" (close)="toggleModal(settingsModal)" [modalVisible]="false"
+  #settingsModal>
   <app-settings *ngIf="settingsModal.modalVisible" [user]="user"></app-settings>
 </app-modal>
 <!-- // MODAL SETTINGS -->
 
 <!-- MODAL EDIT PHOTOS -->
-<app-modal [title]="'Edit profile photo'" [modalId]="'editPhotoModal'" (close)="toggleModal(editPhotoModal)" [modalVisible]="false" [isFull]="false" #editPhotoModal>
-  <app-profile-img *ngIf="editPhotoModal.modalVisible" [imageUrl]="user.avatar" [user]="user" (save)="uploadPhoto($event, editPhotoModal)" (delete)="uploadPhoto($event, editPhotoModal)"></app-profile-img>
+<app-modal [title]="'Edit profile photo'" [modalId]="'editPhotoModal'" (close)="toggleModal(editPhotoModal)"
+  [modalVisible]="false" [isFull]="false" #editPhotoModal>
+  <app-profile-img *ngIf="editPhotoModal.modalVisible" [imageUrl]="user.avatar" [user]="user"
+    (save)="uploadPhoto($event, editPhotoModal)" (delete)="uploadPhoto($event, editPhotoModal)"></app-profile-img>
 </app-modal>
 <!-- // MODAL EDIT PHOTOS -->
-
