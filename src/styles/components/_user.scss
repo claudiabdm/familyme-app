@@ -72,6 +72,28 @@
     background: linear-gradient(0, $primary 0%, $secondary 100%);
     padding: 1px;
 
+    &--medium {
+      @include size(rem(70px), rem(70px));
+      position: relative;
+
+      &::after {
+        content: "";
+        @include size(rem(40px), rem(40px));
+        position: absolute;
+        bottom: -5px;
+        align-self: flex-end;
+        display: block;
+        border-radius: 3px;
+        border: 2px solid #fff;
+        background: #fff;
+        background: radial-gradient(45deg, $primary 0%, $secondary 100%);
+        transform: rotate(-45deg);
+        z-index: -1;
+        box-shadow: -20px 20px 20px -5px rgba(0, 0, 0, 0.5)
+      }
+
+    }
+
     &--large {
       @include size(11rem, 11rem);
       margin: 0;
@@ -93,6 +115,10 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+
+    &--medium {
+      @include size(rem(60px), rem(60px));
+    }
 
     &--large {
       @include size(10rem, 10rem);

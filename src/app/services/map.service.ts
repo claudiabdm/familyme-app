@@ -7,6 +7,7 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class MapService {
+
   mapbox = (mapboxgl as typeof mapboxgl);
   map: mapboxgl.Map;
   style = `mapbox://styles/mapbox/streets-v11`;
@@ -34,14 +35,13 @@ export class MapService {
 
   addMarker(user: User, map: mapboxgl.Map) {
       const overlay = document.createElement('div');
-      overlay.classList.add('overlay');
+      overlay.classList.add('marker');
       const overlayContainer = document.createElement('div');
-      overlayContainer.classList.add('overlay__container');
+      overlayContainer.classList.add('user__img-wrapper', 'user__img-wrapper--medium');
       const userPhoto = document.createElement('img');
-      userPhoto.classList.add('overlay__photo');
-
-      overlay.className = 'marker';
+      userPhoto.classList.add('user__img', 'user__img--medium');
       userPhoto.src = user.avatar.toString();
+
       overlayContainer.appendChild(userPhoto);
       overlay.appendChild(overlayContainer);
 

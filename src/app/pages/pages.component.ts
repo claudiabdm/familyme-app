@@ -1,13 +1,9 @@
 import { Component, OnInit, OnChanges, DoCheck, SimpleChange, Input } from '@angular/core';
 import { ActivatedRoute, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
-import { Route } from '@angular/compiler/src/core';
-import { UsersService } from '../services/users.service';
-import { AuthService } from '../services/auth.service';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Button } from '../models/button';
 import { filter, takeUntil } from 'rxjs/operators';
 import { DataService } from '../services/data.service';
-import { GroupsService } from '../services/groups.service';
 
 @Component({
   selector: 'app-pages',
@@ -21,9 +17,10 @@ export class PagesComponent implements OnInit {
   public button: Button;
   public switchVisible: boolean = false;
   private currentRoute: string;
+  private ngUnsubscribe$ = new Subject<void>();
 
 
-  constructor(public router: Router, private route: ActivatedRoute, private dataService: DataService) {
+  constructor(public router: Router) {
   }
 
   ngOnInit(): void {
@@ -31,7 +28,7 @@ export class PagesComponent implements OnInit {
     this.toggleHeaderNavbar(this.currentRoute);
     this.changeButton(this.currentRoute);
 
-    this.router.events.pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+    this.router.events.pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd), takeUntil(this.ngUnsubscribe$))
     .subscribe(res => {
       this.currentRoute = res.url;
       this.changeButton(this.currentRoute);
@@ -74,6 +71,11 @@ export class PagesComponent implements OnInit {
         break;
     }
 
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe$.next()
+    this.ngUnsubscribe$.complete();
   }
 
 }

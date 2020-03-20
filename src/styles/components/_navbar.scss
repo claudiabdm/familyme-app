@@ -5,7 +5,7 @@
 .navbar {
   @include fixed(auto, 0, 0, 0);
   @include size($height: $navbar-height);
-  
+
   margin: 0 auto;
   border-top: $border;
   font-size: 0;
@@ -15,6 +15,10 @@
   &__icons {
     @include flex(center, space-around);
     @include size(auto, 100%);
+  }
+
+  .navbar__icon {
+    @include size(rem(32px), rem(32px));
   }
 
   &__container {
@@ -37,6 +41,7 @@
 // --- User navbar top --- //
 .navbar--top {
   @include relative($top: 0);
+  @include size($height: $header-height);
   display: flex;
   border: 0;
 }
