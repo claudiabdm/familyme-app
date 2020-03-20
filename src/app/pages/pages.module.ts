@@ -12,17 +12,18 @@ import { LoginComponent } from './login/login.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ListComponent } from './list/list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { LocatorComponent } from './locator/locator.component';
 
 
 
 @NgModule({
-  declarations: [HomeComponent, CalendarComponent, LoginComponent, SignupComponent, PagesComponent, ListComponent, PageNotFoundComponent,],
+  declarations: [HomeComponent, CalendarComponent, LoginComponent, SignupComponent, PagesComponent, ListComponent, PageNotFoundComponent, LocatorComponent,],
   imports: [
     CommonModule,
     SharedModule,
     PagesRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports: [
     PagesComponent,

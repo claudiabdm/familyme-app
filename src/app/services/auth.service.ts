@@ -89,7 +89,7 @@ export class AuthService {
       .subscribe(user => {
         if (!user) {
           this.invalidUser = false;
-          this.groupsService.searchGroupByToken(currUser.group).pipe(map(group => group[0]))
+          this.groupsService.searchGroupByToken(currUser.group)
             .subscribe(group => {
               if (group) {
                 delete currUser.group;

@@ -1,0 +1,22 @@
+<!-- <google-map id="googleMap" class="container container--map" aria-label="google map" height="100%" width="100%"
+  [zoom]="zoom" [center]="center" [options]="options"
+  (mapClick)="click($event)">
+
+  <map-marker
+    #markerElem
+    *ngFor="let marker of markers"
+    [label]="marker.label"
+    [position]="marker.position"
+    [options]="marker.options"
+    (mapClick)="logger(markerElem)"
+  >
+  </map-marker>
+
+
+</google-map> -->
+
+<div id="map" class="container container--map"></div>
+
+<button type="button" class="btn btn--float" id="filterBtn">
+  <i class="icon icon-funnel icon--sm"></i>
+</button>

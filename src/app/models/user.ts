@@ -10,4 +10,5 @@ export class User {
   role: string;
   groupId: Group["id"];
   groupToken: Group["token"];
+  location: google.maps.LatLngLiteral;
 }

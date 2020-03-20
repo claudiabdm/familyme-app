@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { PagesComponent } from './pages.component';
 import { ListComponent } from './list/list.component';
+import { LocatorComponent } from './locator/locator.component';
 
 const pagesRoutes: Routes = [
   { path: '',
@@ -15,6 +16,7 @@ const pagesRoutes: Routes = [
       { path: 'signup', component: SignupComponent },
       { path: 'home', component: HomeComponent },
       { path: 'calendar', component: CalendarComponent },
+      { path: 'locator', component: LocatorComponent },
       { path: 'list', component: ListComponent }
     ]
   }

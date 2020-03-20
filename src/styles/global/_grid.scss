@@ -55,8 +55,3 @@
 .container--static {
   position: static;
 }
-
-// --- Map ---//
-.container--map {
-  @include absolute($header-height, 0, $navbar-height, 0);
-}

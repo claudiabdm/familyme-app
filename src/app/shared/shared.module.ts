@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
 import { ModalComponent } from './component/modal/modal.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { SignupFormComponent } from './component/forms/signup-form/signup-form.component';
@@ -12,15 +13,16 @@ import { HeaderComponent } from './component/header/header.component';
 import { UserListComponent } from './component/user-list/user-list.component';
 import { ScrollBottomDirective } from './directive/scroll-bottom.directive';
 import { ProfileImgComponent } from './component/profile-img/profile-img.component';
+import { MapComponent } from './component/map/map.component';
 
 
 @NgModule({
-  declarations: [ModalComponent, NavbarComponent, SignupFormComponent, LoginFormComponent, SettingsComponent, HeaderComponent, UserListComponent, ScrollBottomDirective, ProfileImgComponent,],
+  declarations: [ModalComponent, NavbarComponent, SignupFormComponent, LoginFormComponent, SettingsComponent, HeaderComponent, UserListComponent, ScrollBottomDirective, ProfileImgComponent, MapComponent,],
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports: [
     ModalComponent,
@@ -30,7 +32,8 @@ import { ProfileImgComponent } from './component/profile-img/profile-img.compone
     SettingsComponent,
     HeaderComponent,
     UserListComponent,
-    ProfileImgComponent
+    ProfileImgComponent,
+    MapComponent,
   ]
 })
 export class SharedModule { }
