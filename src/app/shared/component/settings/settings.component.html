@@ -2,13 +2,13 @@
   <h2 class="settings__title">User settings</h2>
   <ul class="settings__list">
     <li>
-      <a href="#" class="settings__txt">Change password<i class="icon icon-next icon--xs"></i></a>
+      <a class="settings__txt" (click)="selectedModalInfo(targetModal, 'passwordModal')">Change password<i class="icon icon-next icon--xs"></i></a>
     </li>
     <li>
-      <a href="#" class="settings__txt">Edit user name<i class="icon icon-next icon--xs"></i></a>
+      <a class="settings__txt" (click)="selectedModalInfo(targetModal, 'nameModal')">Edit user name<i class="icon icon-next icon--xs"></i></a>
     </li>
     <li>
-      <a href="#" class="settings__txt">Change email<i class="icon icon-next icon--xs"></i></a>
+      <a class="settings__txt"(click)="selectedModalInfo(targetModal, 'emailModal')">Change email<i class="icon icon-next icon--xs"></i></a>
     </li>
     <!-- SWITCHES -->
     <li>
@@ -47,3 +47,15 @@
     <li class="settings__txt settings__txt--warning">Delete family group</li>
   </ul>
 </article>
+
+
+<!-- MODAL CHANGE USER DATA -->
+
+<app-modal class [title]="targetModalInfo.title" [modalId]="targetModalInfo.id" (close)="toggleModal(targetModal)" [modalVisible]="false" [isFull]="false" #targetModal>
+
+
+
+</app-modal>
+
+<!-- // MODAL CHANGE USER DATA -->
+

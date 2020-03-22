@@ -15,13 +15,18 @@
   z-index: 1000;
   visibility: hidden;
 
+
+  @media screen and (min-width: $lg) {
+    justify-content: flex-end;
+  }
+
   // MODAL CONTAINER
   // -----------------------------
   &__container {
     @include flex(flex-start, center);
     @include size($height: auto);
 
-    min-height: 70vh;
+    min-height: 40vh;
     background-color: #fff;
     transform: translate3d(0, 100%, 0);
     transition: transform 0.35s ease-out;
@@ -29,13 +34,18 @@
     // Modal container full
     // ------------------------
     &--full {
-      @include size();
+      @include size(100%, 100%);
       transform: translate3d(100%, 0, 0);
+
+      @media screen and (min-width: $lg){
+        @include size(rem(375px), 100%);
+        transform: translate3d(rem(375px), 0, 0);
+      }
     }
 
     // Modal show container
     // ------------------------
-    .modal--show & {
+    .modal--show > & {
       transform: translate3d(0, 0, 0);
     }
   }
