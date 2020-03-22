@@ -63,3 +63,11 @@
 .container--static {
   position: static;
 }
+
+
+// --- Container grid --- //
+.container--grid {
+  position: static;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}

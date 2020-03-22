@@ -1,6 +1,6 @@
 @import '../../../../styles/mixins/mixins';
 @import '../../../../styles/global/variables';
-
+@import url('https://fonts.googleapis.com/css?family=Lobster&display=swap');
 .app-name {
   @include size(100vw, 100%);
   @include flex(center, center);
@@ -9,5 +9,7 @@
   color: $secondary;
   font-size: rem(50px);
   font-weight: $font-weight-bold;
+  font-family: 'Lobster';
+  letter-spacing: rem(5px);
 }
 
