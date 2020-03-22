@@ -1,3 +1,75 @@
+@import '../../styles/mixins/mixins';
+@import '../../styles/global/variables';
+
 main {
   overflow: hidden;
+
+}
+
+.grid {
+  display: grid;
+  grid-template-rows: rem($header-height) auto rem($navbar-height);
+  height: 100vh;
+  width: 100vw;
+
+  &__header {
+    @include fixed(0, auto,  auto,  auto,);
+
+    grid-area: header;
+    z-index: 10;
+  }
+
+  &__navbar {
+    @include fixed( auto,  auto, 0, auto);
+
+
+    grid-area: navbar;
+    z-index: 10;
+  }
+
+  &__main {
+    @include fixed(rem($header-height), 0, rem($navbar-height), 0);
+
+    grid-area: main;
+    z-index: 0;
+  }
+
+  @media screen and (min-width: $lg) {
+    grid-template-columns: 20vw 80vw;
+    grid-template-rows: rem($header-height) auto;
+    grid-template-areas:
+      "navbar header"
+      "navbar main"
+    ;
+
+    &__header, &__main,  &__navbar {
+      position: static;
+    }
+
+  }
+
+}
+
+.grid--navbar {
+  display: grid;
+  grid-template-rows: auto rem($navbar-height);
+  height: 100vh;
+  width: 100vw;
+
+  & .grid__main {
+    @include fixed(0, 0, rem($navbar-height), 0);
+  }
+
+  @media screen and (min-width: $lg) {
+
+    grid-template-columns: 20vw 80vw;
+    grid-template-areas:
+      "navbar main"
+    ;
+
+    & .grid__header, & .grid__main,  & .grid__navbar {
+      position: static;
+    }
+
+  }
 }

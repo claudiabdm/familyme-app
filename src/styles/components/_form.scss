@@ -5,7 +5,8 @@
 .form {
 
   min-width: 20rem;
-
+  max-width: rem(375px);
+  margin: auto;
   // SECTION
   //-----------------------------
   &__section {
@@ -129,6 +130,7 @@
   // ACTIONS
   // -----------------------------
   &__actions {
+    @include flex(center, center);
     padding: 20px $padding-sides;
   }
 

@@ -20,8 +20,11 @@ $grey-200:  #525252;
 
 // Scaffolding
 // ------------------------------------------
-$header-height: rem(50px);
-$navbar-height: rem(40px);
+$header-height:50px;
+$navbar-height:40px;
+
+$navbar-width-desktop: 18vw;
+
 
 $body-color:   #000;
 $body-bg:      #fff;
@@ -47,7 +50,7 @@ $font-family-primary:        $font-primary, Arial, sans-serif;
 $font-family-secondary:      $font-primary, serif;
 
 $font-size-body: 16px;
-$font-size-base: rem($font-size-body);
+$font-size-base: 1rem;
 
 $font-weight-light: 300;
 $font-weight-normal: 400;
@@ -58,4 +61,4 @@ $font-weight-bold: 700;
 // Breakpoints
 // ------------------------------------------
 $md: 768px;
-$lg: 1024px;
+$lg: 1023px;

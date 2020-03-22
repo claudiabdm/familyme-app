@@ -15,8 +15,8 @@
   // HEADER
   //-----------------------------
   &__header {
-    @include flex(center, flex-end);
-    padding: 15px ($padding-sides - 10px) 0;
+    @include flex(center, center);
+    padding: 15px $padding-sides 0;
     // border-bottom: 1px solid rgba($color: $secondary, $alpha: 0.5);
     // background-color: rgba($color: $secondary, $alpha: 0.5);
     color: #fff;
@@ -31,7 +31,7 @@
     @include size(auto, rem(60px));
     transition: background-color 0.2s linear;
 
-    margin: 10px;
+    margin: 10px 20px;
     padding: 0 ($padding-sides - 20px);
     background-color: #fff;
     border: 1px solid rgba($color: $secondary, $alpha: 0.75);
@@ -97,10 +97,14 @@
   &__btn {
     color: $grey-100;
     transition: color 0.1s linear;
-    margin: 0 10px;
+    margin: 0;
 
     &--sort {
       color: #fff;
+
+      & + & {
+        margin-left: 20px;
+      }
     }
 
     &--add {

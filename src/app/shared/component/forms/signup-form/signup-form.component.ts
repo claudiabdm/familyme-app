@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators, AbstractControl} from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { CustomValidatorsService } from 'src/app/services/custom-validators.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({

@@ -3,6 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs';
 import { Button } from '../models/button';
 import { filter, takeUntil } from 'rxjs/operators';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-pages',
@@ -13,13 +14,15 @@ export class PagesComponent implements OnInit {
 
   public navbarVisible: boolean = false;
   public headerVisible: boolean = false;
+  public gridActive: boolean = false;
+  public gridAll: boolean = false;
   public button: Button;
   public switchVisible: boolean = false;
   private currentRoute: string;
   private ngUnsubscribe$ = new Subject<void>();
 
 
-  constructor(public router: Router) {
+  constructor(public router: Router, public dataService: DataService) {
   }
 
   ngOnInit(): void {
@@ -39,12 +42,17 @@ export class PagesComponent implements OnInit {
     if (['/pages/login', '/pages/signup'].includes(currentRoute)) {
       this.headerVisible = false;
       this.navbarVisible = false;
+      this.gridActive = false;
     } else if (currentRoute === '/pages/home') {
       this.headerVisible = false;
       this.navbarVisible = true;
+      this.gridActive = true;
+      this.gridAll = false;
     } else {
       this.headerVisible = true;
       this.navbarVisible = true;
+      this.gridActive = true;
+      this.gridAll = true;
     }
   }
 

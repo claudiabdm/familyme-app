@@ -1,15 +1,15 @@
 <header class="header">
 
-  <nav class="navbar navbar--top">
+  <nav class="header__container">
 
     <!-- USERS -->
 
-    <app-user-list [onlyImage]="true" class="navbar__container"></app-user-list>
+    <app-user-list [onlyImage]="true" class="header__list"></app-user-list>
 
     <!-- //USERS -->
 
     <!-- SWITCH -->
-    <div class="navbar__actions" *ngIf="switchVisible">
+    <div class="header__actions" *ngIf="switchVisible">
       <label class="switch switch--sm" for="shopping">
         <span class="switch__label switch__label--sm">Shopping</span>
         <input type="checkbox" class="switch__check" id="shopping" role="switch" aria-checked="true">
@@ -19,7 +19,7 @@
     <!-- //SWITCH -->
 
     <!-- BUTTON -->
-    <div class="navbar__actions" *ngIf="!switchVisible">
+    <div class="header__actions" *ngIf="!switchVisible">
       <button type="button" class="btn btn--primary btn--sm" id="button.id">{{ button.name }}</button>
     </div>
     <!-- //BUTTON -->

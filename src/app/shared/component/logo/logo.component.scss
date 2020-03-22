@@ -1,10 +1,5 @@
-@import '../../../styles/mixins/mixins';
-@import '../../../styles/global/variables';
-
-.form__link {
-  margin-bottom: 20px;
-  text-align: center;
-}
+@import '../../../../styles/mixins/mixins';
+@import '../../../../styles/global/variables';
 
 .app-name {
   @include size(100vw, 100%);
@@ -15,3 +10,4 @@
   font-size: rem(50px);
   font-weight: $font-weight-bold;
 }
+

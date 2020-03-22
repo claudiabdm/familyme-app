@@ -1,0 +1,95 @@
+@import '../../../../styles/mixins/mixins';
+@import '../../../../styles/global/variables';
+
+//------------------------------//
+// NAVBAR                       //
+// ---------------------------- //
+
+.navbar {
+  // @include fixed(auto, 0, 0, 0);
+  @include fixed(auto, 0, 0, 0);
+  @include size(100vw, $height: rem($navbar-height));
+  // @include size(100vw, rem($navbar-height));
+  @include flex(center, space-around);
+
+  min-width: rem(320px);
+  margin: 0 auto;
+  border-top: $border;
+  background-color: #fff;
+  box-shadow: 3px 1px 1px rgba(0, 0, 0, 0.05);
+  z-index: 9;
+
+  @media screen and (min-width: $lg) {
+    @include flex(flex-start, flex-start);
+    @include size($navbar-width-desktop, 100vh);
+
+    flex-direction: column;
+    min-width: 0;
+    border-right: $border;
+    border-top: 0;
+    margin: 0;
+    padding: 20px;;
+  }
+
+  // NAVBAR WELCOME MESSAGE
+  // -----------------------------
+  &__welcome {
+    display: none;
+    @media screen and (min-width: $lg) {
+      display: block;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      line-height: 1.2;
+    }
+  }
+
+  // NAVBAR ITEM
+  // -----------------------------
+  &__item {
+    font-size: 0;
+    @include size(rem(32px), rem(32px));
+
+    @media screen and (min-width: $lg) {
+      @include flex(flex-end, flex-start);
+      width: 100%;
+      margin-bottom: 30px;
+      font-size: 1rem;
+
+      &:hover {
+        font-size: 1.25rem;
+      }
+    }
+  }
+
+  // NAVBAR LINK TEXT
+  // -----------------------------
+  &__txt {
+    @media screen and (min-width: $lg) {
+      color: #000;
+      margin-left: 50px;
+      font-weight: $font-weight-light;
+      transition: font-size 0.1s linear;
+    }
+  }
+
+}
+
+// --- User navbar top --- //
+.navbar--top {
+  @include relative($top: 0);
+  @include size($height: rem($header-height));
+  display: flex;
+  flex-direction: row;
+  border: 0;
+}
+
+
+// --- LINK SELECTED --- //
+@media screen and (min-width: $lg) {
+  a[aria-current=true] {
+    .navbar__txt {
+      color: $secondary;
+      font-size: 1.25rem;
+    }
+  }
+}

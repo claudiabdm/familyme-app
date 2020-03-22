@@ -1,0 +1,62 @@
+@import "../../../../styles/global/variables";
+@import "../../../../styles/mixins/mixins";
+
+//------------------------------//
+// HEADER                       //
+// ---------------------------- //
+
+.header {
+  @include fixed(0, 0, auto, 0);
+  // @include size(100vw, $header-height);
+  min-width: 20rem;
+  margin: 0 auto;
+  border-bottom: $border;
+  background-color: #fff;
+  color: $secondary;
+  font-weight: $font-weight-bold;
+  font-size: ($font-size-base * 2);
+  box-shadow: $box-shadow-sharpen;
+  z-index: 10;
+
+  @media screen and (min-width: $lg) {
+    width: auto;
+    left: $navbar-width-desktop;
+  }
+
+  // HEADER CONTAINER
+  // -----------------------------
+  &__container {
+    @include flex(center, space-between);
+    @include size(100%, rem($header-height));
+  }
+
+
+  // HEADER TITLE
+  // -----------------------------
+  &__title {
+    font-size: 1.7rem;
+  }
+
+  // HEADER LIST
+  // -----------------------------
+  &__list {
+    @include size(100%, rem($header-height));
+
+    display: flex;
+    padding: 5px 10px;
+    overflow: auto;
+  }
+
+  // HEADER ACTION BUTTONS
+  // -----------------------------
+  &__actions {
+    @include size(rem(120px),rem( $header-height));
+    @include flex();
+
+    padding: 0 5px;
+    border-left: $border;
+    box-shadow: -1px 0 0px 0 rgba(0, 0, 0, 0.075);
+  }
+
+}
+

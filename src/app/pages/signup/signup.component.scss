@@ -1,15 +1,20 @@
 @import '../../../styles/global/variables';
+@import '../../../styles/mixins/mixins';
 
-.header--signup {
+.signup-header {
+  @include flex(center, flex-start);
+  @include size(100vw, rem($header-height),);
+  margin: 0px 0;
   padding: 0 $padding-sides;
+  border-bottom: $border;
 
-  & .header__title {
+  &__title {
     margin-left: 20px;
+    color: $secondary;
+    font-weight: $font-weight-bold;
+    font-size: 1.7rem;
   }
 
-  & .header__container {
-    justify-content: flex-start;
-  }
 }
 
 .container__p {

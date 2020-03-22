@@ -11,6 +11,8 @@
 .btn {
   @include flex();
   @include size($height: var(--button-height));
+
+  max-width: rem(375px);
   border: 0;
   border-radius: 10px;
   padding: 5px;
@@ -113,7 +115,7 @@
 
 //--- Float button ---//
 .btn--float {
-  @include fixed($right: rem(20px), $bottom:($navbar-height + rem(5px)));
+  @include fixed($right: rem(20px), $bottom:(rem($navbar-height) + rem(5px)));
   @include flex();
   @include size(rem(50px));
 

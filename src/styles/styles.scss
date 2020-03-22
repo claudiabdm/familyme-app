@@ -10,7 +10,7 @@
 @import "global/variables";
 @import "global/reset";
 @import "global/base";
-@import "global/grid";
+@import "global/container";
 @import "global/icons";
 
 
@@ -19,10 +19,8 @@
 @import "components/button";
 @import "components/checkbox";
 @import "components/switch";
-@import "components/header";
 @import "components/form";
 @import "components/modal";
 @import "components/user";
-@import "components/navbar";
 @import "../app/shared/component/map/map.component.scss";
 

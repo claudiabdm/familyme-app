@@ -89,7 +89,7 @@
         background: radial-gradient(45deg, $primary 0%, $secondary 100%);
         transform: rotate(-45deg);
         z-index: -1;
-        box-shadow: -20px 20px 20px -5px rgba(0, 0, 0, 0.5)
+        box-shadow: -20px 20px 20px -5px rgba(0, 0, 0, 0.25);
       }
 
     }
@@ -145,5 +145,4 @@
 .user--row {
   display: flex;
   padding: 10px $padding-sides;
-  border-bottom: $border;
 }

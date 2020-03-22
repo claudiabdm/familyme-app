@@ -44,9 +44,27 @@
   // -----------------------------
   &__header {
     @include fixed(0, 0, auto, 0);
+    @include flex(center, space-between);
+    @include size(100%, rem($header-height));
+    min-width: 20rem;
     padding: 0 $padding-sides;
-    box-shadow: none;
+    margin: 0 auto;
+    border-bottom: $border;
+    background-color: #fff;
+    color: $secondary;
+    font-weight: $font-weight-bold;
+    font-size: ($font-size-base * 2); // not working again using the variable like rem(16px)
+    z-index: 10;
+
   }
+
+
+  // MODAL TITLE
+  // -----------------------------
+  &__title {
+    font-size: 1.7rem;
+  }
+
 
   // MODAL BODY
   // -----------------------------

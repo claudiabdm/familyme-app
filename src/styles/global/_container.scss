@@ -3,10 +3,15 @@
 // ---------------------------- //
 
 .container {
-  @include fixed($header-height, 0, $navbar-height, 0);
+  @include fixed(rem($header-height), 0, rem($navbar-height), 0);
   min-width: 20rem;
   margin: 0 auto;
   overflow: auto;
+
+  @media screen and (min-width: $lg){
+    left: $navbar-width-desktop;
+    bottom: 0;
+  }
 
   // PARAGRAPH
   // -----------------------------
@@ -30,7 +35,6 @@
     color: $secondary;
     font-size: 1.5rem;
     font-weight: $font-weight-bold;
-    border-bottom: $border;
   }
 
 }
@@ -42,7 +46,11 @@
 
 // --- CONTAINER BUTTON --- //
 .container--btn {
+  @include flex(center, center);
+
   position: static;
+  flex-direction: column;
+  width: 100%;
   padding: 20px $padding-sides;
 }
 

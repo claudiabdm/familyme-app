@@ -15,10 +15,11 @@ import { ScrollBottomDirective } from './directive/scroll-bottom.directive';
 import { ProfileImgComponent } from './component/profile-img/profile-img.component';
 import { MapComponent } from './component/map/map.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { LogoComponent } from './component/logo/logo.component';
 
 
 @NgModule({
-  declarations: [ModalComponent, NavbarComponent, SignupFormComponent, LoginFormComponent, SettingsComponent, HeaderComponent, UserListComponent, ScrollBottomDirective, ProfileImgComponent, MapComponent,],
+  declarations: [ModalComponent, NavbarComponent, SignupFormComponent, LoginFormComponent, SettingsComponent, HeaderComponent, UserListComponent, ScrollBottomDirective, ProfileImgComponent, MapComponent, LogoComponent,],
   imports: [
     CommonModule,
     RouterModule,
@@ -36,6 +37,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     UserListComponent,
     ProfileImgComponent,
     MapComponent,
+    LogoComponent
   ]
 })
 export class SharedModule { }
