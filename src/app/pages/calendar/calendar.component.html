@@ -1,2 +1,9 @@
-
-
+<full-calendar class="container container--calendar" #calendar
+defaultView= "listWeek"
+height="parent"
+[header]="header"
+[events]="calendarEvents"
+[editable]="true"
+[customButtons]="false"
+[plugins]="calendarPlugins">
+</full-calendar>

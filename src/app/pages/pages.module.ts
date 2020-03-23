@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -23,7 +24,8 @@ import { LocatorComponent } from './locator/locator.component';
     SharedModule,
     PagesRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FullCalendarModule
   ],
   exports: [
     PagesComponent,

@@ -80,3 +80,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
+
+.container--calendar {
+  padding: 10px;
+  background-color: $tertiary;
+}

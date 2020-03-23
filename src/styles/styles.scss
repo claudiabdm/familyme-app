@@ -6,6 +6,9 @@
 
 // CORE                         //
 // ---------------------------- //
+@import '../../node_modules/@fullcalendar/core/main.css';
+@import '../../node_modules/@fullcalendar/daygrid/main.css';
+@import '../../node_modules/@fullcalendar/list/main.css';
 @import "mixins/mixins";
 @import "global/variables";
 @import "global/reset";
@@ -23,4 +26,4 @@
 @import "components/modal";
 @import "components/user";
 @import "../app/shared/component/map/map.component.scss";
-
+@import "components/calendar";
