@@ -28,23 +28,23 @@ export class SortService {
 
   sortListAz(iconSort, list: Array<any>): void {
     if (this.sortedAtoZ) {
-      list.sort(this.sortAtoZ);
-      iconSort.classList.add('icon--sort-down');
+      list.sort(this.sortAtoZ).reverse();
+      iconSort.classList.remove('icon--sort-az');
       this.sortedAtoZ = false;
     } else {
-      list.sort(this.sortAtoZ).reverse();
-      iconSort.classList.remove('icon--sort-down');
+      list.sort(this.sortAtoZ);
+      iconSort.classList.add('icon--sort-az');
       this.sortedAtoZ = true;
     }
   }
 
   sortListByDone(iconSort, list: Array<any>): void {
     if (this.sortedDone) {
-      list.sort(this.sortByDone);
+      list.sort(this.sortAtoZ).sort(this.sortByDone);
       this.sortedDone = false;
       iconSort.classList.add('icon--sort-down');
     } else {
-      list.sort(this.sortByDone).reverse();
+      list.sort(this.sortAtoZ).sort(this.sortByDone).reverse();
       this.sortedDone = true;
       iconSort.classList.remove('icon--sort-down');
     }

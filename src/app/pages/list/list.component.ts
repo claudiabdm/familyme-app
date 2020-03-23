@@ -1,11 +1,7 @@
-import { Component, OnInit, ElementRef, TemplateRef, ViewChild, SimpleChanges, OnChanges, Input } from '@angular/core';
-import { ShoppingListService } from 'src/app/services/shopping-list.service';
-import { AuthService } from 'src/app/services/auth.service';
-import { Subscription, Subject } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Product } from 'src/app/models/product';
-import { TemplateBinding } from '@angular/compiler';
-import { Group } from 'src/app/models/group';
 import { GroupsService } from 'src/app/services/groups.service';
 import { DataService } from 'src/app/services/data.service';
 import { SortService } from 'src/app/services/sort.service';
@@ -50,7 +46,7 @@ export class ListComponent implements OnInit {
         deleted: false,
       };
       this.productList.push(newProduct);
-      this.dataService.userGroup.shoppingList = this.productList
+      this.dataService.userGroup.shoppingList = this.productList;
       this.scrollToBottom(document.getElementById('container'));
       this.groupsService.updateGroup(this.dataService.userGroup).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
     }
@@ -62,7 +58,7 @@ export class ListComponent implements OnInit {
     if (idx > -1) {
       product.done = check;
       this.productList.splice(idx, 1, product);
-      this.dataService.userGroup.shoppingList = this.productList
+      this.dataService.userGroup.shoppingList = this.productList;
       this.groupsService.updateGroup(this.dataService.userGroup).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
     }
   }
