@@ -1,0 +1,93 @@
+// ---------------------------- //
+// CALENDAR                     //
+// ---------------------------- //
+
+
+// FULL CALENDAR                //
+// ---------------------------- //
+
+.fc-view-container {
+  background-color: #fff;
+}
+
+// TOOLBAR
+// ----------------------------
+.fc-toolbar {
+  @media screen and (max-width: $lg) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    column-gap: 0;
+    grid-template-areas:
+    " fc-center fc-center"
+    " fc-left fc-right"
+    ;
+    font-size: 1rem;
+
+    .fc-center {
+      grid-area: fc-center;
+      margin-bottom: 5px;
+    }
+
+    .fc-left {
+      @include flex(center, flex-start);
+      grid-area: fc-left;
+      align-self: center;
+    }
+
+    .fc-right {
+      @include flex(center, flex-end);
+      grid-area: fc-right;
+      align-self: center;
+    }
+
+  }
+}
+
+// EVENTS
+// ----------------------------
+.fc-event, .fc-event-dot {
+  border: none;
+  background-color: $primary;
+}
+
+// BUTTONS
+// ----------------------------
+.fc-button {
+
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  background-color: $primary;
+
+  @media screen and (max-width: $lg) {
+    font-size: 0.75rem;
+    font-weight: $font-weight-bold;
+  }
+
+  &:hover {
+    background-color: darken($primary, 10%);
+  }
+}
+
+.fc-button-primary {
+  background-color: $primary;
+
+  &:disabled{
+    background-color: $grey-100;
+  }
+
+  &:not(:disabled):active,
+  &:not(:disabled).fc-button-active {
+    background-color: $secondary;
+  }
+}
+
+.fc-button-active {
+  background-color: $secondary;
+}
+
+
+// LIST VIEW
+// ----------------------------
+

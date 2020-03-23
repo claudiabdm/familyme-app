@@ -61,7 +61,7 @@
     <p class="container__p container__p--medium">Copy the code below and send it to your family to join you!
     </p>
     <div class="container container--btn">
-      <input type="text" class="copy-me" value="{{userGroup.token}}" #copyMe>
+      <input type="text" class="copy-me" value="{{userGroup.token}}" #copyMe readonly="true">
       <button class="btn btn--primary btn--m" (click)="copyMyText(copyMe)">Copy To Clipboard</button>
     </div>
 
