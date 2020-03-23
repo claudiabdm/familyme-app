@@ -41,4 +41,10 @@ export class HomeComponent implements OnInit {
       this.modalService.closeModal(targetModal);
     }
   }
+
+  copyMyText(textToCopy) {
+    textToCopy.select();
+    document.execCommand("copy");
+  }
+
 }

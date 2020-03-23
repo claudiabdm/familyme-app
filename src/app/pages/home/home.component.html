@@ -26,7 +26,7 @@
 
   <!-- NEW MEMBERS BUTTON -->
   <div class="container container--btn">
-    <button type="button" class="btn btn--m btn--primary" id="newMemberBtn">New member</button>
+    <button type="button" class="btn btn--m btn--primary" (click)="toggleModal(newMemberModal)">New member</button>
   </div>
   <!-- //NEW MEMBERS BUTTON -->
 
@@ -51,3 +51,21 @@
     (save)="uploadPhoto($event, editPhotoModal)" (delete)="uploadPhoto($event, editPhotoModal)"></app-profile-img>
 </app-modal>
 <!-- // MODAL EDIT PHOTOS -->
+
+<!-- MODAL NEW MEMBER -->
+<app-modal [title]="'New member'" [modalId]="'newMemberModal'" (close)="toggleModal(newMemberModal)"
+  [modalVisible]="false" [isFull]="false" #newMemberModal>
+
+  <div *ngIf="newMemberModal.modalVisible" class="container container--static">
+
+    <p class="container__p container__p--medium">Copy the code below and send it to your family to join you!
+    </p>
+    <div class="container container--btn">
+      <input type="text" class="copy-me" value="{{userGroup.token}}" #copyMe>
+      <button class="btn btn--primary btn--m" (click)="copyMyText(copyMe)">Copy To Clipboard</button>
+    </div>
+
+  </div>
+
+</app-modal>
+<!-- // MODAL NEW MEMBER -->

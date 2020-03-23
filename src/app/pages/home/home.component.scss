@@ -1,0 +1,22 @@
+@import '../../../styles/mixins/mixins';
+@import '../../../styles/global/variables';
+
+.copy-me {
+  @include flex(center, center);
+  @include size();
+
+  border: $border;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  padding: 5px 7px;
+  max-width: rem(375px);
+  font-family: $font-family-primary;
+  font-weight: $font-weight-light;
+  font-size: 1rem;
+  text-align: center;
+
+  &:focus {
+    outline: none;
+    background-color: $tertiary;
+  }
+}
