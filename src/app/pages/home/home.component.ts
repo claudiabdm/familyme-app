@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  copyMyText(textToCopy) {
+  copyMyText(textToCopy): void {
     textToCopy.select();
     document.execCommand("copy");
   }
