@@ -1,0 +1,17 @@
+@import "../../../../../styles/global/variables";
+@import "../../../../../styles/mixins/mixins";
+
+.form__user-list {
+  display: flex;
+  padding: 5px 0;
+  overflow-x: auto;
+}
+
+.form__btn {
+  @include size(rem(100px), auto);
+  @include flex();
+
+  padding: 5px;
+  border-left: $border;
+  box-shadow: -1px 0 0px 0 rgba(0, 0, 0, 0.075);
+}

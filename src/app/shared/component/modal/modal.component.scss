@@ -17,7 +17,7 @@
 
 
   @media screen and (min-width: $lg) {
-    justify-content: flex-end;
+    justify-content: center;
   }
 
   // MODAL CONTAINER
@@ -31,6 +31,7 @@
     transform: translate3d(0, 100%, 0);
     transition: transform 0.35s ease-out;
 
+
     // Modal container full
     // ------------------------
     &--full {
@@ -39,7 +40,7 @@
 
       @media screen and (min-width: $lg){
         @include size(rem(375px), 100%);
-        transform: translate3d(rem(375px), 0, 0);
+        transform: translate3d(0, -100%, 0);
       }
     }
 

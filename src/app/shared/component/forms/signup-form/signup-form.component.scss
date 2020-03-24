@@ -1,7 +1,6 @@
-.form__label {
-  margin-top: 20px;
-}
+.form__group {
 
-.btn--signup {
-  margin-top: 20px;
+  & + & {
+    margin-top: 15px;
+  }
 }

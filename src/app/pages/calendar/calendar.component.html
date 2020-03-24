@@ -7,3 +7,8 @@ height="parent"
 [customButtons]="false"
 [plugins]="calendarPlugins">
 </full-calendar>
+
+<app-modal [title]="'New event'" [modalId]="'newEventModal'"
+[modalVisible]="true" [isFull]="true" #newEventModal>
+  <app-event-form></app-event-form>
+</app-modal>

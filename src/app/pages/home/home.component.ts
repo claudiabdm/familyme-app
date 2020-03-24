@@ -28,6 +28,10 @@ export class HomeComponent implements OnInit {
     return this.dataService.userGroup;
   }
 
+  get userList() {
+    return this.dataService.userList;
+  }
+
   uploadPhoto(event, targetModal: ModalComponent): void {
     this.dataService.user.avatar = event;
     this.usersService.updateUser(this.dataService.user).subscribe();

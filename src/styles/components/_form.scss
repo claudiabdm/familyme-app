@@ -5,8 +5,11 @@
 .form {
 
   min-width: 20rem;
-  max-width: rem(375px);
   margin: auto;
+
+  @media screen and (min-width:$lg){
+    max-width: rem(375px);
+  }
   // SECTION
   //-----------------------------
   &__section {
@@ -14,7 +17,7 @@
 
     &--add {
       display: flex;
-      padding: 0 20px;
+      padding: 0 5px;
       z-index: 0;
     }
   }
@@ -23,13 +26,13 @@
   //-----------------------------
   &__group {
     position: relative;
-    padding: 15px $padding-sides;
+    padding: 20px $padding-sides;
 
     &+& {
       padding-top: 0;
     }
 
-    &--grid {
+    &--date {
       display: grid;
       grid-template-columns: 5rem 2fr 1fr;
       grid-template-rows: repeat(1, 1fr);
@@ -39,7 +42,7 @@
     // Form login group
     // ---------------------
     .form--login & {
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
     // Form checklist group
@@ -82,7 +85,12 @@
     border-radius: 4px;
     padding: 5px 7px;
     font-family: $font-family-primary;
+    font-weight: $font-weight-light;
     font-size: 1rem;
+
+    &::placeholder {
+      font-size: 0.85rem;
+    }
 
     &:focus {
       outline: none;
@@ -145,16 +153,6 @@
     font-size: rem(12px);
     font-weight: $font-weight-bold;
     line-height: 1.2;
-  }
-
-  // MESSAGE VALIDATIONS
-  // -----------------------------
-  &__msg-validation {}
-
-  // MESSAGE SUBMISION WRONG
-  // -----------------------------
-  &__msg-submit {
-
   }
 
 }

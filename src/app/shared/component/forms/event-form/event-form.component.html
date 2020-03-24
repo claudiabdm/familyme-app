@@ -1,0 +1,76 @@
+<form [formGroup]="eventForm" class="form" (ngSubmit)="onSubmit(eventForm)">
+
+  <!-- Event name and location -->
+  <div class="form__section">
+    <div class="form__group">
+      <label for="eventName" class="form__label">Event name</label>
+      <input type="text" id="eventName" class="form__control" placeholder="Chinese lessons" aria-required="true"
+        autocomplete="off" required formControlName="eventName"
+        [class.form__control--invalid]="eventForm.controls.eventName.dirty && eventForm.controls.eventName.invalid">
+      <div class="form__msg-group" *ngIf="eventForm.controls.eventName.dirty && eventForm.controls.eventName.invalid">
+        Required field
+      </div>
+    </div>
+
+    <div class="form__group">
+      <label for="location" class="form__label">Location</label>
+      <input type="text" id="location" class="form__control" placeholder="C/Abc, 28220, Madrid" aria-required="true"
+        autocomplete="off" required formControlName="location">
+    </div>
+  </div>
+  <!-- //Event name and location -->
+
+  <!-- Event dates -->
+  <div class="form__section">
+    <div class="form__group form__group--date">
+      <label for="startDate" class="form__label">Start date</label>
+      <input type="text" id="startDate" class="form__control" value="YYYY-MM-DDT00:00" placeholder="DD/MM/YYYY" aria-required="true"
+        autocomplete="off" required formControlName="startDate"
+      >
+      <!-- <label for="startTime" class="" aria-hidden="true" hidden>Start Time</label>
+      <input type="text" id="startTime" class="form__control" placeholder="00:00"> -->
+    </div>
+
+    <div class="form__group form__group--date">
+      <label for="endDate" class="form__label">End date</label>
+      <input type="text" id="endDate" class="form__control" placeholder="DD/MM/YYYY">
+      <label for="endTime" class="" aria-hidden="true" hidden>End time</label>
+      <input type="text" id="endTime" class="form__control" placeholder="00:00">
+    </div>
+
+  </div>
+  <!-- //Event dates -->
+
+  <!-- Event add invitee -->
+  <div class="form__section form__section--add">
+
+    <!-- USERS -->
+    <app-user-list [onlyImage]="true" [userList]="userList" class="form__user-list"></app-user-list>
+    <!-- //USERS -->
+
+    <!-- Add invitee -->
+    <div class="form__btn">
+      <button type="button" class="btn btn--primary btn--sm" id="addInviteeBtn">Add
+        invitee</button>
+    </div>
+    <!-- //Add invitee -->
+
+  </div>
+  <!-- //Event add invitee -->
+
+  <div class="form__section">
+    <div class="form__group">
+      <label for="notes" class="form__label">Notes</label>
+      <textarea id="notes" class="form__control" rows="4" cols="50"
+        placeholder="Write additional information here..."></textarea>
+    </div>
+  </div>
+
+  <!-- FORM ACTIONS -->
+  <div class="form__actions">
+    <button type="submit" class="btn btn--m btn--signup" aria-disabled="true">Add event</button>
+  </div>
+  <!-- //FORM ACTIONS -->
+
+</form>
+<!-- //FORM -->
