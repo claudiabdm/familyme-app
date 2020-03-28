@@ -11,4 +11,5 @@ export class User {
   groupId: Group["id"];
   groupToken: Group["token"];
   location: google.maps.LatLngLiteral;
+  isSelected: boolean;
 }

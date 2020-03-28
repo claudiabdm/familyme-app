@@ -9,6 +9,6 @@ height="parent"
 </full-calendar>
 
 <app-modal [title]="'New event'" [modalId]="'newEventModal'"
-[modalVisible]="true" [isFull]="true" #newEventModal>
-  <app-event-form></app-event-form>
+[modalVisible]="false" [isFull]="true" (close)="toggleModal(newEventModal)" #newEventModal>
+  <app-event-form *ngIf="newEventModal.modalVisible"></app-event-form>
 </app-modal>

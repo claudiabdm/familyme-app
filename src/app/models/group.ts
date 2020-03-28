@@ -1,5 +1,4 @@
 import { Product } from './product';
-import { User } from './user';
 
 export class Group {
   id: number;

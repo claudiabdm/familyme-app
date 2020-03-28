@@ -1,6 +1,27 @@
-<article class="user" *ngFor="let user of userList" [class.user--row]="!onlyImage">
-  <div class="user__img-wrapper">
-    <img class="user__img" [src]="user.avatar" alt="{{ user.name }} profile photo">
-  </div>
-  <h2 class="user__name" *ngIf="!onlyImage">{{ user.name }}</h2>
-</article>
+<!-- USER LIST FROM GROUP  -->
+<ng-container *ngIf="!isCheckList">
+  <article class="user" *ngFor="let user of userList" [class.user--row]="!onlyImage">
+    <div class="user__img-wrapper">
+      <img class="user__img" [src]="user.avatar" alt="{{ user.name }} profile photo">
+    </div>
+    <h2 class="user__name" *ngIf="!onlyImage">{{ user.name }}</h2>
+  </article>
+</ng-container>
+<!-- // USER LIST FROM GROUP  -->
+
+
+<!-- USER CHECKLIST -->
+<ng-container *ngIf="isCheckList">
+  <article class="user user--row" *ngFor="let user of allUsers">
+    <div class="user__img-wrapper">
+      <img class="user__img" [src]="user.avatar" alt="{{ user.name }} profile photo">
+    </div>
+    <label class="user__name" [for]="user.id">{{ user.name }}</label>
+    <div class="checkbox">
+      <input type="checkbox" [id]="user.id" class="checkbox__box" #checkedUser [checked]="user.isSelected"
+        (change)="onChecked(user, checkedUser.checked)">
+      <span class="checkbox__checkmark"></span>
+    </div>
+  </article>
+</ng-container>
+<!-- // USER CHECKLIST -->

@@ -85,7 +85,7 @@ export class ListComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.ngUnsubscribe$.next()
+    this.ngUnsubscribe$.next();
     this.ngUnsubscribe$.complete();
   }
 }
