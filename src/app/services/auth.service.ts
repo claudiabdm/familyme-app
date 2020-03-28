@@ -1,16 +1,13 @@
 import { Injectable, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { SESSION_STORAGE, LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
-import { Observable } from 'rxjs';
+import { FormGroup } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import { UsersService } from './users.service';
 import { User } from '../models/user';
 import { GroupsService } from './groups.service';
-import { Group } from '../models/group';
-import { FormGroup } from '@angular/forms';
-import { map, takeUntil } from 'rxjs/operators';
 import { DataService } from './data.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({
   providedIn: 'root'

@@ -16,7 +16,7 @@
     border-bottom: $border;
 
     &--add {
-      display: flex;
+      @include flex(strech, space-between);
       padding: 0 5px;
       z-index: 0;
     }
@@ -35,7 +35,7 @@
     &--date {
       display: grid;
       grid-template-columns: 5rem 2fr 1fr;
-      grid-template-rows: repeat(1, 1fr);
+      grid-template-rows: 1fr 1rem;
       column-gap: 10px;
     }
 
@@ -153,6 +153,12 @@
     font-size: rem(12px);
     font-weight: $font-weight-bold;
     line-height: 1.2;
+
+    .form__group--date &{
+      grid-column: 2/-1;
+      grid-row: 2/-1;
+    }
+
   }
 
 }

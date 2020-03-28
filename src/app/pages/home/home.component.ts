@@ -3,6 +3,8 @@ import { UsersService } from 'src/app/services/users.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { ModalComponent } from 'src/app/shared/component/modal/modal.component';
 import { DataService } from 'src/app/services/data.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -11,13 +13,15 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class HomeComponent implements OnInit {
 
+  private ngUnsubscribe$ = new Subject<void>();
+
   constructor(
     private dataService: DataService,
     private modalService: ModalService,
     private usersService: UsersService) { }
 
   ngOnInit(): void {
-    this.usersService.getUsersByGroupToken(this.dataService.user.groupToken).subscribe();
+    this.usersService.getUsersByGroupToken(this.dataService.user.groupToken).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
   }
 
   get user() {
@@ -49,6 +53,11 @@ export class HomeComponent implements OnInit {
   copyMyText(textToCopy): void {
     textToCopy.select();
     document.execCommand("copy");
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe$.next();
+    this.ngUnsubscribe$.complete();
   }
 
 }

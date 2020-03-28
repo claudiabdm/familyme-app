@@ -61,15 +61,17 @@ export class PagesComponent implements OnInit {
     switch (currentRoute) {
       case '/pages/calendar':
         this.button = {
-          id: "newEventButton",
-          name: "New event"
+          id: 'newEventBtn',
+          name: 'New event',
+          modal: 'newEventModal'
         }
         this.switchVisible = false;
         break;
       case '/pages/locator':
         this.button = {
-          id: "newPlaceButton",
-          name: "New place"
+          id: 'newPlaceBtn',
+          name: 'New place',
+          modal: 'newPlaceModal'
         };
         this.switchVisible = false;
         break;

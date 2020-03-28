@@ -9,7 +9,7 @@ import { DataService } from './services/data.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'personal-project-routing';
+  title = 'personal-project';
   constructor(private dataService: DataService) {
 
   }

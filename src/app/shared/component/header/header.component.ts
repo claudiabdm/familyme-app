@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
-import { User } from 'src/app/models/user';
 import { Button } from 'src/app/models/button';
 import { DataService } from 'src/app/services/data.service';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-header',
@@ -12,6 +11,7 @@ import { DataService } from 'src/app/services/data.service';
 export class HeaderComponent implements OnInit {
 
   @Input() button: Button;
+  @Input() targetModal: ModalComponent;
   @Input() switchVisible: boolean = false;
 
   constructor(

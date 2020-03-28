@@ -4,7 +4,7 @@
   <div class="form__section">
     <div class="form__group">
       <label for="eventName" class="form__label">Event name</label>
-      <input type="text" id="eventName" class="form__control" placeholder="Chinese lessons" aria-required="true"
+      <input type="text" id="eventName" class="form__control" placeholder="Dentist" aria-required="true"
         autocomplete="off" required formControlName="eventName"
         [class.form__control--invalid]="eventForm.controls.eventName.dirty && eventForm.controls.eventName.invalid">
       <div class="form__msg-group" *ngIf="eventForm.controls.eventName.dirty && eventForm.controls.eventName.invalid">
@@ -24,18 +24,23 @@
   <div class="form__section">
     <div class="form__group form__group--date">
       <label for="startDate" class="form__label">Start date</label>
-      <input type="text" id="startDate" class="form__control" value="YYYY-MM-DDT00:00" placeholder="DD/MM/YYYY" aria-required="true"
-        autocomplete="off" required formControlName="startDate"
-      >
-      <!-- <label for="startTime" class="" aria-hidden="true" hidden>Start Time</label>
-      <input type="text" id="startTime" class="form__control" placeholder="00:00"> -->
+      <input type="text" id="startDate" class="form__control" placeholder="DD/MM/YYYY" aria-required="true"
+        autocomplete="off" required formControlName="startDate">
+      <label for="startTime" class="" aria-hidden="true" hidden>Start Time</label>
+      <input type="text" id="startTime" class="form__control" placeholder="00:00" formControlName="startTime">
+      <div class="form__msg-group" *ngIf="eventForm.controls.startDate.dirty && eventForm.controls.startDate.invalid">
+        Required field
+      </div>
     </div>
 
     <div class="form__group form__group--date">
       <label for="endDate" class="form__label">End date</label>
-      <input type="text" id="endDate" class="form__control" placeholder="DD/MM/YYYY">
+      <input type="text" id="endDate" class="form__control" placeholder="DD/MM/YYYY" formControlName="endDate">
       <label for="endTime" class="" aria-hidden="true" hidden>End time</label>
-      <input type="text" id="endTime" class="form__control" placeholder="00:00">
+      <input type="text" id="endTime" class="form__control" placeholder="00:00" formControlName="endTime">
+      <div class="form__msg-group" *ngIf="eventForm.controls.endDate.dirty && eventForm.controls.endDate.invalid">
+        Required field
+      </div>
     </div>
 
   </div>
@@ -45,12 +50,12 @@
   <div class="form__section form__section--add">
 
     <!-- USERS -->
-    <app-user-list [onlyImage]="true" [userList]="userList" class="form__user-list"></app-user-list>
+    <app-user-list [onlyImage]="true" [userList]="inviteeList" class="form__user-list"></app-user-list>
     <!-- //USERS -->
 
     <!-- Add invitee -->
     <div class="form__btn">
-      <button type="button" class="btn btn--primary btn--sm" id="addInviteeBtn">Add
+      <button type="button" class="btn btn--primary btn--sm" (click)="toggleModal(newInvitee)">Add
         invitee</button>
     </div>
     <!-- //Add invitee -->
@@ -68,9 +73,22 @@
 
   <!-- FORM ACTIONS -->
   <div class="form__actions">
-    <button type="submit" class="btn btn--m btn--signup" aria-disabled="true">Add event</button>
+    <button type="submit" class="btn btn--m" aria-disabled="true">Add event</button>
   </div>
   <!-- //FORM ACTIONS -->
 
 </form>
 <!-- //FORM -->
+
+<!-- MODAL NEW INVITEE -->
+<app-modal [title]="'New invitee'" [isFull]="false" (close)="toggleModal(newInvitee)" #newInvitee>
+  <app-user-list [onlyImage]="false" [(userList)]="userList" [isCheckList]="true" class="form form--checklist">
+  </app-user-list>
+   <!-- FORM ACTIONS -->
+   <div class="container container--btn">
+    <button type="button" class="btn btn--m btn--primary" aria-disabled="true" (click)="onAdd(newInvitee)">Add invitee</button>
+  </div>
+  <!-- //FORM ACTIONS -->
+</app-modal>
+
+<!-- //MODAL NEW INVITEE -->
