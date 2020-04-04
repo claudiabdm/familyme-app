@@ -40,4 +40,26 @@ export class CustomValidatorsService {
       }
     }
   }
+
+  checkDates(startDate: string, endDate: string) {
+    return (formGroup: FormGroup) => {
+      const startControl = formGroup.controls.startDate;
+      const endControl = formGroup.controls.endDate;
+
+      if (!startControl || !endControl) {
+        return null;
+      }
+
+      if (endControl.errors && !endControl.errors.datesError) {
+        return null;
+      }
+
+      if (startControl.value > endControl.value) {
+        endControl.setErrors({ datesError: true });
+      } else {
+        endControl.setErrors(null);
+      }
+    }
+  }
+
 }

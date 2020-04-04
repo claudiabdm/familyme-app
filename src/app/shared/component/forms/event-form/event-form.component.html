@@ -14,34 +14,73 @@
 
     <div class="form__group">
       <label for="location" class="form__label">Location</label>
-      <input type="text" id="location" class="form__control" placeholder="C/Abc, 28220, Madrid" aria-required="true"
-        autocomplete="off" required formControlName="location">
+      <input type="text" id="location" class="form__control" placeholder="C/Abc, 28220, Madrid" aria-required="false"
+        autocomplete="off" formControlName="location">
     </div>
   </div>
   <!-- //Event name and location -->
 
   <!-- Event dates -->
   <div class="form__section">
+
+    <label class="switch form__group" for="allDay">
+      <span class="switch__label form__label">All day</span>
+      <input type="checkbox" class="switch__check" id="allDay" role="switch" aria-checked="true"
+        formControlName="allDay">
+      <span class="switch__slider"></span>
+    </label>
+
+    <!-- Start Date -->
     <div class="form__group form__group--date">
       <label for="startDate" class="form__label">Start date</label>
-      <input type="text" id="startDate" class="form__control" placeholder="DD/MM/YYYY" aria-required="true"
-        autocomplete="off" required formControlName="startDate">
-      <label for="startTime" class="" aria-hidden="true" hidden>Start Time</label>
-      <input type="text" id="startTime" class="form__control" placeholder="00:00" formControlName="startTime">
-      <div class="form__msg-group" *ngIf="eventForm.controls.startDate.dirty && eventForm.controls.startDate.invalid">
+      <div *ngIf="eventForm.controls.allDay.value">
+        <input type="text" id="startDate" name="startDate" class="form__control" aria-required="true"
+          placeholder="DD/MM/YYYY, 00:00" formControlName="startDate" [owlDateTime]="startDate"
+          [owlDateTimeTrigger]="startDate">
+        <owl-date-time #startDate [pickerType]="'calendar'" [pickerMode]="'dialog'"></owl-date-time>
+      </div>
+      <div *ngIf="!eventForm.controls.allDay.value">
+        <input type="text" id="startDate" name="startDate" class="form__control" aria-required="true"
+          placeholder="DD/MM/YYYY, 00:00" formControlName="startDate" [owlDateTime]="startDate"
+          [owlDateTimeTrigger]="startDate">
+        <owl-date-time #startDate [pickerType]="'both'" [pickerMode]="'dialog'"></owl-date-time>
+      </div>
+      <div class="form__msg-group"
+        *ngIf="eventForm.controls.startDate.dirty && eventForm.controls.startDate.invalid && !eventForm.controls.startDate.errors?.datesError">
         Required field
       </div>
+      <div class="form__msg-group"
+        *ngIf="eventForm.controls.startDate.dirty && eventForm.controls.endDate.errors?.datesError">
+        Invalid date
+      </div>
     </div>
+    <!-- //Start Date -->
 
+    <!-- End Date -->
     <div class="form__group form__group--date">
       <label for="endDate" class="form__label">End date</label>
-      <input type="text" id="endDate" class="form__control" placeholder="DD/MM/YYYY" formControlName="endDate">
-      <label for="endTime" class="" aria-hidden="true" hidden>End time</label>
-      <input type="text" id="endTime" class="form__control" placeholder="00:00" formControlName="endTime">
-      <div class="form__msg-group" *ngIf="eventForm.controls.endDate.dirty && eventForm.controls.endDate.invalid">
+      <div *ngIf="eventForm.controls.allDay.value">
+        <input type="text" id="endDate" name="endDate" class="form__control" aria-required="true"
+          placeholder="DD/MM/YYYY, 00:00" formControlName="endDate" [owlDateTime]="endDate"
+          [owlDateTimeTrigger]="endDate">
+        <owl-date-time #endDate [pickerType]="'calendar'" [pickerMode]="'dialog'"></owl-date-time>
+      </div>
+      <div *ngIf="!eventForm.controls.allDay.value">
+        <input type="text" id="endDate" name="endDate" class="form__control" aria-required="true"
+          placeholder="DD/MM/YYYY, 00:00" formControlName="endDate" [owlDateTime]="endDate"
+          [owlDateTimeTrigger]="endDate">
+        <owl-date-time #endDate [pickerType]="'both'" [pickerMode]="'dialog'"></owl-date-time>
+      </div>
+      <div class="form__msg-group"
+        *ngIf="eventForm.controls.endDate.dirty && eventForm.controls.endDate.invalid && !eventForm.controls.endDate.errors?.datesError">
         Required field
       </div>
+      <div class="form__msg-group"
+        *ngIf="eventForm.controls.endDate.dirty && eventForm.controls.endDate.errors?.datesError">
+        Invalid date
+      </div>
     </div>
+    <!-- //End Date -->
 
   </div>
   <!-- //Event dates -->
@@ -63,17 +102,22 @@
   </div>
   <!-- //Event add invitee -->
 
+  <!-- Notes -->
   <div class="form__section">
     <div class="form__group">
       <label for="notes" class="form__label">Notes</label>
-      <textarea id="notes" class="form__control" rows="4" cols="50"
-        placeholder="Write additional information here..."></textarea>
+      <textarea id="notes" class="form__control" rows="4" cols="50" placeholder="Write additional information here..."
+        formControlName="notes"></textarea>
     </div>
   </div>
+  <!-- //Notes -->
 
   <!-- FORM ACTIONS -->
-  <div class="form__actions">
-    <button type="submit" class="btn btn--m" aria-disabled="true">Add event</button>
+  <div class="form__actions container--btn">
+    <button type="submit" class="btn btn--m" aria-disabled="true" [disabled]="!eventForm.valid">{{formBtn}}
+      event</button>
+    <button *ngIf="formBtn === 'Modify'" type="button" class="btn btn--m btn--secondary" aria-disabled="true"> Delete
+      event</button>
   </div>
   <!-- //FORM ACTIONS -->
 
@@ -84,9 +128,10 @@
 <app-modal [title]="'New invitee'" [isFull]="false" (close)="toggleModal(newInvitee)" #newInvitee>
   <app-user-list [onlyImage]="false" [(userList)]="userList" [isCheckList]="true" class="form form--checklist">
   </app-user-list>
-   <!-- FORM ACTIONS -->
-   <div class="container container--btn">
-    <button type="button" class="btn btn--m btn--primary" aria-disabled="true" (click)="onAdd(newInvitee)">Add invitee</button>
+  <!-- FORM ACTIONS -->
+  <div class="container container--btn">
+    <button type="button" class="btn btn--m btn--primary" aria-disabled="true" (click)="onAdd(newInvitee)">Add
+      invitee</button>
   </div>
   <!-- //FORM ACTIONS -->
 </app-modal>

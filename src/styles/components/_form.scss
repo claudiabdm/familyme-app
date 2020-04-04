@@ -34,9 +34,10 @@
 
     &--date {
       display: grid;
-      grid-template-columns: 5rem 2fr 1fr;
+      grid-template-columns: 5rem 1fr;
       grid-template-rows: 1fr 1rem;
-      column-gap: 10px;
+      column-gap: 5px;
+      justify-content: space-between;
     }
 
     // Form login group

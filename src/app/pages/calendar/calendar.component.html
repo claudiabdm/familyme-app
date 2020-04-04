@@ -5,10 +5,20 @@ height="parent"
 [events]="calendarEvents"
 [editable]="true"
 [customButtons]="false"
-[plugins]="calendarPlugins">
+[plugins]="calendarPlugins"
+[eventTimeFormat]="eventTimeFormat"
+(dateClick)="selectDay($event, newEventModal)"
+(eventClick)="selectEvent($event, modifyEventModal)"
+>
 </full-calendar>
 
 <app-modal [title]="'New event'" [modalId]="'newEventModal'"
 [modalVisible]="false" [isFull]="true" (close)="toggleModal(newEventModal)" #newEventModal>
-  <app-event-form *ngIf="newEventModal.modalVisible"></app-event-form>
+  <app-event-form *ngIf="newEventModal.modalVisible" [eventInfo]="selectedDay" [formBtn]="'Add'"></app-event-form>
 </app-modal>
+
+<app-modal [title]="'Modify event'" [modalId]="'modifyEventModal'"
+[modalVisible]="false" [isFull]="true" (close)="toggleModal(modifyEventModal)" #modifyEventModal>
+  <app-event-form *ngIf="modifyEventModal.modalVisible" [eventInfo]="selectedEvent" [formBtn]="'Modify'"></app-event-form>
+</app-modal>
+
