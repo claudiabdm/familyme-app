@@ -50,7 +50,6 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     this.calendarEvents = this.dataService.userGroup.events.filter(event => event.deleted === false);
-    console.log(this.dataService.userGroup.events.filter(event => event.deleted === false))
     const newEventBtn = document.getElementById('newEventBtn');
     newEventBtn.addEventListener('click', () => this.toggleModal(this.newEventModal))
   }
