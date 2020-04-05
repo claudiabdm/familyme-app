@@ -11,4 +11,5 @@ export class CalendarEvent {
   location: '';
   invitees: User["id"][];
   notes:string;
+  deleted: boolean;
 }

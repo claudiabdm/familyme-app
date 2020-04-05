@@ -1,3 +1,4 @@
+<ngx-spinner size="medium" bdColor="rgba(51,51,51,0.35)" type="ball-spin-clockwise" color="#fff"></ngx-spinner>
 <form [formGroup]="eventForm" class="form" (ngSubmit)="onSubmit(eventForm)">
 
   <!-- Event name and location -->
@@ -37,13 +38,13 @@
         <input type="text" id="startDate" name="startDate" class="form__control" aria-required="true"
           placeholder="DD/MM/YYYY, 00:00" formControlName="startDate" [owlDateTime]="startDate"
           [owlDateTimeTrigger]="startDate">
-        <owl-date-time #startDate [pickerType]="'calendar'" [pickerMode]="'dialog'"></owl-date-time>
+        <owl-date-time #startDate [pickerType]="'calendar'" [pickerMode]="'dialog'" firstDayOfWeek="1"></owl-date-time>
       </div>
       <div *ngIf="!eventForm.controls.allDay.value">
         <input type="text" id="startDate" name="startDate" class="form__control" aria-required="true"
           placeholder="DD/MM/YYYY, 00:00" formControlName="startDate" [owlDateTime]="startDate"
           [owlDateTimeTrigger]="startDate">
-        <owl-date-time #startDate [pickerType]="'both'" [pickerMode]="'dialog'"></owl-date-time>
+        <owl-date-time #startDate [pickerType]="'both'" [pickerMode]="'dialog'" firstDayOfWeek="1"></owl-date-time>
       </div>
       <div class="form__msg-group"
         *ngIf="eventForm.controls.startDate.dirty && eventForm.controls.startDate.invalid && !eventForm.controls.startDate.errors?.datesError">
@@ -63,13 +64,13 @@
         <input type="text" id="endDate" name="endDate" class="form__control" aria-required="true"
           placeholder="DD/MM/YYYY, 00:00" formControlName="endDate" [owlDateTime]="endDate"
           [owlDateTimeTrigger]="endDate">
-        <owl-date-time #endDate [pickerType]="'calendar'" [pickerMode]="'dialog'"></owl-date-time>
+        <owl-date-time #endDate [pickerType]="'calendar'" [pickerMode]="'dialog'" firstDayOfWeek="1"></owl-date-time>
       </div>
       <div *ngIf="!eventForm.controls.allDay.value">
         <input type="text" id="endDate" name="endDate" class="form__control" aria-required="true"
           placeholder="DD/MM/YYYY, 00:00" formControlName="endDate" [owlDateTime]="endDate"
           [owlDateTimeTrigger]="endDate">
-        <owl-date-time #endDate [pickerType]="'both'" [pickerMode]="'dialog'"></owl-date-time>
+        <owl-date-time #endDate [pickerType]="'both'" [pickerMode]="'dialog'" firstDayOfWeek="1"></owl-date-time>
       </div>
       <div class="form__msg-group"
         *ngIf="eventForm.controls.endDate.dirty && eventForm.controls.endDate.invalid && !eventForm.controls.endDate.errors?.datesError">
@@ -116,7 +117,7 @@
   <div class="form__actions container--btn">
     <button type="submit" class="btn btn--m" aria-disabled="true" [disabled]="!eventForm.valid">{{formBtn}}
       event</button>
-    <button *ngIf="formBtn === 'Modify'" type="button" class="btn btn--m btn--secondary" aria-disabled="true"> Delete
+    <button *ngIf="formBtn === 'Modify'" type="button" class="btn btn--m btn--secondary" aria-disabled="true" (click)="deleteEvent()"> Delete
       event</button>
   </div>
   <!-- //FORM ACTIONS -->
@@ -130,7 +131,7 @@
   </app-user-list>
   <!-- FORM ACTIONS -->
   <div class="container container--btn">
-    <button type="button" class="btn btn--m btn--primary" aria-disabled="true" (click)="onAdd(newInvitee)">Add
+    <button type="button" class="btn btn--m btn--primary" aria-disabled="true" (click)="onAddInvitee(newInvitee)">Add
       invitee</button>
   </div>
   <!-- //FORM ACTIONS -->

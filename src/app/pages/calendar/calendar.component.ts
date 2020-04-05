@@ -1,17 +1,14 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { Calendar, EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import listGridPlugin from '@fullcalendar/list';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import interactionPlugin from '@fullcalendar/interaction';
 
-
 import { ModalComponent } from 'src/app/shared/component/modal/modal.component';
 import { ModalService } from 'src/app/services/modal.service';
 import { CalendarEvent } from 'src/app/models/event';
 import { DataService } from 'src/app/services/data.service';
-import { Evented } from 'mapbox-gl';
 
 @Component({
   selector: 'app-calendar',
@@ -52,7 +49,8 @@ export class CalendarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.calendarEvents = this.dataService.userGroup.events;
+    this.calendarEvents = this.dataService.userGroup.events.filter(event => event.deleted === false);
+    console.log(this.dataService.userGroup.events.filter(event => event.deleted === false))
     const newEventBtn = document.getElementById('newEventBtn');
     newEventBtn.addEventListener('click', () => this.toggleModal(this.newEventModal))
   }
@@ -65,24 +63,30 @@ export class CalendarComponent implements OnInit {
     }
   }
 
-  selectEvent(event, modal: ModalComponent): void {
+  selectEvent(event, targetModal: ModalComponent): void {
     this.selectedEvent = {
       id: event.event.id,
       modifyAt: event.event.extendedProps.modifyAt,
       title: event.event.title,
       start: event.event.start,
-      end: event.event.allDay ? event.event.start : event.event.end ,
+      end: event.event.end ? event.event.end: event.event.start ,
       allDay: event.event.allDay,
       location: event.event.extendedProps.location,
       invitees: event.event.extendedProps.invitees,
       notes: event.event.extendedProps.notes,
+      deleted: false,
     }
-    this.toggleModal(modal);
+    this.toggleModal(targetModal);
   }
 
-  selectDay(event, modal): void {
+  selectDay(event, targetModal: ModalComponent): void {
     this.selectedDay.start = event.date;
     this.selectedDay.end = event.date;
-    this.toggleModal(modal);
+    this.toggleModal(targetModal);
+  }
+
+  updateEventList(eventList, targetModal: ModalComponent): void {
+    this.calendarEvents = eventList.filter(event => event.deleted === false);
+    this.toggleModal(targetModal);
   }
 }
