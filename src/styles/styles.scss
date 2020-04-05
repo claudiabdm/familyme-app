@@ -2,27 +2,27 @@
 // FONTS                        //
 // ---------------------------- //
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700i&display=swap');
-
+@import '~@danielmoncada/angular-datetime-picker/assets/style/picker.min.css';
 
 // CORE                         //
 // ---------------------------- //
 @import '../../node_modules/@fullcalendar/core/main.css';
 @import '../../node_modules/@fullcalendar/daygrid/main.css';
 @import '../../node_modules/@fullcalendar/list/main.css';
-@import "mixins/mixins";
-@import "global/variables";
-@import "global/reset";
-@import "global/base";
-@import "global/container";
-@import "global/icons";
+@import 'mixins/mixins';
+@import 'global/variables';
+@import 'global/reset';
+@import 'global/base';
+@import 'global/container';
+@import 'global/icons';
 
 
 // COMPONENTS                  //
 // ---------------------------- //
-@import "components/button";
-@import "components/checkbox";
-@import "components/switch";
-@import "components/form";
-@import "components/user";
-@import "../app/shared/component/map/map.component";
-@import "components/calendar";
+@import 'components/button';
+@import 'components/checkbox';
+@import 'components/switch';
+@import 'components/form';
+@import 'components/user';
+@import '../app/shared/component/map/map.component';
+@import 'components/calendar';

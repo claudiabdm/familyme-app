@@ -14,7 +14,6 @@ export class UserListComponent implements OnInit {
   @Input() isCheckList: boolean = false;
 
   @Output() userListChange = new EventEmitter<User[]>();
-  @Output() close = new EventEmitter();
 
   constructor(
     private dataService: DataService,

@@ -2,14 +2,19 @@
 // CALENDAR                     //
 // ---------------------------- //
 
-
+// ---------------------------- //
 // FULL CALENDAR                //
 // ---------------------------- //
 
 .fc-view-container {
   background-color: #fff;
   border-radius: 5px;
+
+  a {
+    font-weight: $font-weight-medium;
+  }
 }
+
 
 // TOOLBAR
 // ----------------------------
@@ -20,8 +25,8 @@
     grid-template-rows: repeat(2, 1fr);
     column-gap: 0;
     grid-template-areas:
-    " fc-center fc-center"
-    " fc-left fc-right"
+      " fc-center fc-center"
+      " fc-left fc-right"
     ;
     font-size: 1rem;
 
@@ -47,10 +52,16 @@
 
 // EVENTS
 // ----------------------------
-.fc-event, .fc-event-dot {
+.fc-event,
+.fc-event-dot {
   border: none;
   background-color: $primary;
 }
+
+.fc-day-grid-event .fc-time {
+  font-weight: $font-weight-medium;
+}
+
 
 // BUTTONS
 // ----------------------------
@@ -74,7 +85,7 @@
 .fc-button-primary {
   background-color: $primary;
 
-  &:disabled{
+  &:disabled {
     background-color: $grey-100;
   }
 
@@ -91,4 +102,23 @@
 
 // LIST VIEW
 // ----------------------------
+.fc-list-heading td,
+.fc-list-item a {
+  font-weight: $font-weight-medium;
+}
 
+
+// ----------------------------//
+// OWL DATETIME PICKER         //
+// ----------------------------//
+.owl-dt-calendar-table .owl-dt-calendar-cell-selected {
+  background-color: $primary;
+}
+
+.owl-dt-calendar-table .owl-dt-calendar-cell-today:not(.owl-dt-calendar-cell-selected) {
+  border-color: $grey-100;
+}
+
+.owl-dt-container-buttons {
+  color: $secondary;
+}
