@@ -34,20 +34,19 @@ export class GroupsService {
     }));
   }
 
-  searchGroupByToken(groupToken: string): Observable<Group> {
-    return this.http.get<Group>(`${this.url}?search=${groupToken}`, this.httpOptions).pipe(map(group => {
+  searchGroupByToken(familyCode: string): Observable<Group> {
+    return this.http.get<Group>(`${this.url}?search=${familyCode}`, this.httpOptions).pipe(map(group => {
       this.dataService.updateUserGroup(group[0]);
       return group[0];
     }));
   }
 
-  deleteGroup(id: Group["id"]): Observable<Group> {
+  deleteGroup(id: string): Observable<Group> {
     return this.http.delete<Group>(`${this.url}/${id}`);
   }
 
   addUserToGroup(user: User, group: Group): Observable<Group> {
-    user.groupToken = group.token;
-    user.groupId = group.id;
+    user.familyCode = group.familyCode;
     return this.http.put<Group>(`${this.url}/${group.id}`, group, this.httpOptions);
   }
 }

@@ -14,12 +14,13 @@ import { DataService } from './data.service';
 })
 export class UsersService {
 
-  private url = `${environment.apiUrl}users`;
+  // private url = `${environment.apiUrl}users`;
+  private url = 'http://localhost:3000/api/v1/users';
 
   constructor(private http: HttpClient, private dataService: DataService) { }
 
   createUser(user: User, group: Group, role: string): Observable<User> {
-    const newUser = Object.assign(user, { role: role, groupToken: group.token, groupId: group.id });
+    const newUser = Object.assign(user, { role: role, familyCode: group.familyCode, groupId: group.id });
     return this.http.post<User>(this.url, newUser);
   }
 
@@ -30,8 +31,8 @@ export class UsersService {
     }))
   }
 
-  getUsersByGroupToken(groupToken: string): Observable<User[]> {
-    return this.http.get<User[]>(`${this.url}?search=${groupToken}`).pipe(map(users => {
+  getUsersByGroupToken(familyCode: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.url}?search=${familyCode}`).pipe(map(users => {
       this.dataService.updateUserList(users);
       return users;
     }))

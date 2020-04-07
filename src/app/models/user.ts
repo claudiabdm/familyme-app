@@ -1,15 +1,13 @@
 import { Group } from './group';
 
 export class User {
-  id: number;
-  createdAt: Date;
+  id: string;
   name: string;
   email: string;
   password: string;
   avatar: string | ArrayBuffer;
   role: string;
-  groupId: Group["id"];
-  groupToken: Group["token"];
+  familyCode: Group["familyCode"];
   location: google.maps.LatLngLiteral;
   isSelected: boolean;
 }
