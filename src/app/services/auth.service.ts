@@ -37,9 +37,11 @@ export class AuthService {
             this.invalidPassword = false;
             this.groupsService.searchGroupByToken(user.familyCode)
               .subscribe(group => {
+
                 if (group) {
                   this.invalidGroup = false;
                   this.usersService.getUsersByGroupToken(user.familyCode).subscribe(users => {
+
                     this.dataService.setData(user, group, users);
                     this.spinner.hide();
                     this.router.navigate(['pages/home']);

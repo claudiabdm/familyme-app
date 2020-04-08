@@ -43,7 +43,7 @@ export class DataService {
   }
 
   public updateUserData(user: User): void {
-    const idx = this.userList.findIndex(data => data.id === user.id);
+    const idx = this.userList.findIndex(data => data._id === user._id);
     if (idx > -1) {
       this.user = user;
       this.userList.splice(idx, 1, user);

@@ -28,14 +28,14 @@ export class GroupsService {
   }
 
   updateGroup(group: Group): Observable<Group> {
-    return this.http.put<Group>(`${this.url}/${group.id}`, group).pipe(map(group => {
+    return this.http.put<Group>(`${this.url}/${group._id}`, group).pipe(map(group => {
       this.dataService.updateUserGroup(group);
       return group;
     }));
   }
 
   searchGroupByToken(familyCode: string): Observable<Group> {
-    return this.http.get<Group>(`${this.url}?search=${familyCode}`, this.httpOptions).pipe(map(group => {
+    return this.http.get<Group>(`${this.url}/search/${familyCode}`, this.httpOptions).pipe(map(group => {
       this.dataService.updateUserGroup(group[0]);
       return group[0];
     }));
@@ -47,6 +47,6 @@ export class GroupsService {
 
   addUserToGroup(user: User, group: Group): Observable<Group> {
     user.familyCode = group.familyCode;
-    return this.http.put<Group>(`${this.url}/${group.id}`, group, this.httpOptions);
+    return this.http.put<Group>(`${this.url}/${group._id}`, group, this.httpOptions);
   }
 }

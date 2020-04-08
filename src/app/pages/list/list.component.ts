@@ -24,7 +24,7 @@ export class ListComponent implements OnInit {
     private sortService: SortService) { }
 
   ngOnInit(): void {
-    this.groupsService.searchGroupByToken(this.dataService.user.groupToken)
+    this.groupsService.searchGroupByToken(this.dataService.user.familyCode)
       .pipe(takeUntil(this.ngUnsubscribe$)).subscribe(group => { this.productList = group.shoppingList });
   }
 

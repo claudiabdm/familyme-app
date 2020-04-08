@@ -14,32 +14,31 @@ import { DataService } from './data.service';
 })
 export class UsersService {
 
-  // private url = `${environment.apiUrl}users`;
-  private url = 'http://localhost:3000/api/v1/users';
+  private url = `${environment.apiUrl}users`;
 
   constructor(private http: HttpClient, private dataService: DataService) { }
 
   createUser(user: User, group: Group, role: string): Observable<User> {
-    const newUser = Object.assign(user, { role: role, familyCode: group.familyCode, groupId: group.id });
+    const newUser = Object.assign(user, { role: role, familyCode: group.familyCode, groupId: group._id });
     return this.http.post<User>(this.url, newUser);
   }
 
   updateUser(user: User): Observable<User> {
-    return this.http.put<User>(`${this.url}/${user.id}`, user).pipe(map(user => {
+    return this.http.put<User>(`${this.url}/${user._id}`, user).pipe(map(user => {
       this.dataService.updateUserData(user);
       return user;
     }))
   }
 
   getUsersByGroupToken(familyCode: string): Observable<User[]> {
-    return this.http.get<User[]>(`${this.url}?search=${familyCode}`).pipe(map(users => {
+    return this.http.get<User[]>(`${this.url}/search/${familyCode}`).pipe(map(users => {
       this.dataService.updateUserList(users);
       return users;
     }))
   }
 
   searchUserByEmail(user: User): Observable<User> {
-    const url = `${this.url}?search=${user.email}`;
+    const url = `${this.url}/search/${user.email}`;
     return this.http.get<User>(url).pipe(
       map(users => users[0]),
     );

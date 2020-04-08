@@ -2,7 +2,7 @@ import { Product } from './product';
 import { CalendarEvent } from './event';
 
 export class Group {
-  id: string;
+  _id: string;
   familyCode: string;
   name: string;
   shoppingList: Product[];

@@ -7,7 +7,7 @@
   <article class="user user--col">
     <button type="button" class="user__btn" id="imgBtn" (click)="toggleModal(editPhotoModal)">
       <div class="user__img-wrapper user__img-wrapper--large">
-        <img class="user__img user__img--large" [src]="user.avatar" alt="{{ user.name }} profile photo">
+        <img class="user__img user__img--large" [src]="user.avatar || img" alt="{{ user.name }} profile photo">
       </div>
     </button>
     <h2 class="user__name user__name--large">{{ user.name }}</h2>
@@ -61,7 +61,7 @@
     <p class="container__p container__p--medium">Copy the code below and send it to your family to join you!
     </p>
     <div class="container container--btn">
-      <input type="text" class="copy-me" value="{{userGroup.token}}" #copyMe readonly="true">
+      <input type="text" class="copy-me" value="{{userGroup.familyCode}}" #copyMe readonly="true">
       <button class="btn btn--primary btn--m" (click)="copyMyText(copyMe)">Copy To Clipboard</button>
     </div>
 

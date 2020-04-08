@@ -49,7 +49,7 @@ export class CalendarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.calendarEvents = this.dataService.userGroup.events.filter(event => event.deleted === false);
+    this.calendarEvents = this.dataService.userGroup.events;
     const newEventBtn = document.getElementById('newEventBtn');
     newEventBtn.addEventListener('click', () => this.toggleModal(this.newEventModal))
   }
@@ -64,8 +64,7 @@ export class CalendarComponent implements OnInit {
 
   selectEvent(event, targetModal: ModalComponent): void {
     this.selectedEvent = {
-      id: event.event.id,
-      modifyAt: event.event.extendedProps.modifyAt,
+      _id: event.event.extendedProps._id,
       title: event.event.title,
       start: event.event.start,
       end: event.event.end ? event.event.end: event.event.start ,
@@ -73,7 +72,6 @@ export class CalendarComponent implements OnInit {
       location: event.event.extendedProps.location,
       invitees: event.event.extendedProps.invitees,
       notes: event.event.extendedProps.notes,
-      deleted: false,
     }
     this.toggleModal(targetModal);
   }
@@ -85,7 +83,7 @@ export class CalendarComponent implements OnInit {
   }
 
   updateEventList(eventList, targetModal: ModalComponent): void {
-    this.calendarEvents = eventList.filter(event => event.deleted === false);
+    this.calendarEvents = eventList;
     this.toggleModal(targetModal);
   }
 }
