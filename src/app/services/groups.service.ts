@@ -19,10 +19,9 @@ export class GroupsService {
 
   constructor(private http:HttpClient, private dataService: DataService) { }
 
-  createGroup(group: string): Observable<Group> {
+  createGroup(name: string): Observable<Group> {
     const newGroup = {
-      name: group,
-      createdAt: new Date(),
+      name: name,
     }
     return this.http.post<Group>(this.url, newGroup);
   }

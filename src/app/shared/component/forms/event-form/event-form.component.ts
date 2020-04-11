@@ -83,7 +83,7 @@ export class EventFormComponent implements OnInit, OnDestroy {
       allDay: form.value.allDay,
       invitees: this.inviteeList.map(user => user._id),
       notes: form.value.notes,
-    } as CalendarEvent
+    } as CalendarEvent;
     switch (this.formBtn) {
       case 'Add':
         this.dataService.userGroup.events.push(eventToSubmit);

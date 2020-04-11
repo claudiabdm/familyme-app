@@ -35,16 +35,11 @@ export class ListComponent implements OnInit {
 
   addItem(product: string): void {
     if (product) {
-      const ids = this.productList.map(a => a.id);
-      const productId = this.productList.length > 0 ? Math.max(...ids) + 1 : 1;
       const newProduct: Product = {
-        id: productId,
-        createdAt: new Date(),
         name: product,
         addedBy: this.dataService.user.name,
         done: false,
-        deleted: false,
-      };
+      } as Product;
       this.productList.push(newProduct);
       this.dataService.userGroup.shoppingList = this.productList;
       this.scrollToBottom(document.getElementById('container'));
@@ -54,7 +49,7 @@ export class ListComponent implements OnInit {
   }
 
   doneItem(product: Product, check: boolean): void {
-    const idx = this.productList.findIndex((data) => data.id === product.id);
+    const idx = this.productList.findIndex((data) => data._id === product._id);
     if (idx > -1) {
       product.done = check;
       this.productList.splice(idx, 1, product);
@@ -64,9 +59,8 @@ export class ListComponent implements OnInit {
   }
 
   deleteItem(product: Product): void {
-    const idx = this.productList.findIndex((data) => data.id === product.id);
+    const idx = this.productList.findIndex((data) => data._id === product._id);
     if (idx > -1) {
-      product.deleted = true; // la api no me deja eliminar de la shopping list, put devuelve 200 OK pero no modifica nada
       this.dataService.userGroup.shoppingList.splice(idx, 1, product);
       this.groupsService.updateGroup(this.dataService.userGroup).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
     }
