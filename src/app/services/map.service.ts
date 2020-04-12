@@ -19,6 +19,8 @@ export class MapService {
     'features': []
   };
 
+  private img = '../../../../assets/img/profile-photo-round.svg';
+
   constructor() {
     this.mapbox.accessToken = environment.mapBoxToken;
   }
@@ -40,7 +42,7 @@ export class MapService {
       overlayContainer.classList.add('user__img-wrapper', 'user__img-wrapper--medium');
       const userPhoto = document.createElement('img');
       userPhoto.classList.add('user__img', 'user__img--medium');
-      userPhoto.src = user.avatar.toString();
+      userPhoto.src = user.avatar.toString() || this.img;
 
       overlayContainer.appendChild(userPhoto);
       overlay.appendChild(overlayContainer);
