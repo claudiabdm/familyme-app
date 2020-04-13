@@ -24,11 +24,11 @@
     <ng-container *ngFor="let product of productList">
       <li class="list__item" *ngIf="!product.deleted">
         <div class="list__checkbox checkbox checkbox--lg">
-          <input type="checkbox" [name]="product.name" [id]="product.id" class="checkbox__box" [checked]="product.done"
-            #checkboxCheck (click)="doneItem(product, checkboxCheck.checked)">
+          <input type="checkbox" [name]="product.name" [id]="product._id" class="checkbox__box" [checked]="product.done"
+            #checkedProduct (change)="doneItem(product, checkedProduct.checked)">
           <span class="checkbox__checkmark"></span>
         </div>
-        <label [for]="product.id" class="list__label">
+        <label [for]="product._id" class="list__label">
           <span class="list__product" [class.list__done]="product.done">{{ product.name }}</span>
           <span class="list__addedby">Added by {{ product.addedBy }}</span>
         </label>
