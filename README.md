@@ -1,27 +1,31 @@
-# Familyme App
+# FamilyMe App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.1.
+## About 
 
-## Development server
+FamilyMe is an application that helps your family getting orginized by providing a shared calendar and shopping list. It also provides a locator to check where the members are and a chat to keep family connected from anywhere.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+This repository contains the Angular 9 frontend project, to check out the backend project visit the following link: 
+https://github.com/claudiabdm/familyme-api
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Getting Started
 
-## Build
+### Prerequistes
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+To run this project you will need to install node.js, npm and angular in your local environmnet.
+https://angular.io/guide/setup-local 
 
-## Running unit tests
+### Installation
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+After you have cloned this repository in your directory, run the following command to install dependencies:
 
-## Running end-to-end tests
+````
+npm install
+````
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Usage
 
-## Further help
+### Run in development environment
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Use `npm run dev` for a dev server. Navigate to `https://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
