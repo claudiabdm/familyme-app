@@ -15,6 +15,8 @@ export class UserListComponent implements OnInit {
 
   @Output() userListChange = new EventEmitter<User[]>();
 
+  public img = '../../../assets/img/profile-photo-round.svg';
+
   constructor(
     private dataService: DataService,
   ) { }
@@ -24,6 +26,7 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
   onChecked(user, checked) {

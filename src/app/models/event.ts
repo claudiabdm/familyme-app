@@ -2,14 +2,12 @@ import { User } from './user';
 import { DateInput } from '@fullcalendar/core/datelib/env';
 
 export class CalendarEvent {
-  id: number;
-  modifyAt: Date;
+  _id: string;
   title: string;
   start: DateInput;
   end: DateInput;
   allDay: boolean;
   location: '';
-  invitees: User["id"][];
+  invitees: User["_id"][];
   notes:string;
-  deleted: boolean;
 }

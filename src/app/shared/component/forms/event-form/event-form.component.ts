@@ -20,7 +20,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class EventFormComponent implements OnInit, OnDestroy {
 
-  @Input() eventInfo: CalendarEvent | any;
+  @Input() eventInfo: CalendarEvent ;
   @Input() formBtn: string;
 
   @Output() onEventListChange = new EventEmitter<CalendarEvent[]>();
@@ -51,7 +51,7 @@ export class EventFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.dataService.userList.forEach(user => {
-      if (this.eventInfo.invitees.length > 0 && this.eventInfo.invitees.includes(user.id)) {
+      if (this.eventInfo.invitees.length > 0 && this.eventInfo.invitees.includes(user._id)) {
         this.inviteeList.push(user);
         user.isSelected = true;
       } else {
@@ -76,27 +76,20 @@ export class EventFormComponent implements OnInit, OnDestroy {
   onSubmit(form: FormGroup): void {
     this.spinner.show();
     const eventToSubmit = {
-      id: 0,
-      modifyAt: new Date(),
       title: form.value.eventName,
       location: form.value.location,
       start: form.value.startDate,
       end: form.value.endDate,
       allDay: form.value.allDay,
-      invitees: this.inviteeList.map(user => user.id),
+      invitees: this.inviteeList.map(user => user._id),
       notes: form.value.notes,
-      deleted: false,
-    }
+    } as CalendarEvent
     switch (this.formBtn) {
       case 'Add':
-        const ids = this.dataService.userGroup.events.map(a => a.id);
-        const eventId = this.dataService.userGroup.events.length > 0 ? Math.max(...ids) + 1 : 1;
-        eventToSubmit.id = eventId;
         this.dataService.userGroup.events.push(eventToSubmit);
         break;
       case 'Modify':
-        const idx = this.dataService.userGroup.events.findIndex(event => event.id === this.eventInfo.id);
-        eventToSubmit.id = this.eventInfo.id;
+        const idx = this.dataService.userGroup.events.findIndex(event => event._id === this.eventInfo._id);
         this.dataService.userGroup.events.splice(idx, 1, eventToSubmit);
         break;
     }
@@ -108,9 +101,8 @@ export class EventFormComponent implements OnInit, OnDestroy {
   }
 
   deleteEvent() {
-    const idx = this.dataService.userGroup.events.findIndex(event => event.id === this.eventInfo.id);
-    this.eventInfo.deleted = true;
-    this.dataService.userGroup.events.splice(idx, 1, this.eventInfo);
+    const updatedEventList = this.dataService.userGroup.events.filter(event => event._id !== this.eventInfo._id);
+    this.dataService.userGroup.events = updatedEventList;
     this.groupsService.updateGroup(this.dataService.userGroup).pipe(takeUntil(this.ngUnsubscribe$)).subscribe(
       group => this.onEventListChange.emit(group.events));
   }
@@ -131,7 +123,6 @@ export class EventFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.eventForm.reset();
-    this.eventInfo = {};
     this.userList = [];
     this.inviteeList = [];
     this.ngUnsubscribe$.next();

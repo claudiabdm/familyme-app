@@ -15,13 +15,15 @@ export class HomeComponent implements OnInit {
 
   private ngUnsubscribe$ = new Subject<void>();
 
+  public img = '../../../assets/img/profile-photo-round.svg';
+
   constructor(
     private dataService: DataService,
     private modalService: ModalService,
     private usersService: UsersService) { }
 
   ngOnInit(): void {
-    this.usersService.getUsersByGroupToken(this.dataService.user.groupToken).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
+    this.usersService.getUsersByGroupToken(this.dataService.user.familyCode).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
   }
 
   get user() {

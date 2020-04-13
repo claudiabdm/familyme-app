@@ -19,26 +19,26 @@ export class UsersService {
   constructor(private http: HttpClient, private dataService: DataService) { }
 
   createUser(user: User, group: Group, role: string): Observable<User> {
-    const newUser = Object.assign(user, { role: role, groupToken: group.token, groupId: group.id });
+    const newUser = Object.assign(user, { role: role, familyCode: group.familyCode, groupId: group._id });
     return this.http.post<User>(this.url, newUser);
   }
 
   updateUser(user: User): Observable<User> {
-    return this.http.put<User>(`${this.url}/${user.id}`, user).pipe(map(user => {
+    return this.http.put<User>(`${this.url}/${user._id}`, user).pipe(map(user => {
       this.dataService.updateUserData(user);
       return user;
     }))
   }
 
-  getUsersByGroupToken(groupToken: string): Observable<User[]> {
-    return this.http.get<User[]>(`${this.url}?search=${groupToken}`).pipe(map(users => {
+  getUsersByGroupToken(familyCode: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.url}/search/${familyCode}`).pipe(map(users => {
       this.dataService.updateUserList(users);
       return users;
     }))
   }
 
   searchUserByEmail(user: User): Observable<User> {
-    const url = `${this.url}?search=${user.email}`;
+    const url = `${this.url}/search/${user.email}`;
     return this.http.get<User>(url).pipe(
       map(users => users[0]),
     );

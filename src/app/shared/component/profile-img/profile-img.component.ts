@@ -18,6 +18,7 @@ export class ProfileImgComponent implements OnInit {
   @Output() delete = new EventEmitter();
 
   public isDisabled: boolean = true;
+  public img = '../../../../assets/img/profile-photo-round.svg';
 
   fileName: string = "No file selected";
   file: File;
@@ -55,7 +56,7 @@ export class ProfileImgComponent implements OnInit {
   }
 
   onDelete() {
-    this.user.avatar = '../../../../assets/img/profile-photo-round.svg';
+    this.user.avatar = this.img;
     this.delete.emit(this.user.avatar);
   }
 
