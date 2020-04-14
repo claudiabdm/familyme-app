@@ -5,7 +5,7 @@
 // ---------------------------- //
 
 .container--list {
-  background-color: $tertiary;
+  background-color: var(--tertiary);
 }
 .list {
   min-width: 20rem;
@@ -33,7 +33,7 @@
 
     margin: 10px 20px;
     padding: 0 ($padding-sides - 20px);
-    background-color: #fff;
+    background-color: var(--body-bg);
     border: 1px solid rgba($color: $secondary, $alpha: 0.75);
     border-radius: 3px;
     box-shadow: $box-shadow-sharpen;
@@ -48,7 +48,7 @@
 
     &:hover {
       cursor: pointer;
-      background-color: darken($tertiary, 2.5%);
+      background-color: var(--hover-bg);
     }
 
   }
@@ -87,6 +87,7 @@
     margin-left: 0px;
     padding: 0;
     background: none;
+    color: var(--body-color);
     font-family: $font-family-primary;
     font-size: rem(24px);
     font-weight: $font-weight-light;
@@ -118,7 +119,7 @@
 
   }
 
-  // Checked status
+  // CHECKED STATUS
   // ---------------------
 
   &__product {

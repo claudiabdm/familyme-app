@@ -11,7 +11,7 @@
   position: relative;
   border: $border;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: var(--body-bg);
   width: max-content;
 
   &__box {

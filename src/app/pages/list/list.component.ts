@@ -59,11 +59,9 @@ export class ListComponent implements OnInit {
   }
 
   deleteItem(product: Product): void {
-    const idx = this.productList.findIndex((data) => data._id === product._id);
-    if (idx > -1) {
-      this.dataService.userGroup.shoppingList.splice(idx, 1, product);
-      this.groupsService.updateGroup(this.dataService.userGroup).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
-    }
+    this.productList = this.productList.filter((data) => data._id !== product._id);
+    this.dataService.userGroup.shoppingList = this.productList;
+    this.groupsService.updateGroup(this.dataService.userGroup).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
   }
 
   sortAtoZ(sortIcon): void {

@@ -6,14 +6,16 @@
 // -----------------------------------------
 
 // Colors
-$primary:  #94e9f2;
-$secondary:#ff748b;
-$tertiary: #fffdf5;
-$success:  #79f285;
+$primary: #25ced1;
+$secondary:#ea526f;
+$tertiary:#fffdf5;
+$success: #72e67d;
 
 // Grey
-$grey-100:  #c4c4c4;
-$grey-200:  #525252;
+$grey-100: #c4c4c4;
+$grey-200: #525252;
+$grey-300: #333;
+$grey-400: #202020;
 
 
 // Gradients
@@ -28,12 +30,9 @@ $navbar-height:40px;
 $navbar-width-desktop: 18vw;
 
 
-$body-color:   #000;
-$body-bg:      #fff;
-
-$link-color:          $secondary;
-$link-decoration:     none;
-$link-hover:          none;
+$link-color: $secondary;
+$link-decoration: none;
+$link-hover: none;
 
 $padding-sides: 30px;
 
@@ -46,10 +45,13 @@ $box-shadow-sharpen: 0 3px 1px 1px rgba(0, 0, 0, 0.05);
 // Font
 // ------------------------------------------
 
-$font-primary:   "Roboto";
+$font-primary: "Roboto";
 $font-secondary: "Quattrocento";
-$font-family-primary:        $font-primary, Arial, sans-serif;
-$font-family-secondary:      $font-primary, serif;
+$font-family-primary: $font-primary,
+Arial,
+sans-serif;
+$font-family-secondary: $font-primary,
+serif;
 
 $font-size-body: 16px;
 $font-size-base: 1rem;
@@ -64,3 +66,27 @@ $font-weight-bold: 700;
 // ------------------------------------------
 $md: 768px;
 $lg: 1023px;
+
+
+// Light and Dark theme
+// ------------------------------------------
+
+:root {
+  --body-color: #000;
+  --body-bg: #fff;
+  --tertiary: #{$tertiary};
+  --hover-bg: #{darken($tertiary, 2.5%)};
+  --icon-filter: grayscale(1);
+  --icon-filter-selected: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --body-color: #fff;
+    --body-bg:  #{$grey-400};
+    --tertiary: #{$grey-200};
+    --hover-bg: #{darken($grey-300, 2.5%)};
+    --icon-filter: grayscale(1) invert(1) opacity(0.8);
+    --icon-filter-selected: hue-rotate(-180deg) invert(1) opacity(1);
+  }
+}

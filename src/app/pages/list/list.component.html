@@ -22,7 +22,7 @@
     </div>
 
     <ng-container *ngFor="let product of productList">
-      <li class="list__item" *ngIf="!product.deleted">
+      <li class="list__item">
         <div class="list__checkbox checkbox checkbox--lg">
           <input type="checkbox" [name]="product.name" [id]="product._id" class="checkbox__box" [checked]="product.done"
             #checkedProduct (change)="doneItem(product, checkedProduct.checked)">

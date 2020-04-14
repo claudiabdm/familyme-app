@@ -27,9 +27,14 @@
     @include size($height: auto);
 
     min-height: 40vh;
-    background-color: #fff;
+    background-color: var(--body-bg);
     transform: translate3d(0, 100%, 0);
     transition: transform 0.35s ease-out;
+
+    @media screen and (min-width: $lg){
+     border: $border;
+     border-top: 0;
+    }
 
 
     // Modal container full
@@ -60,8 +65,10 @@
     min-width: 20rem;
     padding: 0 $padding-sides;
     margin: 0 auto;
-    border-bottom: $border;
-    background-color: #fff;
+    border: $border;
+    border-left: 0;
+    border-right: 0;
+    background-color: var(--body-bg);
     color: $secondary;
     font-weight: $font-weight-bold;
     font-size: ($font-size-base * 2); // not working again using the variable like rem(16px)

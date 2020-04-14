@@ -12,7 +12,7 @@
     width: 100%;
     margin: 0 auto;
     font-weight: $font-weight-light;
-    color: #000;
+    color: var(--body-color);
 
     &--large {
       width: inherit;
@@ -67,8 +67,8 @@
 
     margin-right: 10px;
     border-radius: 100%;
-    border: 2px solid #fff;
-    background: #fff;
+    border: 2px solid var(--body-bg);
+    background: var(--body-bg);
     background: $gradient;
     padding: 1px;
 
@@ -84,8 +84,8 @@
         align-self: flex-end;
         display: block;
         border-radius: 3px;
-        border: 2px solid #fff;
-        background: #fff;
+        border: 2px solid var(--body-bg);
+        background: var(--body-bg);
         background: linear-gradient(45deg, $primary 0%, $secondary 100%);
         transform: rotate(-45deg);
         z-index: -1;
@@ -104,7 +104,7 @@
     @include size(rem(40px), rem(40px));
     margin: 0;
     border-radius: 100%;
-    border: 2px solid #fff;
+    border: 2px solid var(--body-bg);
     border-radius: 100%;
     object-position: center;
     object-fit: cover;

@@ -30,7 +30,7 @@
   }
 
   &:disabled {
-    background-color: $grey-100;
+    background-color: $grey-200;
   }
 
   &:hover:not(:disabled) {
@@ -102,7 +102,7 @@
   transition: color 0.2s ease-out;
 
   &:hover {
-    color: #{darken($grey-100, 30%)};
+    color: #{darken($grey-100, 20%)};
     --button-hover: rgba(0, 0, 0, 0);
   }
 }
@@ -120,8 +120,8 @@
   @include size(rem(50px));
 
   border-radius: 100%;
-  background-color: #fff;
-  --button-hover: #fff;
+  background-color: var(--body-bg);
+  --button-hover: var(--body-bg);
   font-size: $font-size-base;
   font-weight: $font-weight-light;
   box-shadow: $box-shadow-sharpen;

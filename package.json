@@ -7,7 +7,7 @@
   },
   "scripts": {
     "ng": "ng",
-    "dev": "ng serve --ssl --ssl-key certificate/localhost.key  --ssl-cert certificate/localhost.crt",
+    "dev": "ng serve --ssl --ssl-key certificate/localhost.key  --ssl-cert certificate/localhost.crt --host 192.168.0.35",
     "start": "node server.js",
     "build": "ng build",
     "test": "ng test",

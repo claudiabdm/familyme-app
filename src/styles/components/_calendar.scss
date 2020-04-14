@@ -7,7 +7,7 @@
 // ---------------------------- //
 
 .fc-view-container {
-  background-color: #fff;
+  background-color: var(--body-bg);
   border-radius: 5px;
 
   a {
@@ -15,6 +15,9 @@
   }
 }
 
+.fc-unthemed td.fc-today {
+  background-color: var(--tertiary);
+}
 
 // TOOLBAR
 // ----------------------------
@@ -105,6 +108,15 @@
 .fc-list-heading td,
 .fc-list-item a {
   font-weight: $font-weight-medium;
+}
+
+.fc-unthemed .fc-list-heading td {
+  background-color: var(--body-bg);
+}
+
+.fc-unthemed .fc-list-item:hover td {
+  background-color: var(--body-bg);
+  cursor: pointer;
 }
 
 

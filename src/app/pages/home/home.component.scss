@@ -17,6 +17,6 @@
 
   &:focus {
     outline: none;
-    background-color: $tertiary;
+    background-color: var(--tertiary);
   }
 }

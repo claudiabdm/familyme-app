@@ -15,7 +15,7 @@
   min-width: rem(320px);
   margin: 0 auto;
   border-top: $border;
-  background-color: #fff;
+  background-color: var(--body-bg);
   box-shadow: 3px 0px 1px rgba(0, 0, 0, 0.05);
   z-index: 9;
 

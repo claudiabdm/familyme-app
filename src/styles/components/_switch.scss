@@ -13,7 +13,7 @@
   // SWITCH LABEL
   // -----------------------------
   &__label {
-    color: #000;
+    color: var(--body-color);
     font-size: var(--switch-label-size);
     font-weight: $font-weight-light;
     margin-right: 5px;
@@ -42,7 +42,7 @@
 
       border-radius: 50%;
       border: $border;
-      background-color: white;
+      background-color: var(--body-bg);
       transform: translate3d(0, 0, 0);
       transition: transform 0.3s, border 0.3s;
     }

@@ -6,19 +6,20 @@
 .icon {
 	width: 2.5rem;
 	height: 2.5rem;
-	filter: grayscale(100%);
+	filter: var(--icon-filter);
 	transition: filter 0.1s linear;
 }
 
 .icon--selected,
 .icon:hover,
-.icon--nofilter,
 .icon-red_eye,
 .icon-red_eye_close {
-  filter: none;
-  transition: none;
+  filter: var(--icon-filter-selected);
 }
 
+.icon--nofilter {
+  filter: none;
+}
 // -- Sizes --- //
 
 .icon--ms {

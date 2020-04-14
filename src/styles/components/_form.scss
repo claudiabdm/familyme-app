@@ -85,17 +85,20 @@
     border: $border;
     border-radius: 4px;
     padding: 5px 7px;
+    color: var(--body-color);
+    background-color: var(--body-bg);
     font-family: $font-family-primary;
     font-weight: $font-weight-light;
     font-size: 1rem;
 
     &::placeholder {
       font-size: 0.85rem;
+      font-style: italic;
     }
 
     &:focus {
       outline: none;
-      background-color: $tertiary;
+      // background-color: var(--tertiary);
     }
 
     &--invalid {
@@ -168,4 +171,19 @@
 .form--checklist {
   display: flex;
   flex-direction: column;
+}
+
+
+// Deletes autofill default styles
+@keyframes autofill {
+  0%,100% {
+      color: var(--body-color);
+      background: transparent;
+  }
+}
+
+input:-webkit-autofill {
+  animation-delay: 0s; /* Safari support - any positive time runs instantly */
+  animation-name: autofill;
+  animation-fill-mode: both;
 }

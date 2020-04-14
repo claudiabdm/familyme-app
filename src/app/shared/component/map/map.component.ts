@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as mapboxgl from 'mapbox-gl';
 
@@ -15,23 +15,26 @@ import { MapService } from 'src/app/services/map.service';
 export class MapComponent implements OnInit {
 
   private ngUnsubscribe$ = new Subject<void>();
-
+  private mapStyle: string;
   constructor(private mapService: MapService, private dataService: DataService, private usersService: UsersService) { }
 
   ngOnInit(): void {
     if (navigator) {
       navigator.geolocation.getCurrentPosition(position => {
-        this.mapService.buildMap(position);
-        this.dataService.user.location.lat = position.coords.latitude;
-        this.dataService.user.location.lng = position.coords.longitude;
-        this.usersService.updateUser(this.dataService.user).pipe(takeUntil(this.ngUnsubscribe$)).subscribe(res => {
-          this.dataService.userList.forEach((user) => {
-            if (user.location.lat && user.location.lng) {
-              this.mapService.addMarker(user, this.mapService.map);
-            }
+        this.mapService.mapTheme.pipe(takeUntil(this.ngUnsubscribe$)).subscribe((theme: string) => {
+          this.mapStyle = theme;
+          this.mapService.buildMap(position, this.mapStyle);
+          this.dataService.user.location.lat = position.coords.latitude;
+          this.dataService.user.location.lng = position.coords.longitude;
+          this.usersService.updateUser(this.dataService.user).pipe(takeUntil(this.ngUnsubscribe$)).subscribe(res => {
+            this.dataService.userList.forEach((user) => {
+              if (user.location.lat && user.location.lng) {
+                this.mapService.addMarker(user, this.mapService.map);
+              }
+            })
           })
         })
-      })
+      });
     }
   }
 

@@ -11,7 +11,7 @@
   min-width: 20rem;
   margin: 0 auto;
   border-bottom: $border;
-  background-color: #fff;
+  background-color: var(--body-bg);
   color: $secondary;
   font-weight: $font-weight-bold;
   font-size: ($font-size-base * 2);
