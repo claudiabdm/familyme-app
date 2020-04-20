@@ -80,7 +80,7 @@
   // -----------------------------
   &__control {
     @include flex(center, flex-start);
-    @include size();
+    @include size(100%, rem(30px));
 
     border: $border;
     border-radius: 4px;
@@ -147,7 +147,7 @@
   }
 
 
-  // MESSAGE GROUP
+  // MESSAGE VALIDATION GROUP
   // -----------------------------
   &__msg-group {
     position: absolute;

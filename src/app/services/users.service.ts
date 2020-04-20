@@ -30,6 +30,10 @@ export class UsersService {
     }))
   }
 
+  getUserById(id: User['_id']): Observable<User> {
+    return this.http.get<User>(`${this.url}/${id}`);
+  }
+
   getUsersByGroupToken(familyCode: string): Observable<User[]> {
     return this.http.get<User[]>(`${this.url}/search/${familyCode}`).pipe(map(users => {
       this.dataService.updateUserList(users);

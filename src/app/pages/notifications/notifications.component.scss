@@ -1,0 +1,105 @@
+@import '../../../styles/mixins/mixins';
+@import '../../../styles/global/variables';
+
+:root {
+  --direction: left;
+  --text-area-height: rem(30px);
+  --notifications-area-height: var(--text-area-height);
+}
+
+.container--top {
+  @include flex();
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--tertiary);
+}
+
+// ---------------------------- //
+// MESSAGE AREA                 //
+// ---------------------------- //
+
+.notifications {
+  @include flex(flex-start, flex-start);
+  @include size(100%);
+  flex-direction: column;
+  padding:  $navbar-height $padding-sides;
+  overflow: auto;
+
+  &__item {
+    @include flex(center, flex-start);
+    @include size(100%, auto);
+    border-color: rgba($color: $secondary, $alpha: 0.5);
+    margin: 10px 0;
+
+    &--right {
+      flex-direction: row-reverse;
+
+      & .notifications__msg {
+        margin-right: 10px;
+        border-color: $primary;
+      }
+    }
+  }
+
+  &__msg {
+    max-width: 60vw;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    border: $border;
+    border-color: $secondary;
+    border-radius: 3px;
+    padding: 10px;
+    background-color: var(--body-bg);
+    box-shadow: $box-shadow-sharpen;
+  }
+
+  &__text {
+    word-wrap: break-word;
+  }
+
+  &__time {
+    display: block;
+    margin-top: 2px;
+    color: $grey-100;
+    font-size: rem(10px);
+    text-align: right;
+  }
+
+}
+
+// ---------------------------- //
+// SEND AREA                    //
+// ---------------------------- //
+
+.form--notifications {
+    @include flex(center, space-between);
+    @include size(100%, auto);
+    margin: 0;
+    padding: $padding-sides/2;
+    border-top: $border;
+    background-color: var(--body-bg);
+
+    @media screen and (min-width: $lg) {
+      max-width: none;
+    }
+
+  & .form__control {
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 80%;
+    min-height: var(--text-area-height);
+    margin-right: rem(10px);
+    background-color: var(--body-bg);
+    resize: none;
+    overflow: hidden;
+  }
+}
+
+
+// ---------------------------- //
+// USER IMG                     //
+// ---------------------------- //
+
+.user__img-wrapper {
+  margin: 0;
+}

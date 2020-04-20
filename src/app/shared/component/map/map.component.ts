@@ -1,5 +1,5 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as mapboxgl from 'mapbox-gl';
 
@@ -16,7 +16,10 @@ export class MapComponent implements OnInit {
 
   private ngUnsubscribe$ = new Subject<void>();
   private mapStyle: string;
-  constructor(private mapService: MapService, private dataService: DataService, private usersService: UsersService) { }
+  constructor(
+    private mapService: MapService,
+    private dataService: DataService,
+    private usersService: UsersService) { }
 
   ngOnInit(): void {
     if (navigator) {

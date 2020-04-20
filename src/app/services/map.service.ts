@@ -32,8 +32,7 @@ export class MapService {
     }
 
     window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
-      const turnOn = e.matches;
-      this.mapTheme.next(turnOn ? 'mapbox://styles/mapbox/dark-v10' : 'mapbox://styles/mapbox/light-v10');
+      this.mapTheme.next(e.matches ? 'mapbox://styles/mapbox/dark-v10' : 'mapbox://styles/mapbox/light-v10');
       this.ref.tick();
     });
 

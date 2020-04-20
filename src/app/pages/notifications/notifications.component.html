@@ -1,0 +1,28 @@
+<div class="container container--top">
+
+  <section class="notifications" id="notifications" #scrollMe>
+    <h1 hidden>Messages</h1>
+    <article *ngFor="let message of messages" class="notifications__item"
+      [class.notifications__item--right]="message.userId === loggedUserId">
+      <div class="user__img-wrapper">
+        <img class="user__img" [src]="message.userAvatar" alt="{{ message.addedBy }} profile photo">
+      </div>
+      <p class="notifications__msg">
+        <!-- <span class="notification__user"
+          *ngIf="message.userId !== loggedUserId">
+          <strong>{{message.addedBy}}:</strong>
+        </span> -->
+        <span class="notifications__text">{{ message.text }}</span>
+        <time class="notifications__time">{{message.createdAt | date: 'dd/MM/yyyy HH:mm'}}</time>
+      </p>
+    </article>
+  </section>
+
+
+  <form [formGroup]="sendMessageForm" class="form form--notifications" (ngSubmit)="sendMessage(sendMessageForm)">
+    <textarea formControlName="inputText" class="form__control" placeholder="Send message..." (input)="autoGrow()"
+      (keydown.enter)="disableNewLine($event)" (keyup.enter)="sendMessage(sendMessageForm)" required #inputTextElem></textarea>
+    <button type="submit" class="btn btn--m btn--primary" [disabled]="!sendMessageForm.valid">Send</button>
+  </form>
+
+</div>

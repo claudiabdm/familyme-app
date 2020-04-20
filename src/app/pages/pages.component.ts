@@ -43,7 +43,7 @@ export class PagesComponent implements OnInit {
       this.headerVisible = false;
       this.navbarVisible = false;
       this.gridActive = false;
-    } else if (currentRoute === '/pages/home') {
+    } else if (currentRoute === '/pages/home' || currentRoute === '/pages/notifications') {
       this.headerVisible = false;
       this.navbarVisible = true;
       this.gridActive = true;

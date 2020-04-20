@@ -7,6 +7,7 @@ import { SignupComponent } from './signup/signup.component';
 import { PagesComponent } from './pages.component';
 import { ListComponent } from './list/list.component';
 import { LocatorComponent } from './locator/locator.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 const pagesRoutes: Routes = [
   { path: '',
@@ -16,6 +17,7 @@ const pagesRoutes: Routes = [
       { path: 'signup', component: SignupComponent },
       { path: 'home', component: HomeComponent },
       { path: 'calendar', component: CalendarComponent },
+      { path: 'notifications', component: NotificationsComponent },
       { path: 'locator', component: LocatorComponent },
       { path: 'list', component: ListComponent }
     ]
