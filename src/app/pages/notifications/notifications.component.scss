@@ -19,14 +19,12 @@
 // ---------------------------- //
 
 .notifications {
-  @include flex(flex-start, flex-start);
   @include size(100%);
-  flex-direction: column;
   padding:  $navbar-height $padding-sides;
   overflow: auto;
 
   &__item {
-    @include flex(center, flex-start);
+    @include flex(flex-end, flex-start);
     @include size(100%, auto);
     border-color: rgba($color: $secondary, $alpha: 0.5);
     margin: 10px 0;
@@ -42,13 +40,13 @@
   }
 
   &__msg {
+    min-height: rem(42px);
     max-width: 60vw;
     margin-left: 10px;
-    margin-bottom: 10px;
     border: $border;
     border-color: $secondary;
     border-radius: 3px;
-    padding: 10px;
+    padding: 5px;
     background-color: var(--body-bg);
     box-shadow: $box-shadow-sharpen;
   }
@@ -60,7 +58,7 @@
   &__time {
     display: block;
     margin-top: 2px;
-    color: $grey-100;
+    color: $grey-200;
     font-size: rem(10px);
     text-align: right;
   }
