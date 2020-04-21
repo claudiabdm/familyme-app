@@ -12,7 +12,8 @@
     <div class="header__actions" *ngIf="switchVisible">
       <label class="switch switch--sm" for="shopping">
         <span class="switch__label switch__label--sm">Shopping</span>
-        <input type="checkbox" class="switch__check" id="shopping" role="switch" aria-checked="true">
+        <input type="checkbox" class="switch__check" id="shopping" role="switch" aria-checked="true" [checked]="isShopping"
+        (change)="onChecked(isShopping)">
         <span class="switch__slider"></span>
       </label>
     </div>
