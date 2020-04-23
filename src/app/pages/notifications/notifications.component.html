@@ -20,7 +20,7 @@
 
 
   <form [formGroup]="sendMessageForm" class="form form--notifications" (ngSubmit)="sendMessage(sendMessageForm)">
-    <textarea formControlName="inputText" class="form__control" placeholder="Send message..." (input)="autoGrow()"
+    <textarea formControlName="inputText" class="form__control" placeholder="Send message..."
       (keydown.enter)="disableNewLine($event)" (keyup.enter)="sendMessage(sendMessageForm)" required #inputTextElem></textarea>
     <button type="submit" class="btn btn--m btn--primary" [disabled]="!sendMessageForm.valid">Send</button>
   </form>

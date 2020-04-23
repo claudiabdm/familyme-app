@@ -11,6 +11,8 @@ export class SocketioService {
 
   socket: any;
 
+  notificationsCounter: number = 0;
+
   constructor() { }
 
   setupSocketConnection() {

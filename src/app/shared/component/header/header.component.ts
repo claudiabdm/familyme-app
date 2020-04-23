@@ -36,10 +36,12 @@ export class HeaderComponent implements OnInit {
     this.isShopping = !isShopping;
     let text = this.isShopping ? "I'm shopping" : "I've finished shopping";
     const newMsg: Message = {
-      addedBy: this.dataService.user._id,
+      addedBy: this.dataService.user.name,
+      userId: this.dataService.user._id,
+      userAvatar: '',
       text: text,
       createdAt: new Date(Date.now()),
-    } as Message;
+    };
     this.socketService.sendMessage(newMsg);
   }
 

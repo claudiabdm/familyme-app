@@ -46,6 +46,7 @@
   // NAVBAR ITEM
   // -----------------------------
   &__item {
+    position: relative;
     font-size: 0;
     @include size(rem(32px), rem(32px));
 
@@ -70,6 +71,22 @@
       font-weight: $font-weight-light;
       transition: font-size 0.1s linear;
     }
+  }
+
+  // NAVBAR NOTIF BUBBLE
+  // -----------------------------
+  &__bubble {
+    @include absolute(0, auto, auto, rem(32px));
+    @include flex(center, center);
+    @include size(rem(15px), rem(15px));
+
+    border-radius: 100%;
+    padding: 2px;
+    background-color: $secondary;
+    color: #fff;
+    font-size: rem(10px);
+    line-height: 0;
+
   }
 
 }
