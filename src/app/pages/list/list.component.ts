@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Product } from 'src/app/models/product';
@@ -13,10 +13,11 @@ import { SortService } from 'src/app/services/sort.service';
 })
 export class ListComponent implements OnInit {
 
-  private ngUnsubscribe$ = new Subject<void>();
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
-  public addItemElemVisible: boolean = false;
-  public productList: Product[];
+  addItemElemVisible: boolean = false;
+
+  private ngUnsubscribe$ = new Subject<void>();
 
   constructor(
     private dataService: DataService,
@@ -25,24 +26,28 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.groupsService.searchGroupByToken(this.dataService.user.familyCode)
-      .pipe(takeUntil(this.ngUnsubscribe$)).subscribe(group => { this.productList = group.shoppingList });
+      .pipe(takeUntil(this.ngUnsubscribe$)).subscribe(group =>
+        this.dataService.userGroup.shoppingList = group.shoppingList.sort(this.sortService.sortAtoZ));
+  }
+
+  get productList(): Product[] {
+    return this.dataService.userGroup.shoppingList;
   }
 
   addItemElem(): void {
     this.addItemElemVisible = true;
-    this.scrollToBottom(document.getElementById('container'));
+    this.scrollToBottom();
   }
 
-  addItem(product: string): void {
+  addItem(product: Product['name']): void {
     if (product) {
       const newProduct: Product = {
         name: product,
         addedBy: this.dataService.user.name,
         done: false,
       } as Product;
-      this.productList.push(newProduct);
-      this.dataService.userGroup.shoppingList = this.productList;
-      this.scrollToBottom(document.getElementById('container'));
+      this.scrollToBottom();
+      this.dataService.userGroup.shoppingList.push(newProduct);
       this.groupsService.updateGroup(this.dataService.userGroup).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
     }
     this.addItemElemVisible = false;
@@ -52,28 +57,30 @@ export class ListComponent implements OnInit {
     const idx = this.productList.findIndex((data) => data._id === product._id);
     if (idx > -1) {
       product.done = check;
-      this.productList.splice(idx, 1, product);
-      this.dataService.userGroup.shoppingList = this.productList;
+      this.dataService.userGroup.shoppingList.splice(idx, 1, product);
       this.groupsService.updateGroup(this.dataService.userGroup).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
     }
   }
 
   deleteItem(product: Product): void {
-    this.productList = this.productList.filter((data) => data._id !== product._id);
-    this.dataService.userGroup.shoppingList = this.productList;
+    this.dataService.userGroup.shoppingList = this.productList.filter((data) => data._id !== product._id);
     this.groupsService.updateGroup(this.dataService.userGroup).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
   }
 
-  sortAtoZ(sortIcon): void {
-    this.sortService.sortListAz(sortIcon, this.productList);
+  sortList(sortIcon): void {
+    if (sortIcon.id === 'sort-az') {
+      this.sortService.sortListAz(sortIcon, this.productList);
+    } else {
+      this.sortService.sortListByDone(sortIcon, this.productList);
+    }
   }
 
-  sortByDone(sortIcon): void {
-    this.sortService.sortListByDone(sortIcon, this.productList);
-  }
-
-  private scrollToBottom(container): void {
-    container.scrollTop = container.scrollHeight;
+  private scrollToBottom(): void {
+    this.myScrollContainer.nativeElement.scroll({
+      top: this.myScrollContainer.nativeElement.scrollHeight,
+      left: 0,
+      behavior: 'smooth'
+    })
   }
 
   ngOnDestroy(): void {

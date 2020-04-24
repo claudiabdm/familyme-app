@@ -19,7 +19,6 @@ export class NotificationsComponent implements OnInit, AfterViewChecked {
   loggedUserId: User['_id'] = this.dataService.user._id;
   messages: Message[] = [];
 
-
   sendMessageForm = this.formBuilder.group({
     inputText: ['', Validators.required],
   })
@@ -64,7 +63,7 @@ export class NotificationsComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  disableNewLine(e) {
+  disableNewLine(e: Event): void {
     e.preventDefault();
   }
 

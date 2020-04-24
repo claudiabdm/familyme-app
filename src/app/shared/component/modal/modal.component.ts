@@ -7,15 +7,15 @@ import { Component, OnInit, Input, ElementRef, Output, EventEmitter } from '@ang
 })
 export class ModalComponent implements OnInit {
 
-  @Input() public modalVisible: boolean = false;
+  @Input() modalVisible: boolean = false;
 
-  @Input() public isFull: boolean = true;
+  @Input() isFull: boolean = true;
 
-  @Input() public title: string;
+  @Input() title: string;
 
-  @Input() public modalId: string;
+  @Input() modalId: string;
 
-  @Output() public close = new EventEmitter();
+  @Output() close = new EventEmitter();
 
   constructor(private modal: ElementRef) { }
 
@@ -23,7 +23,7 @@ export class ModalComponent implements OnInit {
 
   }
 
-  onClose() {
+  onClose(): void {
     this.close.emit(this.modal);
   }
 

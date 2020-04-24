@@ -6,7 +6,7 @@ import { Product } from '../models/product';
 })
 export class SortService {
 
-  private sortedAtoZ: boolean = false;
+  private sortedAtoZ: boolean = true;
   private sortedDone: boolean = false;
 
   constructor() { }
@@ -26,7 +26,7 @@ export class SortService {
     return (b.done ? 1 : 0) - (a.done ? 1 : 0);
   }
 
-  sortListAz(iconSort, list: Array<any>): void {
+  sortListAz(iconSort, list: Product[]): void {
     if (this.sortedAtoZ) {
       list.sort(this.sortAtoZ).reverse();
       iconSort.classList.remove('icon--sort-az');
@@ -38,7 +38,7 @@ export class SortService {
     }
   }
 
-  sortListByDone(iconSort, list: Array<any>): void {
+  sortListByDone(iconSort, list: Product[]): void {
     if (this.sortedDone) {
       list.sort(this.sortAtoZ).sort(this.sortByDone);
       this.sortedDone = false;

@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Route } from '@angular/compiler/src/core';
+
 import { User } from 'src/app/models/user';
 import { SocketioService } from 'src/app/services/socketio.service';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,12 +11,14 @@ import { SocketioService } from 'src/app/services/socketio.service';
 })
 export class NavbarComponent implements OnInit {
 
-  @Input() user: User;
-
-
   constructor(
-    private socketService: SocketioService
+    private socketService: SocketioService,
+    private dataService: DataService
   ) {
+  }
+
+  get user(): User {
+    return this.dataService.user;
   }
 
   get notificationsCounter() {

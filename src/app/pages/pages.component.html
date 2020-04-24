@@ -1,17 +1,6 @@
-<!-- <div [class.grid]="gridActive" [class.grid--navbar]="!gridAll && gridActive">
-  <app-header class="grid__header" [button]="button" [switchVisible]="switchVisible" *ngIf="headerVisible"></app-header>
-
-    <router-outlet>
-    </router-outlet>
-
-  <app-navbar *ngIf="navbarVisible" class="grid__navbar" [user]="this.dataService.user">
-  </app-navbar>
-</div> -->
-
-
 <app-header [button]="button" [switchVisible]="switchVisible" *ngIf="headerVisible"></app-header>
 <main>
   <router-outlet>
   </router-outlet>
 </main>
-<app-navbar *ngIf="navbarVisible" [user]="this.dataService.user"></app-navbar>
+<app-navbar *ngIf="navbarVisible"></app-navbar>

@@ -24,9 +24,7 @@
 
 
 <!-- MODAL -->
-<app-modal [title]="targetModalInfo.title" [modalId]="targetModalInfo.id" (close)="toggleModal(targetModal)" [modalVisible]="false" [isFull]="true" #targetModal>
-
+<app-modal [title]="targetModalInfo?.title" [modalId]="targetModalInfo?.id" (close)="toggleModal(targetModal)" [modalVisible]="false" [isFull]="true" #targetModal>
   <app-signup-form [singUpType]="targetModalInfo" *ngIf="targetModal.modalVisible"></app-signup-form>
-
 </app-modal>
 <!-- // MODAL -->

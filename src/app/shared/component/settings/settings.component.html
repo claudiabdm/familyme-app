@@ -2,19 +2,23 @@
   <h2 class="settings__title">User settings</h2>
   <ul class="settings__list">
     <li>
-      <a class="settings__txt" (click)="selectedModalInfo(targetModal, 'passwordModal')">Change password<i class="icon icon-next icon--xs"></i></a>
+      <a class="settings__txt" (click)="selectedModalInfo(targetModal, 'passwordModal')">Change password<i
+          class="icon icon-next icon--xs"></i></a>
     </li>
     <li>
-      <a class="settings__txt" (click)="selectedModalInfo(targetModal, 'nameModal')">Edit user name<i class="icon icon-next icon--xs"></i></a>
+      <a class="settings__txt" (click)="selectedModalInfo(targetModal, 'nameModal')">Edit user name<i
+          class="icon icon-next icon--xs"></i></a>
     </li>
     <li>
-      <a class="settings__txt"(click)="selectedModalInfo(targetModal, 'emailModal')">Change email<i class="icon icon-next icon--xs"></i></a>
+      <a class="settings__txt" (click)="selectedModalInfo(targetModal, 'emailModal')">Change email<i
+          class="icon icon-next icon--xs"></i></a>
     </li>
     <!-- SWITCHES -->
     <li>
       <label class="switch settings__txt" for="location">
         <span class="switch__label">Location</span>
-        <input type="checkbox" class="switch__check" id="location" role="switch" aria-checked="true" (click)="locationOn()">
+        <input type="checkbox" class="switch__check" id="location" role="switch" aria-checked="true"
+          (click)="locationOn()">
         <span class="switch__slider"></span>
       </label>
     </li>
@@ -22,14 +26,15 @@
     <li>
       <label class="switch settings__txt" for="notifications">
         <span class="switch__label">Notifications</span>
-        <input type="checkbox" class="switch__check" id="notifications" role="switch" aria-checked="true" (click)="notificationsOn()">
+        <input type="checkbox" class="switch__check" id="notifications" role="switch" aria-checked="true"
+          (click)="notificationsOn()">
         <span class="switch__slider"></span>
       </label>
     </li>
     <!-- //SWITCHES -->
 
     <li>
-      <a [routerLink]="'../login'"class="settings__txt settings__txt--warning" (click)="logOut()">Log out</a>
+      <a [routerLink]="'../login'" class="settings__txt settings__txt--warning" (click)="logOut()">Log out</a>
     </li>
     <li>
       <a href="#" class="settings__txt settings__txt--warning">Delete account</a>
@@ -38,7 +43,7 @@
   </ul>
 </article>
 
-<article class="settings" *ngIf="user.role === 'admin'">
+<article class="settings" *ngIf="roleAdmin">
   <h2 class="settings__title">Family settings</h2>
   <ul>
     <li class="settings__txt">Change admin <i class="icon icon-next icon--xs"></i></li>
@@ -51,11 +56,8 @@
 
 <!-- MODAL CHANGE USER DATA -->
 
-<app-modal class [title]="targetModalInfo.title" [modalId]="targetModalInfo.id" (close)="toggleModal(targetModal)" [modalVisible]="false" [isFull]="false" #targetModal>
-
-
-
+<app-modal class [title]="targetModalInfo?.title" [modalId]="targetModalInfo?.id" (close)="toggleModal(targetModal)"
+  [modalVisible]="false" [isFull]="false" #targetModal>
 </app-modal>
 
 <!-- // MODAL CHANGE USER DATA -->
-

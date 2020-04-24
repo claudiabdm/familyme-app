@@ -3,15 +3,15 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { DateTimeAdapter } from '@danielmoncada/angular-datetime-picker';
+import { NgxSpinnerService } from 'ngx-spinner';
 
+import { User } from 'src/app/models/user';
+import { CalendarEvent } from 'src/app/models/event';
 import { CustomValidatorsService } from 'src/app/services/custom-validators.service';
 import { DataService } from 'src/app/services/data.service';
 import { ModalService } from 'src/app/services/modal.service';
-import { ModalComponent } from '../../modal/modal.component';
-import { User } from 'src/app/models/user';
-import { CalendarEvent } from 'src/app/models/event';
 import { GroupsService } from 'src/app/services/groups.service';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { ModalComponent } from '../../modal/modal.component';
 
 @Component({
   selector: 'app-event-form',
@@ -20,21 +20,20 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class EventFormComponent implements OnInit, OnDestroy {
 
-  @Input() eventInfo: CalendarEvent ;
+  @Input() eventInfo: CalendarEvent;
   @Input() formBtn: string;
 
-  @Output() onEventListChange = new EventEmitter<CalendarEvent[]>();
+  @Output() delete = new EventEmitter<CalendarEvent[]>();
 
   userList: User[] = [];
   inviteeList: User[] = [];
-  eventForm: FormGroup;
   isVisible: boolean = false;
+  eventForm: FormGroup;
   datePickerConfig: {
     pickerType: 'both',
   }
 
   private ngUnsubscribe$ = new Subject<void>();
-
 
   constructor(
     private dataService: DataService,
@@ -60,51 +59,50 @@ export class EventFormComponent implements OnInit, OnDestroy {
     });
 
     this.eventForm = this.formBuilder.group({
-      eventName: [this.eventInfo.title, [Validators.required, Validators.minLength(3)]],
+      title: [this.eventInfo.title, [Validators.required, Validators.minLength(3)]],
       location: this.eventInfo.location,
-      startDate: [this.eventInfo.start, Validators.required],
-      endDate: [this.eventInfo.end, Validators.required],
+      start: [this.eventInfo.start, Validators.required],
+      end: [this.eventInfo.end, Validators.required],
       allDay: this.eventInfo.allDay,
+      invitees: this.inviteeList,
       notes: [this.eventInfo.notes]
     },
       {
-        validator: this.customValidators.checkDates('startDate', 'endDate'),
+        validator: this.customValidators.checkDates('start', 'end'),
       }
     );
   }
 
   onSubmit(form: FormGroup): void {
     this.spinner.show();
-    const eventToSubmit = {
-      title: form.value.eventName,
-      location: form.value.location,
-      start: form.value.startDate,
-      end: form.value.endDate,
-      allDay: form.value.allDay,
-      invitees: this.inviteeList.map(user => user._id),
-      notes: form.value.notes,
-    } as CalendarEvent;
+
+    form.value.invitees = this.inviteeList.map(user => user._id);
+
     switch (this.formBtn) {
       case 'Add':
-        this.dataService.userGroup.events.push(eventToSubmit);
+        this.dataService.userGroup.events.push(form.value);
         break;
       case 'Modify':
         const idx = this.dataService.userGroup.events.findIndex(event => event._id === this.eventInfo._id);
-        this.dataService.userGroup.events.splice(idx, 1, eventToSubmit);
+        this.dataService.userGroup.events.splice(idx, 1, form.value);
         break;
     }
+
     this.groupsService.updateGroup(this.dataService.userGroup).pipe(takeUntil(this.ngUnsubscribe$)).subscribe(
       group => {
-        this.onEventListChange.emit(group.events)
+        this.dataService.userGroup.events = group.events;
         this.spinner.hide();
       });
   }
 
-  deleteEvent() {
+  onDeleteEvent() {
     const updatedEventList = this.dataService.userGroup.events.filter(event => event._id !== this.eventInfo._id);
     this.dataService.userGroup.events = updatedEventList;
     this.groupsService.updateGroup(this.dataService.userGroup).pipe(takeUntil(this.ngUnsubscribe$)).subscribe(
-      group => this.onEventListChange.emit(group.events));
+      group => {
+        this.dataService.userGroup.events = group.events;
+        this.delete.emit();
+      });
   }
 
   onAddInvitee(modal) {

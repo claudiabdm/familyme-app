@@ -4,6 +4,7 @@ import { DataService } from 'src/app/services/data.service';
 import { ModalComponent } from '../modal/modal.component';
 import { SocketioService } from 'src/app/services/socketio.service';
 import { Message } from 'src/app/models/message';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-header',
@@ -23,12 +24,12 @@ export class HeaderComponent implements OnInit {
     private socketService: SocketioService,
   ) { }
 
-  ngOnInit(): void {
-
+  get userList(): User[] {
+    return this.dataService.userList;
   }
 
-  get userList() {
-    return this.dataService.userList;
+  ngOnInit(): void {
+
   }
 
   onChecked(isShopping: boolean) {
@@ -45,4 +46,4 @@ export class HeaderComponent implements OnInit {
     this.socketService.sendMessage(newMsg);
   }
 
-  }
+}

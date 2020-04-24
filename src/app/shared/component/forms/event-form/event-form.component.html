@@ -4,11 +4,11 @@
   <!-- Event name and location -->
   <div class="form__section">
     <div class="form__group">
-      <label for="eventName" class="form__label">Event name</label>
-      <input type="text" id="eventName" class="form__control" placeholder="Dentist" aria-required="true"
-        autocomplete="off" required formControlName="eventName"
-        [class.form__control--invalid]="eventForm.controls.eventName.dirty && eventForm.controls.eventName.invalid">
-      <div class="form__msg-group" *ngIf="eventForm.controls.eventName.dirty && eventForm.controls.eventName.invalid">
+      <label for="title" class="form__label">Event name</label>
+      <input type="text" id="title" class="form__control" placeholder="Dentist" aria-required="true"
+        autocomplete="off" required formControlName="title"
+        [class.form__control--invalid]="eventForm.controls.title.dirty && eventForm.controls.title.invalid">
+      <div class="form__msg-group" *ngIf="eventForm.controls.title.dirty && eventForm.controls.title.invalid">
         Required field
       </div>
     </div>
@@ -33,25 +33,25 @@
 
     <!-- Start Date -->
     <div class="form__group form__group--date">
-      <label for="startDate" class="form__label">Start date</label>
+      <label for="start" class="form__label">Start date</label>
       <div *ngIf="eventForm.controls.allDay.value">
-        <input type="text" id="startDate" name="startDate" class="form__control" aria-required="true"
-          placeholder="DD/MM/YYYY, 00:00" formControlName="startDate" [owlDateTime]="startDate"
-          [owlDateTimeTrigger]="startDate">
-        <owl-date-time #startDate [pickerType]="'calendar'" [pickerMode]="'dialog'" firstDayOfWeek="1"></owl-date-time>
+        <input type="text" id="start" name="start" class="form__control" aria-required="true"
+          placeholder="DD/MM/YYYY, 00:00" formControlName="start" [owlDateTime]="start"
+          [owlDateTimeTrigger]="start">
+        <owl-date-time #start [pickerType]="'calendar'" [pickerMode]="'dialog'" firstDayOfWeek="1"></owl-date-time>
       </div>
       <div *ngIf="!eventForm.controls.allDay.value">
-        <input type="text" id="startDate" name="startDate" class="form__control" aria-required="true"
-          placeholder="DD/MM/YYYY, 00:00" formControlName="startDate" [owlDateTime]="startDate"
-          [owlDateTimeTrigger]="startDate">
-        <owl-date-time #startDate [pickerType]="'both'" [pickerMode]="'dialog'" firstDayOfWeek="1"></owl-date-time>
+        <input type="text" id="start" name="start" class="form__control" aria-required="true"
+          placeholder="DD/MM/YYYY, 00:00" formControlName="start" [owlDateTime]="start"
+          [owlDateTimeTrigger]="start">
+        <owl-date-time #start [pickerType]="'both'" [pickerMode]="'dialog'" firstDayOfWeek="1"></owl-date-time>
       </div>
       <div class="form__msg-group"
-        *ngIf="eventForm.controls.startDate.dirty && eventForm.controls.startDate.invalid && !eventForm.controls.startDate.errors?.datesError">
+        *ngIf="eventForm.controls.start.dirty && eventForm.controls.start.invalid && !eventForm.controls.start.errors?.datesError">
         Required field
       </div>
       <div class="form__msg-group"
-        *ngIf="eventForm.controls.startDate.dirty && eventForm.controls.endDate.errors?.datesError">
+        *ngIf="eventForm.controls.start.dirty && eventForm.controls.end.errors?.datesError">
         Invalid date
       </div>
     </div>
@@ -59,25 +59,25 @@
 
     <!-- End Date -->
     <div class="form__group form__group--date">
-      <label for="endDate" class="form__label">End date</label>
+      <label for="end" class="form__label">End date</label>
       <div *ngIf="eventForm.controls.allDay.value">
-        <input type="text" id="endDate" name="endDate" class="form__control" aria-required="true"
-          placeholder="DD/MM/YYYY, 00:00" formControlName="endDate" [owlDateTime]="endDate"
-          [owlDateTimeTrigger]="endDate">
-        <owl-date-time #endDate [pickerType]="'calendar'" [pickerMode]="'dialog'" firstDayOfWeek="1"></owl-date-time>
+        <input type="text" id="end" name="end" class="form__control" aria-required="true"
+          placeholder="DD/MM/YYYY, 00:00" formControlName="end" [owlDateTime]="end"
+          [owlDateTimeTrigger]="end">
+        <owl-date-time #end [pickerType]="'calendar'" [pickerMode]="'dialog'" firstDayOfWeek="1"></owl-date-time>
       </div>
       <div *ngIf="!eventForm.controls.allDay.value">
-        <input type="text" id="endDate" name="endDate" class="form__control" aria-required="true"
-          placeholder="DD/MM/YYYY, 00:00" formControlName="endDate" [owlDateTime]="endDate"
-          [owlDateTimeTrigger]="endDate">
-        <owl-date-time #endDate [pickerType]="'both'" [pickerMode]="'dialog'" firstDayOfWeek="1"></owl-date-time>
+        <input type="text" id="end" name="end" class="form__control" aria-required="true"
+          placeholder="DD/MM/YYYY, 00:00" formControlName="end" [owlDateTime]="end"
+          [owlDateTimeTrigger]="end">
+        <owl-date-time #end [pickerType]="'both'" [pickerMode]="'dialog'" firstDayOfWeek="1"></owl-date-time>
       </div>
       <div class="form__msg-group"
-        *ngIf="eventForm.controls.endDate.dirty && eventForm.controls.endDate.invalid && !eventForm.controls.endDate.errors?.datesError">
+        *ngIf="eventForm.controls.end.dirty && eventForm.controls.end.invalid && !eventForm.controls.end.errors?.datesError">
         Required field
       </div>
       <div class="form__msg-group"
-        *ngIf="eventForm.controls.endDate.dirty && eventForm.controls.endDate.errors?.datesError">
+        *ngIf="eventForm.controls.end.dirty && eventForm.controls.end.errors?.datesError">
         Invalid date
       </div>
     </div>
@@ -117,7 +117,7 @@
   <div class="form__actions container--btn">
     <button type="submit" class="btn btn--m" aria-disabled="true" [disabled]="!eventForm.valid">{{formBtn}}
       event</button>
-    <button *ngIf="formBtn === 'Modify'" type="button" class="btn btn--m btn--secondary" aria-disabled="true" (click)="deleteEvent()"> Delete
+    <button *ngIf="formBtn === 'Modify'" type="button" class="btn btn--m btn--secondary" aria-disabled="true" (click)="onDeleteEvent()"> Delete
       event</button>
   </div>
   <!-- //FORM ACTIONS -->

@@ -19,9 +19,7 @@
 
   <h1 class="container__title">Family {{ userGroup.name }}</h1>
 
-
   <app-user-list [onlyImage]="false" class="container container--grid" [userList]="userList"></app-user-list>
-
 
 
   <!-- NEW MEMBERS BUTTON -->
@@ -40,15 +38,15 @@
 <!-- MODAL SETTINGS -->
 <app-modal [title]="'Settings'" [modalId]="'settingsModal'" (close)="toggleModal(settingsModal)" [modalVisible]="false"
   #settingsModal>
-  <app-settings *ngIf="settingsModal.modalVisible" [user]="user"></app-settings>
+  <app-settings *ngIf="settingsModal.modalVisible"></app-settings>
 </app-modal>
 <!-- // MODAL SETTINGS -->
 
 <!-- MODAL EDIT PHOTOS -->
 <app-modal [title]="'Edit profile photo'" [modalId]="'editPhotoModal'" (close)="toggleModal(editPhotoModal)"
   [modalVisible]="false" [isFull]="false" #editPhotoModal>
-  <app-profile-img *ngIf="editPhotoModal.modalVisible" [imageUrl]="user.avatar" [user]="user"
-    (save)="uploadPhoto($event, editPhotoModal)" (delete)="uploadPhoto($event, editPhotoModal)"></app-profile-img>
+  <app-profile-img *ngIf="editPhotoModal.modalVisible" [imageUrl]="user.avatar" (update)="toggleModal(editPhotoModal)">
+  </app-profile-img>
 </app-modal>
 <!-- // MODAL EDIT PHOTOS -->
 
@@ -58,8 +56,7 @@
 
   <div *ngIf="newMemberModal.modalVisible" class="container container--static">
 
-    <p class="container__p container__p--medium">Copy the code below and send it to your family to join you!
-    </p>
+    <p class="container__p container__p--medium">Copy the code below and send it to your family to join you!</p>
     <div class="container container--btn">
       <input type="text" class="copy-me" value="{{userGroup.familyCode}}" #copyMe readonly="true">
       <button class="btn btn--primary btn--m" (click)="copyMyText(copyMe)">Copy To Clipboard</button>

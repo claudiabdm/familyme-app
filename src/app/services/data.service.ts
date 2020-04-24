@@ -2,25 +2,21 @@ import { Injectable, Inject } from '@angular/core';
 import { Group } from '../models/group';
 import { User } from '../models/user';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
-import { UsersService } from './users.service';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Product } from '../models/product';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  public user: User;
-  public userGroup: Group;
-  public userList: User[];
+  user: User;
+  userGroup: Group;
+  userList: User[];
 
   constructor(
     @Inject(LOCAL_STORAGE) private storage: StorageService,
   ) { }
 
-  public setLocalStorage(): void {
+  setLocalStorage(): void {
     if (!this.storage.get('user')) {
       this.storage.set('user', this.user);
       this.storage.set('userGroup', this.userGroup);
@@ -35,14 +31,14 @@ export class DataService {
     }
   }
 
-  public setData(user: User, group: Group, users: User[]): void {
+  setData(user: User, group: Group, users: User[]): void {
     this.user = user;
     this.userGroup = group;
     this.userList = users;
     this.setLocalStorage();
   }
 
-  public updateUserData(user: User): void {
+  updateUserData(user: User): void {
     const idx = this.userList.findIndex(data => data._id === user._id);
     if (idx > -1) {
       this.user = user;
@@ -52,12 +48,12 @@ export class DataService {
     }
   }
 
-  public updateUserList(users: User[]): void{
+  updateUserList(users: User[]): void{
     this.userList = users;
     this.updateLocalStorage('userList', this.userList);
   }
 
-  public updateUserGroup(usersGroup: Group): void{
+  updateUserGroup(usersGroup: Group): void{
     this.userGroup = usersGroup;
     this.updateLocalStorage('userGroup', this.userGroup);
   }

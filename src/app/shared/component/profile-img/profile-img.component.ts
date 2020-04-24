@@ -1,9 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Subscription, Subject } from 'rxjs';
+
 import { User } from 'src/app/models/user';
 import { ModalService } from 'src/app/services/modal.service';
 import { DataService } from 'src/app/services/data.service';
 import { ImageProcessorService } from 'src/app/services/image-processor.service';
-import { Subscription } from 'rxjs';
+import { UsersService } from 'src/app/services/users.service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile-img',
@@ -14,22 +17,25 @@ export class ProfileImgComponent implements OnInit, OnDestroy {
 
 
   @Input() imageUrl: string | ArrayBuffer;
-  @Input() user: User;
-  @Output() save = new EventEmitter();
-  @Output() delete = new EventEmitter();
+  @Output() update = new EventEmitter();
 
   public isDisabled: boolean = true;
-  public img = '../../../../assets/img/profile-photo-round.svg';
+  public defaultImg = '../../../../assets/img/profile-photo-round.svg';
 
-  private changePhoto: Subscription;
+  private ngUnsubscribe$ = new Subject<void>();
 
   constructor(
     private dataService: DataService,
+    private usersService: UsersService,
     private modalService: ModalService,
     private imageProcessor: ImageProcessorService, ) { }
 
   ngOnInit(): void {
 
+  }
+
+  get user(): User {
+    return this.dataService.user;
   }
 
   toggleModal(targetModal): void {
@@ -41,26 +47,21 @@ export class ProfileImgComponent implements OnInit, OnDestroy {
   }
 
   onChangePhoto(file: File): void {
-   this.changePhoto = this.imageProcessor.compressImg(file).subscribe(res => {
+    this.imageProcessor.compressImg(file).pipe(takeUntil(this.ngUnsubscribe$)).subscribe(res => {
       this.imageUrl = res;
       this.isDisabled = false;
     });
   }
 
-  onSave(file: string | ArrayBuffer) {
-    this.user.avatar = file;
-    this.save.emit(this.user.avatar);
-  }
-
-  onDelete() {
-    this.user.avatar = this.img;
-    this.delete.emit(this.user.avatar);
+  onUpdatePhoto(file: string | ArrayBuffer) {
+    this.dataService.user.avatar = file;
+    this.usersService.updateUser(this.dataService.user).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
+    this.update.emit();
   }
 
   ngOnDestroy() {
-    if (this.changePhoto) {
-      this.changePhoto.unsubscribe();
-    }
+    this.ngUnsubscribe$.next();
+    this.ngUnsubscribe$.complete();
   }
 
 }

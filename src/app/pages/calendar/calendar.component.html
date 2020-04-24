@@ -1,24 +1,17 @@
-<full-calendar class="container container--calendar" #calendar
-defaultView= "dayGridMonth"
-height="parent"
-[header]="header"
-[events]="calendarEvents"
-[customButtons]="false"
-[plugins]="calendarPlugins"
-[eventTimeFormat]="eventTimeFormat"
-[firstDay]="1"
-(dateClick)="selectDay($event, newEventModal)"
-(eventClick)="selectEvent($event, modifyEventModal)"
->
+<full-calendar class="container container--calendar" #calendar defaultView="dayGridMonth" height="parent"
+  [header]="header" [events]="calendarEvents" [customButtons]="false" [plugins]="calendarPlugins"
+  [eventTimeFormat]="eventTimeFormat" [firstDay]="1" (dateClick)="selectDay($event, newEventModal)"
+  (eventClick)="selectEvent($event, modifyEventModal)">
 </full-calendar>
 
-<app-modal [title]="'New event'" [modalId]="'newEventModal'"
-[modalVisible]="false" [isFull]="true" (close)="toggleModal(newEventModal)" #newEventModal>
-  <app-event-form *ngIf="newEventModal.modalVisible" [eventInfo]="selectedDay" [formBtn]="'Add'" (onEventListChange)="updateEventList($event, newEventModal)"></app-event-form>
+<app-modal [title]="'New event'" [modalId]="'newEventModal'" [modalVisible]="false" [isFull]="true"
+  (close)="toggleModal(newEventModal)" #newEventModal>
+  <app-event-form *ngIf="newEventModal.modalVisible" [eventInfo]="selectedDay" [formBtn]="'Add'"
+  (submit)="toggleModal(newEventModal)"></app-event-form>
 </app-modal>
 
-<app-modal [title]="'Modify event'" [modalId]="'modifyEventModal'"
-[modalVisible]="false" [isFull]="true" (close)="toggleModal(modifyEventModal)" #modifyEventModal>
-  <app-event-form *ngIf="modifyEventModal.modalVisible" [eventInfo]="selectedEvent" [formBtn]="'Modify'" (onEventListChange)="updateEventList($event, modifyEventModal)"></app-event-form>
+<app-modal [title]="'Modify event'" [modalId]="'modifyEventModal'" [modalVisible]="false" [isFull]="true"
+  (close)="toggleModal(modifyEventModal)" #modifyEventModal>
+  <app-event-form *ngIf="modifyEventModal.modalVisible" [eventInfo]="selectedEvent" [formBtn]="'Modify'"
+    (submit)="toggleModal(modifyEventModal)" (delete)="toggleModal(modifyEventModal)"></app-event-form>
 </app-modal>
-

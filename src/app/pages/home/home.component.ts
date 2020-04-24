@@ -1,10 +1,13 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
-import { UsersService } from 'src/app/services/users.service';
-import { ModalService } from 'src/app/services/modal.service';
-import { ModalComponent } from 'src/app/shared/component/modal/modal.component';
-import { DataService } from 'src/app/services/data.service';
+import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
+import { User } from 'src/app/models/user';
+import { Group } from 'src/app/models/group';
+import { UsersService } from 'src/app/services/users.service';
+import { ModalService } from 'src/app/services/modal.service';
+import { DataService } from 'src/app/services/data.service';
+import { ModalComponent } from 'src/app/shared/component/modal/modal.component';
 
 @Component({
   selector: 'app-home',
@@ -26,22 +29,16 @@ export class HomeComponent implements OnInit {
     this.usersService.getUsersByGroupToken(this.dataService.user.familyCode).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
   }
 
-  get user() {
+  get user(): User {
     return this.dataService.user;
   }
 
-  get userGroup() {
+  get userGroup(): Group {
     return this.dataService.userGroup;
   }
 
-  get userList() {
+  get userList(): User[] {
     return this.dataService.userList;
-  }
-
-  uploadPhoto(event, targetModal: ModalComponent): void {
-    this.dataService.user.avatar = event;
-    this.usersService.updateUser(this.dataService.user).subscribe();
-    this.modalService.closeModal(targetModal);
   }
 
   toggleModal(targetModal: ModalComponent): void {
