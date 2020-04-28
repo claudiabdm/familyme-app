@@ -1,0 +1,10 @@
+<form [formGroup]="pswdResetForm" class="form" (ngSubmit)="sendEmail(pswdResetForm)">
+  <div class="form__group">
+    <label for="inputEmail" class="form__label">Enter your email</label>
+    <input type="text" id="inputEmail" formControlName="inputEmail" class="form__control" placeholder="john@hotmail.com"
+      required>
+  </div>
+  <div class="form__actions">
+    <button type="submit" class="btn btn--m btn--primary" [disabled]="!pswdResetForm.valid">Send</button>
+  </div>
+</form>

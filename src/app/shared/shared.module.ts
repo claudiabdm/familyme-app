@@ -17,10 +17,11 @@ import { ProfileImgComponent } from './component/profile-img/profile-img.compone
 import { MapComponent } from './component/map/map.component';
 import { LogoComponent } from './component/logo/logo.component';
 import { EventFormComponent } from './component/forms/event-form/event-form.component';
+import { PswdresetFormComponent } from './component/forms/pswdreset-form/pswdreset-form.component';
 
 
 @NgModule({
-  declarations: [ModalComponent, NavbarComponent, SignupFormComponent, LoginFormComponent, SettingsComponent, HeaderComponent, UserListComponent, ProfileImgComponent, MapComponent, LogoComponent, EventFormComponent,],
+  declarations: [ModalComponent, NavbarComponent, SignupFormComponent, LoginFormComponent, SettingsComponent, HeaderComponent, UserListComponent, ProfileImgComponent, MapComponent, LogoComponent, EventFormComponent, PswdresetFormComponent,],
   imports: [
     CommonModule,
     RouterModule,
@@ -42,6 +43,7 @@ import { EventFormComponent } from './component/forms/event-form/event-form.comp
     MapComponent,
     LogoComponent,
     EventFormComponent,
+    PswdresetFormComponent,
   ]
 })
 export class SharedModule { }
