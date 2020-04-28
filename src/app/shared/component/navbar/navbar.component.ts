@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
     return this.dataService.user;
   }
 
-  get notificationsCounter() {
+  get notificationsCounter(): number {
     return this.socketService.notificationsCounter;
   }
 

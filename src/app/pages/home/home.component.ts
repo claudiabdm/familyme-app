@@ -16,9 +16,9 @@ import { ModalComponent } from 'src/app/shared/component/modal/modal.component';
 })
 export class HomeComponent implements OnInit {
 
-  private ngUnsubscribe$ = new Subject<void>();
+  img = '../../../assets/img/profile-photo-round.svg';
 
-  public img = '../../../assets/img/profile-photo-round.svg';
+  private ngUnsubscribe$ = new Subject<void>();
 
   constructor(
     private dataService: DataService,

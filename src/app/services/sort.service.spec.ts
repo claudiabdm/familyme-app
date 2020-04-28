@@ -13,4 +13,8 @@ describe('SortService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should order alphabetically', () => {
+
+  })
 });
