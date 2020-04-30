@@ -5,13 +5,13 @@ import { Subject } from 'rxjs';
 import { DateTimeAdapter } from '@danielmoncada/angular-datetime-picker';
 import { NgxSpinnerService } from 'ngx-spinner';
 
-import { User } from 'src/app/models/user';
-import { CalendarEvent } from 'src/app/models/event';
+import { User } from 'src/app/shared/models/user';
+import { CalendarEvent } from 'src/app/shared/models/event';
 import { CustomValidatorsService } from 'src/app/services/custom-validators.service';
 import { DataService } from 'src/app/services/data.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { GroupsService } from 'src/app/services/groups.service';
-import { ModalComponent } from '../../modal/modal.component';
+import { ModalComponent } from '../../../shared/component/modal/modal.component';
 
 @Component({
   selector: 'app-event-form',

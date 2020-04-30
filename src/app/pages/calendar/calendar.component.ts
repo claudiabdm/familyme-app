@@ -7,7 +7,7 @@ import listGridPlugin from '@fullcalendar/list';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import interactionPlugin from '@fullcalendar/interaction';
 
-import { CalendarEvent } from 'src/app/models/event';
+import { CalendarEvent } from 'src/app/shared/models/event';
 import { ModalService } from 'src/app/services/modal.service';
 import { DataService } from 'src/app/services/data.service';
 import { GroupsService } from 'src/app/services/groups.service';

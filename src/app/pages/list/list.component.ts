@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Product } from 'src/app/models/product';
+import { Product } from 'src/app/shared/models/product';
 import { GroupsService } from 'src/app/services/groups.service';
 import { DataService } from 'src/app/services/data.service';
-import { SortService } from 'src/app/services/sort.service';
+import { SortService } from './sort.service';
 
 @Component({
   selector: 'app-list',
@@ -27,11 +27,17 @@ export class ListComponent implements OnInit {
   ngOnInit(): void {
     this.groupsService.searchGroupByToken(this.dataService.user.familyCode)
       .pipe(takeUntil(this.ngUnsubscribe$)).subscribe(group =>
-        this.dataService.userGroup.shoppingList = group.shoppingList.sort(this.sortService.sortAtoZ));
+       {this.dataService.userGroup.shoppingList = group.shoppingList.sort(this.sortService.sortAtoZ)});
   }
 
   get productList(): Product[] {
     return this.dataService.userGroup.shoppingList;
+  }
+  get sortIconAZ(): boolean {
+    return this.sortService.sortedAtoZ;
+  }
+  get sortIconDone(): boolean {
+    return this.sortService.sortedDone;
   }
 
   addItemElem(): void {
@@ -69,9 +75,9 @@ export class ListComponent implements OnInit {
 
   sortList(sortIcon): void {
     if (sortIcon.id === 'sort-az') {
-      this.sortService.sortListAz(sortIcon, this.productList);
+      this.sortService.sortListAz(this.productList);
     } else {
-      this.sortService.sortListByDone(sortIcon, this.productList);
+      this.sortService.sortListByDone(this.productList);
     }
   }
 

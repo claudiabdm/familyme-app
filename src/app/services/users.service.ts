@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { User } from '../models/user';
+import { User } from '../shared/models/user';
 import { environment } from 'src/environments/environment';
-import { Group } from '../models/group';
+import { Group } from '../shared/models/group';
 import { DataService } from './data.service';
 
 

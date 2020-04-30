@@ -1,12 +1,10 @@
 import { ApplicationRef, Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import * as mapboxgl from 'mapbox-gl';
-import { User } from '../models/user';
+import { User } from '../../shared/models/user';
 import { BehaviorSubject } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class MapService {
 
   mapbox = (mapboxgl as typeof mapboxgl);

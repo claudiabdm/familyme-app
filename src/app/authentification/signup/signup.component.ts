@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { ModalService } from 'src/app/services/modal.service';
 import { ModalComponent } from 'src/app/shared/component/modal/modal.component';
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -21,7 +22,7 @@ export class SignupComponent implements OnInit {
 
 
   goBack(): void {
-    this.router.navigate(['pages/login'])
+    this.router.navigate(['../login'])
   }
 
 

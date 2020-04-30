@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Group } from '../models/group';
+import { Group } from '../shared/models/group';
 import { Observable } from 'rxjs';
-import { User } from '../models/user';
+import { User } from '../shared/models/user';
 import { map } from 'rxjs/operators';
 import { DataService } from './data.service';
 

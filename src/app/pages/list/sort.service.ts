@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../models/product';
+import { Product } from '../../shared/models/product';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class SortService {
 
-  private sortedAtoZ: boolean = true;
-  private sortedDone: boolean = false;
+  sortedAtoZ: boolean = true;
+  sortedDone: boolean = true;
 
   constructor() { }
 
@@ -26,28 +24,26 @@ export class SortService {
     return (b.done ? 1 : 0) - (a.done ? 1 : 0);
   }
 
-  sortListAz(iconSort, list: Product[]): void {
+  sortListAz(list: Product[]): Product[] {
     if (this.sortedAtoZ) {
       list.sort(this.sortAtoZ).reverse();
-      iconSort.classList.remove('icon--sort-az');
       this.sortedAtoZ = false;
     } else {
       list.sort(this.sortAtoZ);
-      iconSort.classList.add('icon--sort-az');
       this.sortedAtoZ = true;
     }
+    return list;
   }
 
-  sortListByDone(iconSort, list: Product[]): void {
+  sortListByDone(list: Product[]): Product[] {
     if (this.sortedDone) {
       list.sort(this.sortAtoZ).sort(this.sortByDone);
       this.sortedDone = false;
-      iconSort.classList.add('icon--sort-down');
     } else {
       list.sort(this.sortAtoZ).sort(this.sortByDone).reverse();
       this.sortedDone = true;
-      iconSort.classList.remove('icon--sort-down');
     }
+    return list;
   }
 
 }

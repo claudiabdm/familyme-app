@@ -5,7 +5,7 @@ import { FormGroup } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 import { UsersService } from './users.service';
-import { User } from '../models/user';
+import { User } from '../shared/models/user';
 import { GroupsService } from './groups.service';
 import { DataService } from './data.service';
 

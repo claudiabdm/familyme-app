@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { Subscription, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/shared/models/user';
 import { ModalService } from 'src/app/services/modal.service';
 import { DataService } from 'src/app/services/data.service';
-import { ImageProcessorService } from 'src/app/services/image-processor.service';
+import { ImageProcessorService } from 'src/app/shared/component/profile-img/image-processor.service';
 import { UsersService } from 'src/app/services/users.service';
 import { takeUntil } from 'rxjs/operators';
 

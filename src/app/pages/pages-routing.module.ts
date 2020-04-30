@@ -1,27 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { CalendarComponent } from './calendar/calendar.component';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
 import { PagesComponent } from './pages.component';
-import { ListComponent } from './list/list.component';
-import { LocatorComponent } from './locator/locator.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 
 const pagesRoutes: Routes = [
   { path: '',
     component: PagesComponent,
     children: [
-      { path: 'login', component: LoginComponent },
-      { path: 'signup', component: SignupComponent },
-      { path: 'home', component: HomeComponent },
-      { path: 'calendar', component: CalendarComponent },
       { path: 'notifications', component: NotificationsComponent },
-      { path: 'locator', component: LocatorComponent },
-      { path: 'list', component: ListComponent }
+      { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule)},
+      { path: 'calendar', loadChildren: () => import('./calendar/calendar.module').then(m => m.CalendarModule)},
+      { path: 'locator', loadChildren: () => import('./locator/locator.module').then(m => m.LocatorModule)},
+      { path: 'list', loadChildren: () => import('./list/list.module').then(m => m.ListModule)},
     ]
-  }
+  },
 ];
 
 @NgModule({

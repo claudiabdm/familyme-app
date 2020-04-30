@@ -9,8 +9,6 @@ import { ModalService } from 'src/app/services/modal.service';
 
 export class LoginComponent implements OnInit {
 
-
-
   constructor(
     private modalService: ModalService
   ) { }

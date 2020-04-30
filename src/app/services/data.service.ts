@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
-import { Group } from '../models/group';
-import { User } from '../models/user';
+import { Group } from '../shared/models/group';
+import { User } from '../shared/models/user';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 
 @Injectable({

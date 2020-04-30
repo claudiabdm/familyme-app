@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs';
-import { Button } from '../models/button';
+import { Button } from '../shared/models/button';
 import { filter, takeUntil } from 'rxjs/operators';
 import { DataService } from '../services/data.service';
 
@@ -39,11 +39,7 @@ export class PagesComponent implements OnInit {
   }
 
   toggleHeaderNavbar(currentRoute) {
-    if (['/pages/login', '/pages/signup'].includes(currentRoute)) {
-      this.headerVisible = false;
-      this.navbarVisible = false;
-      this.gridActive = false;
-    } else if (currentRoute === '/pages/home' || currentRoute === '/pages/notifications') {
+    if (currentRoute === '/pages/home' || currentRoute === '/pages/notifications') {
       this.headerVisible = false;
       this.navbarVisible = true;
       this.gridActive = true;

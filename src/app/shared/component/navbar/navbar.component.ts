@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/shared/models/user';
 import { SocketioService } from 'src/app/services/socketio.service';
 import { DataService } from 'src/app/services/data.service';
 

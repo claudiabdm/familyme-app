@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { User } from 'src/app/models/user';
-import { Group } from 'src/app/models/group';
+import { User } from 'src/app/shared/models/user';
+import { Group } from 'src/app/shared/models/group';
 import { UsersService } from 'src/app/services/users.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { DataService } from 'src/app/services/data.service';

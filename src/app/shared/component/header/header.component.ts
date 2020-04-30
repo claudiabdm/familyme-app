@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Button } from 'src/app/models/button';
+import { Button } from 'src/app/shared/models/button';
 import { DataService } from 'src/app/services/data.service';
 import { ModalComponent } from '../modal/modal.component';
 import { SocketioService } from 'src/app/services/socketio.service';
-import { Message } from 'src/app/models/message';
-import { User } from 'src/app/models/user';
+import { Message } from 'src/app/shared/models/message';
+import { User } from 'src/app/shared/models/user';
 
 @Component({
   selector: 'app-header',

@@ -3,8 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { SocketioService } from 'src/app/services/socketio.service';
 import { DataService } from 'src/app/services/data.service';
-import { Message } from 'src/app/models/message';
-import { User } from 'src/app/models/user';
+import { Message } from 'src/app/shared/models/message';
+import { User } from 'src/app/shared/models/user';
 
 @Component({
   selector: 'app-notifications',

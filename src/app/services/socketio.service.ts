@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import * as io from 'socket.io-client';
 import { Observable } from 'rxjs';
-import { Message } from '../models/message';
+import { Message } from '../shared/models/message';
 
 @Injectable({
   providedIn: 'root'

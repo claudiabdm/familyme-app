@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { User } from 'src/app/models/user';
 import { ModalService } from 'src/app/services/modal.service';
-import { ModalComponent } from '../modal/modal.component';
+import { ModalComponent } from '../../../shared/component/modal/modal.component';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
