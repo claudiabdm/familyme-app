@@ -10,6 +10,8 @@
     "dev": "ng serve --ssl --ssl-key certificate/localhost.key  --ssl-cert certificate/localhost.crt",
     "start": "node server.js",
     "build": "ng build",
+    "buildwithstats": "ng b --sourceMap --prod --stats-json",
+    "analyze": "webpack-bundle-analyzer --port 9901 dist/personal-project/stats-es2015.json",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -65,9 +67,11 @@
     "minimist": "^1.2.5",
     "moment": "^2.24.0",
     "protractor": "~5.4.3",
+    "source-map-explorer": "^2.4.2",
     "ts-node": "~8.3.0",
     "tslint": "~5.18.0",
-    "typescript": "~3.7.5"
+    "typescript": "~3.7.5",
+    "webpack-bundle-analyzer": "^3.7.0"
   },
   "resolutions": {
     "minimist": "^1.2.5"

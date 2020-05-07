@@ -28,7 +28,7 @@ export class LoginFormComponent implements OnInit {
 
   onSubmit(form: FormGroup) {
     if (form.valid) {
-      this.authService.logIn(form.value);
+      this.authService.logIn(form.value).subscribe(res => console.log(res));
     }
   }
 

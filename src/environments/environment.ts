@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   SOCKET_ENDPOINT: 'http://localhost:3000/',
   apiUrl: 'http://localhost:3000/api/v1/',
+  authUrl: 'http://localhost:3000/auth',
   mapBoxToken: 'pk.eyJ1IjoiY2xhdWRpYWJkbSIsImEiOiJjazd6NmFmZmwwMm9rM21wYjh6NjdpbmRmIn0.6q9bu7QHSFgC9NS3BEoHUQ',
 };
 

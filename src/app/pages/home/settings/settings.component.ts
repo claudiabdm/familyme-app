@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { ModalComponent } from '../../../shared/component/modal/modal.component';
 import { DataService } from 'src/app/services/data.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-settings',
@@ -16,7 +17,8 @@ export class SettingsComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private dataService: DataService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private usersService: UsersService
   ) { }
 
   get roleAdmin(): boolean {
@@ -35,11 +37,9 @@ export class SettingsComponent implements OnInit {
   }
 
   locationOn() {
-
   }
 
   notificationsOn() {
-
   }
 
 
