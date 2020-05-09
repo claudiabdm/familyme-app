@@ -13,6 +13,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/internal/operators/tap';
 import { map } from 'rxjs/internal/operators/map';
+import { SocketioService } from './socketio.service';
 
 @Injectable({
   providedIn: 'root'
@@ -32,48 +33,49 @@ export class AuthService {
     private groupsService: GroupsService,
     private dataService: DataService,
     private spinner: NgxSpinnerService,
-    public router: Router) { }
+    private socketService: SocketioService,
+    public router: Router,
+    ) { }
 
-  // logIn(currUser: FormGroup["value"]): void {
-  //   this.storage.clear();
-  //   this.spinner.show();
-  //   this.usersService.searchUserByEmail(currUser)
-  //     .subscribe(user => {
-  //       if (user) {
-  //         this.invalidUser = false;
-  //         if (currUser.password === user.password) {
-  //           this.invalidPassword = false;
-  //           this.groupsService.searchGroupByToken(user.familyCode)
-  //             .subscribe(group => {
+  logIn(currUser: FormGroup["value"]): void {
+    this.storage.clear();
+    this.spinner.show();
+    this.usersService.searchUserByEmail(currUser)
+      .subscribe(user => {
+        if (user) {
+          this.invalidUser = false;
+          if (currUser.password === user.password) {
+            this.invalidPassword = false;
+            this.groupsService.searchGroupByToken(user.familyCode)
+              .subscribe(group => {
 
-  //               if (group) {
-  //                 this.invalidGroup = false;
-  //                 this.usersService.getUsersByGroupToken(user.familyCode).subscribe(users => {
-
-  //                   this.dataService.setData(user, group, users);
-  //                   this.spinner.hide();
-  //                   this.router.navigate(['pages/home']);
-  //                 })
-  //               } else {
-  //                 this.spinner.hide();
-  //                 this.invalidGroup = true;
-  //               }
-  //             });
-  //         } else {
-  //           this.spinner.hide();
-  //           this.invalidPassword = true;
-  //         }
-  //       } else {
-  //         this.spinner.hide();
-  //         this.invalidUser = true;
-  //       }
-  //     }
-  //     );
-  // }
-
-  logIn(user: { email: User['email'], password: User['password'] }): Observable<any> {
-    return this.http.post<any>(`${this.url}/login`, user);
+                if (group) {
+                  this.invalidGroup = false;
+                  this.usersService.getUsersByGroupToken(user.familyCode).subscribe(users => {
+                    this.dataService.setData(user, group, users);
+                    this.spinner.hide();
+                    this.router.navigate(['pages/home']);
+                  })
+                } else {
+                  this.spinner.hide();
+                  this.invalidGroup = true;
+                }
+              });
+          } else {
+            this.spinner.hide();
+            this.invalidPassword = true;
+          }
+        } else {
+          this.spinner.hide();
+          this.invalidUser = true;
+        }
+      }
+      );
   }
+
+  // logIn(user: { email: User['email'], password: User['password'] }): Observable<any> {
+  //   return this.http.post<any>(`${this.url}/login`, user);
+  // }
 
   signUpCreate(currUser: FormGroup["value"]): void {
     this.storage.clear();
@@ -140,5 +142,6 @@ export class AuthService {
 
   logOut(): void {
     this.storage.clear();
+    this.socketService.socket.disconnect();
   };
 }

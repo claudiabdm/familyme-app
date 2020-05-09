@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Subject } from 'rxjs/internal/Subject';
+import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 
 import { SocketioService } from 'src/app/services/socketio.service';
 import { DataService } from 'src/app/services/data.service';
 import { Message } from 'src/app/shared/models/message';
 import { User } from 'src/app/shared/models/user';
+import { first } from 'rxjs/internal/operators/first';
 
 @Component({
   selector: 'app-notifications',
@@ -23,41 +26,34 @@ export class NotificationsComponent implements OnInit, AfterViewChecked {
     inputText: ['', Validators.required],
   })
 
+  private ngUnsubscribe$ = new Subject<void>();
+
   constructor(
     private socketService: SocketioService,
     private dataService: DataService,
     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.socketService.setupSocketConnection();
-    this.socketService.getMessages().subscribe((msg: Message) => {
-      const message: Message = msg;
-      this.dataService.userList.some(user => {
-        if (user._id === msg.userId) {
-          message.userAvatar = user.avatar;
-        }
-      })
-      this.messages.push(message);
+    this.socketService.getAllMessages().pipe(first()).subscribe((msgs: Message[]) => {
+      this.messages = msgs;
       this.scrollToBottom();
       this.autoGrow();
+      this.socketService.notificationsCounter = 0;
+    });
+    this.socketService.getMessage().pipe(takeUntil(this.ngUnsubscribe$)).subscribe((msg: Message) => {
+      this.messages.push(msg);
+      this.socketService.notificationsCounter = 0;
     });
   }
 
-  ngAfterViewChecked() {
+  ngAfterViewChecked(): void {
     this.scrollToBottom();
     this.autoGrow();
   }
 
-  sendMessage(form: FormGroup) {
+  sendMessage(form: FormGroup): void {
     if (this.sendMessageForm.valid) {
-      const newMsg: Message = {
-        addedBy: this.dataService.user.name,
-        userId: this.dataService.user._id,
-        userAvatar: '',
-        text: form.value.inputText,
-        createdAt: new Date(Date.now()),
-      };
-      this.socketService.sendMessage(newMsg);
+      this.socketService.sendMessage(form.value.inputText);
       this.sendMessageForm.value.inputText = '';
       form.reset();
     }
@@ -65,6 +61,11 @@ export class NotificationsComponent implements OnInit, AfterViewChecked {
 
   disableNewLine(e: Event): void {
     e.preventDefault();
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe$.next();
+    this.ngUnsubscribe$.complete();
   }
 
   private autoGrow(): void {

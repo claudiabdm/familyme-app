@@ -8,7 +8,7 @@ export class ImageProcessorService {
   constructor() { }
 
   compressImg(file: File): Observable<any> {
-    const width = 600; // For scaling relative to width
+    const width = 200; // For scaling relative to width
     const reader = new FileReader();
     reader.readAsDataURL(file);
     return Observable.create(observer => {

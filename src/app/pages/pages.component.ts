@@ -3,7 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs';
 import { Button } from '../shared/models/button';
 import { filter, takeUntil } from 'rxjs/operators';
-import { DataService } from '../services/data.service';
+import { SocketioService } from '../services/socketio.service';
 
 @Component({
   selector: 'app-pages',
@@ -22,10 +22,13 @@ export class PagesComponent implements OnInit {
   private ngUnsubscribe$ = new Subject<void>();
 
 
-  constructor(public router: Router, public dataService: DataService) {
+  constructor(
+    public router: Router,
+    private socketService: SocketioService) {
   }
 
   ngOnInit(): void {
+    this.socketService.setupSocketConnection();
     this.currentRoute = this.router.url;
     this.toggleHeaderNavbar(this.currentRoute);
     this.changeButton(this.currentRoute);

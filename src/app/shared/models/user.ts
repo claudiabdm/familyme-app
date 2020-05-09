@@ -10,4 +10,5 @@ export class User {
   familyCode: Group["familyCode"];
   location: google.maps.LatLngLiteral;
   isSelected: boolean;
+  lastConnection: Date;
 }

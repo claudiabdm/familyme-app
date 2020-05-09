@@ -4,6 +4,8 @@ import { ModalService } from 'src/app/services/modal.service';
 import { ModalComponent } from '../../../shared/component/modal/modal.component';
 import { DataService } from 'src/app/services/data.service';
 import { UsersService } from 'src/app/services/users.service';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { first } from 'rxjs/internal/operators/first';
 
 @Component({
   selector: 'app-settings',
@@ -30,6 +32,8 @@ export class SettingsComponent implements OnInit {
 
   logOut() {
     this.authService.logOut();
+    this.dataService.user.lastConnection = new Date();
+    this.usersService.updateUser(this.dataService.user).pipe(first()).subscribe();
   }
 
   deleteAccount() {
@@ -77,6 +81,5 @@ export class SettingsComponent implements OnInit {
     }
     this.toggleModal(targetModal);
   }
-
 
 }

@@ -32,18 +32,9 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  onChecked(isShopping: boolean) {
-    this.socketService.setupSocketConnection();
-    this.isShopping = !isShopping;
-    let text = this.isShopping ? "I'm shopping" : "I've finished shopping";
-    const newMsg: Message = {
-      addedBy: this.dataService.user.name,
-      userId: this.dataService.user._id,
-      userAvatar: '',
-      text: text,
-      createdAt: new Date(Date.now()),
-    };
-    this.socketService.sendMessage(newMsg);
+  onChecked() {
+    const text = !this.isShopping ? "I'm shopping" : "I've finished shopping";
+    this.socketService.sendMessage(text);
   }
 
 }

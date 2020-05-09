@@ -8,10 +8,6 @@
         <img class="user__img" [src]="message.userAvatar" alt="{{ message.addedBy }} profile photo">
       </div>
       <p class="notifications__msg">
-        <!-- <span class="notification__user"
-          *ngIf="message.userId !== loggedUserId">
-          <strong>{{message.addedBy}}:</strong>
-        </span> -->
         <span class="notifications__text">{{ message.text }}</span>
         <time class="notifications__time">{{message.createdAt | date: 'dd/MM/yyyy HH:mm'}}</time>
       </p>

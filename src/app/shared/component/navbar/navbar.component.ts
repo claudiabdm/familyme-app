@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
 import { SocketioService } from 'src/app/services/socketio.service';
 import { DataService } from 'src/app/services/data.service';
+import { first } from 'rxjs/internal/operators/first';
 
 @Component({
   selector: 'app-navbar',
@@ -17,19 +18,23 @@ export class NavbarComponent implements OnInit {
   ) {
   }
 
-  get user(): User {
-    return this.dataService.user;
+  ngOnInit(): void {
+    this.socketService.getAllMessages().pipe(first()).subscribe(messages => {
+      messages.forEach( msg => {
+        if (msg.createdAt > this.dataService.user.lastConnection ) {
+          this.socketService.notificationsCounter += 1;
+          console.log(msg.createdAt, this.dataService.user.lastConnection, this.socketService.notificationsCounter)
+        }
+      })
+    })
   }
 
   get notificationsCounter(): number {
     return this.socketService.notificationsCounter;
   }
 
-  ngOnInit(): void {
-    this.socketService.setupSocketConnection();
-    this.socketService.getMessages().subscribe(msg => {
-      msg.userId !== this.user._id ? this.socketService.notificationsCounter += 1 : null;
-    });
+  get user(): User {
+    return this.dataService.user;
   }
 
 }
