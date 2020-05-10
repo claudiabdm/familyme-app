@@ -19,14 +19,6 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.socketService.getAllMessages().pipe(first()).subscribe(messages => {
-      messages.forEach( msg => {
-        if (msg.createdAt > this.dataService.user.lastConnection ) {
-          this.socketService.notificationsCounter += 1;
-          console.log(msg.createdAt, this.dataService.user.lastConnection, this.socketService.notificationsCounter)
-        }
-      })
-    })
   }
 
   get notificationsCounter(): number {

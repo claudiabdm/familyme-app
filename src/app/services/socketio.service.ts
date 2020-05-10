@@ -45,7 +45,6 @@ export class SocketioService {
             msg.userAvatar = user.avatar;
           };
         });
-        msg.userId !== this.dataService.user._id ? this.notificationsCounter +=1 : null;
         observer.next(msg);
       })
     })

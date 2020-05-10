@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs';
 import { Button } from '../shared/models/button';
-import { filter, takeUntil } from 'rxjs/operators';
+import { filter, takeUntil, first } from 'rxjs/operators';
 import { SocketioService } from '../services/socketio.service';
+import { DataService } from '../services/data.service';
+import { Message } from '../shared/models/message';
 
 @Component({
   selector: 'app-pages',
@@ -24,20 +26,36 @@ export class PagesComponent implements OnInit {
 
   constructor(
     public router: Router,
-    private socketService: SocketioService) {
+    private socketService: SocketioService,
+    private dataService: DataService) {
   }
 
   ngOnInit(): void {
     this.socketService.setupSocketConnection();
+    this.socketService.getAllMessages().pipe(first()).subscribe((messages: Message[]) => {
+      messages.forEach(msg => {
+        if (msg.createdAt > this.dataService.user.lastConnection) {
+          this.socketService.notificationsCounter += 1;
+        }
+      })
+    })
+
+    this.socketService.getMessage().pipe(takeUntil(this.ngUnsubscribe$)).subscribe((msg: Message) => {
+      if (msg.userId !== this.dataService.user._id) {
+        this.socketService.notificationsCounter += 1;
+      }
+    });
+
+
     this.currentRoute = this.router.url;
     this.toggleHeaderNavbar(this.currentRoute);
     this.changeButton(this.currentRoute);
 
     this.router.events.pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd), takeUntil(this.ngUnsubscribe$))
-    .subscribe(res => {
-      this.currentRoute = res.url;
-      this.changeButton(this.currentRoute);
-      this.toggleHeaderNavbar(this.currentRoute);
+      .subscribe(res => {
+        this.currentRoute = res.url;
+        this.changeButton(this.currentRoute);
+        this.toggleHeaderNavbar(this.currentRoute);
       })
   }
 
