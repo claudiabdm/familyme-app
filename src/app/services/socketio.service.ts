@@ -24,7 +24,9 @@ export class SocketioService {
 
   setupSocketConnection() {
     this.socket = io(environment.SOCKET_ENDPOINT);
+    this.socket.emit('join', this.dataService.userGroup._id);
   }
+
 
   sendMessage(msg: string): void {
     const newMsg: Message = {
