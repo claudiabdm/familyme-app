@@ -15,7 +15,7 @@
   color: $secondary;
   font-weight: $font-weight-bold;
   font-size: ($font-size-base * 2);
-  box-shadow: $box-shadow-sharpen;
+  box-shadow: var(--box-shadow-sharpen);
   z-index: 10;
 
   @media screen and (min-width: $lg) {

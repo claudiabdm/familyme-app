@@ -17,23 +17,25 @@ export class HeaderComponent implements OnInit {
   @Input() targetModal: ModalComponent;
   @Input() switchVisible: boolean = false;
 
-  isShopping: boolean = false;
-
   constructor(
     private dataService: DataService,
     private socketService: SocketioService,
   ) { }
 
+  ngOnInit(): void {
+  }
+
   get userList(): User[] {
     return this.dataService.userList;
   }
 
-  ngOnInit(): void {
-
+  get isShopping(): boolean {
+    return this.dataService.user.isShopping;
   }
 
   onChecked() {
-    const text = !this.isShopping ? "I'm shopping" : "I've finished shopping";
+    this.dataService.user.isShopping = !this.isShopping;
+    const text = this.dataService.user.isShopping ? "I'm shopping" : "I've finished shopping";
     this.socketService.sendMessage(text);
   }
 
