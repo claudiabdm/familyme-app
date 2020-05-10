@@ -1,6 +1,9 @@
 <div class="edit-photo">
   <!-- PREVIEW -->
   <article class="user user--col">
+    <ngx-spinner size="medium" bdColor="rgba(51,51,51,0.35)" type="ball-spin-clockwise" color="#fff"
+      [fullScreen]="false">
+    </ngx-spinner>
     <div class="user__img-wrapper user__img-wrapper--large">
       <img class="user__img user__img--large" [src]="imageUrl || defaultImg" alt="{{user.name}} profile photo">
     </div>
@@ -14,7 +17,8 @@
       <input type="file" id="changePhoto" hidden accept="image/*" (change)=onChangePhoto(imgInput.files[0]) #imgInput>
     </label>
 
-    <button type="button" class="btn btn--m btn--success" (click)="onUpdatePhoto(imageUrl)" [disabled]="isDisabled">Save</button>
+    <button type="button" class="btn btn--m btn--success" (click)="onUpdatePhoto(imageUrl)"
+      [disabled]="isDisabled">Save</button>
 
     <button type="button" class="btn btn--m btn--secondary" (click)="onUpdatePhoto(defaultImg)">Remove</button>
 

@@ -7,6 +7,7 @@ import { DataService } from 'src/app/services/data.service';
 import { ImageProcessorService } from 'src/app/shared/component/profile-img/image-processor.service';
 import { UsersService } from 'src/app/services/users.service';
 import { takeUntil } from 'rxjs/operators';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-profile-img',
@@ -28,7 +29,8 @@ export class ProfileImgComponent implements OnInit, OnDestroy {
     private dataService: DataService,
     private usersService: UsersService,
     private modalService: ModalService,
-    private imageProcessor: ImageProcessorService, ) { }
+    private imageProcessor: ImageProcessorService,
+    private spinner: NgxSpinnerService, ) { }
 
   ngOnInit(): void {
 
@@ -47,9 +49,11 @@ export class ProfileImgComponent implements OnInit, OnDestroy {
   }
 
   onChangePhoto(file: File): void {
+    this.spinner.show();
     this.imageProcessor.compressImg(file).pipe(takeUntil(this.ngUnsubscribe$)).subscribe(res => {
       this.imageUrl = res;
       this.isDisabled = false;
+      this.spinner.hide();
     });
   }
 
