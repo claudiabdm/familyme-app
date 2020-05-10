@@ -9,6 +9,7 @@
 .fc-view-container {
   background-color: var(--body-bg);
   border-radius: 5px;
+  box-shadow: var(--box-shadow-sharpen);
 
   a {
     font-weight: $font-weight-medium;
@@ -17,6 +18,14 @@
 
 .fc-unthemed td.fc-today {
   background-color: var(--tertiary);
+}
+
+thead tr:first-child td:first-child {
+  border-top-left-radius: 15px;
+}
+
+thead tr:first-child td:last-child {
+  border-top-right-radius: 15px;
 }
 
 // TOOLBAR
@@ -105,6 +114,14 @@
 
 // LIST VIEW
 // ----------------------------
+.fc-list-view {
+  border: none;
+}
+
+.fc-unthemed .fc-list-empty {
+  background-color: var(--tertiary);
+}
+
 .fc-list-heading td,
 .fc-list-item a {
   font-weight: $font-weight-medium;
@@ -112,6 +129,7 @@
 
 .fc-unthemed .fc-list-heading td {
   background-color: var(--body-bg);
+  border-radius: 20px;
 }
 
 .fc-unthemed .fc-list-item:hover td {
@@ -123,14 +141,27 @@
 // ----------------------------//
 // OWL DATETIME PICKER         //
 // ----------------------------//
+.owl-dt-container {
+  background-color: var(--body-bg);
+
+  .owl-dt-control-button, .owl-dt-weekday {
+    color: var(--body-color);
+
+  }
+
+}
+
+.owl-dt-control-content.owl-dt-control-button-content  {
+  color: $secondary;
+}
+.owl-dt-calendar-table .owl-dt-calendar-cell-content {
+  color: var(--body-color);
+}
+
 .owl-dt-calendar-table .owl-dt-calendar-cell-selected {
   background-color: $primary;
 }
 
 .owl-dt-calendar-table .owl-dt-calendar-cell-today:not(.owl-dt-calendar-cell-selected) {
   border-color: $grey-100;
-}
-
-.owl-dt-container-buttons {
-  color: $secondary;
 }

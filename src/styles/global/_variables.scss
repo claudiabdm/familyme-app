@@ -78,6 +78,7 @@ $lg: 1023px;
   --hover-bg: #{darken($tertiary, 2.5%)};
   --icon-filter: grayscale(1);
   --icon-filter-selected: none;
+  --box-shadow-sharpen: #{$box-shadow-sharpen};
 }
 
 @media (prefers-color-scheme: dark) {
@@ -88,5 +89,6 @@ $lg: 1023px;
     --hover-bg: #{darken($grey-300, 2.5%)};
     --icon-filter: grayscale(1) invert(1) opacity(0.8);
     --icon-filter-selected: hue-rotate(-180deg) invert(1) opacity(1);
+    --box-shadow-sharpen:  0 3px 1px 1px rgba(0, 0, 0, 0.2);
   }
 }
