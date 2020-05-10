@@ -11,4 +11,5 @@ export class User {
   location: google.maps.LatLngLiteral;
   isSelected: boolean;
   lastConnection: Date;
+  isShopping: boolean;
 }

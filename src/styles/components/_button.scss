@@ -39,7 +39,7 @@
 
   &:focus {
     outline:none;
-    box-shadow: $box-shadow-sharpen;
+    box-shadow: var(--box-shadow-sharpen);
   }
 
 }
@@ -124,6 +124,6 @@
   --button-hover: var(--body-bg);
   font-size: $font-size-base;
   font-weight: $font-weight-light;
-  box-shadow: $box-shadow-sharpen;
+  box-shadow: var(--box-shadow-sharpen);
   z-index: 1000;
 }

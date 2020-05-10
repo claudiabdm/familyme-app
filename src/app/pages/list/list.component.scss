@@ -21,7 +21,7 @@
     // background-color: rgba($color: $secondary, $alpha: 0.5);
     color: #fff;
     font-size: rem(28px);
-    // box-shadow: $box-shadow-sharpen;
+    // box-shadow: var(--box-shadow-sharpen);
   }
 
   // ITEM
@@ -36,7 +36,7 @@
     background-color: var(--body-bg);
     border: 1px solid rgba($color: $secondary, $alpha: 0.75);
     border-radius: 3px;
-    box-shadow: $box-shadow-sharpen;
+    box-shadow: var(--box-shadow-sharpen);
 
     &:first-child {
       border-top: 1px solid rgba($color: $secondary, $alpha: 0.5);
