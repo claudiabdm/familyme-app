@@ -24,7 +24,7 @@ export class AuthService {
   public invalidGroup: boolean = false;
   public invalidPassword: boolean = false;
 
-  url = `${environment.authUrl}`;
+  // url = `${environment.authUrl}`;
 
   constructor(
     @Inject(LOCAL_STORAGE) private storage: StorageService,
