@@ -17,7 +17,7 @@ export class GroupsService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(private http:HttpClient, private dataService: DataService) { }
+  constructor(private http: HttpClient, private dataService: DataService) { }
 
   createGroup(name: string): Observable<Group> {
     const newGroup = {
@@ -40,12 +40,12 @@ export class GroupsService {
     }));
   }
 
-  deleteGroup(id: string): Observable<Group> {
-    return this.http.delete<Group>(`${this.url}/${id}`);
-  }
-
   addUserToGroup(user: User, group: Group): Observable<Group> {
     user.familyCode = group.familyCode;
     return this.http.put<Group>(`${this.url}/${group._id}`, group, this.httpOptions);
+  }
+
+  deleteGroup(): Observable<any> {
+    return this.http.delete(`${this.url}/${this.dataService.userGroup._id}/${this.dataService.user._id}`);
   }
 }

@@ -37,8 +37,8 @@
     <li>
       <a class="settings__txt settings__txt--warning" (click)="logOut()">Log out</a>
     </li>
-    <li>
-      <a class="settings__txt settings__txt--warning" (click)="toggleModal(deleteModal)">Delete account</a>
+    <li class="settings__txt settings__txt--warning" (click)="selectedModalInfo(targetModal, 'deleteAccountModal')">
+      Delete account
     </li>
 
   </ul>
@@ -50,30 +50,33 @@
     <li class="settings__txt">Change admin <i class="icon icon-next icon--xs"></i></li>
     <li class="settings__txt">Change family name <i class="icon icon-next icon--xs"></i>
     </li>
-    <li class="settings__txt settings__txt--warning">Delete family group</li>
+    <li class="settings__txt settings__txt--warning" (click)="selectedModalInfo(targetModal, 'deleteGroupModal')">
+      Delete family group and related accounts
+    </li>
   </ul>
 </article>
 
 
-<!-- MODAL CHANGE USER DATA -->
+<!-- MODAL CHANGE/DELETE USER DATA -->
 
 <app-modal class [title]="targetModalInfo?.title" [modalId]="targetModalInfo?.id" (close)="toggleModal(targetModal)"
   [modalVisible]="false" [isFull]="false" #targetModal>
+  <ng-container *ngIf="targetModal.modalVisible">
+
+    <!-- DELETE MODALS -->
+    <ng-container *ngIf="targetModalInfo.id === 'deleteModal'">
+      <div class="container container--static">
+        <p class="container__p container__p--medium">Are you sure you want to delete {{ targetModalInfo.label }}?
+        </p>
+        <div class="container container--btn">
+          <button type="button" class="btn btn--m btn--secondary" (click)="targetModalInfo.function()">Remove</button>
+          <button type="button" class="btn btn--m btn--primary" (click)="toggleModal(targetModal)">Cancel</button>
+        </div>
+      </div>
+    </ng-container>
+    <!-- //DELETE MODALS -->
+
+  </ng-container>
 </app-modal>
 
-<!-- // MODAL CHANGE USER DATA -->
-
-<!-- CONFIRM DELETE ACCOUNT MODAL -->
-
-<app-modal class [title]="'Delete Account'" [modalId]="deleteModal" (close)="toggleModal(deleteModal)"
-  [modalVisible]="false" [isFull]="false" #deleteModal>
-  <div *ngIf="deleteModal.modalVisible" class="container container--static">
-    <p class="container__p container__p--medium">Are you sure you want to delete your account?</p>
-    <div class="container container--btn">
-      <button type="button" class="btn btn--m btn--secondary" (click)="deleteAccount()">Remove account</button>
-      <button type="button" class="btn btn--m btn--primary" (click)="toggleModal(deleteModal)">Cancel</button>
-    </div>
-  </div>
-</app-modal>
-
-<!-- // CONFIRM DELETE ACCOUNT MODAL -->
+<!-- // MODAL CHANGE/DELETE USER DATA -->

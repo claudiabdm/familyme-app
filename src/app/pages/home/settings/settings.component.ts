@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { ModalComponent } from '../../../shared/component/modal/modal.component';
@@ -6,6 +6,8 @@ import { DataService } from 'src/app/services/data.service';
 import { UsersService } from 'src/app/services/users.service';
 import { first } from 'rxjs/internal/operators/first';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { MethodCall } from '@angular/compiler';
+import { GroupsService } from 'src/app/services/groups.service';
 
 @Component({
   selector: 'app-settings',
@@ -14,17 +16,18 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class SettingsComponent implements OnInit {
 
-  targetModalInfo: { title: string; id: string; label: string; };
+  targetModalInfo: { title: string; id: string; label: string; function: () => void };
 
   constructor(
-    public authService: AuthService,
+    private authService: AuthService,
     private dataService: DataService,
     private modalService: ModalService,
     private usersService: UsersService,
+    private groupsService: GroupsService,
     private spinner: NgxSpinnerService,
   ) { }
 
-  get roleAdmin(): boolean {
+  get roleAdmin(): boolean {
     return this.dataService.user.role === 'admin';
   }
 
@@ -38,9 +41,17 @@ export class SettingsComponent implements OnInit {
     this.usersService.updateUser(this.dataService.user).pipe(first()).subscribe(res => this.spinner.hide());
   }
 
-  deleteAccount() {
+  deleteAccount = () => {
     this.spinner.show();
-    this.usersService.deleteUser().pipe(first()).subscribe(res =>{
+    this.usersService.deleteUser().pipe(first()).subscribe(res => {
+      this.authService.logOut();
+      this.spinner.hide();
+    });
+  }
+
+  deleteGroup = () => {
+    this.spinner.show();
+    this.groupsService.deleteGroup().pipe(first()).subscribe(res => {
       this.authService.logOut();
       this.spinner.hide();
     });
@@ -50,6 +61,10 @@ export class SettingsComponent implements OnInit {
   }
 
   notificationsOn() {
+  }
+
+  onModify(): void {
+
   }
 
 
@@ -68,6 +83,7 @@ export class SettingsComponent implements OnInit {
           title: 'Change password',
           id: 'passwordModal',
           label: 'Password',
+          function: this.onModify,
         };
         break;
       case 'emailModal':
@@ -75,6 +91,7 @@ export class SettingsComponent implements OnInit {
           title: 'Change email',
           id: 'emailModal',
           label: 'Email',
+          function: this.onModify,
         };
         break;
       case 'nameModal':
@@ -82,13 +99,23 @@ export class SettingsComponent implements OnInit {
           title: 'Edit name',
           id: 'namelModal',
           label: 'Name',
+          function: this.onModify,
         };
         break;
       case 'deleteAccountModal':
         this.targetModalInfo = {
           title: 'Delete Account',
-          id: 'deleteAccountModal',
-          label: 'Password',
+          id: 'deleteModal',
+          label: 'your account',
+          function: this.deleteAccount,
+        };
+        break;
+      case 'deleteGroupModal':
+        this.targetModalInfo = {
+          title: 'Delete Group',
+          id: 'deleteModal',
+          label: 'the family group and related accounts',
+          function: this.deleteGroup,
         };
         break;
     }
