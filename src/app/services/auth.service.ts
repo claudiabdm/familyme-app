@@ -143,5 +143,6 @@ export class AuthService {
   logOut(): void {
     this.storage.clear();
     this.socketService.socket.disconnect();
+    this.router.navigate(['']);
   };
 }

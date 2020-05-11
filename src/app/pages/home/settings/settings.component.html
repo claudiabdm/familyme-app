@@ -1,3 +1,4 @@
+<ngx-spinner size="medium" bdColor="rgba(51,51,51,0.35)" type="ball-spin-clockwise" color="#fff"></ngx-spinner>
 <article class="settings">
   <h2 class="settings__title">User settings</h2>
   <ul class="settings__list">
@@ -34,10 +35,10 @@
     <!-- //SWITCHES -->
 
     <li>
-      <a [routerLink]="''" class="settings__txt settings__txt--warning" (click)="logOut()">Log out</a>
+      <a class="settings__txt settings__txt--warning" (click)="logOut()">Log out</a>
     </li>
     <li>
-      <a href="#" class="settings__txt settings__txt--warning">Delete account</a>
+      <a class="settings__txt settings__txt--warning" (click)="toggleModal(deleteModal)">Delete account</a>
     </li>
 
   </ul>
@@ -61,3 +62,18 @@
 </app-modal>
 
 <!-- // MODAL CHANGE USER DATA -->
+
+<!-- CONFIRM DELETE ACCOUNT MODAL -->
+
+<app-modal class [title]="'Delete Account'" [modalId]="deleteModal" (close)="toggleModal(deleteModal)"
+  [modalVisible]="false" [isFull]="false" #deleteModal>
+  <div *ngIf="deleteModal.modalVisible" class="container container--static">
+    <p class="container__p container__p--medium">Are you sure you want to delete your account?</p>
+    <div class="container container--btn">
+      <button type="button" class="btn btn--m btn--secondary" (click)="deleteAccount()">Remove account</button>
+      <button type="button" class="btn btn--m btn--primary" (click)="toggleModal(deleteModal)">Cancel</button>
+    </div>
+  </div>
+</app-modal>
+
+<!-- // CONFIRM DELETE ACCOUNT MODAL -->

@@ -48,4 +48,8 @@ export class UsersService {
     );
   }
 
+  deleteUser(): Observable<any> {
+    return this.http.delete(`${this.url}/${this.dataService.user._id}`);
+  }
+
 }

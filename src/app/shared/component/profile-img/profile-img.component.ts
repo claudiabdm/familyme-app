@@ -8,6 +8,7 @@ import { ImageProcessorService } from 'src/app/shared/component/profile-img/imag
 import { UsersService } from 'src/app/services/users.service';
 import { takeUntil } from 'rxjs/operators';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-profile-img',
@@ -40,7 +41,7 @@ export class ProfileImgComponent implements OnInit, OnDestroy {
     return this.dataService.user;
   }
 
-  toggleModal(targetModal): void {
+  toggleModal(targetModal: ModalComponent): void {
     if (!targetModal.modalVisible) {
       this.modalService.openModal(targetModal);
     } else {
