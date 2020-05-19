@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { Observable, of, BehaviorSubject } from 'rxjs';
+import { catchError, map, tap, switchMap } from 'rxjs/operators';
 
 import { User } from '../shared/models/user';
 import { environment } from 'src/environments/environment';
@@ -14,38 +14,49 @@ import { DataService } from './data.service';
 })
 export class UsersService {
 
+  userDataSource = new BehaviorSubject(null);
+  userData$ = this.userDataSource.asObservable();
+  membersDataSource = new BehaviorSubject(null);
+  membersData$ = this.membersDataSource.asObservable();
+
   private url = `${environment.apiUrl}users`;
 
   constructor(private http: HttpClient, private dataService: DataService) { }
+
+  setUserData(): Observable<User> {
+    return this.http.get<User>(`${this.url}/user-logged`)
+      .pipe(
+        map(user => {
+          this.userDataSource.next(user);
+          return user;
+        })
+      );
+  }
 
   createUser(user: User, group: Group, role: string): Observable<User> {
     const newUser = Object.assign(user, { role: role, familyCode: group.familyCode, groupId: group._id });
     return this.http.post<User>(this.url, newUser);
   }
 
-  updateUser(user: User): Observable<User> {
-    return this.http.put<User>(`${this.url}/${user._id}`, user).pipe(map(user => {
-      this.dataService.updateUserData(user);
-      return user;
-    }))
+  updateUserData(user: User): Observable<any> {
+    return this.http.put<User>(`${this.url}/${user._id}`, user)
+      .pipe(
+        switchMap(user => {
+
+          this.userDataSource.next(user);
+          return this.getUsersByFamilyCode(user.familyCode);
+        })
+      );
   }
 
-  getUserById(id: User['_id']): Observable<User> {
-    return this.http.get<User>(`${this.url}/${id}`);
-  }
-
-  getUsersByGroupToken(familyCode: string): Observable<User[]> {
-    return this.http.get<User[]>(`${this.url}/search/${familyCode}`).pipe(map(users => {
-      this.dataService.updateUserList(users);
-      return users;
-    }))
-  }
-
-  searchUserByEmail(user: User): Observable<User> {
-    const url = `${this.url}/search/${user.email}`;
-    return this.http.get<User>(url).pipe(
-      map(users => users[0]),
-    );
+  getUsersByFamilyCode(familyCode: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.url}/search/${familyCode}`)
+      .pipe(
+        map(users => {
+          this.membersDataSource.next(users);
+          return users;
+        })
+      )
   }
 
   deleteUser(): Observable<any> {

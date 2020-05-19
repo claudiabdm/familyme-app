@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Group } from '../shared/models/group';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { User } from '../shared/models/user';
 import { map } from 'rxjs/operators';
 import { DataService } from './data.service';
@@ -12,6 +12,8 @@ import { DataService } from './data.service';
 })
 export class GroupsService {
 
+  groupDataSource = new BehaviorSubject(null);
+  groupData$ = this.groupDataSource.asObservable();
   private url = `${environment.apiUrl}groups`;
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -33,11 +35,13 @@ export class GroupsService {
     }));
   }
 
-  searchGroupByToken(familyCode: string): Observable<Group> {
-    return this.http.get<Group>(`${this.url}/search/${familyCode}`, this.httpOptions).pipe(map(group => {
-      this.dataService.updateUserGroup(group[0]);
-      return group[0];
-    }));
+  getGroupByFamilyCode(familyCode: string): Observable<Group> {
+    return this.http.get<Group>(`${this.url}/search/${familyCode}`, this.httpOptions)
+      .pipe(
+        map(group => {
+          this.groupDataSource.next(group);
+          return group; })
+      );
   }
 
   addUserToGroup(user: User, group: Group): Observable<Group> {
