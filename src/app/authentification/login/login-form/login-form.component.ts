@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login-form',
@@ -11,12 +13,16 @@ export class LoginFormComponent implements OnInit {
 
   loginForm: FormGroup;
   isVisible: boolean = false;
+  invalidUser: boolean = false;
   type: string = 'password';
 
 
   constructor(
     private formBuilder: FormBuilder,
-    public authService: AuthService) { }
+    private authService: AuthService,
+    private router: Router,
+    private spinner: NgxSpinnerService,
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -27,8 +33,17 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSubmit(form: FormGroup) {
+    this.spinner.show();
     if (form.valid) {
-      this.authService.logIn(form.value);
+      this.authService.logIn(form.value)
+        .subscribe(
+          res => {
+            this.spinner.hide();
+            this.router.navigate(['pages/home']);
+          },
+          error => {
+            this.invalidUser = error.status === 401;
+          });
     }
   }
 
