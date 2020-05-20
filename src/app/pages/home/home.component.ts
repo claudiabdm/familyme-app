@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject, Observable } from 'rxjs';
 
 import { User } from 'src/app/shared/models/user';
 import { Group } from 'src/app/shared/models/group';
-import { UsersService } from 'src/app/services/users.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { DataService } from 'src/app/services/data.service';
 import { ModalComponent } from 'src/app/shared/component/modal/modal.component';
@@ -17,28 +15,21 @@ import { ModalComponent } from 'src/app/shared/component/modal/modal.component';
 export class HomeComponent implements OnInit {
 
   img = '../../../assets/img/profile-photo-round.svg';
+  user: Observable<any>;
+  userGroup: Observable<Group>;
+  userList: Observable<User[]>;
 
   private ngUnsubscribe$ = new Subject<void>();
 
   constructor(
-    private dataService: DataService,
     private modalService: ModalService,
-    private usersService: UsersService) { }
+    private dataService: DataService
+    ) { }
 
   ngOnInit(): void {
-    this.usersService.getUsersByGroupToken(this.dataService.user.familyCode).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
-  }
-
-  get user(): User {
-    return this.dataService.user;
-  }
-
-  get userGroup(): Group {
-    return this.dataService.userGroup;
-  }
-
-  get userList(): User[] {
-    return this.dataService.userList;
+    this.user = this.dataService.userData$;
+    this.userGroup = this.dataService.groupData$;
+    this.userList = this.dataService.membersData$;
   }
 
   toggleModal(targetModal: ModalComponent): void {

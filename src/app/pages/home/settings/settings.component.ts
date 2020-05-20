@@ -8,6 +8,8 @@ import { first } from 'rxjs/internal/operators/first';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MethodCall } from '@angular/compiler';
 import { GroupsService } from 'src/app/services/groups.service';
+import { Observable } from 'rxjs';
+import { User } from 'src/app/shared/models/user';
 
 @Component({
   selector: 'app-settings',
@@ -16,6 +18,7 @@ import { GroupsService } from 'src/app/services/groups.service';
 })
 export class SettingsComponent implements OnInit {
 
+  user: Observable<User>;
   targetModalInfo: { title: string; id: string; label: string; function: () => void };
 
   constructor(
@@ -27,18 +30,14 @@ export class SettingsComponent implements OnInit {
     private spinner: NgxSpinnerService,
   ) { }
 
-  get roleAdmin(): boolean {
-    return this.dataService.user.role === 'admin';
-  }
-
   ngOnInit(): void {
+    this.user = this.dataService.userData$;
   }
 
   logOut() {
     this.spinner.show();
     this.authService.logOut();
-    this.dataService.user.lastConnection = new Date();
-    this.usersService.updateUser(this.dataService.user).pipe(first()).subscribe(res => this.spinner.hide());
+    this.spinner.hide();
   }
 
   deleteAccount = () => {

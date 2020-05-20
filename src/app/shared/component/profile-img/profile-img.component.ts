@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
+import { takeUntil, take } from 'rxjs/operators';
 
 import { User } from 'src/app/shared/models/user';
 import { ModalService } from 'src/app/services/modal.service';
 import { DataService } from 'src/app/services/data.service';
-import { ImageProcessorService } from 'src/app/shared/component/profile-img/image-processor.service';
 import { UsersService } from 'src/app/services/users.service';
-import { takeUntil, take } from 'rxjs/operators';
+import { ImageProcessorService } from 'src/app/shared/component/profile-img/image-processor.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ModalComponent } from '../modal/modal.component';
 
@@ -27,13 +27,14 @@ export class ProfileImgComponent implements OnInit, OnDestroy {
   private ngUnsubscribe$ = new Subject<void>();
 
   constructor(
+    private dataService: DataService,
     private usersService: UsersService,
     private modalService: ModalService,
     private imageProcessor: ImageProcessorService,
     private spinner: NgxSpinnerService, ) { }
 
   ngOnInit(): void {
-    this.user = this.usersService.userData$;
+    this.user = this.dataService.userData$;
   }
 
   toggleModal(targetModal: ModalComponent): void {
@@ -54,7 +55,7 @@ export class ProfileImgComponent implements OnInit, OnDestroy {
   }
 
   onUpdatePhoto(file: string | ArrayBuffer) {
-    const userToBeUpdated = this.usersService.userDataSource.getValue();
+    const userToBeUpdated = this.dataService.getUser();
     userToBeUpdated.avatar = file;
     this.usersService.updateUserData(userToBeUpdated).pipe(take(1)).subscribe();
     this.update.emit();
