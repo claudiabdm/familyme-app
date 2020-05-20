@@ -42,6 +42,7 @@ export class LoginFormComponent implements OnInit {
             this.router.navigate(['pages/home']);
           },
           error => {
+            this.spinner.hide();
             this.invalidUser = error.status === 401;
           });
     }
