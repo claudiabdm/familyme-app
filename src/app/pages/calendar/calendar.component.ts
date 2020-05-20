@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { takeUntil, map } from 'rxjs/operators';
+import { Subject, Observable } from 'rxjs';
 
 import dayGridPlugin from '@fullcalendar/daygrid';
 import listGridPlugin from '@fullcalendar/list';
@@ -12,6 +12,7 @@ import { ModalService } from 'src/app/services/modal.service';
 import { DataService } from 'src/app/services/data.service';
 import { GroupsService } from 'src/app/services/groups.service';
 import { ModalComponent } from 'src/app/shared/component/modal/modal.component';
+import { Group } from 'src/app/shared/models/group';
 
 @Component({
   selector: 'app-calendar',
@@ -26,6 +27,7 @@ export class CalendarComponent implements OnInit {
 
   private ngUnsubscribe$ = new Subject<void>();
 
+  calendarEvents: Observable<Group['events']>;
   calendarPlugins = [dayGridPlugin, listGridPlugin, interactionPlugin];
   header = {
     left: 'dayGridMonth,listWeek,today',
@@ -50,23 +52,14 @@ export class CalendarComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private groupsService: GroupsService,
     private modalService: ModalService
   ) { }
 
-  get calendarEvents() {
-    return this.dataService.userGroup.events;
-  }
-
   ngOnInit(): void {
-    this.groupsService.searchGroupByToken(this.dataService.user.familyCode)
-      .pipe(takeUntil(this.ngUnsubscribe$))
-      .subscribe(group => { this.dataService.userGroup.events = group.events });
-
+    this.calendarEvents = this.dataService.groupData$.pipe(map(group => group.events));
     const newEventBtn = document.getElementById('newEventBtn');
     newEventBtn.addEventListener('click', () => this.toggleModal(this.newEventModal))
   }
-
 
   selectEvent(event, targetModal: ModalComponent): void {
     this.selectedEvent = {

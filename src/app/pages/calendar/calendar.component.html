@@ -1,5 +1,5 @@
 <full-calendar class="container container--calendar" #calendar defaultView="dayGridMonth" height="parent"
-  [header]="header" [events]="calendarEvents" [customButtons]="false" [plugins]="calendarPlugins"
+  [header]="header" [events]="( calendarEvents | async )" [customButtons]="false" [plugins]="calendarPlugins"
   [eventTimeFormat]="eventTimeFormat" [firstDay]="1" (dateClick)="selectDay($event, newEventModal)"
   (eventClick)="selectEvent($event, modifyEventModal)">
 </full-calendar>

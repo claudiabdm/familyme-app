@@ -48,8 +48,7 @@ export class EventFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
-    this.dataService.userList.forEach(user => {
+    this.dataService.getMembers().forEach(user => {
       if (this.eventInfo.invitees.length > 0 && this.eventInfo.invitees.includes(user._id)) {
         this.inviteeList.push(user);
         user.isSelected = true;
@@ -75,34 +74,33 @@ export class EventFormComponent implements OnInit, OnDestroy {
 
   onSubmit(form: FormGroup): void {
     this.spinner.show();
-
+    const group = this.dataService.getGroup();
     form.value.invitees = this.inviteeList.map(user => user._id);
 
     switch (this.formBtn) {
       case 'Add':
-        this.dataService.userGroup.events.push(form.value);
+        group.events.push(form.value);
+        this.dataService.setGroup(group);
         break;
       case 'Modify':
-        const idx = this.dataService.userGroup.events.findIndex(event => event._id === this.eventInfo._id);
-        this.dataService.userGroup.events.splice(idx, 1, form.value);
+        const idx = group.events.findIndex(event => event._id === this.eventInfo._id);
+        group.events.splice(idx, 1, form.value);
         break;
     }
 
-    this.groupsService.updateGroup(this.dataService.userGroup).pipe(takeUntil(this.ngUnsubscribe$)).subscribe(
-      group => {
-        this.dataService.userGroup.events = group.events;
-        this.spinner.hide();
-      });
+    this.groupsService.updateGroupData(group).pipe(takeUntil(this.ngUnsubscribe$)).subscribe(() => this.spinner.hide());
+
   }
 
   onDeleteEvent() {
-    const updatedEventList = this.dataService.userGroup.events.filter(event => event._id !== this.eventInfo._id);
-    this.dataService.userGroup.events = updatedEventList;
-    this.groupsService.updateGroup(this.dataService.userGroup).pipe(takeUntil(this.ngUnsubscribe$)).subscribe(
-      group => {
-        this.dataService.userGroup.events = group.events;
-        this.delete.emit();
-      });
+    this.spinner.show();
+    const group = this.dataService.getGroup();
+    const updatedEvents = group.events.filter(event => event._id !== this.eventInfo._id);
+    group.events = updatedEvents;
+    this.groupsService.updateGroupData(group).pipe(takeUntil(this.ngUnsubscribe$)).subscribe(() => {
+      this.spinner.hide(),
+      this.delete.emit()
+    });
   }
 
   onAddInvitee(modal) {

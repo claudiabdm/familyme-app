@@ -12,21 +12,17 @@ export class UserListComponent implements OnInit {
   @Input() userList: User[];
   @Input() onlyImage: boolean;
   @Input() isCheckList: boolean = false;
-
   @Output() userListChange = new EventEmitter<User[]>();
 
+  allUsers: User[];
   public img = '../../../assets/img/profile-photo-round.svg';
 
   constructor(
     private dataService: DataService,
   ) { }
 
-  get allUsers() {
-    return this.dataService.userList;
-  }
-
   ngOnInit(): void {
-
+    this.allUsers = this.dataService.getMembers();
   }
 
   onChecked(user, checked) {
