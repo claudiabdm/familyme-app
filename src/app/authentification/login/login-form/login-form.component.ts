@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-login-form',
@@ -38,8 +39,11 @@ export class LoginFormComponent implements OnInit {
       this.authService.logIn(form.value)
         .subscribe(
           res => {
-            this.spinner.hide();
-            this.router.navigate(['pages/home']);
+            if (res) {
+              this.spinner.hide();
+            } else {
+              throwError('Something went wrong');
+            }
           },
           error => {
             this.spinner.hide();

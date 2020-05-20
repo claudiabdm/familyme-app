@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CustomValidatorsService } from 'src/app/services/custom-validators.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { SignUpType } from 'src/app/shared/models/signup';
 
 
 @Component({
@@ -13,12 +14,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class SignupFormComponent implements OnInit {
 
-  @Input() singUpType = {
-    title: 'Sign in',
-    id: 'string',
-    label: 'string',
-    placeholder: 'string',
-  };
+  @Input() singUpType: SignUpType;
 
   signupForm: FormGroup;
   isVisible: boolean = false;
@@ -54,27 +50,13 @@ export class SignupFormComponent implements OnInit {
     this.spinner.show();
     if (form.valid) {
       delete form.value.passwordConfirm;
-      switch (this.singUpType.id) {
-        case 'createModal':
-          this.authService.signUpCreate(form.value).subscribe(
-            res => {
-              this.router.navigate(['/login']);
-            },
-            error => {
-              this.invalidUser = error.status === 409;
-            });
-          break;
-        case 'joinModal':
-          this.authService.signUpJoin(form.value).subscribe(
-            res => {
-              this.router.navigate(['/login']);
-            },
-            error => {
-              this.invalidUser = error.status === 409;
-              this.invalidGroup = error.status === 404;
-            });
-          break;
-      }
+      this.authService.signUp(this.singUpType.id, form.value).subscribe(
+        () => {},
+        error => {
+          this.invalidUser = error.status === 409;
+          this.invalidGroup = error.status === 404;
+        }
+      );
     }
     this.signupForm.reset();
     this.spinner.hide();
