@@ -4,7 +4,7 @@
 
     <!-- USERS -->
 
-    <app-user-list [onlyImage]="true" class="header__list" [userList]="userList"></app-user-list>
+    <app-user-list [onlyImage]="true" class="header__list" [userList]="(userList | async)"></app-user-list>
 
     <!-- //USERS -->
 
@@ -12,7 +12,7 @@
     <div class="header__actions" *ngIf="switchVisible">
       <label class="switch switch--sm" for="shopping">
         <span class="switch__label switch__label--sm">Shopping</span>
-        <input type="checkbox" class="switch__check" id="shopping" role="switch" aria-checked="true" [checked]="isShopping"
+        <input type="checkbox" class="switch__check" id="shopping" role="switch" aria-checked="true" [checked]="(isShopping | async )"
         (click)="onChecked()">
         <span class="switch__slider"></span>
       </label>
