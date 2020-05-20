@@ -1,5 +1,5 @@
-@import '../../../../styles/mixins/mixins';
-@import '../../../../styles/global/variables';
+@import 'mixins/mixins';
+@import 'global/variables';
 @import url('https://fonts.googleapis.com/css?family=Lobster&display=swap');
 .app-name {
   @include size(100vw, 100%);
