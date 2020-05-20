@@ -19,7 +19,7 @@ export class NotificationsComponent implements OnInit, AfterViewChecked {
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   @ViewChild('inputTextElem') private myInputText: ElementRef;
 
-  loggedUserId: User['_id'] = this.dataService.user._id;
+  loggedUserId: User['_id'] = this.dataService.getUser()._id;
   messages: Message[] = [];
 
   sendMessageForm = this.formBuilder.group({
