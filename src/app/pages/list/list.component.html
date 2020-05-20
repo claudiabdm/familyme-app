@@ -1,6 +1,8 @@
 <div class="container container--list" #scrollMe>
+  <!-- LIST -->
   <ul class="list">
 
+    <!-- FILTERS -->
     <div class="list__header">
       <button type="button" class="btn list__btn list__btn--sort" (click)="sortList(iconSort)">
         <svg class="icon icon--nofilter icon--sm" id="sort-done" #iconSort [class.icon--sort-done]="sortIconDone">
@@ -20,8 +22,10 @@
         </svg>
       </button>
     </div>
+    <!-- // FILTERS -->
 
-    <ng-container *ngFor="let product of productList">
+    <!-- PRODUCTS -->
+    <ng-container *ngFor="let product of productList | async ">
       <li class="list__item">
         <div class="list__checkbox checkbox checkbox--lg">
           <input type="checkbox" [name]="product.name" [id]="product._id" class="checkbox__box" [checked]="product.done"
@@ -39,7 +43,9 @@
         </button>
       </li>
     </ng-container>
+    <!-- // PRODUCTS -->
 
+    <!-- ADD NEW PRODUCT -->
     <li class="list__item" *ngIf="addItemElemVisible">
       <input class="list__label list__input" type="text" #newProduct (keydown.enter)="addItem(newProduct.value)">
       <button class="list__btn list__btn--add" (click)="addItem(newProduct.value)">
@@ -48,8 +54,10 @@
         </svg>
       </button>
     </li>
+    <!-- // ADD NEW PRODUCT -->
 
   </ul>
+  <!-- // LIST -->
 </div>
 
 <button type="button" class="btn btn--float" (click)="addItemElem()" *ngIf="!addItemElemVisible">

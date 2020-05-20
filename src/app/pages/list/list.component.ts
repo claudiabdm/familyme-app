@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject, Observable } from 'rxjs';
+import { takeUntil, map } from 'rxjs/operators';
 import { Product } from 'src/app/shared/models/product';
 import { GroupsService } from 'src/app/services/groups.service';
 import { DataService } from 'src/app/services/data.service';
 import { SortService } from './sort.service';
+import { Group } from 'src/app/shared/models/group';
 
 @Component({
   selector: 'app-list',
@@ -16,7 +17,7 @@ export class ListComponent implements OnInit {
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
   addItemElemVisible: boolean = false;
-
+  productList: Observable<Group['shoppingList']>;
   private ngUnsubscribe$ = new Subject<void>();
 
   constructor(
@@ -25,14 +26,9 @@ export class ListComponent implements OnInit {
     private sortService: SortService) { }
 
   ngOnInit(): void {
-    this.groupsService.searchGroupByToken(this.dataService.user.familyCode)
-      .pipe(takeUntil(this.ngUnsubscribe$)).subscribe(group =>
-       {this.dataService.userGroup.shoppingList = group.shoppingList.sort(this.sortService.sortAtoZ)});
+    this.productList = this.dataService.groupData$.pipe(map(group => group.shoppingList));
   }
 
-  get productList(): Product[] {
-    return this.dataService.userGroup.shoppingList;
-  }
   get sortIconAZ(): boolean {
     return this.sortService.sortedAtoZ;
   }
@@ -49,36 +45,43 @@ export class ListComponent implements OnInit {
     if (product) {
       const newProduct: Product = {
         name: product,
-        addedBy: this.dataService.user.name,
+        addedBy: this.dataService.getUser().name,
         done: false,
       } as Product;
       this.scrollToBottom();
-      this.dataService.userGroup.shoppingList.push(newProduct);
-      this.groupsService.updateGroup(this.dataService.userGroup).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
+      const group = this.dataService.getGroup();
+      group.shoppingList.push(newProduct);
+      this.groupsService.updateGroupData(group).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
     }
     this.addItemElemVisible = false;
   }
 
-  doneItem(product: Product, check: boolean): void {
-    const idx = this.productList.findIndex((data) => data._id === product._id);
+  doneItem(selectedProduct: Product, check: boolean): void {
+    const group = this.dataService.getGroup();
+    const idx = group.shoppingList.findIndex((product) => product._id === selectedProduct._id);
     if (idx > -1) {
-      product.done = check;
-      this.dataService.userGroup.shoppingList.splice(idx, 1, product);
-      this.groupsService.updateGroup(this.dataService.userGroup).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
+      selectedProduct.done = check;
+      group.shoppingList.splice(idx, 1, selectedProduct);
+      this.groupsService.updateGroupData(group).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
     }
   }
 
-  deleteItem(product: Product): void {
-    this.dataService.userGroup.shoppingList = this.productList.filter((data) => data._id !== product._id);
-    this.groupsService.updateGroup(this.dataService.userGroup).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
+  deleteItem(selectedProduct: Product): void {
+    const group = this.dataService.getGroup();
+    const updatedShoppingList = group.shoppingList.filter((product) => product._id !== selectedProduct._id);
+    group.shoppingList = updatedShoppingList;
+    this.groupsService.updateGroupData(group).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
   }
 
   sortList(sortIcon): void {
+    const group = this.dataService.getGroup();
+    const productList = group.shoppingList;
     if (sortIcon.id === 'sort-az') {
-      this.sortService.sortListAz(this.productList);
+      group.shoppingList = this.sortService.sortListAz(productList);
     } else {
-      this.sortService.sortListByDone(this.productList);
+      group.shoppingList = this.sortService.sortListByDone(productList);
     }
+    this.dataService.setGroup(group);
   }
 
   private scrollToBottom(): void {
