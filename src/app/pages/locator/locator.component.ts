@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 import { DataService } from 'src/app/services/data.service';
 import { UsersService } from 'src/app/services/users.service';
 import { MapService } from './map.service';
+import * as mapboxgl from 'mapbox-gl';
 
 @Component({
   selector: 'app-locator',
@@ -15,6 +15,10 @@ export class LocatorComponent implements OnInit {
 
   private ngUnsubscribe$ = new Subject<void>();
   private mapStyle: string;
+  private options = {
+    enableHighAccuracy: true,
+  };
+
   constructor(
     private mapService: MapService,
     private dataService: DataService,
@@ -22,21 +26,41 @@ export class LocatorComponent implements OnInit {
 
   ngOnInit(): void {
     if (navigator) {
-      navigator.geolocation.getCurrentPosition(position => {
-        this.mapService.mapTheme.pipe(takeUntil(this.ngUnsubscribe$)).subscribe((theme: string) => {
-          this.mapStyle = theme;
+      this.mapStyle = this.mapService.mapTheme.getValue();
+      navigator.geolocation.getCurrentPosition(
+        position => {
           this.mapService.buildMap(position, this.mapStyle);
-          this.dataService.user.location.lat = position.coords.latitude;
-          this.dataService.user.location.lng = position.coords.longitude;
-          this.usersService.updateUser(this.dataService.user).pipe(takeUntil(this.ngUnsubscribe$)).subscribe(res => {
-            this.dataService.userList.forEach((user) => {
+          this.dataService.getMembers().forEach(user => {
+            if (user._id === this.dataService.getUser()._id) {
+              this.mapService.updateUserCoords(user, position).subscribe();
+            }
+            if (user.location.lat && user.location.lng) {
+              this.mapService.addMarker(user, this.mapService.map);
+            }
+          })
+        },
+        error => { },
+        this.options
+      );
+
+      navigator.geolocation.watchPosition(
+        position => {
+          this.mapService.updateUserCoords(this.dataService.getUser(), position);
+          this.usersService.getUsersByFamilyCode(this.dataService.getUser().familyCode).subscribe(users => {
+            users.forEach((user) => {
+              if (user._id === this.dataService.getUser()._id) {
+                this.mapService.updateUserCoords(user, position).subscribe();
+              }
               if (user.location.lat && user.location.lng) {
                 this.mapService.addMarker(user, this.mapService.map);
               }
             })
-          })
-        })
-      });
+          });
+        },
+        error => { },
+        this.options
+      )
+
     }
   }
 

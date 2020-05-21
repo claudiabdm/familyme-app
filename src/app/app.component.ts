@@ -1,18 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { DataService } from './services/data.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'personal-project';
-  constructor(private dataService: DataService) {
-
-  }
-  ngOnInit(): void {
-    this.dataService.setLocalStorage();
-  }
 }
 

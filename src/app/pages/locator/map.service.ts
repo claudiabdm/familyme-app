@@ -2,17 +2,20 @@ import { ApplicationRef, Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import * as mapboxgl from 'mapbox-gl';
 import { User } from '../../shared/models/user';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { DataService } from 'src/app/services/data.service';
+import { UsersService } from 'src/app/services/users.service';
+import { take } from 'rxjs/operators';
 
 @Injectable()
 export class MapService {
 
   mapbox = (mapboxgl as typeof mapboxgl);
   map: mapboxgl.Map;
+  markers: { id: string, marker: mapboxgl.Marker }[] = [];
 
   themes = ['mapbox://styles/mapbox/light-v10', 'mapbox://styles/mapbox/dark-v10']
   mapTheme = new BehaviorSubject(this.themes[0]);
-
 
   geojson = {
     'type': 'FeatureCollection',
@@ -21,7 +24,10 @@ export class MapService {
 
   private img = '../../../../assets/img/profile-photo-round.svg';
 
-  constructor(private ref: ApplicationRef) {
+  constructor(
+    private ref: ApplicationRef,
+    private usersService: UsersService
+  ) {
     this.mapbox.accessToken = environment.mapBoxToken;
     const darkModeOn = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -36,7 +42,7 @@ export class MapService {
 
   }
 
-  buildMap(position, style) {
+  buildMap(position: Position, style: string) {
     if (this.map) {
       this.map.remove();
     }
@@ -46,33 +52,34 @@ export class MapService {
       zoom: 15,
       center: [position.coords.longitude, position.coords.latitude]
     });
-    // this.map.addControl(new mapboxgl.NavigationControl());
   }
 
   addMarker(user: User, map: mapboxgl.Map) {
-    const overlay = document.createElement('div');
-    overlay.classList.add('marker');
-    const overlayContainer = document.createElement('div');
-    overlayContainer.classList.add('user__img-wrapper', 'user__img-wrapper--medium');
-    const userPhoto = document.createElement('img');
-    userPhoto.classList.add('user__img', 'user__img--medium');
-    userPhoto.src = user.avatar.toString() || this.img;
+    const marker = this.markers.find(marker => marker.id === user._id);
+    if (marker) {
+      marker.marker.setLngLat(new mapboxgl.LngLat(user.location.lng, user.location.lat));
+    } else {
+      const overlay = document.createElement('div');
+      overlay.classList.add('marker');
+      const overlayContainer = document.createElement('div');
+      overlayContainer.classList.add('user__img-wrapper', 'user__img-wrapper--medium');
+      const userPhoto = document.createElement('img');
+      userPhoto.classList.add('user__img', 'user__img--medium');
+      userPhoto.src = user.avatar.toString() || this.img;
 
-    overlayContainer.appendChild(userPhoto);
-    overlay.appendChild(overlayContainer);
+      overlayContainer.appendChild(userPhoto);
+      overlay.appendChild(overlayContainer);
 
-    const coords = new mapboxgl.LngLat(user.location.lng, user.location.lat);
-
-    this.geojson.features.push({
-      'type': 'Feature',
-      'geometry': {
-        'type': 'Point',
-        'coordinates': coords,
-      }
+      const coords = new mapboxgl.LngLat(user.location.lng, user.location.lat);
+      const newMarker = new mapboxgl.Marker(overlay).setLngLat(coords).addTo(map);
+      this.markers.push({ id: user._id, marker: newMarker });
     }
-    )
-    new mapboxgl.Marker(overlay).setLngLat(coords).addTo(map);
+  }
 
+  updateUserCoords(user: User, position: Position): Observable<User> {
+    user.location.lat = position.coords.latitude;
+    user.location.lng = position.coords.longitude;
+    return this.usersService.updateUserData(user);
   }
 
 }
