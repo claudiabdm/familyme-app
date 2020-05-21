@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { User } from 'src/app/shared/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { ModalService } from 'src/app/services/modal.service';
-import { ModalComponent } from '../../../shared/component/modal/modal.component';
 import { DataService } from 'src/app/services/data.service';
 import { UsersService } from 'src/app/services/users.service';
-import { first } from 'rxjs/internal/operators/first';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { MethodCall } from '@angular/compiler';
 import { GroupsService } from 'src/app/services/groups.service';
-import { Observable } from 'rxjs';
-import { User } from 'src/app/shared/models/user';
+import { SocketioService } from 'src/app/services/socketio.service';
+import { ModalComponent } from '../../../shared/component/modal/modal.component';
 
 @Component({
   selector: 'app-settings',
@@ -42,16 +43,14 @@ export class SettingsComponent implements OnInit {
 
   deleteAccount = () => {
     this.spinner.show();
-    this.usersService.deleteUser().pipe(first()).subscribe(res => {
-      this.authService.logOut();
+    this.usersService.deleteUser().pipe(take(1)).subscribe(() => {
       this.spinner.hide();
     });
   }
 
   deleteGroup = () => {
     this.spinner.show();
-    this.groupsService.deleteGroup().pipe(first()).subscribe(res => {
-      this.authService.logOut();
+    this.groupsService.deleteGroup().pipe(take(1)).subscribe(() => {
       this.spinner.hide();
     });
   }

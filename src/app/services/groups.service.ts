@@ -1,25 +1,31 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Group } from '../shared/models/group';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { User } from '../shared/models/user';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { DataService } from './data.service';
+import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
+import { Router } from '@angular/router';
+import { SocketioService } from './socketio.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GroupsService {
 
-  groupDataSource = new BehaviorSubject(null);
-  groupData$ = this.groupDataSource.asObservable();
   private url = `${environment.apiUrl}groups`;
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(private http: HttpClient, private dataService: DataService) { }
+  constructor(
+    @Inject(LOCAL_STORAGE) private storage: StorageService,
+    private router: Router,
+    private http: HttpClient,
+    private dataService: DataService,
+    private socketService: SocketioService) { }
 
   createGroup(name: string): Observable<Group> {
     const newGroup = {
@@ -28,28 +34,28 @@ export class GroupsService {
     return this.http.post<Group>(this.url, newGroup);
   }
 
-  updateGroup(group: Group): Observable<Group> {
-    return this.http.put<Group>(`${this.url}/${group._id}`, group).pipe(map(group => {
-      this.dataService.updateUserGroup(group);
-      return group;
-    }));
+  updateGroupData(group: Group): Observable<Group> {
+    return this.http.put<Group>(`${this.url}/${group._id}`, group)
+      .pipe(
+        tap(group => this.dataService.setGroup(group))
+      );
   }
 
   getGroupByFamilyCode(familyCode: string): Observable<Group> {
     return this.http.get<Group>(`${this.url}/search/${familyCode}`, this.httpOptions)
       .pipe(
-        map(group => {
-          this.groupDataSource.next(group);
-          return group; })
+        tap(group => this.dataService.setGroup(group))
       );
   }
 
-  addUserToGroup(user: User, group: Group): Observable<Group> {
-    user.familyCode = group.familyCode;
-    return this.http.put<Group>(`${this.url}/${group._id}`, group, this.httpOptions);
-  }
-
   deleteGroup(): Observable<any> {
-    return this.http.delete(`${this.url}/${this.dataService.userGroup._id}/${this.dataService.user._id}`);
+    return this.http.delete(`${this.url}/${this.dataService.getGroup()._id}/${this.dataService.getUser()._id}`)
+      .pipe(
+        tap(() => {
+          this.socketService.socket.disconnect();
+          this.storage.clear();
+          this.router.navigate(['']);
+        })
+      );
   }
 }

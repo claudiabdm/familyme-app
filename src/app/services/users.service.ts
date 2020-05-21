@@ -1,12 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, BehaviorSubject } from 'rxjs';
-import { catchError, map, tap, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { tap, switchMap } from 'rxjs/operators';
 
 import { User } from '../shared/models/user';
 import { environment } from 'src/environments/environment';
-import { Group } from '../shared/models/group';
 import { DataService } from './data.service';
+import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
+import { Router } from '@angular/router';
+import { SocketioService } from './socketio.service';
 
 
 @Injectable({
@@ -14,53 +16,46 @@ import { DataService } from './data.service';
 })
 export class UsersService {
 
-  userDataSource = new BehaviorSubject(null);
-  userData$ = this.userDataSource.asObservable();
-  membersDataSource = new BehaviorSubject(null);
-  membersData$ = this.membersDataSource.asObservable();
-
   private url = `${environment.apiUrl}users`;
 
-  constructor(private http: HttpClient, private dataService: DataService) { }
+  constructor(
+    @Inject(LOCAL_STORAGE) private storage: StorageService,
+    private router: Router,
+    private http: HttpClient,
+    private dataService: DataService,
+    private socketService: SocketioService) { }
 
-  setUserData(): Observable<User> {
+  getLoggedUser(): Observable<User> {
     return this.http.get<User>(`${this.url}/user-logged`)
       .pipe(
-        map(user => {
-          this.userDataSource.next(user);
-          return user;
-        })
-      );
-  }
-
-  createUser(user: User, group: Group, role: string): Observable<User> {
-    const newUser = Object.assign(user, { role: role, familyCode: group.familyCode, groupId: group._id });
-    return this.http.post<User>(this.url, newUser);
+        tap(user => this.dataService.setUser(user))
+      )
   }
 
   updateUserData(user: User): Observable<any> {
     return this.http.put<User>(`${this.url}/${user._id}`, user)
       .pipe(
-        switchMap(user => {
-
-          this.userDataSource.next(user);
-          return this.getUsersByFamilyCode(user.familyCode);
-        })
+        tap(user => this.dataService.setUser(user)),
+        switchMap(user => this.getUsersByFamilyCode(user.familyCode))
       );
+  }
+
+  deleteUser(): Observable<any> {
+    return this.http.delete(`${this.url}/${this.dataService.getUser()._id}`)
+      .pipe(
+        tap(() => {
+          this.socketService.socket.disconnect();
+          this.storage.clear();
+          this.router.navigate(['']);
+        })
+      );;
   }
 
   getUsersByFamilyCode(familyCode: string): Observable<User[]> {
     return this.http.get<User[]>(`${this.url}/search/${familyCode}`)
       .pipe(
-        map(users => {
-          this.membersDataSource.next(users);
-          return users;
-        })
+        tap(users => this.dataService.setMembers(users))
       )
-  }
-
-  deleteUser(): Observable<any> {
-    return this.http.delete(`${this.url}/${this.dataService.user._id}`);
   }
 
 }

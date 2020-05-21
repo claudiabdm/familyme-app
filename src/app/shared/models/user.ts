@@ -3,8 +3,8 @@ import { Group } from './group';
 export class User {
   _id: string;
   name: string;
-  email: string;
-  password: string;
+  email?: string;
+  password?: string;
   avatar: string | ArrayBuffer;
   role: string;
   familyCode: Group["familyCode"];

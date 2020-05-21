@@ -44,7 +44,7 @@
   </ul>
 </article>
 
-<article class="settings" *ngIf="roleAdmin">
+<article class="settings" *ngIf="( user | async ).role">
   <h2 class="settings__title">Family settings</h2>
   <ul>
     <li class="settings__txt">Change admin <i class="icon icon-next icon--xs"></i></li>
