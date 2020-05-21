@@ -5,7 +5,7 @@
     <article *ngFor="let message of messages" class="notifications__item"
       [class.notifications__item--right]="message.userId === loggedUserId">
       <div class="user__img-wrapper">
-        <img class="user__img" [src]="message.userAvatar" alt="{{ message.addedBy }} profile photo">
+        <img class="user__img" [src]="message.userAvatar || img " alt="{{ message.addedBy }} profile photo">
       </div>
       <p class="notifications__msg">
         <span class="notifications__text">{{ message.text }}</span>

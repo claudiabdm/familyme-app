@@ -26,6 +26,8 @@ export class NotificationsComponent implements OnInit, AfterViewChecked {
     inputText: ['', Validators.required],
   })
 
+ img = '../../../assets/img/profile-photo-round.svg';
+
   private ngUnsubscribe$ = new Subject<void>();
 
   constructor(

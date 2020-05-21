@@ -15,7 +15,7 @@ export class UserListComponent implements OnInit {
   @Output() userListChange = new EventEmitter<User[]>();
 
   allUsers: User[];
-  public img = '../../../assets/img/profile-photo-round.svg';
+  public img = '/assets/img/profile-photo-round.svg';
 
   constructor(
     private dataService: DataService,
