@@ -1,13 +1,17 @@
-<full-calendar class="container container--calendar" #calendar defaultView="dayGridMonth" height="parent"
-  [header]="header" [events]="( calendarEvents | async )" [customButtons]="false" [plugins]="calendarPlugins"
-  [eventTimeFormat]="eventTimeFormat" [firstDay]="1" (dateClick)="selectDay($event, newEventModal)"
-  (eventClick)="selectEvent($event, modifyEventModal)">
-</full-calendar>
+<div class="container container--calendar">
+  <ngx-spinner size="medium" bdColor="rgba(51,51,51,0.35)" type="ball-spin-clockwise" color="#fff" [fullScreen]="false"
+    [zIndex]="8"></ngx-spinner>
+  <full-calendar #calendar defaultView="dayGridMonth" height="auto" [aspectRatio]="2"
+    [header]="header" [events]="( calendarEvents | async )" [customButtons]="false" [plugins]="calendarPlugins"
+    [eventTimeFormat]="eventTimeFormat" [firstDay]="1" (dateClick)="selectDay($event, newEventModal)"
+    (eventClick)="selectEvent($event, modifyEventModal)">
+  </full-calendar>
+</div>
 
 <app-modal [title]="'New event'" [modalId]="'newEventModal'" [modalVisible]="false" [isFull]="true"
   (close)="toggleModal(newEventModal)" #newEventModal>
   <app-event-form *ngIf="newEventModal.modalVisible" [eventInfo]="selectedDay" [formBtn]="'Add'"
-  (submit)="toggleModal(newEventModal)"></app-event-form>
+    (submit)="toggleModal(newEventModal)"></app-event-form>
 </app-modal>
 
 <app-modal [title]="'Modify event'" [modalId]="'modifyEventModal'" [modalVisible]="false" [isFull]="true"

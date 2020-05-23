@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
 import { PagesRoutingModule } from './pages-routing.module';
-
 import { PagesComponent } from './pages.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 
@@ -14,6 +13,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
   ],
   exports: [
     PagesComponent,
+    NotificationsComponent
   ]
 })
 export class PagesModule { }

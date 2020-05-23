@@ -6,6 +6,11 @@ import { Group } from 'src/app/shared/models/group';
 import { ModalService } from 'src/app/services/modal.service';
 import { DataService } from 'src/app/services/data.service';
 import { ModalComponent } from 'src/app/shared/component/modal/modal.component';
+import { UsersService } from 'src/app/services/users.service';
+import { GroupsService } from 'src/app/services/groups.service';
+import { tap } from 'rxjs/internal/operators/tap';
+import { takeUntil, switchMap } from 'rxjs/operators';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-home',
@@ -23,10 +28,27 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private modalService: ModalService,
-    private dataService: DataService
-    ) { }
+    private dataService: DataService,
+    private usersService: UsersService,
+    private groupsService: GroupsService,
+    private spinner: NgxSpinnerService,
+  ) { }
 
   ngOnInit(): void {
+    this.spinner.show();
+    this.usersService.getLoggedUser().pipe(
+      switchMap((user: User) => {
+        return this.groupsService.getGroupByFamilyCode(user.familyCode);
+      }),
+      switchMap((group: Group) => {
+        return this.usersService.getUsersByFamilyCode(group.familyCode);
+      }),
+      tap(() => this.setData()),
+      takeUntil(this.ngUnsubscribe$)
+    ).subscribe(() => this.spinner.hide());
+  }
+
+  setData() {
     this.user = this.dataService.userData$;
     this.userGroup = this.dataService.groupData$;
     this.userList = this.dataService.membersData$;

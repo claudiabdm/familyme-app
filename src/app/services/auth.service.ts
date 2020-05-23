@@ -10,7 +10,7 @@ import { environment } from '@env/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { SocketioService } from './socketio.service';
-import { switchMap, take, tap, map } from 'rxjs/operators';
+import { take, tap, map, switchMap } from 'rxjs/operators';
 import { Group } from '../shared/models/group';
 import { DataService } from './data.service';
 import { SignUpType } from '../shared/models/signup';
@@ -48,7 +48,7 @@ export class AuthService {
         map((users: User[]) => {
           return users ? true : false;
         }),
-        tap((res: boolean) => {if(res){this.router.navigate(['pages/home'])}})
+        tap((res: boolean) => { if (res) { this.router.navigate(['pages/home']) } })
       );
   }
 
@@ -73,15 +73,16 @@ export class AuthService {
     );
   }
 
-  logOut(): void {
+  logOut(): Observable<any> {
     const user = this.dataService.getUser();
     user.lastConnection = new Date();
-    this.usersService.updateUserData(user).pipe(take(1)).subscribe(
-      () => {
+    return this.usersService.updateUserData(user).pipe(
+      tap(() => {
         this.socketService.socket.disconnect();
         this.storage.clear();
         this.router.navigate(['']);
-      }
+      }),
+      take(1)
     );
   };
 }

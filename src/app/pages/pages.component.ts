@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { Button } from '../shared/models/button';
-import { filter, takeUntil, first } from 'rxjs/operators';
+import { filter, takeUntil, map, switchMap, tap, take, concatMap } from 'rxjs/operators';
 import { SocketioService } from '../services/socketio.service';
-import { DataService } from '../services/data.service';
-import { Message } from '../shared/models/message';
 import { UsersService } from '../services/users.service';
-
+import { User } from '../shared/models/user';
+import { Group } from '../shared/models/group';
+import { GroupsService } from '../services/groups.service';
+import { Message } from '../shared/models/message';
+import { DataService } from '../services/data.service';
 @Component({
   selector: 'app-pages',
   templateUrl: './pages.component.html',
@@ -28,40 +30,53 @@ export class PagesComponent implements OnInit {
   constructor(
     public router: Router,
     private socketService: SocketioService,
-    private dataService: DataService) {
+    private usersService: UsersService,
+    private groupsService: GroupsService,
+    private dataService: DataService,
+  ) {
   }
 
   ngOnInit(): void {
-    this.setSocketIo();
-    this.setLayout();
+    this.usersService.getLoggedUser().pipe(
+      concatMap((user: User) => {
+        this.dataService.setUser(user);
+        return this.groupsService.getGroupByFamilyCode(user.familyCode);
+      }),
+      switchMap((group: Group) => {
+        this.socketService.setupSocketConnection(group._id);
+        return this.usersService.getUsersByFamilyCode(group.familyCode).pipe(map(() => group));
+      }),
+      concatMap((group: Group) => {
+        this.dataService.setGroup(group);
+        return this.socketService.getAllMessages(group._id);
+      }),
+      switchMap((msgs: Message[]) => {
+        this.socketService.setMessages(msgs);
+        return this.socketService.getMessage();
+      }),
+      map((msg: Message) => {
+        this.socketService.addMessage(msg);
+        return msg;
+      }),
+      takeUntil(this.ngUnsubscribe$)
+    ).subscribe(() => {});
+    this.setLayout().subscribe();
   }
 
-  setSocketIo() {
-    this.socketService.setupSocketConnection();
-    this.socketService.getAllMessages().pipe(first()).subscribe((messages: Message[]) => {
-      messages.forEach(msg => {
-        if (msg.createdAt > this.dataService.getUser().lastConnection) {
-          this.socketService.notificationsCounter += 1;
-        }
-      })
-    })
-    this.socketService.getMessage().pipe(takeUntil(this.ngUnsubscribe$)).subscribe((msg: Message) => {
-      if (msg.userId !== this.dataService.getUser()._id) {
-        this.socketService.notificationsCounter += 1;
-      }
-    });
-  }
-
-  setLayout() {
+  setLayout(): Observable<any> {
     this.currentRoute = this.router.url;
     this.toggleHeaderNavbar(this.currentRoute);
     this.changeButton(this.currentRoute);
-    this.router.events.pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd), takeUntil(this.ngUnsubscribe$))
-      .subscribe(res => {
-        this.currentRoute = res.url;
-        this.changeButton(this.currentRoute);
-        this.toggleHeaderNavbar(this.currentRoute);
-      })
+    return this.router.events
+      .pipe(
+        filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+        map(res => {
+          this.currentRoute = res.url;
+          this.changeButton(this.currentRoute);
+          this.toggleHeaderNavbar(this.currentRoute);
+        }),
+        takeUntil(this.ngUnsubscribe$)
+      )
   }
 
   toggleHeaderNavbar(currentRoute) {
@@ -105,6 +120,7 @@ export class PagesComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
+    console.log('pages destroy')
     this.ngUnsubscribe$.next()
     this.ngUnsubscribe$.complete();
   }

@@ -3,9 +3,7 @@ import { environment } from '@env/environment';
 import * as mapboxgl from 'mapbox-gl';
 import { User } from '../../shared/models/user';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { DataService } from 'src/app/services/data.service';
 import { UsersService } from 'src/app/services/users.service';
-import { take } from 'rxjs/operators';
 
 @Injectable()
 export class MapService {
@@ -56,24 +54,20 @@ export class MapService {
 
   addMarker(user: User, map: mapboxgl.Map) {
     const marker = this.markers.find(marker => marker.id === user._id);
-    if (marker) {
-      marker.marker.setLngLat(new mapboxgl.LngLat(user.location.lng, user.location.lat));
-    } else {
-      const overlay = document.createElement('div');
-      overlay.classList.add('marker');
-      const overlayContainer = document.createElement('div');
-      overlayContainer.classList.add('user__img-wrapper', 'user__img-wrapper--medium');
-      const userPhoto = document.createElement('img');
-      userPhoto.classList.add('user__img', 'user__img--medium');
-      userPhoto.src = user.avatar.toString() || this.img;
+    const overlay = document.createElement('div');
+    overlay.classList.add('marker');
+    const overlayContainer = document.createElement('div');
+    overlayContainer.classList.add('user__img-wrapper', 'user__img-wrapper--medium');
+    const userPhoto = document.createElement('img');
+    userPhoto.classList.add('user__img', 'user__img--medium');
+    userPhoto.src = user.avatar.toString() || this.img;
 
-      overlayContainer.appendChild(userPhoto);
-      overlay.appendChild(overlayContainer);
+    overlayContainer.appendChild(userPhoto);
+    overlay.appendChild(overlayContainer);
 
-      const coords = new mapboxgl.LngLat(user.location.lng, user.location.lat);
-      const newMarker = new mapboxgl.Marker(overlay).setLngLat(coords).addTo(map);
-      this.markers.push({ id: user._id, marker: newMarker });
-    }
+    const coords = new mapboxgl.LngLat(user.location.lng, user.location.lat);
+    const newMarker = new mapboxgl.Marker(overlay).setLngLat(coords).addTo(map);
+    this.markers.push({ id: user._id, marker: newMarker });
   }
 
   updateUserCoords(user: User, position: Position): Observable<User> {

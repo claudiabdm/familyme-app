@@ -1,13 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Subject } from 'rxjs/internal/Subject';
-import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 
 import { SocketioService } from 'src/app/services/socketio.service';
 import { DataService } from 'src/app/services/data.service';
 import { Message } from 'src/app/shared/models/message';
 import { User } from 'src/app/shared/models/user';
-import { first } from 'rxjs/internal/operators/first';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/internal/operators/tap';
 
 @Component({
   selector: 'app-notifications',
@@ -19,16 +18,13 @@ export class NotificationsComponent implements OnInit, AfterViewChecked {
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   @ViewChild('inputTextElem') private myInputText: ElementRef;
 
-  loggedUserId: User['_id'] = this.dataService.getUser()._id;
-  messages: Message[] = [];
-
+  loggedUser$: Observable<User>;
+  messages$: Observable<Message[]>;
   sendMessageForm = this.formBuilder.group({
     inputText: ['', Validators.required],
   })
 
- img = '../../../assets/img/profile-photo-round.svg';
-
-  private ngUnsubscribe$ = new Subject<void>();
+  img = '../../../assets/img/profile-photo-round.svg';
 
   constructor(
     private socketService: SocketioService,
@@ -36,16 +32,8 @@ export class NotificationsComponent implements OnInit, AfterViewChecked {
     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.socketService.getAllMessages().pipe(first()).subscribe((msgs: Message[]) => {
-      this.messages = msgs;
-      this.scrollToBottom();
-      this.autoGrow();
-      this.socketService.notificationsCounter = 0;
-    });
-    this.socketService.getMessage().pipe(takeUntil(this.ngUnsubscribe$)).subscribe((msg: Message) => {
-      this.messages.push(msg);
-      this.socketService.notificationsCounter = 0;
-    });
+    this.loggedUser$ = this.dataService.userData$;
+    this.messages$ = this.socketService.messages$.pipe(tap(() => this.socketService.resetNotifications()));
   }
 
   ngAfterViewChecked(): void {
@@ -65,11 +53,6 @@ export class NotificationsComponent implements OnInit, AfterViewChecked {
     e.preventDefault();
   }
 
-  ngOnDestroy(): void {
-    this.ngUnsubscribe$.next();
-    this.ngUnsubscribe$.complete();
-  }
-
   private autoGrow(): void {
     if (this.sendMessageForm.value.inputText) {
       this.myInputText.nativeElement.style.setProperty('--text-area-height', this.myInputText.nativeElement.scrollHeight / 16 + 'rem')
@@ -82,7 +65,6 @@ export class NotificationsComponent implements OnInit, AfterViewChecked {
     this.myScrollContainer.nativeElement.scroll({
       top: this.myScrollContainer.nativeElement.scrollHeight,
       left: 0,
-      behavior: 'smooth'
     })
   }
 

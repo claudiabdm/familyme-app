@@ -134,6 +134,7 @@ thead tr:first-child td:last-child {
 
 .fc-unthemed .fc-list-item:hover td {
   background-color: var(--body-bg);
+  border-radius: 20px;
   cursor: pointer;
 }
 

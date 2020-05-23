@@ -5,6 +5,9 @@ import { DataService } from 'src/app/services/data.service';
 import { UsersService } from 'src/app/services/users.service';
 import { MapService } from './map.service';
 import * as mapboxgl from 'mapbox-gl';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { take, takeWhile, switchMap, concatMap } from 'rxjs/operators';
+import { User } from 'src/app/shared/models/user';
 
 @Component({
   selector: 'app-locator',
@@ -22,48 +25,39 @@ export class LocatorComponent implements OnInit {
   constructor(
     private mapService: MapService,
     private dataService: DataService,
-    private usersService: UsersService) { }
+    private usersService: UsersService,
+    private spinner: NgxSpinnerService, ) { }
 
   ngOnInit(): void {
-    if (navigator) {
-      this.mapStyle = this.mapService.mapTheme.getValue();
-      navigator.geolocation.getCurrentPosition(
-        position => {
-          this.mapService.buildMap(position, this.mapStyle);
-          this.dataService.getMembers().forEach(user => {
-            if (user._id === this.dataService.getUser()._id) {
-              this.mapService.updateUserCoords(user, position).subscribe();
-            }
-            if (user.location.lat && user.location.lng) {
-              this.mapService.addMarker(user, this.mapService.map);
-            }
-          })
-        },
-        error => { },
-        this.options
-      );
+    this.mapStyle = this.mapService.mapTheme.getValue();
+    this.initPosition();
+  }
 
-      navigator.geolocation.watchPosition(
-        position => {
-          this.mapService.updateUserCoords(this.dataService.getUser(), position);
-          this.usersService.getUsersByFamilyCode(this.dataService.getUser().familyCode).subscribe(users => {
-            users.forEach((user) => {
-              if (user._id === this.dataService.getUser()._id) {
-                this.mapService.updateUserCoords(user, position).subscribe();
-              }
-              if (user.location.lat && user.location.lng) {
-                this.mapService.addMarker(user, this.mapService.map);
-              }
-            })
-          });
-        },
-        error => { },
-        this.options
-      )
+  initPosition() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.mapService.buildMap(position, this.mapStyle);
 
+        this.dataService.userData$
+          .pipe(
+            takeWhile((user: User) => !user, true),
+            concatMap((user: User) => this.mapService.updateUserCoords(user, position)),
+            concatMap(() => this.dataService.membersData$),
+            takeWhile((users: User[]) => !users, true),
+          )
+          .subscribe((users: User[]) =>
+            users?.forEach((user: User) => this.setUsersPosition(user, position))
+          );
+
+      })
     }
   }
 
+  setUsersPosition(user: User, position: Position) {
+    if (user.location.lat && user.location.lng) {
+      this.mapService.addMarker(user, this.mapService.map);
+    }
+  }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe$.next()

@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Group } from '../shared/models/group';
 import { User } from '../shared/models/user';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, forkJoin } from 'rxjs';
+import { UsersService } from './users.service';
+import { GroupsService } from './groups.service';
+import { mergeMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +13,7 @@ export class DataService {
 
   private _userDataSource: BehaviorSubject<User> = new BehaviorSubject(null);
   private _membersDataSource: BehaviorSubject<User[]> = new BehaviorSubject(null);
-  private _groupDataSource: BehaviorSubject<Group>  = new BehaviorSubject(null);
+  private _groupDataSource: BehaviorSubject<Group> = new BehaviorSubject(null);
   userData$: Observable<User> = this._userDataSource.asObservable();
   membersData$: Observable<User[]> = this._membersDataSource.asObservable();
   groupData$: Observable<Group> = this._groupDataSource.asObservable();
@@ -23,7 +26,7 @@ export class DataService {
   }
 
   setUser(user: User) {
-    return this._userDataSource.next(user);
+    this._userDataSource.next(user);
   }
 
   getMembers(): User[] {
@@ -31,7 +34,7 @@ export class DataService {
   }
 
   setMembers(members: User[]) {
-    return this._membersDataSource.next(members);
+    this._membersDataSource.next(members);
   }
 
 
@@ -40,7 +43,7 @@ export class DataService {
   }
 
   setGroup(group: Group) {
-    return this._groupDataSource.next(group);
+    this._groupDataSource.next(group);
   }
 
 }

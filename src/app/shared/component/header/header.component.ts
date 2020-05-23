@@ -7,6 +7,9 @@ import { Message } from 'src/app/shared/models/message';
 import { User } from 'src/app/shared/models/user';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
+import { UsersService } from 'src/app/services/users.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -21,23 +24,30 @@ export class HeaderComponent implements OnInit {
 
   userList: Observable<User[]>;
   isShopping: Observable<boolean>;
+  private ngUnsubscribe$ = new Subject<void>();
 
   constructor(
     private dataService: DataService,
+    private usersService: UsersService,
     private socketService: SocketioService,
   ) { }
 
   ngOnInit(): void {
     this.userList = this.dataService.membersData$;
-    this.isShopping = this.dataService.userData$.pipe(map(user => user.isShopping));
+    this.isShopping = this.dataService.userData$.pipe(map(user => user?.isShopping));
   }
 
   onChecked() {
     const user = this.dataService.getUser();
     user.isShopping = !user.isShopping;
     const text = user.isShopping ? "I'm shopping" : "I've finished shopping";
-    this.dataService.setUser(user);
+    this.usersService.updateUserData(user).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
     this.socketService.sendMessage(text);
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe$.next();
+    this.ngUnsubscribe$.complete();
   }
 
 }

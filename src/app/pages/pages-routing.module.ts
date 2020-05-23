@@ -7,6 +7,7 @@ const pagesRoutes: Routes = [
   { path: '',
     component: PagesComponent,
     children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'notifications', component: NotificationsComponent },
       { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule)},
       { path: 'calendar', loadChildren: () => import('./calendar/calendar.module').then(m => m.CalendarModule)},

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { takeUntil, map } from 'rxjs/operators';
+import { takeUntil, map, tap, switchMap } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -13,6 +13,9 @@ import { DataService } from 'src/app/services/data.service';
 import { GroupsService } from 'src/app/services/groups.service';
 import { ModalComponent } from 'src/app/shared/component/modal/modal.component';
 import { Group } from 'src/app/shared/models/group';
+import { User } from 'src/app/shared/models/user';
+import { UsersService } from 'src/app/services/users.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-calendar',
@@ -52,13 +55,29 @@ export class CalendarComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private usersService: UsersService,
+    private groupsService: GroupsService,
+    private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit(): void {
-    this.calendarEvents = this.dataService.groupData$.pipe(map(group => group.events));
+    this.spinner.show();
+    this.usersService.getLoggedUser().pipe(
+      switchMap((user: User) => {
+        return this.groupsService.getGroupByFamilyCode(user.familyCode);
+      }),
+      switchMap((group: Group) => {
+        return this.usersService.getUsersByFamilyCode(group.familyCode);
+      }),
+      tap(() => {
+        this.calendarEvents = this.dataService.groupData$.pipe(map(group => group?.events));
+      }),
+      takeUntil(this.ngUnsubscribe$)
+    ).subscribe(() => this.spinner.hide());
+
     const newEventBtn = document.getElementById('newEventBtn');
-    newEventBtn.addEventListener('click', () => this.toggleModal(this.newEventModal))
+    newEventBtn?.addEventListener('click', () => this.toggleModal(this.newEventModal))
   }
 
   selectEvent(event, targetModal: ModalComponent): void {

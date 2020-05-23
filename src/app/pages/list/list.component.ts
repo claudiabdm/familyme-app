@@ -1,11 +1,14 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
-import { takeUntil, map } from 'rxjs/operators';
+import { takeUntil, map, tap, switchMap } from 'rxjs/operators';
 import { Product } from 'src/app/shared/models/product';
 import { GroupsService } from 'src/app/services/groups.service';
 import { DataService } from 'src/app/services/data.service';
 import { SortService } from './sort.service';
 import { Group } from 'src/app/shared/models/group';
+import { User } from 'src/app/shared/models/user';
+import { UsersService } from 'src/app/services/users.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-list',
@@ -17,16 +20,33 @@ export class ListComponent implements OnInit {
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
   addItemElemVisible: boolean = false;
-  productList: Observable<Group['shoppingList']>;
+  productList: Observable<Group['shoppingList']> = null;
   private ngUnsubscribe$ = new Subject<void>();
 
   constructor(
     private dataService: DataService,
     private groupsService: GroupsService,
-    private sortService: SortService) { }
+    private sortService: SortService,
+    private usersService: UsersService,
+    private spinner: NgxSpinnerService,
+  ) { }
 
   ngOnInit(): void {
-    this.productList = this.dataService.groupData$.pipe(map(group => group.shoppingList));
+    this.spinner.show();
+
+    this.usersService.getLoggedUser().pipe(
+      switchMap((user: User) => {
+        return this.groupsService.getGroupByFamilyCode(user.familyCode);
+      }),
+      switchMap((group: Group) => {
+        return this.usersService.getUsersByFamilyCode(group.familyCode);
+      }),
+      tap(() => {
+        this.productList = this.dataService.groupData$.pipe(map(group => group?.shoppingList));
+      }),
+      takeUntil(this.ngUnsubscribe$)
+    ).subscribe(() => this.spinner.hide());
+
   }
 
   get sortIconAZ(): boolean {

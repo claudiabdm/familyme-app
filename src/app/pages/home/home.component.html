@@ -1,5 +1,6 @@
 <!-- USER AND FAMILY INFO -->
 <div class="container container--top">
+  <ngx-spinner size="medium" bdColor="rgba(51,51,51,0.35)" type="ball-spin-clockwise" color="#fff" [fullScreen]="false"></ngx-spinner>
   <button type="button" class="btn btn--icon icon icon-settings" id="settingsBtn" aria-label="Settings"
     aria-labelledby="settingsModal" (click)="toggleModal(settingsModal)"></button>
 
@@ -7,17 +8,17 @@
   <article class="user user--col">
     <button type="button" class="user__btn" id="imgBtn" (click)="toggleModal(editPhotoModal)">
       <div class="user__img-wrapper user__img-wrapper--large">
-        <img class="user__img user__img--large" [src]="( user | async ).avatar || img" alt="{{ ( user | async ).name }} profile photo">
+        <img class="user__img user__img--large" [src]="( user | async )?.avatar || img" alt="{{ ( user | async )?.name }} profile photo">
       </div>
     </button>
-    <h2 class="user__name user__name--large">{{ ( user | async ).name }}</h2>
-    <span class="user__role" *ngIf="( user | async ).role === 'admin'">admin</span>
+    <h2 class="user__name user__name--large">{{ ( user | async )?.name }}</h2>
+    <span class="user__role" *ngIf="( user | async )?.role === 'admin'">admin</span>
   </article>
   <!-- //MAIN USER -->
 
   <!-- MEMBERS -->
 
-  <h1 class="container__title">Family {{ (userGroup | async ).name }}</h1>
+  <h1 class="container__title">Family {{ (userGroup | async )?.name }}</h1>
 
   <app-user-list [onlyImage]="false" class="container container--grid" [userList]="(userList | async)"></app-user-list>
 
@@ -45,7 +46,7 @@
 <!-- MODAL EDIT PHOTOS -->
 <app-modal [title]="'Edit profile photo'" [modalId]="'editPhotoModal'" (close)="toggleModal(editPhotoModal)"
   [modalVisible]="false" [isFull]="false" #editPhotoModal>
-  <app-profile-img *ngIf="editPhotoModal.modalVisible" [imageUrl]="( user | async ).avatar" (update)="toggleModal(editPhotoModal)">
+  <app-profile-img *ngIf="editPhotoModal.modalVisible" [imageUrl]="( user | async )?.avatar" (update)="toggleModal(editPhotoModal)">
   </app-profile-img>
 </app-modal>
 <!-- // MODAL EDIT PHOTOS -->
@@ -58,7 +59,7 @@
 
     <p class="container__p container__p--medium">Copy the code below and send it to your family to join you!</p>
     <div class="container container--btn">
-      <input type="text" class="copy-me" value="{{(userGroup | async ).familyCode}}" #copyMe readonly="true">
+      <input type="text" class="copy-me" value="{{(userGroup | async )?.familyCode}}" #copyMe readonly="true">
       <button class="btn btn--primary btn--m" (click)="copyMyText(copyMe)">Copy To Clipboard</button>
     </div>
 

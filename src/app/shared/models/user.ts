@@ -12,4 +12,5 @@ export class User {
   isSelected: boolean;
   lastConnection: Date;
   isShopping: boolean;
+  notificationsRead: boolean;
 }

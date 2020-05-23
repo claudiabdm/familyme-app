@@ -1,5 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
+import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -9,7 +8,6 @@ import { ModalService } from 'src/app/services/modal.service';
 import { DataService } from 'src/app/services/data.service';
 import { UsersService } from 'src/app/services/users.service';
 import { GroupsService } from 'src/app/services/groups.service';
-import { SocketioService } from 'src/app/services/socketio.service';
 import { ModalComponent } from '../../../shared/component/modal/modal.component';
 
 @Component({
@@ -37,22 +35,17 @@ export class SettingsComponent implements OnInit {
 
   logOut() {
     this.spinner.show();
-    this.authService.logOut();
-    this.spinner.hide();
+    this.authService.logOut().subscribe(() => this.spinner.hide());
   }
 
   deleteAccount = () => {
     this.spinner.show();
-    this.usersService.deleteUser().pipe(take(1)).subscribe(() => {
-      this.spinner.hide();
-    });
+    this.usersService.deleteUser().pipe(take(1)).subscribe(() => this.spinner.hide());
   }
 
   deleteGroup = () => {
     this.spinner.show();
-    this.groupsService.deleteGroup().pipe(take(1)).subscribe(() => {
-      this.spinner.hide();
-    });
+    this.groupsService.deleteGroup().pipe(take(1)).subscribe(() => this.spinner.hide());
   }
 
   locationOn() {

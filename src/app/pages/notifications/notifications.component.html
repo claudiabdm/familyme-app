@@ -2,10 +2,12 @@
 
   <section class="notifications" id="notifications" #scrollMe>
     <h1 hidden>Messages</h1>
-    <article *ngFor="let message of messages" class="notifications__item"
-      [class.notifications__item--right]="message.userId === loggedUserId">
-      <div class="user__img-wrapper">
-        <img class="user__img" [src]="message.userAvatar || img " alt="{{ message.addedBy }} profile photo">
+
+    <article *ngFor="let message of messages$ | async" class="notifications__item"
+      [class.notifications__item--right]="message?.userId === (loggedUser$ | async)?._id">
+      <div class="user__img-wrapper" [ngSwitch]="message?.userId === (loggedUser$ | async)?._id">
+        <img *ngSwitchCase="true" class="user__img" [src]="(loggedUser$ | async)?.avatar || img " alt="{{ message.addedBy }} profile photo">
+        <img *ngSwitchCase="false" class="user__img" [src]="message.userAvatar || img " alt="{{ message.addedBy }} profile photo">
       </div>
       <p class="notifications__msg">
         <span class="notifications__text">{{ message.text }}</span>
@@ -13,7 +15,6 @@
       </p>
     </article>
   </section>
-
 
   <form [formGroup]="sendMessageForm" class="form form--notifications" (ngSubmit)="sendMessage(sendMessageForm)">
     <textarea formControlName="inputText" class="form__control" placeholder="Send message..."

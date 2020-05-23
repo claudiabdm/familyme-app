@@ -10,7 +10,7 @@
   </a>
   <a routerLink="notifications" routerLinkActive="icon--selected" class="navbar__item icon icon-bell"
     #notifRoute="routerLinkActive" [attr.aria-current]="notifRoute.isActive">
-    <span class="navbar__bubble" *ngIf="notificationsCounter > 0"> {{ notificationsCounter }}</span>
+    <span class="navbar__bubble" *ngIf="(notificationsCounter | async) > 0"> {{ notificationsCounter | async }}</span>
     <span class="navbar__txt">Notifications</span>
   </a>
   <a routerLink="locator" routerLinkActive="icon--selected" class="navbar__item icon icon-location"
