@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Group } from '../shared/models/group';
 import { User } from '../shared/models/user';
-import { BehaviorSubject, Observable, forkJoin } from 'rxjs';
-import { UsersService } from './users.service';
-import { GroupsService } from './groups.service';
-import { mergeMap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +14,7 @@ export class DataService {
   userData$: Observable<User> = this._userDataSource.asObservable();
   membersData$: Observable<User[]> = this._membersDataSource.asObservable();
   groupData$: Observable<Group> = this._groupDataSource.asObservable();
+  familyCode: string = '';
 
   constructor() { }
 

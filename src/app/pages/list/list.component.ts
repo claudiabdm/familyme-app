@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
-import { takeUntil, map, tap, switchMap } from 'rxjs/operators';
+import { takeUntil, map, tap, switchMap, take } from 'rxjs/operators';
 import { Product } from 'src/app/shared/models/product';
 import { GroupsService } from 'src/app/services/groups.service';
 import { DataService } from 'src/app/services/data.service';
@@ -66,8 +66,9 @@ export class ListComponent implements OnInit {
       const newProduct: Product = {
         name: product,
         addedBy: this.dataService.getUser().name,
+        addedById: this.dataService.getUser()._id,
         done: false,
-      } as Product;
+      };
       this.scrollToBottom();
       const group = this.dataService.getGroup();
       group.shoppingList.push(newProduct);
@@ -102,6 +103,10 @@ export class ListComponent implements OnInit {
       group.shoppingList = this.sortService.sortListByDone(productList);
     }
     this.dataService.setGroup(group);
+  }
+
+  onReset() {
+    this.groupsService.getGroupByFamilyCode(this.dataService.familyCode).pipe(take(1)).subscribe();
   }
 
   private scrollToBottom(): void {

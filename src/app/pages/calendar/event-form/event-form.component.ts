@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, take } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { DateTimeAdapter } from '@danielmoncada/angular-datetime-picker';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -88,7 +88,7 @@ export class EventFormComponent implements OnInit, OnDestroy {
         break;
     }
 
-    this.groupsService.updateGroupData(group).pipe(takeUntil(this.ngUnsubscribe$)).subscribe(() => this.spinner.hide());
+    this.groupsService.updateGroupData(group).pipe(take(1)).subscribe(() => this.spinner.hide());
 
   }
 

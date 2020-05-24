@@ -151,7 +151,7 @@
 .user--row {
   display: flex;
   padding: 10px $padding-sides;
-  &:hover {
+  &:hover .user__img-wrapper {
     cursor: default;
   }
 }

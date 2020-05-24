@@ -38,7 +38,7 @@
   }
 
   &:focus {
-    outline:none;
+    outline: none;
     box-shadow: var(--box-shadow-sharpen);
   }
 
@@ -126,4 +126,11 @@
   font-weight: $font-weight-light;
   box-shadow: var(--box-shadow-sharpen);
   z-index: 1000;
+}
+
+//--- Reset button ---//
+.btn--reset {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: $font-weight-light;
 }

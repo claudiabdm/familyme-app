@@ -3,6 +3,8 @@ import { DataService } from 'src/app/services/data.service';
 import { User } from 'src/app/shared/models/user';
 import { MapService } from 'src/app/services/map.service';
 import { Router } from '@angular/router';
+import { Group } from '../../models/group';
+import { GroupsService } from 'src/app/services/groups.service';
 
 @Component({
   selector: 'app-user-list',
@@ -22,6 +24,7 @@ export class UserListComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private mapService: MapService,
+    private groupsService: GroupsService,
     private router: Router
   ) { }
 
@@ -35,11 +38,29 @@ export class UserListComponent implements OnInit {
   }
 
   onClick(userId: string) {
-    if (this.router.url === '/pages/locator') {
-      const selectedUser = this.mapService.markers.find(marker => marker.id === userId);
-      this.mapService.map.flyTo({
-        center: selectedUser.marker.getLngLat(),
-      })
+    switch (this.router.url) {
+      case '/pages/locator':
+        const selectedUser = this.mapService.markers.find(marker => marker.id === userId);
+        if (selectedUser) {
+          this.mapService.map.flyTo({
+            center: selectedUser.marker.getLngLat(),
+          });
+        }
+        break;
+      case '/pages/calendar':
+        this.groupsService.getGroupByFamilyCode(this.dataService.familyCode).subscribe((group: Group) => {
+          const selectedUserEvents = group.events.filter(event => event.invitees.includes(userId));
+          group.events = selectedUserEvents;
+          this.dataService.setGroup(group);
+        })
+        break;
+      case '/pages/list':
+        this.groupsService.getGroupByFamilyCode(this.dataService.familyCode).subscribe((group: Group) => {
+          const selectedUserProducts = group.shoppingList.filter(product => product.addedById === userId);
+          group.shoppingList = selectedUserProducts;
+          this.dataService.setGroup(group);
+        })
+        break;
     }
   }
 

@@ -1,8 +1,9 @@
 import { User } from './user';
 
 export class Product {
-  _id: string;
+  _id?: string;
   name: string;
-  addedBy: User["name"];
+  addedBy: User['name'];
+  addedById: User['_id'];
   done: boolean;
 }

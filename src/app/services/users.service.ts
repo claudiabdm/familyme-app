@@ -28,7 +28,10 @@ export class UsersService {
   getLoggedUser(): Observable<User> {
     return this.http.get<User>(`${this.url}/user-logged`)
       .pipe(
-        tap(user => this.dataService.setUser(user))
+        tap(user => {
+          this.dataService.familyCode = user.familyCode;
+          this.dataService.setUser(user);
+        })
       )
   }
 

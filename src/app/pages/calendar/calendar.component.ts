@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { takeUntil, map, tap, switchMap } from 'rxjs/operators';
-import { Subject, Observable } from 'rxjs';
+import { takeUntil, map, tap, switchMap, take } from 'rxjs/operators';
+import { Subject, Observable, pipe } from 'rxjs';
 
 import dayGridPlugin from '@fullcalendar/daygrid';
 import listGridPlugin from '@fullcalendar/list';
@@ -71,7 +71,7 @@ export class CalendarComponent implements OnInit {
         return this.usersService.getUsersByFamilyCode(group.familyCode);
       }),
       tap(() => {
-        this.calendarEvents = this.dataService.groupData$.pipe(map(group => group?.events));
+        this.calendarEvents = this.dataService.groupData$.pipe(map(group => group.events));
       }),
       takeUntil(this.ngUnsubscribe$)
     ).subscribe(() => this.spinner.hide());
@@ -107,6 +107,10 @@ export class CalendarComponent implements OnInit {
     } else {
       this.modalService.closeModal(targetModal);
     }
+  }
+
+  onReset() {
+    this.groupsService.getGroupByFamilyCode(this.dataService.familyCode).pipe(take(1)).subscribe();
   }
 
   ngOnDestroy(): void {

@@ -12,6 +12,7 @@
           <use xlink:href="../../assets/icons/sprite.svg#sort" />
         </svg>
       </button>
+      <button type=button class="btn btn--reset list__btn" (click)="onReset()">Reset filter</button>
       <button type="button" class="btn list__btn list__btn--sort" (click)="sortList(iconSortAz)">
         <svg viewBox="0 0 480 480" id="sort-az" class="icon icon--nofilter icon--sm icon--sort-az" #iconSortAz
           [class.icon--sort-az]="sortIconAZ" width="480" height="480" fill="currentColor">
@@ -39,7 +40,7 @@
           <span class="list__product" [class.list__done]="product.done">{{ product.name }}</span>
           <span class="list__addedby">Added by {{ product.addedBy }}</span>
         </label>
-        <button type="button" class="list__btn" (click)="deleteItem(product)">
+        <button type="button" class="btn btn--close" (click)="deleteItem(product)">
           <svg class="icon icon--sm">
             <use xlink:href="../../assets/icons/sprite.svg#close" />
           </svg>

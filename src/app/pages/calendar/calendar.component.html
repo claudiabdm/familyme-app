@@ -6,6 +6,7 @@
     [eventTimeFormat]="eventTimeFormat" [firstDay]="1" (dateClick)="selectDay($event, newEventModal)"
     (eventClick)="selectEvent($event, modifyEventModal)">
   </full-calendar>
+  <button type=button class="btn btn--sm btn--reset btn__calendar-reset" (click)="onReset()">Reset filter</button>
 </div>
 
 <app-modal [title]="'New event'" [modalId]="'newEventModal'" [modalVisible]="false" [isFull]="true"

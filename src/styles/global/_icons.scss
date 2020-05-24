@@ -7,17 +7,17 @@
 	width: 2.5rem;
 	height: 2.5rem;
 	filter: var(--icon-filter);
-	transition: filter 0.1s linear;
+  transition: filter 0.1s linear;
 }
 
-.icon--selected,
 .icon:hover,
+.icon--selected,
 .icon-red_eye,
 .icon-red_eye_close {
   filter: var(--icon-filter-selected);
 }
 
-.icon--nofilter {
+.icon--nofilter, .icon:hover.icon--nofilter {
   filter: none;
 }
 // -- Sizes --- //
