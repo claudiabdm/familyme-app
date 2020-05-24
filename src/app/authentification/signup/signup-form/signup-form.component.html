@@ -20,8 +20,8 @@
 
   <!-- Name -->
   <div class="form__group">
-    <label for="name" class="form__label">First name</label>
-    <input type="text" id="name" class="form__control" placeholder="John" aria-required="true" required
+    <label for="given-name" class="form__label">First name</label>
+    <input type="text" id="given-name" class="form__control" placeholder="John" aria-required="true" required
       formControlName="name"
       [class.form__control--invalid]="signupForm.controls.name.dirty && signupForm.controls.name.invalid">
     <div class="form__msg-group" *ngIf="signupForm.controls.name.dirty && signupForm.controls.name.invalid">
