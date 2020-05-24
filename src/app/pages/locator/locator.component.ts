@@ -29,6 +29,7 @@ export class LocatorComponent implements OnInit {
     private spinner: NgxSpinnerService, ) { }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.mapStyle = this.mapService.mapTheme.getValue();
     this.initPosition();
   }
@@ -45,11 +46,15 @@ export class LocatorComponent implements OnInit {
             concatMap(() => this.dataService.membersData$),
             takeWhile((users: User[]) => !users, true),
           )
-          .subscribe((users: User[]) =>
-            users?.forEach((user: User) => this.setUsersPosition(user, position))
+          .subscribe((users: User[]) => {
+            users?.forEach((user: User) => this.setUsersPosition(user, position));
+            this.spinner.hide();
+          }
           );
-
-      })
+      },
+      error => window.alert(`${error}: Fail to find location`)
+      ),
+      this.options
     }
   }
 
