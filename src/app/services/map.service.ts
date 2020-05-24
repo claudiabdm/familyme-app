@@ -1,11 +1,13 @@
 import { ApplicationRef, Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import * as mapboxgl from 'mapbox-gl';
-import { User } from '../../shared/models/user';
+import { User } from '../shared/models/user';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UsersService } from 'src/app/services/users.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class MapService {
 
   mapbox = (mapboxgl as typeof mapboxgl);
@@ -53,7 +55,7 @@ export class MapService {
   }
 
   addMarker(user: User, map: mapboxgl.Map) {
-    const marker = this.markers.find(marker => marker.id === user._id);
+    // const marker = this.markers.find(marker => marker.id === user._id);
     const overlay = document.createElement('div');
     overlay.classList.add('marker');
     const overlayContainer = document.createElement('div');

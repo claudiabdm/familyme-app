@@ -67,14 +67,16 @@
 
     margin-right: 10px;
     border-radius: 100%;
+    padding: 1px;
     background: var(--body-bg);
     background: $gradient;
-    padding: 1px;
+    cursor: pointer;
 
     &--medium {
       @include size(rem(70px), rem(70px));
       border: 2px solid var(--body-bg);
       position: relative;
+      cursor: default;
 
       &::after {
         content: "";
@@ -149,4 +151,7 @@
 .user--row {
   display: flex;
   padding: 10px $padding-sides;
+  &:hover {
+    cursor: default;
+  }
 }

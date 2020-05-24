@@ -1,6 +1,6 @@
 <!-- USER LIST FROM GROUP  -->
 <ng-container *ngIf="!isCheckList">
-  <article class="user" *ngFor="let user of userList" [class.user--row]="!onlyImage">
+  <article class="user" *ngFor="let user of userList" [class.user--row]="!onlyImage" (click)="onClick(user._id)">
     <div class="user__img-wrapper">
       <img class="user__img" [src]="user.avatar || img" alt="{{ user.name }} profile photo">
     </div>

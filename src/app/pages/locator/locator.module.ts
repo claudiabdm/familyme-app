@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../../shared/shared.module';
 import { LocatorRoutingModule } from './locator-routing.module';
-import { MapService } from './map.service';
 import { LocatorComponent } from './locator.component';
 
 
@@ -14,7 +13,6 @@ import { LocatorComponent } from './locator.component';
   ],
   exports: [
     LocatorComponent,
-  ],
-  providers: [MapService]
+  ]
 })
 export class LocatorModule { }

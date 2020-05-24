@@ -3,10 +3,10 @@ import { Subject } from 'rxjs';
 
 import { DataService } from 'src/app/services/data.service';
 import { UsersService } from 'src/app/services/users.service';
-import { MapService } from './map.service';
+import { MapService } from '../../services/map.service';
 import * as mapboxgl from 'mapbox-gl';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { take, takeWhile, switchMap, concatMap, map } from 'rxjs/operators';
+import { takeWhile, concatMap } from 'rxjs/operators';
 import { User } from 'src/app/shared/models/user';
 
 @Component({
@@ -24,9 +24,9 @@ export class LocatorComponent implements OnInit {
 
   constructor(
     private mapService: MapService,
-    private dataService: DataService,
     private usersService: UsersService,
-    private spinner: NgxSpinnerService, ) { }
+    private spinner: NgxSpinnerService
+  ) { }
 
   ngOnInit(): void {
     this.spinner.show();
@@ -50,9 +50,9 @@ export class LocatorComponent implements OnInit {
           }
           );
       },
-      error => window.alert(`${error}: Fail to find location`)
+        error => window.alert(`${error}: Fail to find location`)
       ),
-      this.options
+        this.options
     }
   }
 
@@ -60,6 +60,11 @@ export class LocatorComponent implements OnInit {
     if (user.location.lat && user.location.lng) {
       this.mapService.addMarker(user, this.mapService.map);
     }
+  }
+
+  showUserLocation(selectedUser) {
+
+    this.mapService.markers.find(marker => marker.id === selectedUser._id)
   }
 
   ngOnDestroy(): void {
