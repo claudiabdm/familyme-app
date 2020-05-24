@@ -51,7 +51,7 @@ export class SignupFormComponent implements OnInit {
     if (form.valid) {
       delete form.value.passwordConfirm;
       this.authService.signUp(this.singUpType.id, form.value).subscribe(
-        () => {},
+        () => this.spinner.hide(),
         error => {
           this.invalidUser = error.status === 409;
           this.invalidGroup = error.status === 404;
@@ -59,7 +59,6 @@ export class SignupFormComponent implements OnInit {
       );
     }
     this.signupForm.reset();
-    this.spinner.hide();
   }
 
   showPswd(): void {

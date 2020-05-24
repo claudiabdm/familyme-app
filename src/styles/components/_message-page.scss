@@ -1,0 +1,44 @@
+.message-page-container {
+  @include absolute(0,0,0,0);
+  @include flex(center, flex-start);
+  flex-direction: column;
+  color: #fff;
+  background:$primary;
+}
+.header {
+  z-index: 1000;
+}
+.message-page {
+  @include size(100vw, max-content);
+  @include flex(center, space-around);
+  flex-direction: column;
+  padding: 30px;
+
+
+  &__status {
+    font-size: rem(100px);
+
+    &--sm {
+      font-size: rem(60px);
+      margin-bottom: 20px;
+    }
+  }
+
+  &__message {
+    font-size: rem(36px);
+    margin-bottom: 20px;
+    text-align: center;
+
+    &--sm {
+      font-size: rem(20px);
+    }
+  }
+
+  &__redirect {
+    color: #fff;
+
+    &:hover {
+      color: $secondary;
+    }
+  }
+}

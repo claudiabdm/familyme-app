@@ -63,13 +63,13 @@ export class AuthService {
 
   signUpCreate(user: FormGroup['value']): Observable<any> {
     return this.http.post(`${this.url}/sign-up-create`, user).pipe(
-      tap(() => this.router.navigate(['/login'])),
+      tap(() => this.router.navigate(['/signup/signup-success'])),
     );
   }
 
   signUpJoin(user: FormGroup['value']): Observable<any> {
     return this.http.post(`${this.url}/sign-up-join`, user).pipe(
-      tap(() => this.router.navigate(['/login']))
+      tap(() => this.router.navigate(['/signup/signup-success']))
     );
   }
 
