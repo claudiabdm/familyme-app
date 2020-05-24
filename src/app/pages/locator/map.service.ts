@@ -70,7 +70,7 @@ export class MapService {
     this.markers.push({ id: user._id, marker: newMarker });
   }
 
-  updateUserCoords(user: User, position: Position): Observable<User> {
+  updateUserCoords(user: User, position: Position): Observable<User[]> {
     user.location.lat = position.coords.latitude;
     user.location.lng = position.coords.longitude;
     return this.usersService.updateUserData(user);

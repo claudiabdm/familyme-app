@@ -6,7 +6,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { MapService } from './map.service';
 import * as mapboxgl from 'mapbox-gl';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { take, takeWhile, switchMap, concatMap } from 'rxjs/operators';
+import { take, takeWhile, switchMap, concatMap, map } from 'rxjs/operators';
 import { User } from 'src/app/shared/models/user';
 
 @Component({
@@ -39,11 +39,9 @@ export class LocatorComponent implements OnInit {
       navigator.geolocation.getCurrentPosition(position => {
         this.mapService.buildMap(position, this.mapStyle);
 
-        this.dataService.userData$
+        this.usersService.getLoggedUser()
           .pipe(
-            takeWhile((user: User) => !user, true),
             concatMap((user: User) => this.mapService.updateUserCoords(user, position)),
-            concatMap(() => this.dataService.membersData$),
             takeWhile((users: User[]) => !users, true),
           )
           .subscribe((users: User[]) => {
