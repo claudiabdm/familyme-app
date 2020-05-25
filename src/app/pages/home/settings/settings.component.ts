@@ -78,7 +78,7 @@ export class SettingsComponent implements OnInit {
     this.usersService.updateUserData(currUser).pipe(take(1)).subscribe();
   }
 
-  onModify(form: FormGroup, targetModal: ModalComponent): void {
+  onModify(form: FormGroup): void {
     const newValue = form.value.inputName;
     const currUser = this.dataService.getUser();
     currUser.name = newValue;

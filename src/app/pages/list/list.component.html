@@ -37,8 +37,8 @@
           <span class="checkbox__checkmark"></span>
         </div>
         <label [for]="product._id" class="list__label">
-          <span class="list__product" [class.list__done]="product.done">{{ product.name }}</span>
-          <span class="list__addedby">Added by {{ product.addedBy }}</span>
+          <span class="list__product notranslate" [class.list__done]="product.done">{{ product.name }}</span>
+          <span class="list__addedby">Added by <span class="notranslate">{{ product.addedBy }}</span></span>
         </label>
         <button type="button" class="btn btn--close" (click)="deleteItem(product)">
           <svg class="icon icon--sm">

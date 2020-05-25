@@ -63,7 +63,7 @@
   <ng-container *ngIf="targetModal.modalVisible">
 
     <ng-container *ngIf="targetModalInfo.id === 'nameModal'">
-      <form [formGroup]="changeNameForm" class="form" (ngSubmit)="onModify(changeNameForm, targetModal)">
+      <form [formGroup]="changeNameForm" class="form" (ngSubmit)="onModify(changeNameForm)">
         <div class="form__group">
           <label for="inputName" class="form__label">Enter your new name</label>
           <input type="text" id="inputName" formControlName="inputName" class="form__control"
