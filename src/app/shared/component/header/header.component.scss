@@ -50,7 +50,7 @@
   // HEADER ACTION BUTTONS
   // -----------------------------
   &__actions {
-    @include size(rem(120px),rem( $header-height));
+    @include size(auto, rem($header-height));
     @include flex();
 
     padding: 0 5px;
@@ -58,5 +58,11 @@
     box-shadow: -1px 0 0px 0 rgba(0, 0, 0, 0.075);
   }
 
-}
+  // HEADER  BUTTON
+  // -----------------------------
 
+  &__btn {
+    width: max-content;
+  }
+
+}

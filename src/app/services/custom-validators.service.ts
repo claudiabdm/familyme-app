@@ -41,10 +41,10 @@ export class CustomValidatorsService {
     }
   }
 
-  checkDates(startDate: string, endDate: string) {
+  checkDates(start: string, end: string) {
     return (formGroup: FormGroup) => {
-      const startControl = formGroup.controls.startDate;
-      const endControl = formGroup.controls.endDate;
+      const startControl = formGroup.controls.start;
+      const endControl = formGroup.controls.end;
 
       if (!startControl || !endControl) {
         return null;

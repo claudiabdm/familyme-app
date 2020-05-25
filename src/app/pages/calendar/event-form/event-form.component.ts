@@ -56,7 +56,6 @@ export class EventFormComponent implements OnInit, OnDestroy {
         user.isSelected = false;
       }
     });
-
     this.eventForm = this.formBuilder.group({
       title: [this.eventInfo.title, [Validators.required, Validators.minLength(3)]],
       location: this.eventInfo.location,

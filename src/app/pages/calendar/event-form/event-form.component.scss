@@ -8,7 +8,7 @@
 }
 
 .form__btn {
-  @include size(rem(100px), auto);
+  @include size(auto, auto);
   @include flex();
 
   padding: 5px;

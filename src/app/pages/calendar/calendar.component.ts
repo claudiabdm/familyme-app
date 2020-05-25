@@ -40,7 +40,8 @@ export class CalendarComponent implements OnInit {
   eventTimeFormat = {
     hour: 'numeric',
     minute: '2-digit',
-    meridiem: false
+    meridiem: false,
+    hour12: false
   }
   selectedEvent: CalendarEvent;
   selectedDay = {
