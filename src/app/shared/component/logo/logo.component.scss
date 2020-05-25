@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css?family=Lobster&display=swap');
 // @import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap');
 .app-name {
-  @include size(100vw, 100%);
+  @include size(100vw, auto);
   @include flex(center, center);
 
   padding: 30px;

@@ -1,6 +1,10 @@
 @import  'mixins/mixins';
 @import  'global/variables';
 
+body {
+  overflow: auto;
+}
+
 .form__link {
   margin-bottom: 20px;
   text-align: center;
