@@ -1,5 +1,5 @@
 <nav class="navbar">
-  <p class="navbar__welcome"> Welcome Home, {{(user | async )?.name}}!</p>
+  <p class="navbar__welcome"> Welcome Home, <span class="notranslate">{{(user | async )?.name}}!</span></p>
   <a routerLink="home" routerLinkActive="icon--selected" class="navbar__item icon icon-home"
     #homeRoute="routerLinkActive" [attr.aria-current]="homeRoute.isActive">
     <span class="navbar__txt notranslate">Home</span>
