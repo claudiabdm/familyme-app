@@ -1,6 +1,7 @@
 @import 'mixins/mixins';
 @import 'global/variables';
 @import url('https://fonts.googleapis.com/css?family=Lobster&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap');
 .app-name {
   @include size(100vw, 100%);
   @include flex(center, center);

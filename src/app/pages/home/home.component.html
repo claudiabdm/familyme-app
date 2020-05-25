@@ -18,7 +18,7 @@
 
   <!-- MEMBERS -->
 
-  <h1 class="container__title">Family <span class="notranslate">{{ (userGroup | async )?.name }}</span></h1>
+  <h1 class="container__title">Family <span class="notrans">{{ (userGroup | async )?.name }}</span></h1>
 
   <app-user-list [onlyImage]="false" class="container container--grid" [userList]="(userList | async)"></app-user-list>
 

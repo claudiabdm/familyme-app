@@ -11,10 +11,11 @@ import { HeaderComponent } from './component/header/header.component';
 import { UserListComponent } from './component/user-list/user-list.component';
 import { ProfileImgComponent } from './component/profile-img/profile-img.component';
 import { LogoComponent } from './component/logo/logo.component';
+import { CreditComponent } from './component/credit/credit.component';
 
 
 @NgModule({
-  declarations: [ModalComponent, NavbarComponent, HeaderComponent, UserListComponent, ProfileImgComponent, LogoComponent,],
+  declarations: [ModalComponent, NavbarComponent, HeaderComponent, UserListComponent, ProfileImgComponent, LogoComponent, CreditComponent,],
   imports: [
     CommonModule,
     RouterModule,
@@ -33,6 +34,7 @@ import { LogoComponent } from './component/logo/logo.component';
     UserListComponent,
     ProfileImgComponent,
     LogoComponent,
+    CreditComponent
   ]
 })
 export class SharedModule { }

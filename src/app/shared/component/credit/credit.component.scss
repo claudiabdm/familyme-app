@@ -1,0 +1,17 @@
+@import 'mixins/mixins';
+@import 'global/variables';
+
+// -----------------------------
+// CREDITS
+// -----------------------------
+.credits {
+  @include flex(center, flex-start);
+  font-size: rem(10px);
+  line-height: 1.2;
+
+  &__txt {
+    @include flex(flex-start, flex-start);
+    flex-direction: column;
+    margin-left: 10px;
+  }
+}

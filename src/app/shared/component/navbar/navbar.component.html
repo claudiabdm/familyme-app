@@ -1,5 +1,7 @@
 <nav class="navbar">
-  <p class="navbar__welcome"> Welcome Home, <span class="notranslate">{{(user | async )?.name}}!</span></p>
+  <div class="navbar__welcome">
+    <p>Welcome Home, <span class="notranslate">{{(user | async )?.name}}!</span></p>
+  </div>
   <a routerLink="home" routerLinkActive="icon--selected" class="navbar__item icon icon-home"
     #homeRoute="routerLinkActive" [attr.aria-current]="homeRoute.isActive">
     <span class="navbar__txt notranslate">Home</span>
@@ -15,10 +17,13 @@
   </a>
   <a routerLink="locator" routerLinkActive="icon--selected" class="navbar__item icon icon-location"
     #locatorRoute="routerLinkActive" [attr.aria-current]="locatorRoute.isActive">
-  <span class="navbar__txt">Locator</span>
+    <span class="navbar__txt">Locator</span>
   </a>
   <a routerLink="list" routerLinkActive="icon--selected" class="navbar__item icon icon-check_list"
     #listRoute="routerLinkActive" [attr.aria-current]="listRoute.isActive">
-  <span class="navbar__txt">Shopping</span>
+    <span class="navbar__txt">Shopping</span>
   </a>
+
+  <app-credit class="navbar__credits"></app-credit>
+
 </nav>

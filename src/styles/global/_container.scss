@@ -50,6 +50,12 @@
     font-weight: $font-weight-bold;
   }
 
+  // CONTAINER CREDITS
+  // -----------------------------
+  &__credits{
+    margin: auto $padding-sides 0;
+  }
+
 }
 
 // --- Hidden container --- //
@@ -74,6 +80,8 @@
 
 // --- Container static --- //
 .container--static {
+  display: flex;
+  flex-direction: column;
   position: static;
 }
 

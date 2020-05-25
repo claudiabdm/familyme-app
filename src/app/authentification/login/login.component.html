@@ -1,24 +1,29 @@
-<app-logo></app-logo>
+<div>
+  <app-logo></app-logo>
 
-<!-- LOGIN -->
-<div class="container container--static">
+  <!-- LOGIN -->
+  <div class="container container--static">
 
-  <!-- FORM -->
-  <app-login-form></app-login-form>
-  <!-- //FORM -->
+    <!-- FORM -->
+    <app-login-form></app-login-form>
+    <!-- //FORM -->
 
-  <a class="form__link" (click)="toggleModal(pswdRecoveryModal)">Forgot password?</a>
+    <a class="form__link" (click)="toggleModal(pswdRecoveryModal)">Forgot password?</a>
 
-  <p class="container__p">Don't have an account? <a [routerLink]="'../signup'" class="form__link" id="signUpBtn">Sign
-      up</a>
-  </p>
+    <p class="container__p">Don't have an account? <a [routerLink]="'../signup'" class="form__link" id="signUpBtn">Sign
+        up</a>
+    </p>
+
+    <app-credit class="container__credits"></app-credit>
+
+  </div>
+  <!-- LOGIN -->
 
 </div>
-<!-- LOGIN -->
 
 <!-- FORGOT PASSWORD MODAL -->
 <app-modal [title]="'Password Recovery'" [modalId]="'pswdRecoveryModal'" (close)="toggleModal(pswdRecoveryModal)"
   [modalVisible]="false" [isFull]="false" #pswdRecoveryModal>
-    <app-pswdreset-form *ngIf="pswdRecoveryModal.modalVisible" ></app-pswdreset-form>
+  <app-pswdreset-form *ngIf="pswdRecoveryModal.modalVisible"></app-pswdreset-form>
 </app-modal>
 <!-- //FORGOT PASSWORD MODAL -->

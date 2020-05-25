@@ -33,13 +33,29 @@
   // -----------------------------
   &__welcome {
     display: none;
+
     @media screen and (min-width: $lg) {
-      display: block;
+      @include flex(flex-start flex-start);
+      flex-direction: column;
       margin-bottom: 20px;
       font-size: 1.5rem;
       line-height: 1.2;
     }
   }
+
+  // NAVBAR CREDITS
+  // -----------------------------
+  &__credits {
+    display: none;
+
+    @media screen and (min-width: $lg) {
+      @include flex(center, flex-start);
+      margin-top: auto;
+      margin-bottom: 0;
+    }
+
+  }
+
 
   // NAVBAR ITEM
   // -----------------------------
@@ -107,4 +123,9 @@
       font-size: 1.25rem;
     }
   }
+}
+
+.logo {
+  font-family: 'Lobster';
+  font-size: 16px;
 }
