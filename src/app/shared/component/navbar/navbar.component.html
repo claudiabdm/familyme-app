@@ -2,7 +2,7 @@
   <p class="navbar__welcome"> Welcome Home, {{(user | async )?.name}}!</p>
   <a routerLink="home" routerLinkActive="icon--selected" class="navbar__item icon icon-home"
     #homeRoute="routerLinkActive" [attr.aria-current]="homeRoute.isActive">
-    <span class="navbar__txt">Home</span>
+    <span class="navbar__txt notranslate">Home</span>
   </a>
   <a routerLink="calendar" routerLinkActive="icon--selected" class="navbar__item icon icon-calendar"
     #calendarRoute="routerLinkActive" [attr.aria-current]="calendarRoute.isActive">
