@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { Observable, pipe } from 'rxjs';
+import { take, map } from 'rxjs/operators';
 import { User } from 'src/app/shared/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { ModalService } from 'src/app/services/modal.service';
@@ -9,6 +9,8 @@ import { DataService } from 'src/app/services/data.service';
 import { UsersService } from 'src/app/services/users.service';
 import { GroupsService } from 'src/app/services/groups.service';
 import { ModalComponent } from '../../../shared/component/modal/modal.component';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-settings',
@@ -17,8 +19,14 @@ import { ModalComponent } from '../../../shared/component/modal/modal.component'
 })
 export class SettingsComponent implements OnInit {
 
+  @Output() modify = new EventEmitter();
+
   user: Observable<User>;
-  targetModalInfo: { title: string; id: string; label: string; function: () => void };
+  locationOn: Observable<User['locationOn']>;
+  notificationsOn: Observable<User['notificationsOn']>;
+  targetModalInfo: { title: string; id: string; label: string; function?: () => void };
+  changeNameForm: FormGroup;
+
 
   constructor(
     private authService: AuthService,
@@ -27,10 +35,17 @@ export class SettingsComponent implements OnInit {
     private usersService: UsersService,
     private groupsService: GroupsService,
     private spinner: NgxSpinnerService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
     this.user = this.dataService.userData$;
+    this.locationOn = this.dataService.userData$.pipe(map(user => user?.locationOn));
+    this.notificationsOn = this.dataService.userData$.pipe(map(user => user?.notificationsOn));
+    this.changeNameForm = this.formBuilder.group({
+      inputName: ['', [Validators.required, Validators.minLength(2)]],
+    });
+    this.changeNameForm.reset();
   }
 
   logOut() {
@@ -48,14 +63,28 @@ export class SettingsComponent implements OnInit {
     this.groupsService.deleteGroup().pipe(take(1)).subscribe(() => this.spinner.hide());
   }
 
-  locationOn() {
+  onLocationSwitch() {
+    const currUser = this.dataService.getUser();
+    currUser.locationOn = !currUser.locationOn;
+    if (currUser.locationOn === false) {
+      currUser.location = {lat:'', lng:''};
+    }
+    this.usersService.updateUserData(currUser).pipe(take(1)).subscribe();
   }
 
-  notificationsOn() {
+  onNotificationsSwitch() {
+    const currUser = this.dataService.getUser();
+    currUser.notificationsOn = !currUser.notificationsOn;
+    this.usersService.updateUserData(currUser).pipe(take(1)).subscribe();
   }
 
-  onModify(): void {
-
+  onModify(form: FormGroup, targetModal: ModalComponent): void {
+    const newValue = form.value.inputName;
+    const currUser = this.dataService.getUser();
+    currUser.name = newValue;
+    this.usersService.updateUserData(currUser).pipe(take(1)).subscribe(
+      () => this.modify.emit()
+    );
   }
 
 
@@ -74,7 +103,6 @@ export class SettingsComponent implements OnInit {
           title: 'Change password',
           id: 'passwordModal',
           label: 'Password',
-          function: this.onModify,
         };
         break;
       case 'emailModal':
@@ -82,15 +110,13 @@ export class SettingsComponent implements OnInit {
           title: 'Change email',
           id: 'emailModal',
           label: 'Email',
-          function: this.onModify,
         };
         break;
       case 'nameModal':
         this.targetModalInfo = {
-          title: 'Edit name',
-          id: 'namelModal',
+          title: 'Change name',
+          id: 'nameModal',
           label: 'Name',
-          function: this.onModify,
         };
         break;
       case 'deleteAccountModal':

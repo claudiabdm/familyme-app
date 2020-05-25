@@ -59,7 +59,7 @@ export class SocketioService {
   getMessage(): Observable<Message> {
     return Observable.create((observer: Observer<Message>) => {
       this.socket.on('received', (msg: Message) => {
-        if (msg.userId !== this.dataService.getUser()._id) {
+        if (this.dataService.getUser()?.notificationsOn && msg.userId !== this.dataService.getUser()._id) {
           const total = this._notificationsCounter.getValue() + 1;
           this._notificationsCounter.next(total);
         };
@@ -78,7 +78,7 @@ export class SocketioService {
       .pipe(
         map((messages: Message[]) => {
           messages.map(msg => {
-            if (msg.createdAt > this.dataService.getUser().lastConnection && msg.userId !== this.dataService.getUser()?._id) {
+            if (this.dataService.getUser()?.notificationsOn && msg.createdAt > this.dataService.getUser().lastConnection && msg.userId !== this.dataService.getUser()?._id) {
               const total = this._notificationsCounter.getValue() + 1;
               this._notificationsCounter.next(total);
             }

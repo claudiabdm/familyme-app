@@ -67,7 +67,7 @@ export class MapService {
     overlayContainer.appendChild(userPhoto);
     overlay.appendChild(overlayContainer);
 
-    const coords = new mapboxgl.LngLat(user.location.lng, user.location.lat);
+    const coords = new mapboxgl.LngLat(+user.location.lng, +user.location.lat);
     const newMarker = new mapboxgl.Marker(overlay).setLngLat(coords).addTo(map);
     this.markers.push({ id: user._id, marker: newMarker });
   }

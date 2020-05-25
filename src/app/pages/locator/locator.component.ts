@@ -37,15 +37,16 @@ export class LocatorComponent implements OnInit {
   initPosition() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
+
         this.mapService.buildMap(position, this.mapStyle);
 
         this.usersService.getLoggedUser()
           .pipe(
-            concatMap((user: User) => this.mapService.updateUserCoords(user, position)),
+            concatMap((user: User) => user.locationOn ? this.mapService.updateUserCoords(user, position) : this.usersService.getUsersByFamilyCode(user.familyCode)),
             takeWhile((users: User[]) => !users, true),
           )
           .subscribe((users: User[]) => {
-            users?.forEach((user: User) => this.setUsersPosition(user, position));
+            users?.forEach((user: User) => this.setUsersPosition(user));
             this.spinner.hide();
           }
           );
@@ -56,8 +57,8 @@ export class LocatorComponent implements OnInit {
     }
   }
 
-  setUsersPosition(user: User, position: Position) {
-    if (user.location.lat && user.location.lng) {
+  setUsersPosition(user: User) {
+    if (user.locationOn && user.location.lat && user.location.lng) {
       this.mapService.addMarker(user, this.mapService.map);
     }
   }

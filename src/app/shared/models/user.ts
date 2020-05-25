@@ -8,9 +8,10 @@ export class User {
   avatar: string | ArrayBuffer;
   role: string;
   familyCode: Group["familyCode"];
-  location: google.maps.LatLngLiteral;
+  location: {lat: string | number, lng: string | number};
   isSelected: boolean;
   lastConnection: Date;
   isShopping: boolean;
-  notificationsRead: boolean;
+  notificationsOn: boolean;
+  locationOn: boolean;
 }

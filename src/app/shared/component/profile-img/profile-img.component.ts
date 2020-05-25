@@ -57,8 +57,7 @@ export class ProfileImgComponent implements OnInit, OnDestroy {
   onUpdatePhoto(file: string | ArrayBuffer) {
     const userToBeUpdated = this.dataService.getUser();
     userToBeUpdated.avatar = file;
-    this.usersService.updateUserData(userToBeUpdated).pipe(take(1)).subscribe();
-    this.update.emit();
+    this.usersService.updateUserData(userToBeUpdated).pipe(take(1)).subscribe(() => this.update.emit());
   }
 
   ngOnDestroy() {

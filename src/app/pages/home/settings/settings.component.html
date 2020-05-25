@@ -2,24 +2,24 @@
 <article class="settings">
   <h2 class="settings__title">User settings</h2>
   <ul class="settings__list">
-    <li>
+    <!-- <li>
       <a class="settings__txt" (click)="selectedModalInfo(targetModal, 'passwordModal')">Change password<i
           class="icon icon-next icon--xs"></i></a>
-    </li>
+    </li> -->
     <li>
-      <a class="settings__txt" (click)="selectedModalInfo(targetModal, 'nameModal')">Edit user name<i
+      <a class="settings__txt" (click)="selectedModalInfo(targetModal, 'nameModal')">Change name<i
           class="icon icon-next icon--xs"></i></a>
     </li>
-    <li>
+    <!-- <li>
       <a class="settings__txt" (click)="selectedModalInfo(targetModal, 'emailModal')">Change email<i
           class="icon icon-next icon--xs"></i></a>
-    </li>
+    </li> -->
     <!-- SWITCHES -->
     <li>
       <label class="switch settings__txt" for="location">
         <span class="switch__label">Location</span>
-        <input type="checkbox" class="switch__check" id="location" role="switch" aria-checked="true"
-          (click)="locationOn()">
+        <input type="checkbox" class="switch__check" id="location" role="switch" aria-checked="true" [checked]="(locationOn | async )"
+          (click)="onLocationSwitch()">
         <span class="switch__slider"></span>
       </label>
     </li>
@@ -27,12 +27,11 @@
     <li>
       <label class="switch settings__txt" for="notifications">
         <span class="switch__label">Notifications</span>
-        <input type="checkbox" class="switch__check" id="notifications" role="switch" aria-checked="true"
-          (click)="notificationsOn()">
+        <input type="checkbox" class="switch__check" id="notifications" role="switch" aria-checked="true" [checked]="(notificationsOn | async )"
+          (click)="onNotificationsSwitch()">
         <span class="switch__slider"></span>
       </label>
     </li>
-    <!-- //SWITCHES -->
 
     <li>
       <a class="settings__txt settings__txt--warning" (click)="logOut()">Log out</a>
@@ -62,6 +61,20 @@
 <app-modal class [title]="targetModalInfo?.title" [modalId]="targetModalInfo?.id" (close)="toggleModal(targetModal)"
   [modalVisible]="false" [isFull]="false" #targetModal>
   <ng-container *ngIf="targetModal.modalVisible">
+
+    <ng-container *ngIf="targetModalInfo.id === 'nameModal'">
+      <form [formGroup]="changeNameForm" class="form" (ngSubmit)="onModify(changeNameForm, targetModal)">
+        <div class="form__group">
+          <label for="inputName" class="form__label">Enter your new name</label>
+          <input type="text" id="inputName" formControlName="inputName" class="form__control"
+            required>
+        </div>
+        <div class="form__actions">
+          <button type="submit" class="btn btn--m btn--primary" [disabled]="!changeNameForm.valid">Change name</button>
+        </div>
+      </form>
+
+    </ng-container>
 
     <!-- DELETE MODALS -->
     <ng-container *ngIf="targetModalInfo.id === 'deleteModal'">

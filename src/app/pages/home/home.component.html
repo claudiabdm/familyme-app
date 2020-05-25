@@ -39,7 +39,7 @@
 <!-- MODAL SETTINGS -->
 <app-modal [title]="'Settings'" [modalId]="'settingsModal'" (close)="toggleModal(settingsModal)" [modalVisible]="false"
   #settingsModal>
-  <app-settings *ngIf="settingsModal.modalVisible"></app-settings>
+  <app-settings *ngIf="settingsModal.modalVisible" (modify)="toggleModal(settingsModal)"></app-settings>
 </app-modal>
 <!-- // MODAL SETTINGS -->
 
