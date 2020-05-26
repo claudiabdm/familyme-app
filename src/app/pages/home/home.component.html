@@ -55,7 +55,7 @@
 <app-modal [title]="'New member'" [modalId]="'newMemberModal'" (close)="toggleModal(newMemberModal)"
   [modalVisible]="false" [isFull]="false" #newMemberModal>
 
-  <div *ngIf="newMemberModal.modalVisible" class="container container--static">
+  <div *ngIf="newMemberModal.modalVisible">
 
     <p class="container__p container__p--medium">Copy the code below and send it to your family to join you!</p>
     <div class="container container--btn">
