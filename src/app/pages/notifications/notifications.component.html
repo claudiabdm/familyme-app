@@ -11,7 +11,7 @@
       </div>
       <p class="notifications__msg">
         <span class="notifications__text">{{ message.text }}</span>
-        <time class="notifications__time">{{message.createdAt | date: 'dd/MM/yyyy HH:mm'}}</time>
+        <time class="notifications__time">{{message.createdAt | timeFormat}}</time>
       </p>
     </article>
   </section>
