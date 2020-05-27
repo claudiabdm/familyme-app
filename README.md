@@ -1,6 +1,8 @@
-# FamilyMe App ![FamilyMe logo](https://github.com/claudiabdm/familyme-app/blob/master/src/assets/logo/favicon-96x96.png)
+![FamilyMe logo](https://github.com/claudiabdm/familyme-app/blob/master/src/assets/logo/favicon-96x96.png)
 
-## About 
+# FamilyMe App
+
+## About
 
 The FamilyMe app is my personal project for the Full Stack Web Development Bootcamp at Boream. 
 
