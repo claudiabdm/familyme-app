@@ -1,4 +1,4 @@
-# FamilyMe App ![FamilyMe logo](https://github.com/claudiabdm/familyme-app/blob/master/src/assets/logo-v4.png)
+# FamilyMe App ![FamilyMe logo](https://github.com/claudiabdm/familyme-app/blob/master/src/assets/logo/favicon-96x96.png)
 
 ## About 
 
