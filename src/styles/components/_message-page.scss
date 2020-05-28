@@ -1,7 +1,7 @@
 .message-page-container {
-  @include absolute(0,0,0,0);
   @include flex(center, flex-start);
   flex-direction: column;
+  height: 100%;
   color: #fff;
   background:$primary;
 }
