@@ -15,8 +15,10 @@
 
     <div class="form__group">
       <label for="location" class="form__label">Location</label>
-      <input type="text" id="location" class="form__control" placeholder="C/Abc, 28220, Madrid" aria-required="false"
-        autocomplete="off" formControlName="location">
+      <input type="search" id="location" class="form__control" placeholder="Search location..." formControlName="location" (input)="searchLocation()">
+      <ul>
+        <li *ngFor="let location of locations">{{ location.name }}</li>
+      </ul>
     </div>
   </div>
   <!-- //Event name and location -->

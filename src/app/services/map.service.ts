@@ -4,11 +4,15 @@ import * as mapboxgl from 'mapbox-gl';
 import { User } from '../shared/models/user';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UsersService } from 'src/app/services/users.service';
+import { HttpClient } from '@angular/common/http';
+import { tap, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapService {
+
+  geocoderUrl = 'https://api.mapbox.com/geocoding/v5/mapbox.places';
 
   mapbox = (mapboxgl as typeof mapboxgl);
   map: mapboxgl.Map;
@@ -26,7 +30,8 @@ export class MapService {
 
   constructor(
     private ref: ApplicationRef,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private http: HttpClient
   ) {
     this.mapbox.accessToken = environment.mapBoxToken;
     const darkModeOn = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -76,6 +81,24 @@ export class MapService {
     user.location.lat = position.coords.latitude;
     user.location.lng = position.coords.longitude;
     return this.usersService.updateUserData(user);
+  }
+
+  getNearbyPlaces(text: string) {
+    let search = text.replace(' ', '%20');
+    return this.http.get(`${this.geocoderUrl}/${search}.json?access_token=${environment.mapBoxToken}&autocomplete=true`)
+      .pipe(
+        map((res) => {
+          const locations = [];
+          res['features'].forEach(feature => {
+            const location = {
+              name: feature.place_name,
+              coordinate: feature.center,
+            }
+            locations.push(location);
+          })
+          return locations;
+        })
+      );
   }
 
 }
