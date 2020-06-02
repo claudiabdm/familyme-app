@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Button } from 'src/app/shared/models/button';
 import { DataService } from 'src/app/services/data.service';
 import { ModalComponent } from '../modal/modal.component';
@@ -10,6 +10,7 @@ import { map } from 'rxjs/internal/operators/map';
 import { UsersService } from 'src/app/services/users.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-header',
@@ -30,6 +31,7 @@ export class HeaderComponent implements OnInit {
     private dataService: DataService,
     private usersService: UsersService,
     private socketService: SocketioService,
+    private modalService: ModalService
   ) { }
 
   ngOnInit(): void {
@@ -45,6 +47,9 @@ export class HeaderComponent implements OnInit {
     this.socketService.sendMessage(text);
   }
 
+  onClick(btnId: string) {
+    this.modalService.btnClicked.emit(btnId);
+  }
   ngOnDestroy(): void {
     this.ngUnsubscribe$.next();
     this.ngUnsubscribe$.complete();

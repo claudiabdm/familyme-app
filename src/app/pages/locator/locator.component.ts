@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { Subject } from 'rxjs';
 
 import { DataService } from 'src/app/services/data.service';
@@ -6,8 +6,10 @@ import { UsersService } from 'src/app/services/users.service';
 import { MapService } from '../../services/map.service';
 import * as mapboxgl from 'mapbox-gl';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { takeWhile, concatMap } from 'rxjs/operators';
+import { takeWhile, concatMap, takeUntil } from 'rxjs/operators';
 import { User } from 'src/app/shared/models/user';
+import { ModalComponent } from 'src/app/shared/component/modal/modal.component';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-locator',
@@ -16,22 +18,32 @@ import { User } from 'src/app/shared/models/user';
 })
 export class LocatorComponent implements OnInit {
 
+  @ViewChild('newPlaceModal') private newPlaceModalElem: ModalComponent;
+
   private ngUnsubscribe$ = new Subject<void>();
   private mapStyle: string;
   private options = {
     enableHighAccuracy: true,
   };
 
+  private listener: () => void;
+
   constructor(
     private mapService: MapService,
     private usersService: UsersService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private modalService: ModalService
   ) { }
 
   ngOnInit(): void {
     this.spinner.show();
     this.mapStyle = this.mapService.mapTheme.getValue();
     this.initPosition();
+    this.modalService.btnClicked.pipe(takeUntil(this.ngUnsubscribe$)).subscribe(res => {
+      if(res === 'newPlaceBtn') {
+        this.toggleModal(this.newPlaceModalElem);
+      }
+    })
   }
 
   initPosition() {
@@ -64,13 +76,21 @@ export class LocatorComponent implements OnInit {
   }
 
   showUserLocation(selectedUser) {
-
     this.mapService.markers.find(marker => marker.id === selectedUser._id)
+  }
+
+  toggleModal(targetModal: ModalComponent): void {
+    if (!targetModal.modalVisible) {
+      this.modalService.openModal(targetModal);
+    } else {
+      this.modalService.closeModal(targetModal);
+    }
   }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe$.next()
     this.ngUnsubscribe$.complete();
+    this.listener();
   }
 
 

@@ -21,7 +21,7 @@
 
     <!-- BUTTON -->
     <div class="header__actions" *ngIf="!switchVisible">
-      <button type="button" class="btn btn--primary btn--sm header__btn" [id]="button.id">{{ button.name }}</button>
+      <button type="button" class="btn btn--primary btn--sm header__btn" [id]="button.id" (click)="onClick(button.id)">{{ button.name }}</button>
     </div>
     <!-- //BUTTON -->
 
