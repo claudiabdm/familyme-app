@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { DataService } from 'src/app/services/data.service';
 import { UsersService } from 'src/app/services/users.service';
 import { MapService } from '../../services/map.service';
 import * as mapboxgl from 'mapbox-gl';
@@ -25,8 +24,6 @@ export class LocatorComponent implements OnInit {
   private options = {
     enableHighAccuracy: true,
   };
-
-  private listener: () => void;
 
   constructor(
     private mapService: MapService,
@@ -90,7 +87,6 @@ export class LocatorComponent implements OnInit {
   ngOnDestroy(): void {
     this.ngUnsubscribe$.next()
     this.ngUnsubscribe$.complete();
-    this.listener();
   }
 
 

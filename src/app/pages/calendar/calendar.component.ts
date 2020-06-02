@@ -77,8 +77,11 @@ export class CalendarComponent implements OnInit {
       takeUntil(this.ngUnsubscribe$)
     ).subscribe(() => this.spinner.hide());
 
-    const newEventBtn = document.getElementById('newEventBtn');
-    newEventBtn?.addEventListener('click', () => this.toggleModal(this.newEventModal))
+    this.modalService.btnClicked.pipe(takeUntil(this.ngUnsubscribe$)).subscribe(res => {
+      if(res === 'newEventBtn') {
+        this.toggleModal(this.newEventModal);
+      }
+    })
   }
 
   selectEvent(event, targetModal: ModalComponent): void {
