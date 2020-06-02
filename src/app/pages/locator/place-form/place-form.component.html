@@ -1,0 +1,32 @@
+<ngx-spinner size="medium" bdColor="rgba(51,51,51,0.35)" type="ball-spin-clockwise" color="#fff"></ngx-spinner>
+<form [formGroup]="newPlaceForm" class="form" (ngSubmit)="onSubmit(newPlaceForm)">
+
+  <!-- Place name and location -->
+  <div class="form__section">
+    <div class="form__group">
+      <label for="title" class="form__label">Event name</label>
+      <input type="text" id="title" class="form__control" placeholder="Dentist" aria-required="true" autocomplete="off"
+        required formControlName="title"
+        [class.form__control--invalid]="newPlaceForm.controls.title.dirty && newPlaceForm.controls.title.invalid">
+      <div class="form__msg-group" *ngIf="newPlaceForm.controls.title.dirty && newPlaceForm.controls.title.invalid">
+        Required field
+      </div>
+    </div>
+
+    <div class="form__group">
+      <label for="location" class="form__label">Location</label>
+      <input type="text" id="location" class="form__control" placeholder="C/Abc, 28220, Madrid" aria-required="false"
+        autocomplete="off" formControlName="location">
+    </div>
+  </div>
+  <!-- //Event name and location -->
+
+  <!-- FORM ACTIONS -->
+  <div class="form__actions container--btn">
+    <button type="submit" class="btn btn--m" aria-disabled="true" [disabled]="!newPlaceForm.valid"> New
+      place</button>
+  </div>
+  <!-- //FORM ACTIONS -->
+
+</form>
+<!-- //FORM -->

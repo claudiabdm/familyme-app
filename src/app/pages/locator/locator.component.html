@@ -8,5 +8,5 @@
 
 <app-modal [title]="'New place'" [modalId]="'newPlaceModal'" [modalVisible]="false" [isFull]="true"
   (close)="toggleModal(newPlaceModal)" #newPlaceModal>
-
+  <app-place-form></app-place-form>
 </app-modal>
