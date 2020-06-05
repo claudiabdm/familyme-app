@@ -15,18 +15,34 @@
 
     <div class="form__group">
       <label for="location" class="form__label">Location</label>
-      <input type="search" id="location" class="form__control" placeholder="Search location..." formControlName="location" (input)="searchLocation()">
-      <ul>
-        <li *ngFor="let location of locations">{{ location.name }}</li>
+      <input type="search" id="location" class="form__control" placeholder="Search location..." autocomplete="off"
+        formControlName="locationName" (input)="searchLocation(newPlaceForm.controls.locationName.value)">
+      <ul class="form__list" *ngIf="locationOpen">
+        <li *ngFor="let location of locations" class="form__list-elem" (click)="selectLocation(location)">
+          {{ location.name }}</li>
       </ul>
     </div>
+
+
+  <div class="form__group">
+    <label for="category" class="form__label"> Category </label>
+    <input type="search" id="category" class="form__control" placeholder="Search category..." autocomplete="off"
+      formControlName="categoryName" (input)="searchCategory(newPlaceForm.controls.categoryName.value)">
+    <ul class="form__list" *ngIf="categoryOpen">
+      <li  *ngIf="filteredCategories.length === 0"  class="form__list-elem"> Category not found </li>
+      <li *ngFor="let category of filteredCategories" class="form__list-elem" (click)="selectCategory(category)">
+        {{ category }}</li>
+    </ul>
+  </div>
+
   </div>
   <!-- //Event name and location -->
 
   <!-- FORM ACTIONS -->
   <div class="form__actions container--btn">
-    <button type="submit" class="btn btn--m" aria-disabled="true" [disabled]="!newPlaceForm.valid"> New
-      place</button>
+    <button type="submit" class="btn btn--m" aria-disabled="true" [disabled]="!newPlaceForm.valid">
+      New place
+    </button>
   </div>
   <!-- //FORM ACTIONS -->
 

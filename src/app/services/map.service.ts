@@ -13,17 +13,36 @@ import { tap, map } from 'rxjs/operators';
 export class MapService {
 
   geocoderUrl = 'https://api.mapbox.com/geocoding/v5/mapbox.places';
-
-  mapbox = (mapboxgl as typeof mapboxgl);
   map: mapboxgl.Map;
   markers: { id: string, marker: mapboxgl.Marker }[] = [];
-
+  placeMarkers: { id: string, marker: mapboxgl.Marker }[] = [];
   themes = ['mapbox://styles/mapbox/light-v10', 'mapbox://styles/mapbox/dark-v10']
   mapTheme = new BehaviorSubject(this.themes[0]);
 
-  geojson = {
-    'type': 'FeatureCollection',
-    'features': []
+  places = {
+  'type': 'FeatureCollection',
+    'features': [
+      {
+        'type': 'Feature',
+        'properties': {
+          'icon': 'music'
+        },
+        'geometry': {
+          'type': 'Point',
+          'coordinates': [-3.8591000, 40.4790525]
+        }
+      },
+      {
+        'type': 'Feature',
+        'properties': {
+          'icon': 'music'
+        },
+        'geometry': {
+          'type': 'Point',
+          'coordinates': [-3.8591760, 40.4790530]
+        }
+      }
+    ]
   };
 
   private img = '../../../../assets/img/profile-photo-round.svg';
@@ -33,7 +52,6 @@ export class MapService {
     private usersService: UsersService,
     private http: HttpClient
   ) {
-    this.mapbox.accessToken = environment.mapBoxToken;
     const darkModeOn = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     if (darkModeOn) {
@@ -52,14 +70,54 @@ export class MapService {
       this.map.remove();
     }
     this.map = new mapboxgl.Map({
+      accessToken: environment.mapBoxToken,
       container: 'map',
       style: style,
       zoom: 15,
       center: [position.coords.longitude, position.coords.latitude]
     });
+
+    this.map.on('load', () => {
+      this.addSource(this.map, 'places', this.places);
+      this.addLayer(this.map, this.places);
+
+    });
   }
 
-  addMarker(user: User, map: mapboxgl.Map) {
+  addSource(map, sourceName, data) {
+    map.addSource(sourceName, {
+      type: 'geojson',
+      data
+    })
+  };
+
+  addLayer(map, data) {
+    data.features.forEach(feature => {
+      const symbol = feature.properties['icon'];
+      const layerID = 'poi-' + symbol;
+      // Add a layer for this symbol type if it hasn't been added already.
+      if (!map.getLayer(layerID)) {
+        map.addLayer({
+          'id': layerID,
+          'type': 'symbol',
+          'source': 'places',
+          'layout': {
+            'icon-image': symbol + '-15',
+            'icon-allow-overlap': true,
+            'icon-ignore-placement': true
+          },
+          'filter': ['==', 'icon', symbol]
+        });
+      }
+    });
+  }
+
+  toogleLayer(layerName, visible) {
+    const mode = visible ? 'visible' : 'none';
+    this.map.setLayoutProperty(layerName, 'visibility', mode);
+  }
+
+  addMarker(user: User) {
     // const marker = this.markers.find(marker => marker.id === user._id);
     const overlay = document.createElement('div');
     overlay.classList.add('marker');
@@ -73,17 +131,17 @@ export class MapService {
     overlay.appendChild(overlayContainer);
 
     const coords = new mapboxgl.LngLat(+user.location.lng, +user.location.lat);
-    const newMarker = new mapboxgl.Marker(overlay).setLngLat(coords).addTo(map);
+    const newMarker = new mapboxgl.Marker(overlay).setLngLat(coords).addTo(this.map);
     this.markers.push({ id: user._id, marker: newMarker });
   }
 
-  updateUserCoords(user: User, position: Position): Observable<User[]> {
+  updateUserCoords(user: User, position: Position): Observable < User[] > {
     user.location.lat = position.coords.latitude;
     user.location.lng = position.coords.longitude;
     return this.usersService.updateUserData(user);
   }
 
-  getNearbyPlaces(text: string) {
+  searchPlace(text: string) {
     let search = text.replace(' ', '%20');
     return this.http.get(`${this.geocoderUrl}/${search}.json?access_token=${environment.mapBoxToken}&autocomplete=true`)
       .pipe(
@@ -100,5 +158,12 @@ export class MapService {
         })
       );
   }
+
+  addLocation(location) {
+    const coords = new mapboxgl.LngLat(location.coordinate[0], location.coordinate[1]);
+    const newMarker = new mapboxgl.Marker().setLngLat(coords).addTo(this.map);
+  }
+
+
 
 }

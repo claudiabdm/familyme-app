@@ -20,11 +20,11 @@
 
 // COMPONENTS                  //
 // ---------------------------- //
-@import 'components/button';
-@import 'components/checkbox';
-@import 'components/switch';
-@import 'components/form';
-@import 'components/user';
+@import 'ui/button';
+@import 'ui/checkbox';
+@import 'ui/switch';
+@import 'ui/form';
+@import 'ui/user';
 @import '../app/pages/locator/locator.component';
-@import 'components/calendar';
-@import 'components/message-page';
+@import 'ui/calendar';
+@import 'ui/message-page';

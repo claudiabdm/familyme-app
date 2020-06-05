@@ -46,7 +46,7 @@ export class LocatorComponent implements OnInit {
   initPosition() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
-
+        console.log(position)
         this.mapService.buildMap(position, this.mapStyle);
 
         this.usersService.getLoggedUser()
@@ -59,6 +59,7 @@ export class LocatorComponent implements OnInit {
             this.spinner.hide();
           }
           );
+        this.spinner.hide();
       },
         error => window.alert(`${error}: Fail to find location`)
       ),
@@ -68,7 +69,7 @@ export class LocatorComponent implements OnInit {
 
   setUsersPosition(user: User) {
     if (user.locationOn && user.location.lat && user.location.lng) {
-      this.mapService.addMarker(user, this.mapService.map);
+      this.mapService.addMarker(user);
     }
   }
 
