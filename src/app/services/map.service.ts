@@ -97,7 +97,6 @@ export class MapService {
         'coordinates': place.location.coordinate
       }
     }
-    debugger
     this.places.features.push(newPlace);
     const source = this.map.getSource('places') as mapboxgl.GeoJSONSource;
     source.setData(this.places);
@@ -171,6 +170,14 @@ export class MapService {
   addLocation(location) {
     const coords = new mapboxgl.LngLat(location.coordinate[0], location.coordinate[1]);
     const newMarker = new mapboxgl.Marker().setLngLat(coords).addTo(this.map);
+  }
+
+  filterPlace(layerID: string, checked: boolean, map: mapboxgl.Map) {
+    map.setLayoutProperty(
+      layerID,
+      'visibility',
+      checked ? 'visible' : 'none'
+    );
   }
 
   private addSvg(symbol: string, map: mapboxgl.Map) {

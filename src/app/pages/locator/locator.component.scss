@@ -2,12 +2,38 @@
 @import  'global/variables';
 
 // ---------------------------- //
-// MAP                          //
+// CHECKLIST                    //
 // ---------------------------- //
 
-.marker {
-  @include size(rem(70px), rem(70px));
-  position: absolute;
-  top: -59px;
-  border-radius: 100%;
+.checklist {
+  max-height: 50vh;
+  overflow: auto;
+  &__elem {
+    @include flex(center, flex-start);
+    padding: 0 $padding-sides;
+    padding-bottom: 5px;
+
+    & + & {
+      padding-top: 10px;
+    }
+
+    &:first-child {
+      padding-top: 10px;
+    }
+
+    &:last-child {
+      padding-bottom: 10px;
+    }
+  }
+  &__label {
+    @include flex(center, flex-start);
+    width: 100%;
+    text-transform: capitalize;;
+  }
+
+  &__icon {
+    @include size(rem(18px), rem(18px));
+    margin-right: 10px;
+    color: $primary;
+  }
 }

@@ -19,6 +19,8 @@ export class LocatorComponent implements OnInit {
 
   @ViewChild('newPlaceModal') private newPlaceModalElem: ModalComponent;
 
+  categories = [];
+
   private ngUnsubscribe$ = new Subject<void>();
   private mapStyle: string;
   private options = {
@@ -37,11 +39,12 @@ export class LocatorComponent implements OnInit {
     this.mapStyle = this.mapService.mapTheme.getValue();
     this.initPosition();
     this.modalService.btnClicked.pipe(takeUntil(this.ngUnsubscribe$)).subscribe(res => {
-      if(res === 'newPlaceBtn') {
+      if (res === 'newPlaceBtn') {
 
         this.toggleModal(this.newPlaceModalElem);
       }
     })
+    this.mapService.places.features.forEach(feature => { if (!this.categories.includes(feature)) this.categories.push(feature.properties.icon) });
   }
 
   initPosition() {
@@ -60,7 +63,6 @@ export class LocatorComponent implements OnInit {
             this.spinner.hide();
           }
           );
-        this.spinner.hide();
       },
         error => window.alert(`${error}: Fail to find location`)
       ),
@@ -84,6 +86,10 @@ export class LocatorComponent implements OnInit {
     } else {
       this.modalService.closeModal(targetModal);
     }
+  }
+
+  onChecked(layerID: string, checked: boolean) {
+    this.mapService.filterPlace(`poi-${layerID.toLowerCase()}`, checked, this.mapService.map);
   }
 
   ngOnDestroy(): void {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MapService } from 'src/app/services/map.service';
 
@@ -9,9 +9,9 @@ import { MapService } from 'src/app/services/map.service';
 })
 export class PlaceFormComponent implements OnInit {
 
+  @Input() categories: string[] =[];
   newPlaceForm: FormGroup;
   locations: [] = [];
-  categories: string[] = ['Home', 'Restaurant', 'Cafe', 'School'];
   locationOpen: boolean = false;
   categoryOpen: boolean = false;
 

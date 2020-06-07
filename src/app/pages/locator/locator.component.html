@@ -2,11 +2,30 @@
   <ngx-spinner size="medium" bdColor="rgba(51,51,51,0.35)" type="ball-spin-clockwise" color="#fff" [fullScreen]="false"
     [zIndex]="8"></ngx-spinner>
 </div>
-<button type="button" class="btn btn--float" id="filterBtn">
+<button type="button" class="btn btn--float" id="filterBtn" (click)="toggleModal(filterModal)">
   <i class="icon icon-funnel icon--sm"></i>
 </button>
 
 <app-modal [title]="'New place'" [modalId]="'newPlaceModal'" [modalVisible]="false" [isFull]="true"
   (close)="toggleModal(newPlaceModal)" #newPlaceModal>
-  <app-place-form (submit)="toggleModal(newPlaceModal)"></app-place-form>
+  <app-place-form [categories]="categories" (submit)="toggleModal(newPlaceModal)"></app-place-form>
+</app-modal>
+
+<app-modal [title]="'Filter'" [modalId]="'filterModal'" [modalVisible]="false" [isFull]="false"
+  (close)="toggleModal(filterModal)" #filterModal>
+  <ul class="checklist">
+    <li class="checklist__elem" *ngFor="let category of categories">
+      <label class="checklist__label" [for]="category">
+        <svg class="icon icon--nofilter checklist__icon">
+          <use attr.xlink:href="/assets/icons/sprite.svg#{{category.toLowerCase()}}" />
+        </svg>
+        {{ category }}
+      </label>
+      <div class="checkbox">
+        <input type="checkbox" [id]="category" class="checkbox__box" #checkedCategory [checked]="true"
+          (change)="onChecked(category, checkedCategory.checked)">
+        <span class="checkbox__checkmark"></span>
+      </div>
+    </li>
+  </ul>
 </app-modal>

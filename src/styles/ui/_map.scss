@@ -1,0 +1,14 @@
+// ---------------------------- //
+// MAP                          //
+// ---------------------------- //
+
+.marker {
+  @include size(rem(70px), rem(70px));
+  position: absolute;
+  top: -59px;
+  border-radius: 100%;
+}
+
+.mapboxgl-ctrl.mapboxgl-ctrl-attrib.mapboxgl-compact {
+  display: none;
+}
