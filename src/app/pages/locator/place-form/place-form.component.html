@@ -16,24 +16,36 @@
     <div class="form__group">
       <label for="location" class="form__label">Location</label>
       <input type="search" id="location" class="form__control" placeholder="Search location..." autocomplete="off"
-        formControlName="locationName" (input)="searchLocation(newPlaceForm.controls.locationName.value)">
-      <ul class="form__list" *ngIf="locationOpen">
+        formControlName="locationName" (input)="searchLocation(newPlaceForm.controls.locationName.value)"
+        [class.form__control--invalid]="newPlaceForm.controls.locationName.dirty && newPlaceForm.controls.location.invalid">
+      <div class="form__msg-group" *ngIf="newPlaceForm.controls.locationName.dirty && newPlaceForm.controls.location.invalid">
+        Required field
+      </div>
+      <ul class="form__list" *ngIf="locationOpen" (clickOutside)="onClickOutside($event)">
+        <li *ngIf="locations.length === 0" class="form__list-elem" (click)="selectLocation('')"> Location not found
+        </li>
         <li *ngFor="let location of locations" class="form__list-elem" (click)="selectLocation(location)">
           {{ location.name }}</li>
       </ul>
     </div>
 
 
-  <div class="form__group">
-    <label for="category" class="form__label"> Category </label>
-    <input type="search" id="category" class="form__control" placeholder="Search category..." autocomplete="off"
-      formControlName="categoryName" (input)="searchCategory(newPlaceForm.controls.categoryName.value)">
-    <ul class="form__list" *ngIf="categoryOpen">
-      <li  *ngIf="filteredCategories.length === 0"  class="form__list-elem"> Category not found </li>
-      <li *ngFor="let category of filteredCategories" class="form__list-elem" (click)="selectCategory(category)">
-        {{ category }}</li>
-    </ul>
-  </div>
+    <div class="form__group" (click)="toggleCategory()" (clickOutside)="onClickOutside($event)">
+      <label for="category" class="form__label"> Category </label>
+      <div class="form__select">
+        <input type="text" readonly="true" id="category" class="form__control form__control--select"
+          placeholder="Select category..." autocomplete="off" formControlName="categoryName">
+        <button type="button" class="btn btn--icon btn--dropdown">
+          <svg class="icon icon--nofilter icon--s" [class.icon--rotate]="categoryOpen">
+            <use xlink:href="../../assets/icons/sprite.svg#arrow" />
+          </svg>
+        </button>
+      </div>
+      <ul class="form__list" *ngIf="categoryOpen">
+        <li *ngFor="let category of categories" class="form__list-elem" (click)="selectCategory(category)">
+          {{ category }}</li>
+      </ul>
+    </div>
 
   </div>
   <!-- //Event name and location -->

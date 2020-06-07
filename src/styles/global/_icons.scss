@@ -8,6 +8,7 @@
 	height: 2.5rem;
 	filter: var(--icon-filter);
   transition: filter 0.1s linear;
+  transition: transform 0.15s linear;
 }
 
 .icon:hover,
@@ -32,9 +33,22 @@
 	height: 1.875rem;
 }
 
+
+.icon--s {
+	width: 1.25rem;
+	height: 1.25rem;
+}
+
 .icon--xs {
 	width: 0.75rem;
 	height: 1.25rem;
+}
+
+// --- States --- //
+
+.icon--rotate {
+  transform-origin: center;
+  transform: scale(1, -1);
 }
 
 // --- Icons --- //

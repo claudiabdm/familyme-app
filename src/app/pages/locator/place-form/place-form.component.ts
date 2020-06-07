@@ -6,16 +6,12 @@ import { MapService } from 'src/app/services/map.service';
   selector: 'app-place-form',
   templateUrl: './place-form.component.html',
   styleUrls: ['./place-form.component.scss'],
-  host: {
-    "(window:click)": "onClickOutside()"
-  }
 })
 export class PlaceFormComponent implements OnInit {
 
   newPlaceForm: FormGroup;
   locations: [] = [];
-  categories: string[] = ['Home', 'Restaurant', 'Cafe', 'High School', 'University'];
-  filteredCategories: string[];
+  categories: string[] = ['Home', 'Restaurant', 'Cafe', 'School'];
   locationOpen: boolean = false;
   categoryOpen: boolean = false;
 
@@ -25,20 +21,21 @@ export class PlaceFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.filteredCategories = this.categories;
     this.newPlaceForm = this.formBuilder.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
-      locationName: '',
-      categoryName: '',
-      location: {}
+      locationName: ['', [Validators.required]],
+      categoryName:  ['', [Validators.required]],
+      location: ['', [Validators.required]]
     })
   }
 
-  onSubmit(form: FormGroup){
-    console.log(form.controls.location);
+  onSubmit(form: FormGroup) {
+    if (form) {
+      this.mapService.addNewPlace(form.value);
+    }
   }
 
-  searchLocation(locationName: string) {
+  searchLocation(locationName: string) {
     const search = locationName;
     if (search) {
       this.locationOpen = true;
@@ -49,35 +46,30 @@ export class PlaceFormComponent implements OnInit {
     }
   }
 
-  searchCategory(categoryName: string) {
-    if (categoryName) {
-      this.categoryOpen = true;
-      const searchRegex = new RegExp(categoryName, 'i');
-      this.filteredCategories = this.categories.filter(category => searchRegex.test(category.toLowerCase()));
-    } else {
-      this.filteredCategories = this.categories;
-      this.newPlaceForm.controls.categoryName.setValue('');
-      this.categoryOpen = false;
-
-    }
-  }
-
   selectLocation(location) {
     this.newPlaceForm.controls.locationName.setValue(location.name);
     this.newPlaceForm.controls.location.setValue(location);
-    console.log(location)
     this.locations = []
+  }
+
+
+  toggleCategory() {
+    this.categoryOpen = !this.categoryOpen;
   }
 
   selectCategory(category) {
     this.newPlaceForm.controls.categoryName.setValue(category);
-    console.log(category)
-    this.filteredCategories = []
+    this.categoryOpen = false;
   }
 
-  onClickOutside() {
-    this.categoryOpen = false;
-    this.locationOpen = false;
+  onClickOutside(e) {
+    if (this.locationOpen) {
+      this.locationOpen = false;
+    }
+
+    if (this.categoryOpen) {
+      this.categoryOpen = false;
+    }
   }
 
 }

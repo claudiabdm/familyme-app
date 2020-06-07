@@ -119,6 +119,23 @@
       @include size($height: 2.188rem);
     }
 
+    &--select {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+  }
+
+  // CUSTOM SELECT
+  // -----------------------------
+
+  &__select {
+    @include flex(center, flex-end);
+    position: relative;
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   // LIST

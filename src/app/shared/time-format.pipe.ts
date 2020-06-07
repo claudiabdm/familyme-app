@@ -11,7 +11,6 @@ export class TimeFormatPipe implements PipeTransform {
     const inputDate = new Date(date);
     const currentDate = new Date();
     const diffInDays = (currentDate.getTime() - inputDate.getTime()) / (60 * 60 * 24 * 1000);
-    debugger
     const inputTime = this.setTimeStr(inputDate.getHours(), inputDate.getMinutes());
 
     if (inputDate.toDateString() === currentDate.toDateString()) {

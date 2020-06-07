@@ -76,10 +76,20 @@
 
 //--- Buttons that are icons ---//
 .btn--icon {
-  width: 2.813rem;
+  @include size(max-content, max-content);
   padding: 0;
+  color: $grey-100;
   background-color: rgba(0, 0, 0, 0);
-  --button-hover: rgba(0, 0, 0, 0);
+  border: 0;
+  transition: color 0.2s ease-out;
+  &:focus {
+    box-shadow: none;
+    color: $secondary;
+  }
+  &:hover {
+    color: #{darken($grey-100, 20%)};
+    --button-hover: rgba(0, 0, 0, 0);
+  }
 }
 
 // --- Link button ---//
@@ -97,14 +107,6 @@
   width: max-content;
   margin: 0;
   padding: 10px 0 10px 10px;
-  background: none;
-  color: $grey-100;
-  transition: color 0.2s ease-out;
-
-  &:hover {
-    color: #{darken($grey-100, 20%)};
-    --button-hover: rgba(0, 0, 0, 0);
-  }
 }
 
 //--- Back button ---//
@@ -133,4 +135,10 @@
   color: #fff;
   font-size: 1rem;
   font-weight: $font-weight-light;
+}
+
+// --- Dropdown button --- //
+.btn--dropdown{
+  position: absolute;
+  right: 10px;
 }

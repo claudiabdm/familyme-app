@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { UsersService } from 'src/app/services/users.service';
 import { HttpClient } from '@angular/common/http';
 import { tap, map } from 'rxjs/operators';
+import { DataService } from './data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,26 +21,26 @@ export class MapService {
   mapTheme = new BehaviorSubject(this.themes[0]);
 
   places = {
-  'type': 'FeatureCollection',
+    'type': 'FeatureCollection' as const,
     'features': [
       {
-        'type': 'Feature',
+        'type': 'Feature' as const,
         'properties': {
-          'icon': 'music'
+          icon: 'restaurant'
         },
         'geometry': {
-          'type': 'Point',
-          'coordinates': [-3.8591000, 40.4790525]
+          'type': 'Point' as const,
+          'coordinates': [-3.859567, 40.475012],
         }
       },
       {
-        'type': 'Feature',
+        'type': 'Feature' as const,
         'properties': {
-          'icon': 'music'
+          icon: 'school'
         },
         'geometry': {
-          'type': 'Point',
-          'coordinates': [-3.8591760, 40.4790530]
+          'type': 'Point' as const,
+          'coordinates': [-3.876872, 40.467926],
         }
       }
     ]
@@ -50,6 +51,7 @@ export class MapService {
   constructor(
     private ref: ApplicationRef,
     private usersService: UsersService,
+    private dataService: DataService,
     private http: HttpClient
   ) {
     const darkModeOn = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -74,14 +76,32 @@ export class MapService {
       container: 'map',
       style: style,
       zoom: 15,
-      center: [position.coords.longitude, position.coords.latitude]
+      center: [position.coords.longitude, position.coords.latitude],
     });
 
     this.map.on('load', () => {
       this.addSource(this.map, 'places', this.places);
       this.addLayer(this.map, this.places);
-
     });
+  }
+
+  addNewPlace(place) {
+    const icon = place.categoryName.toLowerCase();
+    const newPlace = {
+      'type': 'Feature' as const,
+      'properties': {
+        icon
+      },
+      'geometry': {
+        'type': 'Point' as const,
+        'coordinates': place.location.coordinate
+      }
+    }
+    debugger
+    this.places.features.push(newPlace);
+    const source = this.map.getSource('places') as mapboxgl.GeoJSONSource;
+    source.setData(this.places);
+    this.addLayer(this.map, this.places);
   }
 
   addSource(map, sourceName, data) {
@@ -91,20 +111,19 @@ export class MapService {
     })
   };
 
-  addLayer(map, data) {
+  addLayer(map: mapboxgl.Map, data: any) {
     data.features.forEach(feature => {
       const symbol = feature.properties['icon'];
       const layerID = 'poi-' + symbol;
-      // Add a layer for this symbol type if it hasn't been added already.
+      if (!map.hasImage(symbol)) this.addSvg(symbol, map);
       if (!map.getLayer(layerID)) {
         map.addLayer({
           'id': layerID,
           'type': 'symbol',
           'source': 'places',
           'layout': {
-            'icon-image': symbol + '-15',
+            'icon-image': symbol,
             'icon-allow-overlap': true,
-            'icon-ignore-placement': true
           },
           'filter': ['==', 'icon', symbol]
         });
@@ -119,23 +138,13 @@ export class MapService {
 
   addMarker(user: User) {
     // const marker = this.markers.find(marker => marker.id === user._id);
-    const overlay = document.createElement('div');
-    overlay.classList.add('marker');
-    const overlayContainer = document.createElement('div');
-    overlayContainer.classList.add('user__img-wrapper', 'user__img-wrapper--medium');
-    const userPhoto = document.createElement('img');
-    userPhoto.classList.add('user__img', 'user__img--medium');
-    userPhoto.src = user.avatar.toString() || this.img;
-
-    overlayContainer.appendChild(userPhoto);
-    overlay.appendChild(overlayContainer);
-
+    const html = this.createHtmlMarker(user);
     const coords = new mapboxgl.LngLat(+user.location.lng, +user.location.lat);
-    const newMarker = new mapboxgl.Marker(overlay).setLngLat(coords).addTo(this.map);
+    const newMarker = new mapboxgl.Marker(html).setLngLat(coords).addTo(this.map);
     this.markers.push({ id: user._id, marker: newMarker });
   }
 
-  updateUserCoords(user: User, position: Position): Observable < User[] > {
+  updateUserCoords(user: User, position: Position): Observable<User[]> {
     user.location.lat = position.coords.latitude;
     user.location.lng = position.coords.longitude;
     return this.usersService.updateUserData(user);
@@ -162,6 +171,25 @@ export class MapService {
   addLocation(location) {
     const coords = new mapboxgl.LngLat(location.coordinate[0], location.coordinate[1]);
     const newMarker = new mapboxgl.Marker().setLngLat(coords).addTo(this.map);
+  }
+
+  private addSvg(symbol: string, map: mapboxgl.Map) {
+    let img = new Image(30, 30);
+    img.onload = () => map.addImage(symbol, img);
+    img.src = `/assets/icons/${symbol}.svg`;
+  }
+
+  private createHtmlMarker(user: User): HTMLDivElement {
+    const overlay = document.createElement('div');
+    overlay.classList.add('marker');
+    const overlayContainer = document.createElement('div');
+    overlayContainer.classList.add('user__img-wrapper', 'user__img-wrapper--medium');
+    const userPhoto = document.createElement('img');
+    userPhoto.classList.add('user__img', 'user__img--medium');
+    userPhoto.src = user.avatar.toString() || this.img;
+    overlayContainer.appendChild(userPhoto);
+    overlay.appendChild(overlayContainer);
+    return overlay;
   }
 
 

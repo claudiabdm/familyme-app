@@ -13,10 +13,11 @@ import { ProfileImgComponent } from './component/profile-img/profile-img.compone
 import { LogoComponent } from './component/logo/logo.component';
 import { CreditComponent } from './component/credit/credit.component';
 import { TimeFormatPipe } from './time-format.pipe';
+import { ClickOutsideDirective } from './click-outside.directive';
 
 
 @NgModule({
-  declarations: [ModalComponent, NavbarComponent, HeaderComponent, UserListComponent, ProfileImgComponent, LogoComponent, CreditComponent, TimeFormatPipe,],
+  declarations: [ModalComponent, NavbarComponent, HeaderComponent, UserListComponent, ProfileImgComponent, LogoComponent, CreditComponent, TimeFormatPipe, ClickOutsideDirective,],
   imports: [
     CommonModule,
     RouterModule,
@@ -36,7 +37,8 @@ import { TimeFormatPipe } from './time-format.pipe';
     ProfileImgComponent,
     LogoComponent,
     CreditComponent,
-    TimeFormatPipe
+    TimeFormatPipe,
+    ClickOutsideDirective
   ],
 })
 export class SharedModule { }

@@ -38,6 +38,7 @@ export class LocatorComponent implements OnInit {
     this.initPosition();
     this.modalService.btnClicked.pipe(takeUntil(this.ngUnsubscribe$)).subscribe(res => {
       if(res === 'newPlaceBtn') {
+
         this.toggleModal(this.newPlaceModalElem);
       }
     })
