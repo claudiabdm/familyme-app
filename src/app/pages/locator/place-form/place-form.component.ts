@@ -9,7 +9,8 @@ import { MapService } from 'src/app/services/map.service';
 })
 export class PlaceFormComponent implements OnInit {
 
-  @Input() categories: string[] =[];
+  categories: string[] =['Restaurant', 'School', 'Home', 'Cafe', 'Park', 'Work', 'Other'];
+
   newPlaceForm: FormGroup;
   locations: [] = [];
   locationOpen: boolean = false;
@@ -23,7 +24,7 @@ export class PlaceFormComponent implements OnInit {
   ngOnInit(): void {
     this.newPlaceForm = this.formBuilder.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
-      locationName: ['', [Validators.required]],
+      address: ['', [Validators.required]],
       categoryName:  ['', [Validators.required]],
       location: ['', [Validators.required]]
     })
@@ -33,10 +34,11 @@ export class PlaceFormComponent implements OnInit {
     if (form) {
       this.mapService.addNewPlace(form.value);
     }
+    form.reset();
   }
 
-  searchLocation(locationName: string) {
-    const search = locationName;
+  searchLocation(address: string) {
+    const search = address;
     if (search) {
       this.locationOpen = true;
       this.mapService.searchPlace(search).subscribe((res: []) => this.locations = res);
@@ -47,7 +49,7 @@ export class PlaceFormComponent implements OnInit {
   }
 
   selectLocation(location) {
-    this.newPlaceForm.controls.locationName.setValue(location.name);
+    this.newPlaceForm.controls.address.setValue(location.name);
     this.newPlaceForm.controls.location.setValue(location);
     this.locations = []
   }

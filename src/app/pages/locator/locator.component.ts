@@ -31,13 +31,11 @@ export class LocatorComponent implements OnInit {
   constructor(
     private mapService: MapService,
     private usersService: UsersService,
-    private spinner: NgxSpinnerService,
     private modalService: ModalService,
     private renderer: Renderer2
   ) { }
 
   ngOnInit(): void {
-    this.spinner.show();
     this.mapStyle = this.mapService.mapTheme.getValue();
     this.initPosition();
     this.mapService.places.features.forEach(feature => { if (!this.categories.includes(feature)) this.categories.push(feature.properties.icon) });
@@ -57,6 +55,7 @@ export class LocatorComponent implements OnInit {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         this.mapService.buildMap(position, this.mapStyle);
+
         this.usersService.getLoggedUser()
           .pipe(
             concatMap((user: User) => user.locationOn ? this.mapService.updateUserCoords(user, position) : this.usersService.getUsersByFamilyCode(user.familyCode)),
@@ -64,7 +63,6 @@ export class LocatorComponent implements OnInit {
           )
           .subscribe((users: User[]) => {
             users?.forEach((user: User) => this.setUsersPosition(user));
-            this.spinner.hide();
           }
           );
       },
@@ -109,7 +107,7 @@ export class LocatorComponent implements OnInit {
     this.renderer.addClass(overlay, 'marker');
     const overlayContainer = this.renderer.createElement('div');
     this.renderer.addClass(overlayContainer, 'user__img-wrapper');
-    this.renderer.addClass(overlayContainer,  'user__img-wrapper--medium');
+    this.renderer.addClass(overlayContainer, 'user__img-wrapper--medium');
     const userPhoto = this.renderer.createElement('img');
     this.renderer.addClass(userPhoto, 'user__img');
     this.renderer.addClass(userPhoto, 'user__img--medium');
@@ -118,7 +116,5 @@ export class LocatorComponent implements OnInit {
     this.renderer.appendChild(overlay, overlayContainer);
     return overlay;
   }
-
-
 
 }

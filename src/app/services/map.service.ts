@@ -7,6 +7,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { HttpClient } from '@angular/common/http';
 import { tap, map } from 'rxjs/operators';
 import { DataService } from './data.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,8 @@ export class MapService {
       {
         'type': 'Feature' as const,
         'properties': {
+          name: 'ejemplo1',
+          description: 'c/jajaaj',
           icon: 'restaurant'
         },
         'geometry': {
@@ -36,6 +39,8 @@ export class MapService {
       {
         'type': 'Feature' as const,
         'properties': {
+          name: 'ejemplo2',
+          description: 'c/jajaaj',
           icon: 'school'
         },
         'geometry': {
@@ -49,7 +54,7 @@ export class MapService {
   constructor(
     private ref: ApplicationRef,
     private usersService: UsersService,
-    private dataService: DataService,
+    private spinner: NgxSpinnerService,
     private http: HttpClient
   ) {
     const darkModeOn = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -69,6 +74,7 @@ export class MapService {
     if (this.map) {
       this.map.remove();
     }
+    this.spinner.show();
     this.map = new mapboxgl.Map({
       accessToken: environment.mapBoxToken,
       container: 'map',
@@ -80,6 +86,7 @@ export class MapService {
     this.map.on('load', () => {
       this.addSource(this.map, 'places', this.places);
       this.addLayer(this.map, this.places);
+      this.spinner.hide();
     });
   }
 
@@ -88,6 +95,8 @@ export class MapService {
     const newPlace = {
       'type': 'Feature' as const,
       'properties': {
+        name: place.title,
+        description: place.address,
         icon
       },
       'geometry': {
@@ -124,6 +133,7 @@ export class MapService {
           },
           'filter': ['==', 'icon', symbol]
         });
+        this.addOnClickPlace(map, layerID)
       }
     });
   }
@@ -174,6 +184,24 @@ export class MapService {
     let img = new Image(30, 30);
     img.onload = () => map.addImage(symbol, img);
     img.src = `/assets/icons/${symbol}.svg`;
+  }
+
+  private addOnClickPlace(map: mapboxgl.Map, layerID: string) {
+    map.on('click', layerID, (e) => {
+      const coordinates = e.features[0].geometry['coordinates'].slice();
+      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+      }
+      new mapboxgl.Popup()
+        .setLngLat(coordinates)
+        .setHTML(`
+          <section class="map-popup">
+            <h2 class="map-popup__title">${e.features[0].properties.name}</h2>
+            <p class="map-popup__desc">${e.features[0].properties.description}</p>
+          </section>
+          `)
+        .addTo(map);
+    })
   }
 
 }

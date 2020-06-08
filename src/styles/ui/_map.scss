@@ -12,3 +12,39 @@
 .mapboxgl-ctrl.mapboxgl-ctrl-attrib.mapboxgl-compact {
   display: none;
 }
+
+.mapboxgl-popup {
+  top: -10px;
+  &-content {
+    display: flex;
+    flex-flow: row-reverse;
+    align-items: flex-start;
+    border-radius: 5px;
+    box-shadow: $box-shadow-sharpen;
+    pointer-events: none;
+  }
+  button.mapboxgl-popup-close-button {
+    position: static;
+    border: 0;
+    border-radius: 0 3px 0 0;
+    margin-left: auto;
+    margin-right: 0;
+    background-color: transparent;
+    color: $grey-100;
+    font-size: rem(30px);
+    line-height: 0.5;
+  }
+}
+
+.map-popup {
+    margin-right: 30px;
+    overflow: auto;
+  &__title {
+    font-size: rem(24px);
+    color: $secondary;
+    margin-bottom: 10px;
+  }
+  &__desc {
+    overflow-wrap: break-word;
+  }
+}

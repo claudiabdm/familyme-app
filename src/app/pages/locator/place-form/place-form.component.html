@@ -16,9 +16,9 @@
     <div class="form__group">
       <label for="location" class="form__label">Location</label>
       <input type="search" id="location" class="form__control" placeholder="Search location..." autocomplete="off"
-        formControlName="locationName" (input)="searchLocation(newPlaceForm.controls.locationName.value)"
-        [class.form__control--invalid]="newPlaceForm.controls.locationName.dirty && newPlaceForm.controls.location.invalid">
-      <div class="form__msg-group" *ngIf="newPlaceForm.controls.locationName.dirty && newPlaceForm.controls.location.invalid">
+        formControlName="address" (input)="searchLocation(newPlaceForm.controls.address.value)"
+        [class.form__control--invalid]="newPlaceForm.controls.address.dirty && newPlaceForm.controls.location.invalid">
+      <div class="form__msg-group" *ngIf="newPlaceForm.controls.address.dirty && newPlaceForm.controls.location.invalid">
         Required field
       </div>
       <ul class="form__list" *ngIf="locationOpen" (clickOutside)="onClickOutside($event)">
@@ -48,7 +48,7 @@
     </div>
 
   </div>
-  <!-- //Event name and location -->
+  <!-- //Place name and location -->
 
   <!-- FORM ACTIONS -->
   <div class="form__actions container--btn">
