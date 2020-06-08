@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Renderer2 } from '@angular/core';
 import { Subject } from 'rxjs';
 
 import { UsersService } from 'src/app/services/users.service';
@@ -26,33 +26,37 @@ export class LocatorComponent implements OnInit {
   private options = {
     enableHighAccuracy: true,
   };
+  private img = '/assets/img/profile-photo-round.svg';
 
   constructor(
     private mapService: MapService,
     private usersService: UsersService,
     private spinner: NgxSpinnerService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private renderer: Renderer2
   ) { }
 
   ngOnInit(): void {
     this.spinner.show();
     this.mapStyle = this.mapService.mapTheme.getValue();
     this.initPosition();
+    this.mapService.places.features.forEach(feature => { if (!this.categories.includes(feature)) this.categories.push(feature.properties.icon) });
     this.modalService.btnClicked.pipe(takeUntil(this.ngUnsubscribe$)).subscribe(res => {
       if (res === 'newPlaceBtn') {
-
         this.toggleModal(this.newPlaceModalElem);
       }
     })
-    this.mapService.places.features.forEach(feature => { if (!this.categories.includes(feature)) this.categories.push(feature.properties.icon) });
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe$.next()
+    this.ngUnsubscribe$.complete();
   }
 
   initPosition() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
-        console.log(position)
         this.mapService.buildMap(position, this.mapStyle);
-
         this.usersService.getLoggedUser()
           .pipe(
             concatMap((user: User) => user.locationOn ? this.mapService.updateUserCoords(user, position) : this.usersService.getUsersByFamilyCode(user.familyCode)),
@@ -72,7 +76,7 @@ export class LocatorComponent implements OnInit {
 
   setUsersPosition(user: User) {
     if (user.locationOn && user.location.lat && user.location.lng) {
-      this.mapService.addMarker(user);
+      this.addMarker(user);
     }
   }
 
@@ -92,10 +96,29 @@ export class LocatorComponent implements OnInit {
     this.mapService.filterPlace(`poi-${layerID.toLowerCase()}`, checked, this.mapService.map);
   }
 
-  ngOnDestroy(): void {
-    this.ngUnsubscribe$.next()
-    this.ngUnsubscribe$.complete();
+  private addMarker(user: User) {
+    // const marker = this.markers.find(marker => marker.id === user._id);
+    const html = this.createHtmlMarker(user);
+    const coords = new mapboxgl.LngLat(+user.location.lng, +user.location.lat);
+    const newMarker = new mapboxgl.Marker(html).setLngLat(coords).addTo(this.mapService.map);
+    this.mapService.markers.push({ id: user._id, marker: newMarker });
   }
+
+  private createHtmlMarker(user: User): HTMLDivElement {
+    const overlay = this.renderer.createElement('div');
+    this.renderer.addClass(overlay, 'marker');
+    const overlayContainer = this.renderer.createElement('div');
+    this.renderer.addClass(overlayContainer, 'user__img-wrapper');
+    this.renderer.addClass(overlayContainer,  'user__img-wrapper--medium');
+    const userPhoto = this.renderer.createElement('img');
+    this.renderer.addClass(userPhoto, 'user__img');
+    this.renderer.addClass(userPhoto, 'user__img--medium');
+    this.renderer.setProperty(userPhoto, 'src', user.avatar.toString() || this.img);
+    this.renderer.appendChild(overlayContainer, userPhoto);
+    this.renderer.appendChild(overlay, overlayContainer);
+    return overlay;
+  }
+
 
 
 }

@@ -46,8 +46,6 @@ export class MapService {
     ]
   };
 
-  private img = '../../../../assets/img/profile-photo-round.svg';
-
   constructor(
     private ref: ApplicationRef,
     private usersService: UsersService,
@@ -135,14 +133,6 @@ export class MapService {
     this.map.setLayoutProperty(layerName, 'visibility', mode);
   }
 
-  addMarker(user: User) {
-    // const marker = this.markers.find(marker => marker.id === user._id);
-    const html = this.createHtmlMarker(user);
-    const coords = new mapboxgl.LngLat(+user.location.lng, +user.location.lat);
-    const newMarker = new mapboxgl.Marker(html).setLngLat(coords).addTo(this.map);
-    this.markers.push({ id: user._id, marker: newMarker });
-  }
-
   updateUserCoords(user: User, position: Position): Observable<User[]> {
     user.location.lat = position.coords.latitude;
     user.location.lng = position.coords.longitude;
@@ -185,20 +175,5 @@ export class MapService {
     img.onload = () => map.addImage(symbol, img);
     img.src = `/assets/icons/${symbol}.svg`;
   }
-
-  private createHtmlMarker(user: User): HTMLDivElement {
-    const overlay = document.createElement('div');
-    overlay.classList.add('marker');
-    const overlayContainer = document.createElement('div');
-    overlayContainer.classList.add('user__img-wrapper', 'user__img-wrapper--medium');
-    const userPhoto = document.createElement('img');
-    userPhoto.classList.add('user__img', 'user__img--medium');
-    userPhoto.src = user.avatar.toString() || this.img;
-    overlayContainer.appendChild(userPhoto);
-    overlay.appendChild(overlayContainer);
-    return overlay;
-  }
-
-
 
 }
