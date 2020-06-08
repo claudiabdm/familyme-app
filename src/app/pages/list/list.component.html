@@ -29,7 +29,7 @@
     <!-- // FILTERS -->
 
     <!-- PRODUCTS -->
-    <ng-container *ngFor="let product of productList | async ">
+    <ng-container *ngFor="let product of productList$ | async ">
       <li class="list__item">
         <div class="list__checkbox checkbox checkbox--lg">
           <input type="checkbox" [name]="product.name" [id]="product._id" class="checkbox__box" [checked]="product.done"

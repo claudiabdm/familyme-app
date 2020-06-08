@@ -30,7 +30,7 @@ export class CalendarComponent implements OnInit {
 
   private ngUnsubscribe$ = new Subject<void>();
 
-  calendarEvents: Observable<Group['events']>;
+  calendarEvents$: Observable<Group['events']>;
   calendarPlugins = [dayGridPlugin, listGridPlugin, interactionPlugin];
   header = {
     left: 'dayGridMonth,listWeek,today',
@@ -64,21 +64,13 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.show();
-    this.usersService.getLoggedUser().pipe(
-      switchMap((user: User) => {
-        return this.groupsService.getGroupByFamilyCode(user.familyCode);
-      }),
-      switchMap((group: Group) => {
-        return this.usersService.getUsersByFamilyCode(group.familyCode);
-      }),
-      tap(() => {
-        this.calendarEvents = this.dataService.groupData$.pipe(map(group => group.events));
-      }),
-      takeUntil(this.ngUnsubscribe$)
-    ).subscribe(() => this.spinner.hide());
-
+    this.calendarEvents$ = this.dataService.groupData$
+      .pipe(
+        map(group => group?.events),
+        tap(() => this.spinner.hide())
+      )
     this.modalService.btnClicked.pipe(takeUntil(this.ngUnsubscribe$)).subscribe(res => {
-      if(res === 'newEventBtn') {
+      if (res === 'newEventBtn') {
         this.toggleModal(this.newEventModal);
       }
     })

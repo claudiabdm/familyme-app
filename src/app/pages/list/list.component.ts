@@ -1,13 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
-import { takeUntil, map, tap, switchMap, take } from 'rxjs/operators';
+import { map, tap, take } from 'rxjs/operators';
 import { Product } from 'src/app/shared/models/product';
 import { GroupsService } from 'src/app/services/groups.service';
 import { DataService } from 'src/app/services/data.service';
 import { SortService } from './sort.service';
 import { Group } from 'src/app/shared/models/group';
-import { User } from 'src/app/shared/models/user';
-import { UsersService } from 'src/app/services/users.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -20,33 +18,30 @@ export class ListComponent implements OnInit {
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
   addItemElemVisible: boolean = false;
-  productList: Observable<Group['shoppingList']> = null;
+  productList$: Observable<Group['shoppingList']>;
   private ngUnsubscribe$ = new Subject<void>();
+  private group: Group;
 
   constructor(
     private dataService: DataService,
     private groupsService: GroupsService,
     private sortService: SortService,
-    private usersService: UsersService,
     private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit(): void {
     this.spinner.show();
-
-    this.usersService.getLoggedUser().pipe(
-      switchMap((user: User) => {
-        return this.groupsService.getGroupByFamilyCode(user.familyCode);
-      }),
-      switchMap((group: Group) => {
-        return this.usersService.getUsersByFamilyCode(group.familyCode);
-      }),
-      tap(() => {
-        this.productList = this.dataService.groupData$.pipe(map(group => group?.shoppingList));
-      }),
-      takeUntil(this.ngUnsubscribe$)
-    ).subscribe(() => this.spinner.hide());
-
+    this.productList$ = this.dataService.groupData$
+      .pipe(
+        map(group => {
+          this.group = group;
+          return group?.shoppingList.map(product => {
+            product.addedBy = this.dataService.getMembers()?.find(member => member._id === product.addedById)?.name || product.addedBy;
+            return product;
+          })
+        }),
+        tap(() => this.spinner.hide())
+      );
   }
 
   get sortIconAZ(): boolean {
@@ -70,39 +65,39 @@ export class ListComponent implements OnInit {
         done: false,
       };
       this.scrollToBottom();
-      const group = this.dataService.getGroup();
-      group.shoppingList.push(newProduct);
-      this.groupsService.updateGroupData(group).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
+
+      this.group.shoppingList.push(newProduct);
+      this.dataService.setGroup(this.group)
+      this.groupsService.updateGroupData(this.group).pipe(take(1)).subscribe();
     }
     this.addItemElemVisible = false;
   }
 
   doneItem(selectedProduct: Product, check: boolean): void {
-    const group = this.dataService.getGroup();
-    const idx = group.shoppingList.findIndex((product) => product._id === selectedProduct._id);
+    const idx = this.group.shoppingList.findIndex((product) => product._id === selectedProduct._id);
     if (idx > -1) {
       selectedProduct.done = check;
-      group.shoppingList.splice(idx, 1, selectedProduct);
-      this.groupsService.updateGroupData(group).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
+      this.group.shoppingList.splice(idx, 1, selectedProduct);
+      this.dataService.setGroup(this.group)
+      this.groupsService.updateGroupData(this.group).pipe(take(1)).subscribe();
     }
   }
 
   deleteItem(selectedProduct: Product): void {
-    const group = this.dataService.getGroup();
-    const updatedShoppingList = group.shoppingList.filter((product) => product._id !== selectedProduct._id);
-    group.shoppingList = updatedShoppingList;
-    this.groupsService.updateGroupData(group).pipe(takeUntil(this.ngUnsubscribe$)).subscribe();
+    const updatedShoppingList = this.group.shoppingList.filter((product) => product._id !== selectedProduct._id);
+    this.group.shoppingList = updatedShoppingList;
+    this.dataService.setGroup(this.group)
+    this.groupsService.updateGroupData(this.group).pipe(take(1)).subscribe();
   }
 
   sortList(sortIcon): void {
-    const group = this.dataService.getGroup();
-    const productList = group.shoppingList;
+    const productList = this.group.shoppingList;
     if (sortIcon.id === 'sort-az') {
-      group.shoppingList = this.sortService.sortListAz(productList);
+      this.group.shoppingList = this.sortService.sortListAz(productList);
     } else {
-      group.shoppingList = this.sortService.sortListByDone(productList);
+      this.group.shoppingList = this.sortService.sortListByDone(productList);
     }
-    this.dataService.setGroup(group);
+    this.dataService.setGroup(this.group);
   }
 
   onReset() {

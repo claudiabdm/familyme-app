@@ -35,10 +35,7 @@ export class GroupsService {
   }
 
   updateGroupData(group: Group): Observable<Group> {
-    return this.http.put<Group>(`${this.url}/${group._id}`, group)
-      .pipe(
-        tap(group => this.dataService.setGroup(group))
-      );
+    return this.http.put<Group>(`${this.url}/${group._id}`, group);
   }
 
   getGroupByFamilyCode(familyCode: string): Observable<Group> {

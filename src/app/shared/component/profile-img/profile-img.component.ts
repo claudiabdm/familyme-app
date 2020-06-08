@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 import { takeUntil, take } from 'rxjs/operators';
 
 import { User } from 'src/app/shared/models/user';
@@ -16,25 +16,23 @@ import { ModalComponent } from '../modal/modal.component';
   styleUrls: ['./profile-img.component.scss']
 })
 export class ProfileImgComponent implements OnInit, OnDestroy {
-
+  @Input() user: User;
   @Input() imageUrl: string | ArrayBuffer;
   @Output() update = new EventEmitter();
 
-  user: Observable<User>;
   isDisabled: boolean = true;
-  defaultImg = '../../../../assets/img/profile-photo-round.svg';
+  defaultImg = '/assets/img/profile-photo-round.svg';
 
   private ngUnsubscribe$ = new Subject<void>();
 
   constructor(
-    private dataService: DataService,
     private usersService: UsersService,
     private modalService: ModalService,
     private imageProcessor: ImageProcessorService,
     private spinner: NgxSpinnerService, ) { }
 
   ngOnInit(): void {
-    this.user = this.dataService.userData$;
+
   }
 
   toggleModal(targetModal: ModalComponent): void {
@@ -55,9 +53,12 @@ export class ProfileImgComponent implements OnInit, OnDestroy {
   }
 
   onUpdatePhoto(file: string | ArrayBuffer) {
-    const userToBeUpdated = this.dataService.getUser();
-    userToBeUpdated.avatar = file;
-    this.usersService.updateUserData(userToBeUpdated).pipe(take(1)).subscribe(() => this.update.emit());
+    this.spinner.show();
+    this.user.avatar = file;
+    this.usersService.updateUserData(this.user).pipe(take(1)).subscribe(() => {
+      this.update.emit();
+      this.spinner.hide();
+    });
   }
 
   ngOnDestroy() {

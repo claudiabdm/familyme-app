@@ -18,7 +18,7 @@
     <li>
       <label class="switch settings__txt" for="location">
         <span class="switch__label">Location</span>
-        <input type="checkbox" class="switch__check" id="location" role="switch" aria-checked="true" [checked]="(locationOn | async )"
+        <input type="checkbox" class="switch__check" id="location" role="switch" aria-checked="true" [checked]="locationOn"
           (click)="onLocationSwitch()">
         <span class="switch__slider"></span>
       </label>
@@ -27,7 +27,7 @@
     <li>
       <label class="switch settings__txt" for="notifications">
         <span class="switch__label">Notifications</span>
-        <input type="checkbox" class="switch__check" id="notifications" role="switch" aria-checked="true" [checked]="(notificationsOn | async )"
+        <input type="checkbox" class="switch__check" id="notifications" role="switch" aria-checked="true" [checked]="notificationsOn"
           (click)="onNotificationsSwitch()">
         <span class="switch__slider"></span>
       </label>
@@ -43,7 +43,7 @@
   </ul>
 </article>
 
-<article class="settings" *ngIf="( user | async ).role">
+<article class="settings" *ngIf="user?.role">
   <h2 class="settings__title">Family settings</h2>
   <ul>
     <li class="settings__txt">Change admin <i class="icon icon-next icon--xs"></i></li>

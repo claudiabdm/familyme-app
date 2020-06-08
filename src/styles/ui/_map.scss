@@ -22,6 +22,19 @@
     border-radius: 5px;
     box-shadow: $box-shadow-sharpen;
     pointer-events: none;
+    background-color: var(--body-bg);
+  }
+  &-anchor-bottom &-tip {
+    border-top-color: var(--body-bg);
+  }
+  &-anchor-left &-tip {
+    border-right-color: var(--body-bg);
+  }
+  &-anchor-right &-tip {
+    border-left-color: var(--body-bg);
+  }
+  &-anchor-top &-tip {
+    border-bottom-color: var(--body-bg);
   }
   button.mapboxgl-popup-close-button {
     position: static;

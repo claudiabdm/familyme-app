@@ -86,9 +86,7 @@ export class EventFormComponent implements OnInit, OnDestroy {
         group.events.splice(idx, 1, form.value);
         break;
     }
-
-    this.groupsService.updateGroupData(group).pipe(take(1)).subscribe(() => this.spinner.hide());
-
+    this.groupsService.updateGroupData(group).pipe(take(1)).subscribe((group) => {this.dataService.setGroup(group); this.spinner.hide()});
   }
 
   onDeleteEvent() {
@@ -96,7 +94,8 @@ export class EventFormComponent implements OnInit, OnDestroy {
     const group = this.dataService.getGroup();
     const updatedEvents = group.events.filter(event => event._id !== this.eventInfo._id);
     group.events = updatedEvents;
-    this.groupsService.updateGroupData(group).pipe(takeUntil(this.ngUnsubscribe$)).subscribe(() => {
+    this.groupsService.updateGroupData(group).pipe(take(1)).subscribe((group) => {
+      this.dataService.setGroup(group),
       this.spinner.hide(),
       this.delete.emit()
     });

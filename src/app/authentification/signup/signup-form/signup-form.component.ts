@@ -55,6 +55,7 @@ export class SignupFormComponent implements OnInit {
         error => {
           this.invalidUser = error.status === 409;
           this.invalidGroup = error.status === 404;
+          this.spinner.hide();
         }
       );
     }

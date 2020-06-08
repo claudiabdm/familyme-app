@@ -8,19 +8,19 @@
   <article class="user user--col">
     <button type="button" class="user__btn" id="imgBtn" (click)="toggleModal(editPhotoModal)">
       <div class="user__img-wrapper user__img-wrapper--large">
-        <img class="user__img user__img--large" [src]="( user | async )?.avatar || img" alt="{{ ( user | async )?.name }} profile photo">
+        <img class="user__img user__img--large" [src]="( user$ | async )?.avatar || img" alt="{{ ( user$ | async )?.name }} profile photo">
       </div>
     </button>
-    <h2 class="user__name user__name--large notranslate">{{ ( user | async )?.name }}</h2>
-    <span class="user__role notranslate" *ngIf="( user | async )?.role === 'admin'">admin</span>
+    <h2 class="user__name user__name--large notranslate">{{ ( user$ | async )?.name }}</h2>
+    <span class="user__role notranslate" *ngIf="( user$ | async )?.role === 'admin'">admin</span>
   </article>
   <!-- //MAIN USER -->
 
   <!-- MEMBERS -->
 
-  <h1 class="container__title">Family <span class="notrans">{{ (userGroup | async )?.name }}</span></h1>
+  <h1 class="container__title">Family <span class="notrans">{{ (userGroup$ | async )?.name }}</span></h1>
 
-  <app-user-list [onlyImage]="false" class="container container--grid" [userList]="(userList | async)"></app-user-list>
+  <app-user-list [onlyImage]="false" class="container container--grid" [userList]="(userList$ | async)"></app-user-list>
 
 
   <!-- NEW MEMBERS BUTTON -->
@@ -39,14 +39,14 @@
 <!-- MODAL SETTINGS -->
 <app-modal [title]="'Settings'" [modalId]="'settingsModal'" (close)="toggleModal(settingsModal)" [modalVisible]="false"
   #settingsModal>
-  <app-settings *ngIf="settingsModal.modalVisible" (modify)="toggleModal(settingsModal)"></app-settings>
+  <app-settings [user]="user$ | async" *ngIf="settingsModal.modalVisible" (modify)="toggleModal(settingsModal)"></app-settings>
 </app-modal>
 <!-- // MODAL SETTINGS -->
 
 <!-- MODAL EDIT PHOTOS -->
 <app-modal [title]="'Edit profile photo'" [modalId]="'editPhotoModal'" (close)="toggleModal(editPhotoModal)"
   [modalVisible]="false" [isFull]="false" #editPhotoModal>
-  <app-profile-img *ngIf="editPhotoModal.modalVisible" [imageUrl]="( user | async )?.avatar" (update)="toggleModal(editPhotoModal)">
+  <app-profile-img *ngIf="editPhotoModal.modalVisible" [user]="user$ | async" [imageUrl]="( user$ | async )?.avatar" (update)="toggleModal(editPhotoModal)">
   </app-profile-img>
 </app-modal>
 <!-- // MODAL EDIT PHOTOS -->
@@ -59,7 +59,7 @@
 
     <p class="container__p container__p--medium">Copy the code below and send it to your family to join you!</p>
     <div class="container container--btn">
-      <input type="text" class="copy-me notranslate" value="{{(userGroup | async )?.familyCode}}" #copyMe readonly="true">
+      <input type="text" class="copy-me notranslate" value="{{(userGroup$ | async )?.familyCode}}" #copyMe readonly="true">
       <button class="btn btn--primary btn--m" (click)="copyMyText(copyMe)">Copy To Clipboard</button>
     </div>
 

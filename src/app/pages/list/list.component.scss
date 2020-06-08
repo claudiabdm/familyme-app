@@ -118,11 +118,34 @@
   &__product {
     transition: all 0.15s linear;
   }
+  @keyframes strike {
+    0% {
+      width: 0;
+    }
+
+    100% {
+      width: 100%;
+    }
+  }
 
   &__done {
     position: relative;
     color: $grey-100;
-    text-decoration: line-through;
+  }
+
+  &__done::after {
+    content: ' ';
+    position: absolute;
+    top: rem(12px);
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: $grey-100;
+    animation-name: strike;
+    animation-duration: 0.15s;
+    animation-timing-function: linear;
+    transform-origin: right;
+    animation-fill-mode: forwards;
   }
 
 }

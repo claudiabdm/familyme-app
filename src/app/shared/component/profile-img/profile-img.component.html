@@ -5,7 +5,7 @@
       [fullScreen]="false">
     </ngx-spinner>
     <div class="user__img-wrapper user__img-wrapper--large">
-      <img class="user__img user__img--large" [src]="imageUrl || defaultImg" alt="{{ ( user | async )?.name }} profile photo">
+      <img class="user__img user__img--large" [src]="imageUrl || defaultImg" alt="{{ user?.name }} profile photo">
     </div>
   </article>
   <!-- //PREVIEW -->
