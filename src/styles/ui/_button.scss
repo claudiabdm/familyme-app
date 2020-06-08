@@ -90,16 +90,13 @@
     color: #{darken($grey-100, 20%)};
     --button-hover: rgba(0, 0, 0, 0);
   }
+
 }
 
-// --- Link button ---//
-.btn--link {
-  background: none;
-  height: 100%;
-  padding: 10px;
-  color: $secondary;
-  font-size: $font-size-base;
-  font-weight: $font-weight-bold;
+// --- Settings button ---//
+.btn--settings {
+  @extend .btn--icon;
+  @include size(var(--button-height), var(--button-height));
 }
 
 //--- Close button ---//
