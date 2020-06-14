@@ -8,9 +8,7 @@ import { MapService } from 'src/app/services/map.service';
   styleUrls: ['./place-form.component.scss'],
 })
 export class PlaceFormComponent implements OnInit {
-
-  categories: string[] =['Restaurant', 'School', 'Home', 'Cafe', 'Park', 'Work', 'Other'];
-
+  @Input() categories: string;
   newPlaceForm: FormGroup;
   locations: [] = [];
   locationOpen: boolean = false;
@@ -25,19 +23,19 @@ export class PlaceFormComponent implements OnInit {
     this.newPlaceForm = this.formBuilder.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
       address: ['', [Validators.required]],
-      categoryName:  ['', [Validators.required]],
+      categoryName: ['', [Validators.required]],
       location: ['', [Validators.required]]
     })
   }
 
-  onSubmit(form: FormGroup) {
+  onSubmit(form: FormGroup): void {
     if (form) {
       this.mapService.addNewPlace(form.value);
     }
     form.reset();
   }
 
-  searchLocation(address: string) {
+  searchLocation(address: string): void {
     const search = address;
     if (search) {
       this.locationOpen = true;
@@ -48,23 +46,22 @@ export class PlaceFormComponent implements OnInit {
     }
   }
 
-  selectLocation(location) {
+  selectLocation(location): void {
     this.newPlaceForm.controls.address.setValue(location.name);
     this.newPlaceForm.controls.location.setValue(location);
     this.locations = []
   }
 
-
-  toggleCategory() {
+  toggleCategory(): void {
     this.categoryOpen = !this.categoryOpen;
   }
 
-  selectCategory(category) {
+  selectCategory(category): void {
     this.newPlaceForm.controls.categoryName.setValue(category);
     this.categoryOpen = false;
   }
 
-  onClickOutside(e) {
+  onClickOutside(e): void {
     if (this.locationOpen) {
       this.locationOpen = false;
     }

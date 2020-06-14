@@ -8,12 +8,12 @@
 
 <app-modal [title]="'New place'" [modalId]="'newPlaceModal'" [modalVisible]="false" [isFull]="true"
   (close)="toggleModal(newPlaceModal)" #newPlaceModal>
-  <app-place-form (submit)="toggleModal(newPlaceModal)"></app-place-form>
+  <app-place-form *ngIf="newPlaceModal.modalVisible" [categories]="categories" (submit)="toggleModal(newPlaceModal)"></app-place-form>
 </app-modal>
 
 <app-modal [title]="'Filter'" [modalId]="'filterModal'" [modalVisible]="false" [isFull]="false"
   (close)="toggleModal(filterModal)" #filterModal>
-  <ul class="checklist">
+  <ul *ngIf="filterModal.modalVisible" class="checklist">
     <li class="checklist__elem" *ngFor="let category of categories">
       <label class="checklist__label" [for]="category">
         <svg class="icon icon--nofilter checklist__icon">

@@ -8,4 +8,5 @@ export class Group {
   name: string;
   shoppingList: Product[];
   events: CalendarEvent[];
+  savedPlaces: mapboxgl.GeoJSONSource | any ;
 }

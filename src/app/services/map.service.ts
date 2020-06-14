@@ -1,13 +1,15 @@
 import { ApplicationRef, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map, take, switchMap } from 'rxjs/operators';
 import { environment } from '@env/environment';
 import * as mapboxgl from 'mapbox-gl';
-import { User } from '../shared/models/user';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { UsersService } from 'src/app/services/users.service';
-import { HttpClient } from '@angular/common/http';
-import { tap, map } from 'rxjs/operators';
-import { DataService } from './data.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+
+import { User } from '../shared/models/user';
+import { DataService } from './data.service';
+import { UsersService } from 'src/app/services/users.service';
+import { GroupsService } from './groups.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,40 +22,13 @@ export class MapService {
   placeMarkers: { id: string, marker: mapboxgl.Marker }[] = [];
   themes = ['mapbox://styles/mapbox/light-v10', 'mapbox://styles/mapbox/dark-v10']
   mapTheme = new BehaviorSubject(this.themes[0]);
-
-  places = {
-    'type': 'FeatureCollection' as const,
-    'features': [
-      {
-        'type': 'Feature' as const,
-        'properties': {
-          name: 'ejemplo1',
-          description: 'c/jajaaj',
-          icon: 'restaurant'
-        },
-        'geometry': {
-          'type': 'Point' as const,
-          'coordinates': [-3.859567, 40.475012],
-        }
-      },
-      {
-        'type': 'Feature' as const,
-        'properties': {
-          name: 'ejemplo2',
-          description: 'c/jajaaj',
-          icon: 'school'
-        },
-        'geometry': {
-          'type': 'Point' as const,
-          'coordinates': [-3.876872, 40.467926],
-        }
-      }
-    ]
-  };
+  categories: string[] = ['restaurant', 'school', 'home', 'cafe', 'park', 'work', 'other']
 
   constructor(
     private ref: ApplicationRef,
     private usersService: UsersService,
+    private dataService: DataService,
+    private groupService: GroupsService,
     private spinner: NgxSpinnerService,
     private http: HttpClient
   ) {
@@ -70,11 +45,10 @@ export class MapService {
 
   }
 
-  buildMap(position: Position, style: string) {
+  buildMap(position: Position, style: string): void {
     if (this.map) {
       this.map.remove();
     }
-    this.spinner.show();
     this.map = new mapboxgl.Map({
       accessToken: environment.mapBoxToken,
       container: 'map',
@@ -84,45 +58,54 @@ export class MapService {
     });
 
     this.map.on('load', () => {
-      this.addSource(this.map, 'places', this.places);
-      this.addLayer(this.map, this.places);
-      this.spinner.hide();
+      this.dataService.groupData$.subscribe(res => {
+        this.addSource(this.map, 'places', res.savedPlaces);
+        this.addLayer(this.map, res.savedPlaces);
+        this.spinner.hide();
+      })
     });
   }
 
-  addNewPlace(place) {
+  addNewPlace(place): void {
     const icon = place.categoryName.toLowerCase();
     const newPlace = {
-      'type': 'Feature' as const,
+      'type': 'Feature',
       'properties': {
         name: place.title,
         description: place.address,
         icon
       },
       'geometry': {
-        'type': 'Point' as const,
+        'type': 'Point',
         'coordinates': place.location.coordinate
       }
     }
-    this.places.features.push(newPlace);
-    const source = this.map.getSource('places') as mapboxgl.GeoJSONSource;
-    source.setData(this.places);
-    this.addLayer(this.map, this.places);
+    this.dataService.groupData$.pipe(
+      map(res => {
+        res.savedPlaces.features.push(newPlace);
+        const source = this.map.getSource('places') as mapboxgl.GeoJSONSource;
+        source.setData(res.savedPlaces);
+        this.addLayer(this.map, res.savedPlaces);
+        return res;
+      }),
+      switchMap(res => this.groupService.updateGroupData(res)),
+      take(1)
+    ).subscribe();
   }
 
-  addSource(map, sourceName, data) {
+  addSource(map, sourceName, data): void {
     map.addSource(sourceName, {
       type: 'geojson',
       data
     })
   };
 
-  addLayer(map: mapboxgl.Map, data: any) {
+  addLayer(map: mapboxgl.Map, data: any): void {
     data.features.forEach(feature => {
       const symbol = feature.properties['icon'];
       const layerID = 'poi-' + symbol;
-      if (!map.hasImage(symbol)) this.addSvg(symbol, map);
       if (!map.getLayer(layerID)) {
+        this.addSvg(symbol, map);
         map.addLayer({
           'id': layerID,
           'type': 'symbol',
@@ -133,12 +116,12 @@ export class MapService {
           },
           'filter': ['==', 'icon', symbol]
         });
-        this.addOnClickPlace(map, layerID)
+        this.addClickOnPlace(map, layerID)
       }
     });
   }
 
-  toogleLayer(layerName, visible) {
+  toogleLayer(layerName, visible): void {
     const mode = visible ? 'visible' : 'none';
     this.map.setLayoutProperty(layerName, 'visibility', mode);
   }
@@ -149,7 +132,7 @@ export class MapService {
     return this.usersService.updateUserData(user);
   }
 
-  searchPlace(text: string) {
+  searchPlace(text: string): Observable<any[]> {
     let search = text.replace(' ', '%20');
     return this.http.get(`${this.geocoderUrl}/${search}.json?access_token=${environment.mapBoxToken}&autocomplete=true`)
       .pipe(
@@ -167,12 +150,7 @@ export class MapService {
       );
   }
 
-  addLocation(location) {
-    const coords = new mapboxgl.LngLat(location.coordinate[0], location.coordinate[1]);
-    const newMarker = new mapboxgl.Marker().setLngLat(coords).addTo(this.map);
-  }
-
-  filterPlace(layerID: string, checked: boolean, map: mapboxgl.Map) {
+  filterPlace(layerID: string, checked: boolean, map: mapboxgl.Map): void {
     map.setLayoutProperty(
       layerID,
       'visibility',
@@ -180,13 +158,13 @@ export class MapService {
     );
   }
 
-  private addSvg(symbol: string, map: mapboxgl.Map) {
+  private addSvg(symbol: string, map: mapboxgl.Map): void {
     let img = new Image(30, 30);
     img.onload = () => map.addImage(symbol, img);
     img.src = `/assets/icons/${symbol}.svg`;
   }
 
-  private addOnClickPlace(map: mapboxgl.Map, layerID: string) {
+  private addClickOnPlace(map: mapboxgl.Map, layerID: string): void {
     map.on('click', layerID, (e) => {
       const coordinates = e.features[0].geometry['coordinates'].slice();
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {

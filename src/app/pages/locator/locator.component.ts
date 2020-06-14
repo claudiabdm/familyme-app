@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Renderer2 } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 
 import { UsersService } from 'src/app/services/users.service';
 import { MapService } from '../../services/map.service';
@@ -9,6 +9,7 @@ import { takeWhile, concatMap, takeUntil } from 'rxjs/operators';
 import { User } from 'src/app/shared/models/user';
 import { ModalComponent } from 'src/app/shared/component/modal/modal.component';
 import { ModalService } from 'src/app/services/modal.service';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-locator',
@@ -19,7 +20,7 @@ export class LocatorComponent implements OnInit {
 
   @ViewChild('newPlaceModal') private newPlaceModalElem: ModalComponent;
 
-  categories = [];
+  categories: string[];
 
   private ngUnsubscribe$ = new Subject<void>();
   private mapStyle: string;
@@ -32,13 +33,15 @@ export class LocatorComponent implements OnInit {
     private mapService: MapService,
     private usersService: UsersService,
     private modalService: ModalService,
+    private spinner: NgxSpinnerService,
     private renderer: Renderer2
   ) { }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.mapStyle = this.mapService.mapTheme.getValue();
+    this.categories = this.mapService.categories;
     this.initPosition();
-    this.mapService.places.features.forEach(feature => { if (!this.categories.includes(feature)) this.categories.push(feature.properties.icon) });
     this.modalService.btnClicked.pipe(takeUntil(this.ngUnsubscribe$)).subscribe(res => {
       if (res === 'newPlaceBtn') {
         this.toggleModal(this.newPlaceModalElem);
@@ -51,14 +54,17 @@ export class LocatorComponent implements OnInit {
     this.ngUnsubscribe$.complete();
   }
 
-  initPosition() {
+  initPosition(): void {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         this.mapService.buildMap(position, this.mapStyle);
 
         this.usersService.getLoggedUser()
           .pipe(
-            concatMap((user: User) => user.locationOn ? this.mapService.updateUserCoords(user, position) : this.usersService.getUsersByFamilyCode(user.familyCode)),
+            concatMap((user: User) =>
+              user.locationOn ?
+                this.mapService.updateUserCoords(user, position) :
+                this.usersService.getUsersByFamilyCode(user.familyCode)),
             takeWhile((users: User[]) => !users, true),
           )
           .subscribe((users: User[]) => {
@@ -72,13 +78,13 @@ export class LocatorComponent implements OnInit {
     }
   }
 
-  setUsersPosition(user: User) {
+  setUsersPosition(user: User): void {
     if (user.locationOn && user.location.lat && user.location.lng) {
       this.addMarker(user);
     }
   }
 
-  showUserLocation(selectedUser) {
+  showUserLocation(selectedUser): void {
     this.mapService.markers.find(marker => marker.id === selectedUser._id)
   }
 
@@ -90,11 +96,11 @@ export class LocatorComponent implements OnInit {
     }
   }
 
-  onChecked(layerID: string, checked: boolean) {
+  onChecked(layerID: string, checked: boolean): void {
     this.mapService.filterPlace(`poi-${layerID.toLowerCase()}`, checked, this.mapService.map);
   }
 
-  private addMarker(user: User) {
+  private addMarker(user: User): void {
     // const marker = this.markers.find(marker => marker.id === user._id);
     const html = this.createHtmlMarker(user);
     const coords = new mapboxgl.LngLat(+user.location.lng, +user.location.lat);
