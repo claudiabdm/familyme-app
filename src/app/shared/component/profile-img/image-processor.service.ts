@@ -21,6 +21,7 @@ export class ImageProcessorService {
           elem.width = width;
           elem.height = img.height * scaleFactor;
           const ctx = <CanvasRenderingContext2D>elem.getContext('2d');
+          /* This is no longer needed, see: https://www.chromestatus.com/feature/6313474512650240 
           this.getOrientation(file, (orientation) => {
             if (orientation > 2) {
               ctx.translate(elem.width / 2, elem.height / 2);
@@ -43,9 +44,10 @@ export class ImageProcessorService {
             } else {
               ctx.drawImage(img, 0, 0, width, (img.height * scaleFactor));
             }
-            let compressedImg = ctx.canvas.toDataURL('image/jpeg');
-            observer.next(compressedImg);
-          });
+          }); */
+          ctx.drawImage(img, 0, 0, width, (img.height * scaleFactor));
+          let compressedImg = ctx.canvas.toDataURL('image/jpeg');
+          observer.next(compressedImg);
         }),
           (reader.onerror = error => observer.error(error));
       };
