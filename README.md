@@ -6,7 +6,7 @@
 
 The FamilyMe app is my personal project for the Full Stack Web Development Bootcamp at Boream. 
 
-This application helps your family getting orginized by providing a shared calendar and shopping list. It also provides a locator to check where the members are and a chat to talk about family matters. Thanks to its responsive web design you can manage your family from any device!
+This application helps your family getting orginized by providing a shared calendar and shopping list. It also provides a locator to check where the members are and a chat to talk about family matters. FamilyMe is a progressive and responsive web application so can manage your family from any device!
 
 This repository contains the Angular 9 frontend project, to check out the backend project visit the following link: 
 https://github.com/claudiabdm/familyme-api
