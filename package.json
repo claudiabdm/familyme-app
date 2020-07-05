@@ -8,6 +8,7 @@
   "scripts": {
     "ng": "ng",
     "dev": "ng serve",
+    "start:pwa": "http-server -p 8080 -c-1 dist/personal-project",
     "start": "node server.js",
     "build": "ng build",
     "buildwithstats": "ng b --sourceMap --prod --stats-json",
@@ -31,6 +32,7 @@
     "@angular/platform-browser": "~9.0.0",
     "@angular/platform-browser-dynamic": "~9.0.0",
     "@angular/router": "~9.0.0",
+    "@angular/service-worker": "~9.0.0",
     "@danielmoncada/angular-datetime-picker": "^9.3.0",
     "@fullcalendar/angular": "^4.4.5-beta",
     "@fullcalendar/core": "^4.4.0",
@@ -57,6 +59,7 @@
     "@types/mapbox-gl": "^1.8.1",
     "@types/node": "^12.11.1",
     "codelyzer": "^5.1.2",
+    "http-server": "^0.12.3",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "^5.0.9",

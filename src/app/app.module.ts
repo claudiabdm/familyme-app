@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthInterceptor } from './authentification/auth.interceptor';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { AuthInterceptor } from './authentification/auth.interceptor';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
