@@ -9,7 +9,7 @@
     <div class="list__header">
       <button type="button" class="btn list__btn list__btn--sort" (click)="sortList(iconSort)">
         <svg class="icon icon--nofilter icon--sm" id="sort-done" #iconSort [class.icon--sort-done]="sortIconDone">
-          <use xlink:href="../../assets/icons/sprite.svg#sort" />
+          <use xlink:href="/assets/icons/sprite.svg#sort" />
         </svg>
       </button>
       <button type=button class="btn btn--reset list__btn" (click)="onReset()">Reset filter</button>
@@ -42,7 +42,7 @@
         </label>
         <button type="button" class="btn btn--icon btn--close" (click)="deleteItem(product)">
           <svg class="icon icon--sm">
-            <use xlink:href="../../assets/icons/sprite.svg#close" />
+            <use xlink:href="/assets/icons/sprite.svg#close" />
           </svg>
         </button>
       </li>
@@ -54,7 +54,7 @@
       <input class="list__label list__input" type="text" #newProduct (keydown.enter)="addItem(newProduct.value)">
       <button class="list__btn list__btn--add" (click)="addItem(newProduct.value)">
         <svg class="icon icon--sm icon--nofilter">
-          <use xlink:href="../../assets/icons/sprite.svg#close" />
+          <use xlink:href="/assets/icons/sprite.svg#close" />
         </svg>
       </button>
     </li>

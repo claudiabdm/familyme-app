@@ -16,7 +16,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class HomeComponent implements OnInit {
 
-  img = '../../../assets/img/profile-photo-round.svg';
+  img = '..//assets/img/profile-photo-round.svg';
   user$: Observable<any>;
   userGroup$: Observable<Group>;
   userList$: Observable<User[]>;
