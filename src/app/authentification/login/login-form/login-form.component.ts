@@ -41,6 +41,7 @@ export class LoginFormComponent implements OnInit {
           res => {
             if (res) {
               this.spinner.hide();
+              Notification.requestPermission();
             } else {
               throwError('Something went wrong');
             }

@@ -31,7 +31,6 @@ export class SocketioService {
   setupSocketConnection(groupId: Group['_id']) {
     this.socket = io(environment.SOCKET_ENDPOINT);
     this.socket.emit('join', groupId);
-    Notification.requestPermission();
   }
 
   setMessages(msgs: Message[]) {
