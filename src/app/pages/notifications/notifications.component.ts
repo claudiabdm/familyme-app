@@ -7,6 +7,8 @@ import { Message } from 'src/app/shared/models/message';
 import { User } from 'src/app/shared/models/user';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/internal/operators/tap';
+import { UsersService } from 'src/app/services/users.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-notifications',
@@ -29,11 +31,18 @@ export class NotificationsComponent implements OnInit, AfterViewChecked {
   constructor(
     private socketService: SocketioService,
     private dataService: DataService,
+    private usersService: UsersService,
     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.loggedUser$ = this.dataService.userData$;
     this.messages$ = this.socketService.messages$.pipe(tap(() => this.socketService.resetNotifications()));
+  }
+
+  ngOnDestroy(): void {
+    const user = this.dataService.getUser(); 
+    user.lastConnection = new Date();
+    this.usersService.updateUserData(user).pipe(take(1)).subscribe();
   }
 
   ngAfterViewChecked(): void {
