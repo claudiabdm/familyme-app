@@ -26,7 +26,7 @@ export class NotificationsComponent implements OnInit, AfterViewChecked {
     inputText: ['', Validators.required],
   })
 
-  img = '../../../assets/img/profile-photo-round.svg';
+  img = '/assets/img/profile-photo-round.svg';
 
   constructor(
     private socketService: SocketioService,

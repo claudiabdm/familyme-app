@@ -55,6 +55,7 @@ export class SocketioService {
       text: msg,
       createdAt: new Date(Date.now()),
     };
+    this.addMessage(newMsg);
     this.socket.emit('chat', newMsg);
   }
 
@@ -68,6 +69,7 @@ export class SocketioService {
           const total = this._notificationsCounter.getValue() + 1;
           this._notificationsCounter.next(total);
           this.getBrowserNotification(msg);
+          this.addMessage(msg);
         }
         this.dataService.getMembers().some((user) => {
           if (user._id === msg.userId) {
@@ -108,6 +110,8 @@ export class SocketioService {
   private getBrowserNotification(msg: Message): void {
     const notification = new Notification('FamilyMe', {
       icon: '/assets/icons/favicon-96x96.png',
+      badge: '/assets/icons/favicon-96x96.png',
+      image: '/assets/icons/favicon-96x96.png',
       body: `${msg.addedBy}: ${msg.text}`,
     });
     notification.addEventListener(

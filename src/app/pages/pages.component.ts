@@ -63,18 +63,13 @@ export class PagesComponent implements OnInit {
           this.socketService.setMessages(msgs);
           return this.socketService.getMessage();
         }),
-        map((msg: Message) => {
-          this.socketService.addMessage(msg);
-          return msg;
-        }),
         takeUntil(this.ngUnsubscribe$)
       )
-      .subscribe(() => {});
+      .subscribe();
     this.setLayout().subscribe();
   }
 
   ngOnDestroy(): void {
-    console.log('pages destroy');
     this.ngUnsubscribe$.next();
     this.ngUnsubscribe$.complete();
   }
