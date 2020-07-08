@@ -2,6 +2,12 @@
 
 # FamilyMe App
 
+## Table of contents
+* [About](#about)
+* [Getting Started](#getting-started)
+* [Usage](#usage)
+
+
 ## About
 
 The FamilyMe app is my personal project for the Full Stack Web Development Bootcamp at Boream. 
