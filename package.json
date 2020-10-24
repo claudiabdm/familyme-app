@@ -1,5 +1,5 @@
 {
-  "name": "personal-project",
+  "name": "familyme",
   "version": "0.0.0",
   "engines": {
     "node": "13.7.0",
@@ -8,11 +8,11 @@
   "scripts": {
     "ng": "ng",
     "dev": "ng serve",
-    "start:pwa": "http-server -p 8080 -c-1 dist/personal-project",
+    "start:pwa": "http-server -p 8080 -c-1 dist/familyme",
     "start": "node server.js",
     "build": "ng build",
     "buildwithstats": "ng b --sourceMap --prod --stats-json",
-    "analyze": "webpack-bundle-analyzer --port 9901 dist/personal-project/stats-es2015.json",
+    "analyze": "webpack-bundle-analyzer --port 9901 dist/familyme/stats-es2015.json",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
