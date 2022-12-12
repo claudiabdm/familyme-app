@@ -39,7 +39,7 @@
     "@fullcalendar/interaction": "^4.4.0",
     "@fullcalendar/list": "^4.4.0",
     "@types/googlemaps": "^3.39.3",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "mapbox-gl": "^1.10.1",
     "ngx-spinner": "^9.0.1",
     "ngx-webstorage-service": "^4.1.0",
