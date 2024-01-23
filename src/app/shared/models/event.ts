@@ -1,5 +1,5 @@
 import { User } from './user';
-import { DateInput } from '@fullcalendar/core/datelib/env';
+import { DateInput } from '@fullcalendar/core/main';
 
 export class CalendarEvent {
   _id: string;
