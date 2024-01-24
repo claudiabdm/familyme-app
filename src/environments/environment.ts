@@ -3,11 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: true,
-  SOCKET_ENDPOINT: 'https://familyme.onrender.com/',
-  siteUrl: 'https://familyme.netlify.app',
-  apiUrl: 'https://familyme.onrender.com/api/v1/',
-  authUrl: 'https://familyme.onrender.com/auth',
+  production: false,
+  SOCKET_ENDPOINT: 'http://localhost:3000/',
+  siteUrl: 'http://localhost:4200/',
+  apiUrl: 'http://localhost:3000/api/v1/',
+  authUrl: 'http://localhost:3000/auth',
   mapBoxToken:
     'pk.eyJ1IjoiY2xhdWRpYWJkbSIsImEiOiJjazd6NmFmZmwwMm9rM21wYjh6NjdpbmRmIn0.6q9bu7QHSFgC9NS3BEoHUQ',
 };

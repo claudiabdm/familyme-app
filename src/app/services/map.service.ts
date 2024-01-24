@@ -45,7 +45,7 @@ export class MapService {
 
   }
 
-  buildMap(position: Position, style: string): void {
+  buildMap(position: GeolocationPosition, style: string): void {
     if (this.map) {
       this.map.remove();
     }
@@ -126,7 +126,7 @@ export class MapService {
     this.map.setLayoutProperty(layerName, 'visibility', mode);
   }
 
-  updateUserCoords(user: User, position: Position): Observable<User[]> {
+  updateUserCoords(user: User, position: GeolocationPosition): Observable<User[]> {
     user.location.lat = position.coords.latitude;
     user.location.lng = position.coords.longitude;
     return this.usersService.updateUserData(user);

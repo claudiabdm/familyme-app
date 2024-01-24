@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { takeUntil, map, tap, switchMap, take } from 'rxjs/operators';
-import { Subject, Observable, pipe } from 'rxjs';
+import { takeUntil, map, take, tap, mergeMap, delay } from 'rxjs/operators';
+import { Subject, Observable, concat } from 'rxjs';
 
 import dayGridPlugin from '@fullcalendar/daygrid';
 import listGridPlugin from '@fullcalendar/list';
-import { FullCalendarComponent } from '@fullcalendar/angular';
 import interactionPlugin from '@fullcalendar/interaction';
 
 import { CalendarEvent } from 'src/app/shared/models/event';
@@ -12,37 +11,45 @@ import { ModalService } from 'src/app/services/modal.service';
 import { DataService } from 'src/app/services/data.service';
 import { GroupsService } from 'src/app/services/groups.service';
 import { ModalComponent } from 'src/app/shared/component/modal/modal.component';
-import { Group } from 'src/app/shared/models/group';
-import { User } from 'src/app/shared/models/user';
-import { UsersService } from 'src/app/services/users.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { FullCalendarComponent } from '@fullcalendar/angular';
+import { CalendarOptions } from '@fullcalendar/core';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss']
+  styleUrls: ['./calendar.component.scss'],
 })
 export class CalendarComponent implements OnInit {
-
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
   @ViewChild('newEventModal') newEventModal: ModalComponent;
 
-
   private ngUnsubscribe$ = new Subject<void>();
 
-  calendarEvents$: Observable<Group['events']>;
-  calendarPlugins = [dayGridPlugin, listGridPlugin, interactionPlugin];
+  calendarOptions: CalendarOptions = {
+    plugins: [dayGridPlugin, listGridPlugin, interactionPlugin],
+    initialView: 'dayGridMonth',
+    height: 'auto',
+    aspectRatio: 2,
+    events: undefined, // set in ngOnInit
+    // customButtons: false,
+    eventTimeFormat: 'eventTimeFormat',
+    firstDay: 1,
+    dateClick: undefined, // set in ngOnInit
+    eventClick: undefined, // set in ngOnInit
+  };
+
   header = {
     left: 'dayGridMonth,listWeek,today',
     right: 'prev,next',
     center: 'title',
-  }
+  };
   eventTimeFormat = {
     hour: 'numeric',
     minute: '2-digit',
     meridiem: false,
-    hour12: false
-  }
+    hour12: false,
+  };
   selectedEvent: CalendarEvent;
   selectedDay = {
     title: '',
@@ -51,29 +58,43 @@ export class CalendarComponent implements OnInit {
     end: new Date(),
     allDay: true,
     invitees: [],
-    notes: ''
-  }
+    notes: '',
+  };
 
   constructor(
     private dataService: DataService,
     private modalService: ModalService,
-    private usersService: UsersService,
     private groupsService: GroupsService,
-    private spinner: NgxSpinnerService,
-  ) { }
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit(): void {
     this.spinner.show();
-    this.calendarEvents$ = this.dataService.groupData$
+
+    this.dataService.groupData$
       .pipe(
-        map(group => group?.events),
-        tap(() => this.spinner.hide())
+        takeUntil(this.ngUnsubscribe$),
+        map((group) => {
+          this.calendarOptions.events = group.events;
+        }),
+        delay(500)
       )
-    this.modalService.btnClicked.pipe(takeUntil(this.ngUnsubscribe$)).subscribe(res => {
-      if (res === 'newEventBtn') {
-        this.toggleModal(this.newEventModal);
-      }
-    })
+      .subscribe((group) => {
+        this.spinner.hide();
+      });
+
+    this.modalService.btnClicked
+      .pipe(takeUntil(this.ngUnsubscribe$))
+      .subscribe((res) => {
+        if (res === 'newEventBtn') {
+          this.toggleModal(this.newEventModal);
+          this.calendarOptions.dateClick = this.selectDay.bind(
+            this,
+            this.newEventModal
+          );
+        }
+        // this.selectEvent.bind(this, this.modifyEventModal);
+      });
   }
 
   selectEvent(event, targetModal: ModalComponent): void {
@@ -86,10 +107,9 @@ export class CalendarComponent implements OnInit {
       location: event.event.extendedProps.location,
       invitees: event.event.extendedProps.invitees,
       notes: event.event.extendedProps.notes,
-    }
+    };
     this.toggleModal(targetModal);
   }
-
 
   selectDay(event, targetModal: ModalComponent): void {
     this.selectedDay.start = event.date;
@@ -106,12 +126,14 @@ export class CalendarComponent implements OnInit {
   }
 
   onReset() {
-    this.groupsService.getGroupByFamilyCode(this.dataService.familyCode).pipe(take(1)).subscribe();
+    this.groupsService
+      .getGroupByFamilyCode(this.dataService.familyCode)
+      .pipe(take(1))
+      .subscribe();
   }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe$.next();
     this.ngUnsubscribe$.complete();
   }
-
 }
